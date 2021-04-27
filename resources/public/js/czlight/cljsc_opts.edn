@@ -1,0 +1,1 @@
+{:output-to "resources/public/js/cesium_light.js", :output-dir "resources/public/js/czlight", :asset-path "js/czlight", :main "light.view3d.client", :verbose false}

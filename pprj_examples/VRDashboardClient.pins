@@ -1,0 +1,477 @@
+; Mon Apr 26 20:35:32 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([VRDashboardClient_Class0] of  WorkingPrograms
+
+	(butt-load-progs "Load Programs/protege.core/ldns")
+	(cloPrograms
+		[RuleEngine_Class30000]
+		[Cezium_Class40000]
+		[Cezium_Class30043]
+		[Cezium_Class30026]
+		[CeziumEngineLight_Class40011]
+		[VRDashboardClient_Class1])
+	(title "VR Programs"))
+
+([VRDashboardClient_Class1] of  CloProgram
+
+	(cloFunctions
+		[VRDashboardClient_Class60003]
+		[VRDashboardClient_Class30019]
+		[VRDashboardClient_Class30006]
+		[VRDashboardClient_Class10000]
+		[VRDashboardClient_Class30003]
+		[VRDashboardClient_Class30058]
+		[VRDashboardClient_Class120007]
+		[VRDashboardClient_Class120003]
+		[VRDashboardClient_Class130002])
+	(cloNamespace [VRDashboardClient_Class2])
+	(cloVars
+		[VRDashboardClient_Class20003]
+		[VRDashboardClient_Class30002]
+		[VRDashboardClient_Class20000]
+		[VRDashboardClient_Class30001]
+		[VRDashboardClient_Class30059])
+	(title "VR Dashboard Client"))
+
+([VRDashboardClient_Class10000] of  CloFunction
+
+	(source "(try\n  (when (nil? TELNET)\n    (def TELNET (tn/get-telnet \"localhost\" port))\n    (println :TELNET \"connected\" :PORT port))\n  (let [nmea (tn/read-until TELNET STOP-TOKEN)\n        len (count nmea)]\n    (if (< len 100)\n      (do (println \"data length=\" len) nil)\n      (if-let [data (parse-nmea-data nmea)]\n        (do (def NMEA data) data)\n        (do (println \"no\" START-TOKEN \"in data\") nil))))\n  (catch Exception e\n    (println :TELNET (.getMessage e) :PORT port)\n    nil))")
+	(title "get-nmea-data [port]"))
+
+([VRDashboardClient_Class100000] of  Rule
+
+	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"REMOVED\"\n	object ?obj)\n?czs (CZMLSpan object ?lab\n	(= ?lab (.getName ?obj)))")
+	(rhs "(retract ?czs)\n(println \"NavOb off map:\" (.getName ?obj))")
+	(salience 0)
+	(title "vr:NavOb off Map"))
+
+([VRDashboardClient_Class10001] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VRDashboardClient_Class0])
+	(%3ACREATION-TIMESTAMP "2021.04.21 19:35:22.278 MSK")
+	(%3ACREATOR "ru"))
+
+([VRDashboardClient_Class10002] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VRDashboardClient_Class30073])
+	(%3ACREATION-TIMESTAMP "2021.04.21 19:35:34.910 MSK")
+	(%3ACREATOR "ru"))
+
+([VRDashboardClient_Class10003] of  CloProgram
+
+	(cloFunctions [RuleEngine_Class220000])
+	(cloNamespace [Clojure_Class300001])
+	(title "CW"))
+
+([VRDashboardClient_Class10004] of  CloFuncall
+
+	(source "(ru.rules/sp :all)"))
+
+([VRDashboardClient_Class10005] of  CZMLGenerator
+
+	(delay 4)
+	(visibility 16.0))
+
+([VRDashboardClient_Class110000] of  NavOb
+
+	(altitude 2)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\"\n  :view-elevation 15\n  :draft 8}")
+	(label "Bylina")
+	(latitude "60 0")
+	(longitude "30 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class120000] of  CloFuncall
+
+	(source "(vr.dashcli/add-fleet)"))
+
+([VRDashboardClient_Class120003] of  CloFunction
+
+	(source "(let [f (atom\n          {:b (fifos \"NavOb\" \"label\" \"Bylina\")\n            :v (fifos \"NavOb\" \"label\" \"Vela\")\n            :d (fifos \"NavOb\" \"label\" \"Diana\")\n            :a (fifos \"NavOb\" \"label\" \"Argo\")\n            :m (fifos \"NavOb\" \"label\" \"Mars\")})\n      rus (OMT/getMapOb \"russor\")\n      lar (.getLatitude rus)\n      lor (.getLongitude rus)\n      crr (.getCourse rus)\n      spr (.getSpeed rus)]\n  (doseq [k (keys @f)]\n    (swap! f assoc k (OMT/getOrAdd (@f k))))\n  (doseq [k (keys @f)]\n    (.setLatitude (@f k) (+ lar (srand 0.02)))\n    (.setLongitude (@f k) (+ lor (srand 0.02)))\n    (.setCourse (@f k) crr)\n    (.setSpeed (@f k) spr)))")
+	(title "add-fleet []"))
+
+([VRDashboardClient_Class120004] of  CloFuncall
+
+	(source "(add-fleet)"))
+
+([VRDashboardClient_Class120005] of  CloFuncall
+
+	(source "(in-ns 'vr.dashcli)"))
+
+([VRDashboardClient_Class120006] of  CloFuncall
+
+	(source "(rand 0.0017)"))
+
+([VRDashboardClient_Class120007] of  CloFunction
+
+	(source "(- (rand (* d 2)) d)")
+	(title "srand [d]"))
+
+([VRDashboardClient_Class120008] of  CloFuncall
+
+	(source "(srand 0.0017)"))
+
+([VRDashboardClient_Class120009] of  CloFuncall
+
+	(source "(ru.rules/pp 'CZMLSpan)"))
+
+([VRDashboardClient_Class130000] of  Command
+
+	(label "Add Fleet")
+	(scenario "clojuretab.ClojureTab invoke vr.dashcli add-fleet"))
+
+([VRDashboardClient_Class130001] of  Command
+
+	(label "Add Aircraft Carrier")
+	(scenario "clojuretab.ClojureTab invoke vr.dashcli add-aircraft-carrier"))
+
+([VRDashboardClient_Class130002] of  CloFunction
+
+	(source "(when-let [ac (fifos \"NavOb\" \"label\" \"CVN-69\")]\n  (let [acm (OMT/getOrAdd ac)\n        rus (OMT/getMapOb \"russor\")\n        lar (.getLatitude rus)\n        lor (.getLongitude rus)\n        crr (.getCourse rus)\n        spr (.getSpeed rus)]\n    (.setLatitude acm (+ lar (srand 0.02)))\n    (.setLongitude acm (+ lor (srand 0.02)))\n    (.setCourse acm crr)\n    (.setSpeed acm spr)))")
+	(title "add-aircraft-carrier []"))
+
+([VRDashboardClient_Class2] of  CloNamespace
+
+	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb)")
+	(title "vr.dashcli"))
+
+([VRDashboardClient_Class20000] of  CloVar
+
+	(source "\"AIVDM\"")
+	(title "STOP-TOKEN"))
+
+([VRDashboardClient_Class20003] of  CloVar
+
+	(source "(defonce TELNET nil)")
+	(title "defTELNET"))
+
+([VRDashboardClient_Class30000] of  CloFuncall
+
+	(source "(ru.rules/pp :all)"))
+
+([VRDashboardClient_Class30001] of  CloVar
+
+	(source "\"RMC\"")
+	(title "START-TOKEN"))
+
+([VRDashboardClient_Class30002] of  CloVar
+
+	(source "nil")
+	(title "NMEA"))
+
+([VRDashboardClient_Class30003] of  CloFunction
+
+	(source "(when (some? TELNET)\n  (tn/kill-telnet TELNET)\n  (def TELNET nil))")
+	(title "close-telnet []"))
+
+([VRDashboardClient_Class30006] of  CloFunction
+
+	(source "(if-let [data (seq (rest (.split data START-TOKEN)))]\n  (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] (.split (first data) \",\")]\n    [time\n     (parse-coord lat1 lat2)\n     (parse-coord lon1 lon2)\n     (round-speed (read-string spd))\n     (read-string crs)\n     date]))")
+	(title "parse-nmea-data [data]"))
+
+([VRDashboardClient_Class30019] of  CloFunction
+
+	(source "(let [c (read-string c1)\n      mf (- c (int c))\n      dm (/ (int c) 100)\n      d (int dm)\n      m (int (* (- dm d) 100))\n      m (+ m mf)\n      d (if (or (= c2 \"S\") (= c2 \"W\")) (* d -1) d)]\n  (MapOb/getDeg (str d \" \" m)))")
+	(title "parse-coord [c1 c2]"))
+
+([VRDashboardClient_Class30058] of  CloFunction
+
+	(source "(def BOAT-DATA \n  (or (get-nmea-data port) (Thread/sleep 10000)\n       (get-nmea-data port) (Thread/sleep 10000)\n       (get-nmea-data port) (Thread/sleep 10000)\n       (get-nmea-data port)))                      \n(close-telnet)\nBOAT-DATA")
+	(title "get-boat-data [port]"))
+
+([VRDashboardClient_Class30059] of  CloVar
+
+	(source "nil")
+	(title "BOAT-DATA"))
+
+([VRDashboardClient_Class30064] of  Openmap
+
+	(components
+		[igis_Class2]
+		[igis_Class3]
+		[igis_Class4]
+		[igis_Class12]
+		[igis_Class40000]
+		[igis_Class40001]
+		[igis_Class70000]
+		[igis_Class100005]
+		[igis_Class100000]
+		[igis_Class14]
+		[igis_Class15]
+		[igis_Class16]
+		[igis_Class17]
+		[igis_Class18]
+		[igis_Class19]
+		[igis_Class20]
+		[igis_Class90000]
+		[igis_Class21]
+		[igis_Class22]
+		[igis_Class23]
+		[igis_Class25]
+		[igis_Class26]
+		[igis_Class27]
+		[igis_Class28]
+		[igis_Class29]
+		[igis_Class30]
+		[igis_Class2])
+	(Debug "FINE")
+	(label "VR Chart")
+	(Latitude "46.7")
+	(layers
+		[igis_Class40012]
+		[igis_Class110000]
+		[NiceSPb_Class130000]
+		[NiceSPb_Class160725]
+		[igis_Class1]
+		[NiceSPb_Class160726]
+		[NiceSPb_Class160727]
+		[igis_Class40011]
+		[igis_Class80004]
+		[igis_Class80000]
+		[igis_Class80001]
+		[igis_Class80003]
+		[igis_Class80002])
+	(Longitude "-2.5")
+	(Scale "50000000")
+	(startUpLayers
+		[igis_Class40012]
+		[NiceSPb_Class160727]
+		[igis_Class40011]))
+
+([VRDashboardClient_Class30065] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VRDashboardClient_Class30064])
+	(%3ACREATION-TIMESTAMP "2021.04.21 13:52:10.310 MSK")
+	(%3ACREATOR "ru"))
+
+([VRDashboardClient_Class30069] of  NMEAControl
+
+	(delay 300)
+	(status "START"))
+
+([VRDashboardClient_Class30070] of  NMEAData
+
+	(object [VRDashboardClient_Class30075])
+	(time 0))
+
+([VRDashboardClient_Class30073] of  Run
+
+	(butt-ass-inss "Assert Instances/ru.rules/ass-inss")
+	(butt-fire "Fire/ru.rules/fire-all-rules")
+	(butt-retr-inss "Retract Instances/ru.rules/retr-inss")
+	(butt-run "Run/ru.rules/run-engine")
+	(butt-step "Step/ru.rules/step-engine")
+	(facts
+		[VRDashboardClient_Class50001]
+		[VRDashboardClient_Class30069]
+		[VRDashboardClient_Class30070]
+		[VRDashboardClient_Class10005]
+		[VRDashboardClient_Class70009])
+	(mode run)
+	(rule-sets
+		[VRDashboardClient_Class30074]
+		[CeziumEngineLight_Class40008]
+		[CeziumEngineLight_Class40026])
+	(steps 1)
+	(title "VRRun"))
+
+([VRDashboardClient_Class30074] of  RuleSet
+
+	(rules
+		[VRDashboardClient_Class30076]
+		[VRDashboardClient_Class30077]
+		[VRDashboardClient_Class80000]
+		[VRDashboardClient_Class100000])
+	(templates
+		[NMEAControl]
+		[NMEAData]
+		[VRDashboardControl])
+	(title "VR Rules"))
+
+([VRDashboardClient_Class30075] of  NavOb
+
+	(altitude 2)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\"\n  :view-elevation 30\n  :draft 8}")
+	(label "russor")
+	(latitude "60 0")
+	(longitude "30 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class30076] of  Rule
+
+	(lhs "?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\"))")
+	(salience 0)
+	(title "vr:NMEA Start"))
+
+([VRDashboardClient_Class30077] of  Rule
+
+	(lhs "(VRDashboardControl telnet-port ?tport)\n?c (NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	data ?data\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
+	(rhs "(if-let [[tim lat lon spd crs dat :as nmea] (vr.dashcli/get-boat-data ?tport)]\n  (let [[?tim ?lat ?lon ?spd ?crs ?dat] ?data]\n    (if (or (not= lat ?lat)\n             (not= lon ?lon)\n             (not= crs ?crs)\n             (not= spd ?spd))\n      (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n        (.setLatitude mo lat)\n        (.setLongitude mo lon)\n        (.setCourse mo (int crs))\n        (.setSpeed mo spd)\n        (println (protege.core/sv ?obj \"label\") lat lon crs spd)\n        (modify ?d data nmea\n	time (+ ?t1 ?del)))))\n  (modify ?d time (+ ?t1 ?del)))")
+	(salience 0)
+	(title "vr:NMEA Run"))
+
+([VRDashboardClient_Class40000] of  CloFuncall
+
+	(source "(ru.rules/pp 'Clock)"))
+
+([VRDashboardClient_Class40001] of  CloFuncall
+
+	(source "(ru.rules/save-bnet-plan)"))
+
+([VRDashboardClient_Class50000] of  CloFuncall
+
+	(source "vr.dashcli/NMEA"))
+
+([VRDashboardClient_Class50001] of  VRDashboardControl
+
+	(onboard "russor")
+	(telnet-port 10470))
+
+([VRDashboardClient_Class60000] of  NavOb
+
+	(altitude 2)
+	(course 0)
+	(description "{:gltf-url \"models/air_carrier/111.glb\"\n  :view-elevation 60\n  :draft 20\n  :model-scale 0.6}")
+	(label "CVN-69")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/lnrR.gif")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class60001] of  CloFuncall
+
+	(source "(count vr.dashcli/NMEA)"))
+
+([VRDashboardClient_Class60002] of  CloFuncall
+
+	(source "(ru.rules/pp 'NMEAData)"))
+
+([VRDashboardClient_Class60003] of  CloFunction
+
+	(source "(let [s (* s 100)\n       s (Math/round s)]\n  (double (/ s 100)))")
+	(title "round-speed [s]"))
+
+([VRDashboardClient_Class60004] of  CloFuncall
+
+	(source "(vr.dashcli/round-speed 8.972345)"))
+
+([VRDashboardClient_Class60005] of  CloFuncall
+
+	(source "(vr.dashcli/round-speed 8.172345)"))
+
+([VRDashboardClient_Class70000] of  CloFuncall
+
+	(source "(ru.rules/f 612)"))
+
+([VRDashboardClient_Class70001] of  NavOb
+
+	(altitude 20)
+	(course 0)
+	(description "{:gltf-url \"models/low_poly_helicopter/scene.gltf\"\n :model-scale 0.02}")
+	(label "h1")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/helr.gif")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class70002] of  NavOb
+
+	(altitude 20)
+	(course 0)
+	(description "{:gltf-url \"models/idf-_plain/scene.gltf\"\n  :model-scale 0.2}")
+	(label "i1")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/plnr.gif")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class70003] of  NavOb
+
+	(altitude 2)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\"\n  :view-elevation 30\n  :draft 8}")
+	(label "Vela")
+	(latitude "60 0")
+	(longitude "30 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class70004] of  NavOb
+
+	(altitude 2)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\"\n  :view-elevation 30\n  :draft 8}")
+	(label "Mars")
+	(latitude "60 0")
+	(longitude "30 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtr.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class70005] of  NavOb
+
+	(altitude 2)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\"\n  :view-elevation 30\n  :draft 8}")
+	(label "Diana")
+	(latitude "60 0")
+	(longitude "30 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtk.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class70006] of  NavOb
+
+	(altitude 2)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\"\n  :view-elevation 30\n  :draft 8}")
+	(label "Argo")
+	(latitude "60 0")
+	(longitude "30 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class70009] of  Onboard
+
+	(label "Bylina")
+	(time 0)
+	(view 0))
+
+([VRDashboardClient_Class80000] of  Rule
+
+	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"ADDED\"\n	object ?obj)\n(Clock0 time ?t)\n(not CZMLSpan object ?lab\n	(= ?lab (.getName ?obj)))")
+	(rhs "(let [lab (.getName ?obj)\n      desc (.getDescription ?obj)]\n  (asser CZMLSpan object lab\n	options (read-string desc)\n	time ?t)\n  (println \"NavOb on map:\" lab))")
+	(salience 0)
+	(title "vr:NavOb on Map"))
+
+([VRDashboardClient_Class80001] of  CloFuncall
+
+	(source "(ru.rules/pp 'Onboard)"))
+
+([VRDashboardClient_Class90000] of  CloFuncall
+
+	(source "(rest nil)"))

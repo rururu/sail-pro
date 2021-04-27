@@ -12,7 +12,10 @@
                  [protege/JGo "3.5.0"]
                  [protege/JGoLayout "3.5.0"]
                  [protege/ClojureTab "1.5.0"]
+                 [OpenMapTab "5.2.1"]
                  [rete "5.3.0-SNAPSHOT"]
+                 [OpenMapTab "5.2.1"]
+                 [org.openmap-java/openmap "5.1.15"]
                  [org.clojure/core.async "0.4.490"]
                  [ring "1.7.1"]
                  [compojure "1.6.1"]
@@ -21,7 +24,8 @@
                  [com.cognitect/transit-clj "0.8.313"]
                  [http-kit "2.5.3"]
                  [clj-json "0.5.3"]
-                 [javax.xml.bind/jaxb-api "2.3.0"]]
+                 [javax.xml.bind/jaxb-api "2.3.0"]
+                 [clj-telnet "0.7.0"]]
   :resource-paths ["src/clojure"]
   ;; :repositories [["repo" "file:repo"]] ;; for "lein deploy" only !!!!
   :repositories {"local" {:url ~(str (.toURI (java.io.File. "repo"))) :checksum :warn}}

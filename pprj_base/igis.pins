@@ -1,0 +1,514 @@
+; Sat Feb 13 21:03:58 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([igis_Class0] of  Openmap
+
+	(components
+		[igis_Class2]
+		[igis_Class3]
+		[igis_Class4]
+		[igis_Class12]
+		[igis_Class40000]
+		[igis_Class40001]
+		[igis_Class70000]
+		[igis_Class100005]
+		[igis_Class100000]
+		[igis_Class14]
+		[igis_Class15]
+		[igis_Class16]
+		[igis_Class17]
+		[igis_Class18]
+		[igis_Class19]
+		[igis_Class20]
+		[igis_Class90000]
+		[igis_Class21]
+		[igis_Class22]
+		[igis_Class23]
+		[igis_Class25]
+		[igis_Class26]
+		[igis_Class27]
+		[igis_Class28]
+		[igis_Class29]
+		[igis_Class30]
+		[igis_Class2])
+	(Debug "FINE")
+	(label "Base Map")
+	(Latitude "60.0")
+	(layers
+		[igis_Class40012]
+		[igis_Class120000]
+		[NiceSPb_Class160725]
+		[igis_Class40011]
+		[igis_Class110000])
+	(Longitude "30.0")
+	(Scale "10000000")
+	(startUpLayers
+		[igis_Class40012]
+		[NiceSPb_Class160725]
+		[igis_Class40011]))
+
+([igis_Class1] of  MapTileLayer
+
+	(background.fillColor "FFFFFF")
+	(background.lineColor "FFFFFF")
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "ArcGIS_Topo")
+	(land.fillColor "DECD8B")
+	(land.lineColor "DECD8B")
+	(localCacheRootDir "data/tiles/arcgis")
+	(noCoverageZoom "13")
+	(prettyName "ArcGIS Topo")
+	(rootDir "https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}.png")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([igis_Class10] of  Menu
+
+	(class "com.bbn.openmap.gui.NavigateMenu")
+	(label "navigateMenu"))
+
+([igis_Class10000] of  NavOb
+
+	(altitude 0)
+	(course 320)
+	(description "<html><h3>Иван Крузенштерн</h3>\nПостроен в 1926 году")
+	(label "ship1")
+	(latitude "60 4")
+	(longitude "28 54")
+	(playground-index 1)
+	(speed 13.0)
+	(url "file:resources/public/img/tall.gif")
+	(verticalSpeed 0.0))
+
+([igis_Class100000] of  SimpleComponent
+
+	(class "com.bbn.openmap.gui.ProjectionStackTool")
+	(label "projectionstacktool"))
+
+([igis_Class100005] of  OverviewMapHandler
+
+	(class "com.bbn.openmap.gui.OverviewMapHandler")
+	(fillColor "66ff0000")
+	(label "overviewMapHandler")
+	(lineColor "ffff0000")
+	(overviewLayers "overviewLayer")
+	(overviewMinScale "10000000f")
+	(overviewScaleFactor "10f")
+	(overviewStatusLayer "com.bbn.openmap.layer.OverviewMapAreaLayer"))
+
+([igis_Class10001] of  NavOb
+
+	(altitude 0)
+	(course 90)
+	(description "<html><h3>MSC Poesia</h3>\nBuilt in 2007 year")
+	(label "ship2")
+	(latitude "60 10")
+	(longitude "28 11")
+	(playground-index 1)
+	(speed 25.0)
+	(url "file:resources/public/img/lnrR.gif")
+	(verticalSpeed 0.0))
+
+([igis_Class11] of  Menu
+
+	(class "ru.igis.omtab.menu.ProtegeMenu")
+	(label "protegeMenu"))
+
+([igis_Class110000] of  ShapeLayer
+
+	(class "com.bbn.openmap.layer.shape.ShapeLayer")
+	(fillColor "ffbdde83")
+	(label "overviewLayer")
+	(lineColor "ff000000")
+	(prettyName "Overview")
+	(shapeFile "data/shape/dcwpo-browse.shp")
+	(spatialIndex "data/shape/dcwpo-browse.ssx"))
+
+([igis_Class12] of  MenuList
+
+	(class "com.bbn.openmap.gui.menu.MenuList")
+	(label "menuList")
+	(menus
+		[igis_Class5]
+		[igis_Class6]
+		[igis_Class7]
+		[igis_Class9]
+		[igis_Class10]
+		[igis_Class11]
+		[igis_Class40004]))
+
+([igis_Class120000] of  Layer
+
+	(class "com.bbn.openmap.layer.learn.SimpleAnimationLayer")
+	(label "animator")
+	(prettyName "Animator"))
+
+([igis_Class13] of  MouseMode
+
+	(class "com.bbn.openmap.event.DistanceMouseMode")
+	(label "DistanceMouseMode"))
+
+([igis_Class14] of  MouseMode
+
+	(class "com.bbn.openmap.MouseDelegator")
+	(label "mouseDelegator"))
+
+([igis_Class15] of  MouseMode
+
+	(class "com.bbn.openmap.gui.MouseModeButtonPanel")
+	(label "mouseModeButtonPanel"))
+
+([igis_Class16] of  MouseMode
+
+	(class "com.bbn.openmap.event.NavMouseMode2")
+	(label "navMouseMode"))
+
+([igis_Class17] of  MouseMode
+
+	(class "com.bbn.openmap.event.NullMouseMode")
+	(label "nullMouseMode"))
+
+([igis_Class18] of  MouseMode
+
+	(class "com.bbn.openmap.event.PanMouseMode")
+	(label "PanMouseMode"))
+
+([igis_Class19] of  MouseMode
+
+	(class "ru.igis.omtab.gui.RuDistanceMouseMode")
+	(label "RuDistanceMouseMode")
+	(units "all"))
+
+([igis_Class2] of  GraphicLoaderConnector
+
+	(class "com.bbn.openmap.plugin.graphicLoader.GraphicLoaderConnector")
+	(label "graphicLoaderConnector"))
+
+([igis_Class20] of  MouseMode
+
+	(class "com.bbn.openmap.event.SelectMouseMode")
+	(label "selectMouseMode"))
+
+([igis_Class20000] of  RepeatAction
+
+	(interval MINUTE)
+	(label "CollisionRA")
+	(lifetime 120)
+	(period 1)
+	(playground-index 0))
+
+([igis_Class21] of  Playground
+
+	(class "ru.igis.omtab.Playground")
+	(label "BluePlayground")
+	(playground-index 2)
+	(prettyName "Blue Playground"))
+
+([igis_Class22] of  Playground
+
+	(class "ru.igis.omtab.Playground")
+	(label "RedPlayground")
+	(playground-index 1)
+	(prettyName "Red Playground"))
+
+([igis_Class23] of  Playground
+
+	(class "ru.igis.omtab.Playground")
+	(label "runa")
+	(playground-index 0)
+	(prettyName "RuNA")
+	(scenario "ru.igis.omtab.Demo collision ship1 ship2 CollisionRA \"Oil Spill\""))
+
+([igis_Class24] of  ProtegeReflector
+
+	(class "ru.igis.omtab.reflect.NavObReflector")
+	(label "navObReflector")
+	(reflectCreation "false"))
+
+([igis_Class25] of  SimpleComponent
+
+	(class "com.bbn.openmap.InformationDelegator")
+	(label "informationDelegator"))
+
+([igis_Class26] of  SimpleComponent
+
+	(class "ru.igis.omtab.OMT")
+	(label "OMT"))
+
+([igis_Class27] of  SimpleComponent
+
+	(class "com.bbn.openmap.proj.ProjectionStack")
+	(label "ProjStack"))
+
+([igis_Class28] of  SimpleComponent
+
+	(class "ru.igis.omtab.RunaControlPanel")
+	(label "runaControlPanel"))
+
+([igis_Class29] of  SimpleComponent
+
+	(class "com.bbn.openmap.gui.ToolPanel")
+	(label "toolPanel"))
+
+([igis_Class3] of  LayerHandler
+
+	(class "com.bbn.openmap.LayerHandler")
+	(label "layerHandler"))
+
+([igis_Class30] of  SimpleComponent
+
+	(class "com.bbn.openmap.gui.OMToolSet")
+	(label "toolSet"))
+
+([igis_Class30000] of  SpillRepeatAction
+
+	(interval SECOND)
+	(label "Oil Spill")
+	(lifetime 3600)
+	(period 1)
+	(playground-index 0)
+	(poly [igis_Class30001]))
+
+([igis_Class30001] of  Spill
+
+	(fillColor "20aa6600")
+	(isPolygon TRUE)
+	(label "os1")
+	(latitude "60 9.94")
+	(lineColor "ffaa6600")
+	(longitude "28 42.24")
+	(N 32)
+	(playground-index 0)
+	(radius 8.0)
+	(relative TRUE)
+	(speed 12.0))
+
+([igis_Class4] of  LayersPanel
+
+	(class "com.bbn.openmap.gui.LayersPanel")
+	(label "layersPanel"))
+
+([igis_Class40000] of  HelpMenuItem
+
+	(class "ru.igis.omtab.menu.URLHelpMenuItem")
+	(label "omtHelp2")
+	(source "file:doc/OpenMapTab/apidoc/index.html")
+	(text "OpenMapTab API"))
+
+([igis_Class40001] of  HelpMenuItem
+
+	(class "ru.igis.omtab.menu.InstanceHelpMenuItem")
+	(label "omtHelp1")
+	(source "igis_Class50000")
+	(text "OpenMapTab Description"))
+
+([igis_Class40004] of  HelpMenu
+
+	(class "com.bbn.openmap.gui.DefaultHelpMenu")
+	(items "omtHelp1 omtHelp2 omtHelp3")
+	(label "helpMenu"))
+
+([igis_Class40010] of  EditorLayer
+
+	(circles.class "com.bbn.openmap.tools.drawing.OMCircleLoader")
+	(class "com.bbn.openmap.layer.editor.EditorLayer")
+	(distance.class "com.bbn.openmap.tools.drawing.OMDistanceLoader")
+	(editor "com.bbn.openmap.layer.editor.DrawingEditorTool")
+	(label "DTLayer")
+	(lines.class "com.bbn.openmap.tools.drawing.OMLineLoader")
+	(loaders "lines polys rects circles points")
+	(mouseModes "Gestures")
+	(points.class "com.bbn.openmap.tools.drawing.OMPointLoader")
+	(polys.class "com.bbn.openmap.tools.drawing.OMPolyLoader")
+	(prettyName "Drawing Layer")
+	(rects.class "com.bbn.openmap.tools.drawing.OMRectLoader"))
+
+([igis_Class40011] of  ShapeLayer
+
+	(class "com.bbn.openmap.layer.shape.ShapeLayer")
+	(fillColor "FFFFCC99")
+	(label "dcwpo")
+	(lineColor "ff000000")
+	(prettyName "Browse World")
+	(shapeFile "data/shape/dcwpo-browse.shp")
+	(spatialIndex "data/shape/dcwpo-browse.ssx"))
+
+([igis_Class40012] of  GraticuleLayer
+
+	(10DegreeColor "99000000")
+	(1DegreeColor "99003300")
+	(5DegreeColor "99009900")
+	(class "com.bbn.openmap.layer.GraticuleLayer")
+	(dateLineColor "99ff0000")
+	(equatorColor "99FF0000")
+	(label "graticule")
+	(prettyName "Graticule")
+	(show1And5Lines "true")
+	(showRuler "true")
+	(specialLineColor "99000000")
+	(textColor "99000000")
+	(threshold "2"))
+
+([igis_Class5] of  Menu
+
+	(class "com.bbn.openmap.gui.ControlMenu")
+	(label "controlMenu"))
+
+([igis_Class50000] of  Description
+
+	(label "OpenMapTab Description")
+	(source "<html>\n  <head>\n    <style type=\"text/css\">\n      <!--\n        body { font-family: arial; font-size: 12pt }\n        p { font-family: arial; margin-top: 2; margin-right: 2; margin-bottom: 2; margin-left: 2 }\n      -->\n    </style>\n    \n  </head>\n  <body>\n    <b>OpenMapTab Description<br><br></b>Protege-Frames plug-in for visualizing geodata and creating GIS applications<br>Uses GIS library OpenMap (http://openmap-java.org/)<br><br><b>Use of external functionality<br></b><br>You can use external functionality by calling <i>static</i> methods of any Java classes. This can by done by two methods:<br><br>1. Using a button &quot;Play scenario&quot; <img src=\"file:resources/public/img/Run.gif\">. In this case you should fill a slot &quot;scenario&quot; of the specific instance of a class &quot;Playground&quot;. This instance has a fixed label &quot;runa&quot; (value of the slot &quot;label&quot;) and is among the values of a slot &quot;components&quot; of <i>an active map</i> represented by the instance of a class &quot;Openmap&quot;.<a href=\"internalLink\">@'igis_Class23'</a>&#160;<br><br>2. Using a button &quot;Execute Command&quot; <img src=\"file:resources/public/img/Sound.gif\">. I this case you should create an instance of a class &quot;Command&quot; and fill its slot &quot;scenario&quot;.<a href=\"internalLink\">@'igis_Class60000'</a>&#160;<br><br>In both cases format of a value of the slot &quot;scenario&quot; the same:<br><br>&lt;package&gt; &lt;class&gt; &lt;static method&gt; &lt;argument 1&gt; &lt;argument 2&gt; ... &lt;argument N&gt;<br><br><b>Examples of external functionality</b><br><br>Into OntoMapTab included a class <i>ru.igis.omtab.Demo</i> (see Help menu).<br>It has a single static method &quot;collision&quot; with two arguments.<br>It shows a scenario of the two ships collision and an oil spill from one of them, presumably a tanker. Ships are represented as instances of a class NavOb in IGIS ontology. The oil spill is represented as an instance of a class SpillRepeatAction. The collision is represented as an internal subclass of a class RepeatAction (see Help OpenMap Tab API menu).<br><br>Ships movement, oil spill and other spatial processes are implementing in the OpenMap Tab with a help of an internal simulation mechanism. It has the controls to start/stop, change time scale and adjust smoofenes of movement. Navigation objects (NavObs) can be controlled by individual panels opened with a Control Object button <img src=\"file:resources/public/img/steer.gif\">.<br><br>In OMTest.pprj project the Demo example uses more elaborate repeat actions DropRepeatAction and OMTPolyOnFieldRepeatAction that work in collaboration. DRA periodically starts OMTPOFRA that is intended to represent spill of oil portions. OMTPOFRA simulates spreading and drifting of oil spot under joint influence of wind and current. This influence is implemented by grid of vectors that represented by two CSV-files, one for directions and one for speed. <br><br>Additionally, in this example are used &quot;bounds&quot; of spot's spreading that is simulating fields of ice.<br><br></body>\n</html>"))
+
+([igis_Class6] of  Menu
+
+	(class "com.bbn.openmap.gui.FileMenu")
+	(label "fileMenu"))
+
+([igis_Class60000] of  Command
+
+	(label "Collision with Oil Spill")
+	(scenario "ru.igis.omtab.Demo collision ship1 ship2 CollisionRA \"Oil Spill\""))
+
+([igis_Class7] of  Menu
+
+	(class "com.bbn.openmap.gui.GoToMenu")
+	(label "gotoMenu"))
+
+([igis_Class70000] of  HelpMenuItem
+
+	(class "ru.igis.omtab.menu.URLHelpMenuItem")
+	(label "omtHelp3")
+	(source "file:src/OpenMapTab/ru/igis/omtab/Demo.java")
+	(text "Class ru.igis.omtab.Demo.java"))
+
+([igis_Class80000] of  MapTileLayer
+
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "owm1:precipitation")
+	(localCacheRootDir "data/tiles/owm1/precipitation")
+	(prettyName "OWM1.0 Precipitation")
+	(rootDir "https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([igis_Class80001] of  MapTileLayer
+
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "owm1:pressure")
+	(localCacheRootDir "data/tiles/owm1/pressure")
+	(prettyName "OWM1.0 Pressure")
+	(rootDir "https://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([igis_Class80002] of  MapTileLayer
+
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "owm1:wind_speed")
+	(localCacheRootDir "data/tiles/owm1/wind_speed")
+	(prettyName "OWM1.0 Wind speed")
+	(rootDir "https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([igis_Class80003] of  MapTileLayer
+
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "owm1:temperature")
+	(localCacheRootDir "data/tiles/owm1/temperature")
+	(prettyName "OWM1.0 Temperature")
+	(rootDir "https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([igis_Class80004] of  MapTileLayer
+
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "owm1:clouds")
+	(localCacheRootDir "data/tiles/owm1/clouds")
+	(prettyName "OWM1.0 Clouds")
+	(rootDir "https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([igis_Class9] of  Menu
+
+	(class "com.bbn.openmap.gui.LayersMenu")
+	(label "layersMenu"))
+
+([igis_Class90000] of  SimpleComponent
+
+	(class "ru.igis.omtab.gui.RuMapMouseAdapter")
+	(label "ruMapMouseAdapter"))
+
+([NiceSPb_Class130000] of  MapTileLayer
+
+	(background.fillColor "FFFFFF")
+	(background.lineColor "FFFFFF")
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "ArcGIS_Satellite")
+	(land.fillColor "DECD8B")
+	(land.lineColor "DECD8B")
+	(localCacheRootDir "data/tiles/sat")
+	(noCoverageZoom "13")
+	(prettyName "ArcGIS Satellite")
+	(rootDir "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([NiceSPb_Class160725] of  MapTileLayer
+
+	(background.fillColor "FFFFFF")
+	(background.lineColor "FFFFFF")
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "ArcGIS_Streets")
+	(land.fillColor "DECD8B")
+	(land.lineColor "DECD8B")
+	(localCacheRootDir "data/tiles/street")
+	(noCoverageZoom "13")
+	(prettyName "ArcGIS Streets")
+	(rootDir "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([NiceSPb_Class160726] of  MapTileLayer
+
+	(background.fillColor "FFFFFF")
+	(background.lineColor "FFFFFF")
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "ArcGIS_NationalGeographic")
+	(land.fillColor "DECD8B")
+	(land.lineColor "DECD8B")
+	(localCacheRootDir "data/tiles/ngeo")
+	(noCoverageZoom "13")
+	(prettyName "ArcGIS National Geographic")
+	(rootDir "http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}.png")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))
+
+([NiceSPb_Class160727] of  MapTileLayer
+
+	(background.fillColor "FFFFFF")
+	(background.lineColor "FFFFFF")
+	(class "com.bbn.openmap.layer.imageTile.MapTileLayer")
+	(emptyTileHandler "com.bbn.openmap.dataAccess.mapTile.ShpFileEmptyTileHandler")
+	(fileExt ".png")
+	(label "Watercolor")
+	(land.fillColor "DECD8B")
+	(land.lineColor "DECD8B")
+	(localCacheRootDir "data/tiles/water")
+	(noCoverageZoom "13")
+	(prettyName "Watercolor")
+	(rootDir "http://a.tile.stamen.com/watercolor/{z}/{x}/{y}.png")
+	(tileFactory "com.bbn.openmap.dataAccess.mapTile.ServerMapTileFactory"))

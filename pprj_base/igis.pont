@@ -1,0 +1,1795 @@
+; Sat Feb 13 21:03:58 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot number.colors
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot relative
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot east
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot csv_delimiter
+		(type SYMBOL)
+		(allowed-values COMMA BLANK COLON SEMICOLON)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pointRadius
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot components
+		(type INSTANCE)
+;+		(allowed-classes Component)
+		(create-accessor read-write))
+	(single-slot wmsserver
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot iconScale
+		(type INSTANCE)
+;+		(allowed-classes IconScale)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot items
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot plugin
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Longitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineWidth
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot localCacheRootDir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot imageReaderLoaders
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fileExt
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot line
+		(type INSTANCE)
+;+		(allowed-classes Line)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shpFile
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ASTARTUP-EXPRESSION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rootDir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot featureTypes
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tileFactory
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot minute.spacing
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot oval
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot playground-index
+		(type SYMBOL)
+		(allowed-values 0 1 2 3 4)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot S57path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot vpfPath
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot transparent
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot points
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot speed2
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot wmsversion
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fontName
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot mapob
+		(type INSTANCE)
+;+		(allowed-classes MapOb)
+		(create-accessor read-write))
+	(single-slot N
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot 10DegreeColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot format
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot extent
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot scenario
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot missions
+		(type INSTANCE)
+;+		(allowed-classes ObjectMission)
+		(create-accessor read-write))
+	(single-slot X
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Y
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot damping
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view.type
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot overviewMinScale
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot labelsNumber
+		(type SYMBOL)
+		(allowed-values ALL ONE)
+		(default ONE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot spatialIndex
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot background.lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lines.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot area
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot circles.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shapeFile
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot mouseModes
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot 1DegreeColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot BOLD
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Latitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot radius
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lifetime
+;+		(comment "0 - means infinity")
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot layers
+		(type INSTANCE)
+;+		(allowed-classes Layer)
+		(create-accessor read-write))
+	(single-slot vendorspecificnames
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dashPattern
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot latitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot overviewLayers
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fileHasHeader
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot 5DegreeColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot land.lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fontSize
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot points.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot spill
+		(type INSTANCE)
+;+		(allowed-classes Spill)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot polys.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot overviewStatusLayer
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rects.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fontSize0
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shp
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot field
+		(type INSTANCE)
+;+		(allowed-classes Field)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shx
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot locationHandlers
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot speed
+		(type FLOAT)
+		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot columnNames
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot loaders
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot textColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot noCoverageZoom
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot useDeclutter
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot label
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tileFile
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot course
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ASTARTUP-FILE
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot period
+		(type INTEGER)
+		(default 1)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ITALIC
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot interval
+		(type SYMBOL)
+		(allowed-values HOUR MINUTE SECOND)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot pointOval
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot description
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot contrast
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dateLineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot WebBrowser
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot startUpLayers
+		(type INSTANCE)
+;+		(allowed-classes Layer)
+		(create-accessor read-write))
+	(single-slot background.fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot excluded
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+		(create-accessor read-write))
+	(single-slot distance
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot period2
+		(type INTEGER)
+		(default 1)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot menus
+		(type INSTANCE)
+;+		(allowed-classes Menu HelpMenu)
+		(create-accessor read-write))
+	(single-slot declutterMatrix
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot property
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot jointDecoration
+		(type SYMBOL)
+		(allowed-values BEVEL MITER ROUND)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot show1And5Lines
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot units
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fontStyle
+		(type SYMBOL)
+		(allowed-values PLAIN BOLD ITALIC BOLD%7CITALIC)
+		(default PLAIN)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot parameters
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+		(create-accessor read-write))
+	(single-slot specialLineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lifetime2
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot type
+		(type INSTANCE)
+;+		(allowed-classes Type)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot bounds
+		(type INSTANCE)
+;+		(allowed-classes Bounds)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3AKB-SAVE
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot point-radius
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot text
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot isPolygon
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot north
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot distance.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot threshold
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ADEFINITION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot angle
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot equatorColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot south
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot minScale
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot land.fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot tow
+		(type INSTANCE)
+;+		(allowed-classes Tow)
+		(create-accessor read-write))
+	(multislot included
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+		(create-accessor read-write))
+	(single-slot opaque
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Scale
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot BackgroundColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot verticalSpeed
+		(type FLOAT)
+		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot url
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillPattern
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot editor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineType
+		(type SYMBOL)
+		(allowed-values RHUMB GREAT_CIRCLE STRAIGHT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot altitude
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Debug
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot basicScale
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot arcType
+		(type SYMBOL)
+		(allowed-values OPEN PIE CHORD)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pointImageURL
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot reflectCreation
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot geotiff
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot vendorspecificvalues
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot poly
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot capDecoration
+		(type SYMBOL)
+		(allowed-values BUTT ROUND SQUARE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot edge
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot interval2
+		(type SYMBOL)
+		(allowed-values HOUR MINUTE SECOND)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot prettyName
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxScale
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ADEFINITION-NAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dbf
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot styles
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot coverageType
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot emptyTileHandler
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot longitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot overviewScaleFactor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot west
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot imageFilePath
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot showRuler
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Projection
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass IGIS
+	(is-a USER)
+	(role abstract)
+	(single-slot label
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Property
+	(is-a IGIS)
+	(role concrete))
+
+(defclass Openmap
+	(is-a Property)
+	(role concrete)
+	(single-slot Latitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Debug
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Scale
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot components
+		(type INSTANCE)
+;+		(allowed-classes Component)
+		(create-accessor read-write))
+	(single-slot BackgroundColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot layers
+		(type INSTANCE)
+;+		(allowed-classes Layer)
+		(create-accessor read-write))
+	(single-slot Longitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot WebBrowser
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot startUpLayers
+		(type INSTANCE)
+;+		(allowed-classes Layer)
+		(create-accessor read-write))
+	(single-slot Projection
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Component
+	(is-a Property)
+	(role concrete)
+	(single-slot class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass MenuList
+	(is-a Component)
+	(role concrete)
+	(multislot menus
+		(type INSTANCE)
+;+		(allowed-classes Menu HelpMenu)
+		(create-accessor read-write)))
+
+(defclass Menu
+	(is-a Component)
+	(role concrete))
+
+(defclass LayerHandler
+	(is-a Component)
+	(role concrete))
+
+(defclass Playground
+	(is-a Component)
+	(role concrete)
+	(single-slot playground-index
+		(type SYMBOL)
+		(allowed-values 0 1 2 3 4)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot prettyName
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot scenario
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass GraphicLoaderConnector
+	(is-a Component)
+	(role concrete))
+
+(defclass LayersPanel
+	(is-a Component)
+	(role concrete))
+
+(defclass MouseMode
+	(is-a Component)
+	(role concrete)
+	(single-slot units
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass SimpleComponent
+	(is-a Component)
+	(role concrete))
+
+(defclass ProtegeReflector
+	(is-a Component)
+	(role concrete)
+	(single-slot reflectCreation
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass HelpMenu
+	(is-a Component)
+	(role concrete)
+	(single-slot items
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass HelpMenuItem
+	(is-a Component)
+	(role concrete)
+	(single-slot text
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OverviewMapHandler
+	(is-a Component)
+	(role concrete)
+	(single-slot overviewLayers
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot overviewMinScale
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot overviewScaleFactor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot overviewStatusLayer
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Layer
+	(is-a Property)
+	(role concrete)
+	(single-slot class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot prettyName
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass ShapeLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot lineWidth
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pointOval
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pointRadius
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shapeFile
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot spatialIndex
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillPattern
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dashPattern
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pointImageURL
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass VPFLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot featureTypes
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot edge
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot area
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot vpfPath
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot coverageType
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass GraticuleLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot threshold
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot showRuler
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot show1And5Lines
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot specialLineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot textColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dateLineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot 1DegreeColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot 10DegreeColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot equatorColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot 5DegreeColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass RasterLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot tileFile
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fileHasHeader
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass S57Layer
+	(is-a Layer)
+	(role concrete)
+	(single-slot S57path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass WMSPlugin
+	(is-a Layer)
+	(role concrete)
+	(single-slot transparent
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot property
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot wmsserver
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot styles
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot wmsversion
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot vendorspecificnames
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot format
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot vendorspecificvalues
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass EsriLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot lineWidth
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pointOval
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pointRadius
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dbf
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shp
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fillPattern
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dashPattern
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shx
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass RuEsriPlugIn
+	(is-a EsriLayer)
+	(role concrete)
+	(single-slot fontStyle
+		(type SYMBOL)
+		(allowed-values PLAIN BOLD ITALIC BOLD%7CITALIC)
+		(default PLAIN)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fontSize0
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot columnNames
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fontName
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot labelsNumber
+		(type SYMBOL)
+		(allowed-values ALL ONE)
+		(default ONE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass MapTileLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot localCacheRootDir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot shpFile
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot emptyTileHandler
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot land.fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fileExt
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot background.fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rootDir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot background.lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot noCoverageZoom
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot land.lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tileFactory
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass PluginLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot plugin
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass ETOPOLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot number.colors
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot minute.spacing
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view.type
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot contrast
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot opaque
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass LocationLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot declutterMatrix
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot locationHandlers
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot useDeclutter
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass EditorLayer
+	(is-a Layer)
+	(role concrete)
+	(single-slot distance.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rects.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot mouseModes
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot points.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lines.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot circles.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot loaders
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot editor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot polys.class
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass MapOb
+	(is-a IGIS)
+	(role concrete)
+	(single-slot description
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot playground-index
+		(type SYMBOL)
+		(allowed-values 0 1 2 3 4)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot longitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot latitude
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMGraphic
+	(is-a MapOb)
+	(role concrete)
+	(single-slot fillColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTPoint
+	(is-a OMGraphic)
+	(role concrete)
+	(single-slot point-radius
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot oval
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTRaster
+	(is-a OMGraphic)
+	(role concrete)
+	(single-slot angle
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot url
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass NavOb
+	(is-a OMTRaster)
+	(role concrete)
+	(single-slot type
+		(type INSTANCE)
+;+		(allowed-classes Type)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot iconScale
+		(type INSTANCE)
+;+		(allowed-classes IconScale)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot verticalSpeed
+		(type FLOAT)
+		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot tow
+		(type INSTANCE)
+;+		(allowed-classes Tow)
+		(create-accessor read-write))
+	(single-slot course
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot speed
+		(type FLOAT)
+		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot altitude
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTPoly
+	(is-a OMGraphic)
+	(role concrete)
+	(multislot points
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot relative
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot isPolygon
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot line
+		(type INSTANCE)
+;+		(allowed-classes Line)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTSpline
+	(is-a OMTPoly)
+	(role concrete))
+
+(defclass Spill
+	(is-a OMTSpline)
+	(role concrete)
+	(single-slot radius
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot damping
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot speed
+		(type FLOAT)
+		(default 0.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot N
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Drift
+	(is-a Spill)
+	(role concrete)
+	(single-slot speed2
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot course
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTArc
+	(is-a OMGraphic)
+	(role concrete)
+	(single-slot radius
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot arcType
+		(type SYMBOL)
+		(allowed-values OPEN PIE CHORD)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot angle
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot line
+		(type INSTANCE)
+;+		(allowed-classes Line)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot extent
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTCircle
+	(is-a OMGraphic)
+	(role concrete)
+	(single-slot radius
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot line
+		(type INSTANCE)
+;+		(allowed-classes Line)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTRect
+	(is-a OMGraphic)
+	(role concrete)
+	(single-slot east
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot line
+		(type INSTANCE)
+;+		(allowed-classes Line)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot north
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot west
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot south
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Field
+	(is-a OMTRect)
+	(role concrete)
+	(multislot parameters
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+		(create-accessor read-write))
+	(single-slot csv_delimiter
+		(type SYMBOL)
+		(allowed-values COMMA BLANK COLON SEMICOLON)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTText
+	(is-a OMGraphic)
+	(role concrete)
+	(single-slot fontSize
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot BOLD
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot text
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot X
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Y
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot angle
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot ITALIC
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot textColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fontName
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Link
+	(is-a MapOb)
+	(role concrete)
+	(multislot mapob
+		(type INSTANCE)
+;+		(allowed-classes MapOb)
+		(create-accessor read-write))
+	(single-slot lineColor
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Tow
+	(is-a IGIS)
+	(role concrete)
+	(multislot mapob
+		(type INSTANCE)
+;+		(allowed-classes MapOb)
+		(create-accessor read-write))
+	(single-slot relative
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot angle
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot distance
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Command
+	(is-a IGIS)
+	(role concrete)
+	(single-slot scenario
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass ObjectMission
+	(is-a IGIS)
+	(role concrete)
+	(multislot parameters
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+		(create-accessor read-write)))
+
+(defclass RepeatAction
+	(is-a IGIS)
+	(role concrete)
+	(single-slot interval
+		(type SYMBOL)
+		(allowed-values HOUR MINUTE SECOND)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot lifetime
+;+		(comment "0 - means infinity")
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot playground-index
+		(type SYMBOL)
+		(allowed-values 0 1 2 3 4)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot period
+		(type INTEGER)
+		(default 1)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass SpillRepeatAction
+	(is-a RepeatAction)
+	(role concrete)
+	(single-slot bounds
+		(type INSTANCE)
+;+		(allowed-classes Bounds)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot poly
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass DriftRepeatAction
+	(is-a RepeatAction)
+	(role concrete)
+	(single-slot bounds
+		(type INSTANCE)
+;+		(allowed-classes Bounds)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot poly
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OMTPolyOnFieldRepeatAction
+	(is-a RepeatAction)
+	(role concrete)
+	(single-slot bounds
+		(type INSTANCE)
+;+		(allowed-classes Bounds)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot poly
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot field
+		(type INSTANCE)
+;+		(allowed-classes Field)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass ScenarioRepeatAction
+	(is-a RepeatAction)
+	(role concrete)
+	(single-slot scenario
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass DropRepeatAction
+	(is-a RepeatAction)
+	(role concrete)
+	(single-slot lifetime2
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot period2
+		(type INTEGER)
+		(default 1)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot bounds
+		(type INSTANCE)
+;+		(allowed-classes Bounds)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot field
+		(type INSTANCE)
+;+		(allowed-classes Field)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot interval2
+		(type SYMBOL)
+		(allowed-values HOUR MINUTE SECOND)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot spill
+		(type INSTANCE)
+;+		(allowed-classes Spill)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Line
+	(is-a IGIS)
+	(role concrete)
+	(single-slot lineWidth
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lineType
+		(type SYMBOL)
+		(allowed-values RHUMB GREAT_CIRCLE STRAIGHT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot jointDecoration
+		(type SYMBOL)
+		(allowed-values BEVEL MITER ROUND)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot capDecoration
+		(type SYMBOL)
+		(allowed-values BUTT ROUND SQUARE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dashPattern
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Type
+	(is-a IGIS)
+	(role concrete)
+	(multislot missions
+		(type INSTANCE)
+;+		(allowed-classes ObjectMission)
+		(create-accessor read-write))
+	(single-slot url
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass IconScale
+	(is-a IGIS)
+	(role concrete)
+	(single-slot minScale
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxScale
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot basicScale
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Bounds
+	(is-a IGIS)
+	(role concrete)
+	(multislot included
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+		(create-accessor read-write))
+	(multislot excluded
+		(type INSTANCE)
+;+		(allowed-classes OMTPoly)
+		(create-accessor read-write)))
+
+(defclass Param
+	(is-a IGIS)
+	(role concrete)
+	(single-slot text
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Description
+	(is-a IGIS)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))

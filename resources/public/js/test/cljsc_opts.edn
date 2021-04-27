@@ -1,0 +1,1 @@
+{:output-to "resources/public/js/test.js", :output-dir "resources/public/js/test", :asset-path "js/test", :main "cesium.test.client", :verbose false}

@@ -1,0 +1,58 @@
+; Mon Apr 26 20:35:32 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot telnet-port
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot data
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass VRDashboardControl
+	(is-a CeziumControl)
+	(role concrete)
+	(single-slot telnet-port
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass VR+Ontology
+	(is-a USER)
+	(role abstract))
+
+(defclass NMEAData
+	(is-a VR+Ontology)
+	(role concrete)
+	(single-slot time
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot object
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING MapOb NavOb)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot data
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass NMEAControl
+	(is-a VR+Ontology)
+	(role concrete)
+	(single-slot status
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot delay
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))

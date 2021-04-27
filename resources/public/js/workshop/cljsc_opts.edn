@@ -1,0 +1,1 @@
+{:output-to "resources/public/js/workshop.js", :output-dir "resources/public/js/workshop", :asset-path "js/workshop", :main "cesium.workshop.client", :verbose false}

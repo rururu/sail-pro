@@ -1,0 +1,237 @@
+; Mon Mar 11 11:20:23 MSK 2019
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([RETE_Class2] of  CloFunction
+
+	(source "(when-let [ri (if (string? rule)\n	(p/fifos \"Rule\" \"title\" rule)\n	rule)]\n  (let [nm (p/sv ri \"title\")\n         _ (if (not= mode \"run\") (println [:MK-RULE nm]))\n        sal (p/sv ri \"salience\")\n        lhs (read-string (str \"(\" (p/sv ri \"lhs\") \")\"))\n        rhs (read-string (str \"(\" (p/sv ri \"rhs\") \")\"))]\n    (concat [nm sal] lhs ['=>] rhs)))")
+	(title "mk-rule [rule mode]"))
+
+([RETE_Class4] of  CloFunction
+
+	(source "([iot]\n  (let [[ins tit] (if (string? iot) \n	[(p/fifos \"Run\" \"title\" iot) iot]\n	[iot (p/sv iot \"title\")])]\n    (if (and ins tit)\n      (run-engine tit\n	(p/svs ins \"rule-sets\")\n	(p/svs ins \"fact-classes\")\n	(p/svs ins \"facts\")\n	(p/sv   ins \"mode\")))))\n([hm inst]\n  (let [mp (into {} hm)\n         tit (mp \"title\")\n         rss (mp \"rule-sets\")\n         fcs (mp \"fact-classes\")\n         ffs (mp \"facts\")\n         mod (mp \"mode\")]\n    (run-engine tit rss fcs ffs mod)))\n([tit rss fcs ffs mod]\n  (println [:RUN tit])\n  (let [ffc (facts-from-classes fcs)\n         fts (concat ffc ffs)\n         fts (map mk-frame fts)\n         tps (mapcat #(p/svs % \"templates\") rss)\n         tps (mk-templates tps)\n         rls (mapcat #(p/svs % \"rules\") rss)\n         rls (map #(mk-rule % mod) rls)\n         rls (map rete/trans-rule rls)]\n     (println (str \"Mode: \" mod))\n     (println (str \"Templates: \" (count tps)))\n     (println (str \"Rules: \" (count rls)))\n     (println (str \"Facts: \" (count fts)))\n     (def RUN true)\n     (rete/run-with mod tps rls fts)))")
+	(title "run-engine"))
+
+([RuleEngine_Class0] of  CloFunction
+
+	(source "(letfn [(mk-tpl [cls]\n	(concat [(symbol (.getName cls)) 'instance]\n	  (map #(symbol (.getName %)) (.getTemplateSlots cls))))]\n  (if (seq? clss)\n    (map mk-tpl clss)\n    (mk-templates (.getSubclasses clss)) ))")
+	(title "mk-templates [clss]"))
+
+([RuleEngine_Class10000] of  CloFunction
+
+	(source ";; short print facts to REPL\n;; typ - type of facts (symbol with ' prefix) or :all\n(let [all (rete/fact-list)\n      sel (if (= typ :all) all (filter #(= (second %) typ) all))]\n  (def k 0)\n  (doseq [fact sel]\n    (let [[n typ & rp] fact\n          mp (apply hash-map rp)]\n      (p/ctpl (str k \" \" typ \" \" (or (mp 'title) (mp 'label)) \" status: \" (mp 'status) \" fact: \" n))\n      (def k (inc k)) ) ))")
+	(title "sp [typ]"))
+
+([RuleEngine_Class100000] of  CloFunction
+
+	(source ";; write rules to file Rules.clj\n(if-let [rr (seq (p/cls-instances \"Rule\"))]\n  (let [fn \"Rules.clj\"]\n    (with-open [wrtr (clojure.java.io/writer fn)]\n      (doseq [r rr]\n        (.write wrtr (str \"(\" (p/sv r \"title\") \" \" (p/sv r \"salience\") \"\\n\"))\n        (.write wrtr (str (p/sv r \"lhs\") \"\\n\"))\n        (.write wrtr \"=>\\n\")\n        (.write wrtr (str (p/sv r \"rhs\") \")\\n\\n\")) ))\n    (str \"Written \" (count rr) \" rules into \" fn)))")
+	(title "dr []"))
+
+([RuleEngine_Class110000] of  CloFunction
+
+	(source ";; fact types statistics\n(letfn [(ads [stm [fid typ mp]]\n	(if-let [ste (typ stm)]\n	  (assoc stm typ (inc ste))\n	  (assoc stm typ 1)))]\n  (let [fl (rete/fact-list)\n         stm (reduce ads {} fl)\n         sto (sort-by second (seq stm))\n         str (reverse sto)]\n    (p/ctpls str)\n    (count fl)))")
+	(title "sts []"))
+
+([RuleEngine_Class120000] of  CloFunction
+
+	(source "(if-let [funarg (@rete/IDFACT fid)]\n  (rete/to-typmap funarg))")
+	(title "typmap-by-id [fid]"))
+
+([RuleEngine_Class120001] of  CloFunction
+
+	(source "([]\n (filter #(not= (second %) nil)\n          (for [i (range @rete/FCNT)](typmap-by-id i))))\n([typ]\n (filter #(= (first %) typ) (typmaps)))")
+	(title "typmaps"))
+
+([RuleEngine_Class130000] of  CloFunction
+
+	(source "(rete/fire)")
+	(title "fire-all-rules [hm inst]"))
+
+([RuleEngine_Class140000] of  CloFunction
+
+	(source "(if (= (.getValueType slt) ValueType/SYMBOL)\n  (symbol val)\n  val)")
+	(title "single-value [val slt]"))
+
+([RuleEngine_Class150000] of  CloFunction
+
+	(source ";; create file with beta net plan\n(rete/log-lst \"beta-net-plan.txt\" rete/BPLAN)")
+	(title "bnp []"))
+
+([RuleEngine_Class160000] of  CloFunction
+
+	(source "(DisplayUtilities/pickSymbol nil question (first answers) answers)")
+	(title "select [question answers]"))
+
+([RuleEngine_Class160001] of  CloFunction
+
+	(source "(let [dis (if-let [dss (seq (p/cls-instances \"Display\"))]\n                (first dss)\n                (let [d (p/crin \"Display\")]\n                  (clear-display)\n                  d))\n       src (p/sv dis \"source\")]\n  (p/ssv dis \"source\" (str src mess \"<br>\"))\n  (.show p/*prj* dis))")
+	(title "display [mess]"))
+
+([RuleEngine_Class160007] of  CloFunction
+
+	(source "(if-let [dss (seq (p/cls-instances \"Display\"))]\n   (p/ssv (first dss) \"source\" \"<html>\"))")
+	(title "clear-display []"))
+
+([RuleEngine_Class170000] of  CloFunction
+
+	(source ";; 1 line full print facts to REPL\n;; typ - type of facts (symbol with ' prefix) or :all\n(let [all (rete/fact-list)\n      sel (if (= typ :all) all (filter #(= (second %) typ) all))]\n  (doseq [fact sel]\n    (p/ctpl \"\")\n    (p/ctpl fact)))")
+	(title "lp [typ]"))
+
+([RuleEngine_Class180000] of  CloFunction
+
+	(source "(let [ans (JOptionPane/showConfirmDialog nil question)]\n  (condp = ans\n    JOptionPane/YES_OPTION true\n    JOptionPane/NO_OPTION false\n    nil))")
+	(title "confirm [question]"))
+
+([RuleEngine_Class180001] of  CloVar
+
+	(source "(atom {})")
+	(title "LOGS"))
+
+([RuleEngine_Class190000] of  CloFunction
+
+	(source "(loop [v nil]\n  (if (or (and validator (validator v)) (some? v))\n    v\n    (-> (DisplayUtilities/editString nil question default nil)\n      (or \"nil\")\n      read-string\n      recur)))")
+	(title "input [question default validator]"))
+
+([RuleEngine_Class20000] of  CloFunction
+
+	(source ";; print fact by number to REPL\n(let [all (rete/fact-list)\n      fact (first (filter #(= (first %) n) all))]\n  (if fact\n    (let [[[n typ] & rp] (partition-all 2 fact)]\n      (p/ctpl (str \"Fact\" n \" \" typ))\n      (doseq [sv rp]\n        (p/ctpl (str \"  \" (first sv) \" \" (second sv))) ) )))")
+	(title "f [n]"))
+
+([RuleEngine_Class200000] of  CloFunction
+
+	(source "([fid]\n  (mk-instance fid 0))\n([fid dep]\n  (if-let [[typ mp] (typmap-by-id fid)]\n    (mk-instance typ mp dep)))\n([typ mp dep]\n  (p/mti (assoc mp :DIRTYP typ :DEPTH dep)))")
+	(title "mk-instance"))
+
+([RuleEngine_Class200002] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n        sts (mp \"steps\")]\n  (if (not RUN)\n    (run-engine hm inst))\n  (if (and rete/TRACE (not rete/TLONG))\n    (println))\n  (println [:STEPS sts])\n  (rete/step sts))")
+	(title "step-engine [hm inst]"))
+
+([RuleEngine_Class210000] of  CloVar
+
+	(source "nil")
+	(title "RUN"))
+
+([RuleEngine_Class220000] of  CloFunction
+
+	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Starting Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"EXPERT SYSTEM INITIALIZED\")")
+	(title "clojure-work []"))
+
+([RuleEngine_Class230000] of  CloFunction
+
+	(source "(doseq [ins inss]\n  (doseq [fact (rete/facts-with-slot-value 'instance = ins)]\n    (rete/retract-fact (first fact))))")
+	(title "retract-instances [inss]"))
+
+([RuleEngine_Class240000] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n      clw (mp \"clsWidget\")\n      sel (.getSelection (.getSlotWidget clw (p/slt \"instances\")))]\n  (if (seq sel)\n    (retract-instances sel)))")
+	(title "retr-inss [hm inst]"))
+
+([RuleEngine_Class250000] of  CloFunction
+
+	(source "(cin/inspect-tree (sort-by #(name (second %)) (rete.core/fact-list)))")
+	(title "fact-inspector []"))
+
+([RuleEngine_Class260000] of  CloFunction
+
+	(source "(let [nam (if (.contains nam \"(\")\n                 (.substring nam (inc (.indexOf nam \"(\")) (.indexOf nam \" \"))\n                 nam)]\n  (.show p/*prj* (.getInstance p/*kb* nam))\n  nam)")
+	(title "di [nam]"))
+
+([RuleEngine_Class260004] of  CloFunction
+
+	(source ";; display fact as table\n(let [all (rete/fact-list)\n      fact (first (filter #(= (first %) n) all))]\n  (if fact\n    (let [[[n typ] & rp] (partition-all 2 fact)\n           t2 (p/crin \"Table2\")]\n      (p/ssv t2 \"title\" (str typ \" \" n))\n      (p/ssvs t2 \"column1\" (map str (map first rp)))\n      (p/ssvs t2 \"column2\" (map str (map second rp)))\n      (.show p/*prj* t2)\n      (str \"Fact-\" n))))")
+	(title "f2 [n]"))
+
+([RuleEngine_Class270000] of  CloFunction
+
+	(source "(let [[otype & svals] frm\n       upf (fn [[k v]]\n	[k (or (mp k) v)])]\n  (cons (if (= typ :same-type) otype typ)\n    (mapcat upf (partition 2 svals))))")
+	(title "update-frame [frm typ mp]"))
+
+([RuleEngine_Class280000] of  CloFunction
+
+	(source "(if-let [esi (p/fainst (p/cls-instances \"Run\") nil)]\n  (run-engine esi))")
+	(title "restart-es []"))
+
+([RuleEngine_Class280001] of  CloFunction
+
+	(source "(rete/log-lst \"beta-net-plan.txt\" rete/BNET)")
+	(title "save-bnet-plan []"))
+
+([RuleEngine_Class30000] of  CloProgram
+
+	(cloFunctions
+		[RuleEngine_Class0]
+		[RETE_Class2]
+		[RuleEngine_Class140000]
+		[RuleEngine_Class90000]
+		[RuleEngine_Class270000]
+		[RuleEngine_Class50000]
+		[RETE_Class4]
+		[RuleEngine_Class70000]
+		[RuleEngine_Class230000]
+		[RuleEngine_Class60002]
+		[RuleEngine_Class240000]
+		[RuleEngine_Class60000]
+		[RuleEngine_Class10000]
+		[RuleEngine_Class170000]
+		[RuleEngine_Class80000]
+		[RuleEngine_Class20000]
+		[RuleEngine_Class100000]
+		[RuleEngine_Class110000]
+		[RuleEngine_Class120000]
+		[RuleEngine_Class120001]
+		[RuleEngine_Class130000]
+		[RuleEngine_Class150000]
+		[RuleEngine_Class160007]
+		[RuleEngine_Class160001]
+		[RuleEngine_Class160000]
+		[RuleEngine_Class180000]
+		[RuleEngine_Class190000]
+		[RuleEngine_Class200002]
+		[RuleEngine_Class200000]
+		[RuleEngine_Class250000]
+		[RuleEngine_Class260004]
+		[RuleEngine_Class260000]
+		[RuleEngine_Class280000]
+		[RuleEngine_Class280001])
+	(cloNamespace [RuleEngine_Class40000])
+	(cloVars
+		[RuleEngine_Class180001]
+		[RuleEngine_Class210000])
+	(title "Rule Engine"))
+
+([RuleEngine_Class40000] of  CloNamespace
+
+	(source "(:require\n  [protege.core :as p]\n  [rete.core :as rete]\n  [clojure.inspector :as cin])\n(:import\n  edu.stanford.smi.protege.model.ValueType\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  javax.swing.JOptionPane)")
+	(title "ru.rules"))
+
+([RuleEngine_Class50000] of  CloFunction
+
+	(source "(mapcat #(.getInstances %) fcs)")
+	(title "facts-from-classes [fcs]"))
+
+([RuleEngine_Class60000] of  CloFunction
+
+	(source ";; pretty print facts to REPL\n;; typ - type of facts (symbol with ' prefix) or :all\n(let [all (rete/fact-list)\n      sel (if (= typ :all) all (filter #(= (second %) typ) all))]\n  (doseq [fact sel]\n    (p/ctpl \"\")\n    (let [[[n typ] & rp] (partition-all 2 fact)]\n      (p/ctpl (str \"Fact\" n \" \" typ))\n      (doseq [sv rp]\n        (p/ctpl (str \"  \" (first sv) \" \" (second sv))) ) )))")
+	(title "pp [typ]"))
+
+([RuleEngine_Class60002] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n      clw (mp \"clsWidget\")\n      sel (.getSelection (.getSlotWidget clw (p/slt \"instances\")))]\n  (if (seq sel)\n    (assert-instances sel)))")
+	(title "ass-inss [hm inst]"))
+
+([RuleEngine_Class70000] of  CloFunction
+
+	(source "(doseq [ins inss]\n  (rete/assert-frame (mk-frame ins)))")
+	(title "assert-instances [inss]"))
+
+([RuleEngine_Class80000] of  CloFunction
+
+	(source ";; print fact numbers containing val to REPL\n(let [all (rete/fact-list)\n      sel (filter #(some #{val} %) all)]\n  (def k 0)\n  (doseq [fact sel]\n    (let [[n typ & rp] fact\n          mp (apply hash-map rp)]\n      (p/ctpl (str k \" \" typ \" \" (or (mp 'title) (mp 'label)) \" status: \" (mp 'status) \" fact: \" n))\n      (def k (inc k)) ) ))")
+	(title "cv [val]"))
+
+([RuleEngine_Class90000] of  CloFunction
+
+	(source "(letfn [(sval [slt ins]\n	(if (.getAllowsMultipleValues slt)\n	  (vec (map #(single-value % slt) (.getOwnSlotValues ins slt)))\n                          (if-let [val (.getOwnSlotValue ins slt)]\n                            (single-value val slt)\n                            :?)))]\n  (let [typ (.getDirectType ins)\n        slots (.getTemplateSlots typ)\n        svls (mapcat #(list (symbol (.getName %)) (sval % ins)) slots)\n        svls (cons 'instance (cons ins svls))]\n    (cons (symbol (.getName typ)) svls)))")
+	(title "mk-frame [ins]"))

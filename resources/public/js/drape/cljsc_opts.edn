@@ -1,0 +1,1 @@
+{:output-to "resources/public/js/drape.js", :output-dir "resources/public/js/drape", :asset-path "js/drape", :main "cesium.drape.client", :verbose false}

@@ -1,0 +1,173 @@
+#vehicle {
+  position:fixed;
+  bottom:140px;
+  right:40px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#name {
+  position:fixed;
+  bottom:130px;
+  right:70px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#course {
+  position:fixed;
+  bottom:110px;
+  right:70px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#speed {
+  position:fixed;
+  bottom:90px;
+  right:70px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#altitude {
+  position:fixed;
+  bottom:70px;
+  right:70px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#name-fld {
+  position:fixed;
+  bottom:130px;
+  right:20px;
+  padding:5px;
+  z-index:100;
+  color:cyan
+}
+#course-fld {
+  position:fixed;
+  bottom:110px;
+  right:20px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#speed-fld {
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#altitude-fld {
+  position:fixed;
+  bottom:70px;
+  right:20px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#camera {
+  position:fixed;
+  bottom:140px;
+  left:60px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#onboard {
+  position:fixed;
+  bottom:130px;
+  left:20px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#onboard-fld {
+  position:fixed;
+  bottom:130px;
+  left:84px;
+  padding:5px;
+  z-index:100;
+  color:cyan
+}
+#view {
+  position:fixed;
+  bottom:110px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#view-fld {
+  position:fixed;
+  bottom:110px;
+  left:64px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#view-sld {
+  position:fixed;
+  bottom:110px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#pitch {
+  position:fixed;
+  bottom:90px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#pitch-fld {
+  position:fixed;
+  bottom:90px;
+  left:64px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#pitch-sld {
+  position:fixed;
+  bottom:90px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#roll {
+  position:fixed;
+  bottom:70px;
+  left:28px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#roll-fld {
+  position:fixed;
+  bottom:70px;
+  left:64px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#roll-sld {
+  position:fixed;
+  bottom:70px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#view-dir {
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  width: 100%;
+  text-align: center;
+  color:yellow
+}

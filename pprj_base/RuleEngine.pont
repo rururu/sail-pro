@@ -1,0 +1,231 @@
+; Mon Mar 11 11:20:23 MSK 2019
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(multislot instances
+		(type INSTANCE)
+;+		(allowed-classes)
+		(create-accessor read-write))
+	(single-slot document
+		(type INSTANCE)
+;+		(allowed-classes Document)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lhs
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot fact-classes
+		(type INSTANCE)
+;+		(allowed-classes %3ASTANDARD-CLASS)
+		(create-accessor read-write))
+	(multislot rule-sets
+		(type INSTANCE)
+;+		(allowed-classes RuleSet)
+		(create-accessor read-write))
+	(single-slot rhs
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-run
+		(type STRING)
+		(default "Run/ru.rules/run-engine")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-retr-inss
+		(type STRING)
+		(default "Retract Instances/ru.rules/retr-inss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-ass-inss
+		(type STRING)
+		(default "Assert Instances/ru.rules/ass-inss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-fire
+		(type STRING)
+		(default "Fire/ru.rules/fire-all-rules")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot steps
+		(type INTEGER)
+		(range 1 %3FVARIABLE)
+		(default 1)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot rules
+		(type INSTANCE)
+;+		(allowed-classes Rule)
+		(create-accessor read-write))
+	(multislot column2
+		(type STRING)
+		(create-accessor read-write))
+	(multislot column1
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot butt-step
+		(type STRING)
+		(default "Step/ru.rules/step-engine")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot salience
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot facts
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+		(create-accessor read-write))
+	(multislot templates
+		(type INSTANCE)
+;+		(allowed-classes %3ASTANDARD-CLASS)
+		(create-accessor read-write))
+	(single-slot mode
+		(type SYMBOL)
+		(allowed-values run trace trace-long step)
+		(default run)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass RuleEngine
+	(is-a USER)
+	(role abstract)
+	(single-slot document
+		(type INSTANCE)
+;+		(allowed-classes Document)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass RuleSet
+	(is-a RuleEngine)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot rules
+		(type INSTANCE)
+;+		(allowed-classes Rule)
+		(create-accessor read-write))
+	(multislot templates
+		(type INSTANCE)
+;+		(allowed-classes %3ASTANDARD-CLASS)
+		(create-accessor read-write)))
+
+(defclass Rule
+	(is-a RuleEngine)
+	(role concrete)
+	(single-slot lhs
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot salience
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rhs
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Run
+	(is-a RuleEngine)
+	(role concrete)
+	(multislot rule-sets
+		(type INSTANCE)
+;+		(allowed-classes RuleSet)
+		(create-accessor read-write))
+	(multislot fact-classes
+		(type INSTANCE)
+;+		(allowed-classes %3ASTANDARD-CLASS)
+		(create-accessor read-write))
+	(single-slot butt-step
+		(type STRING)
+		(default "Step/ru.rules/step-engine")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-ass-inss
+		(type STRING)
+		(default "Assert Instances/ru.rules/ass-inss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-run
+		(type STRING)
+		(default "Run/ru.rules/run-engine")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-fire
+		(type STRING)
+		(default "Fire/ru.rules/fire-all-rules")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot instances
+		(type INSTANCE)
+;+		(allowed-classes)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-retr-inss
+		(type STRING)
+		(default "Retract Instances/ru.rules/retr-inss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot facts
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+		(create-accessor read-write))
+	(single-slot steps
+		(type INTEGER)
+		(range 1 %3FVARIABLE)
+		(default 1)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot mode
+		(type SYMBOL)
+		(allowed-values run trace trace-long step)
+		(default run)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Document
+	(is-a USER)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Display
+	(is-a USER)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Table2
+	(is-a USER)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot column2
+		(type STRING)
+		(create-accessor read-write))
+	(multislot column1
+		(type STRING)
+		(create-accessor read-write)))

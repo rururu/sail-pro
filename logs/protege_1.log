@@ -1,0 +1,4 @@
+2021.04.26 20:00:32.894 MSK INFO: *** SYSTEM START ***
+2021.04.26 20:00:33.046 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2021.04.26 20:01:00.680 MSK INFO: Project load time for file:/home/ru/clojure/sail-pro/pprj_examples/SailExpert.pprj: 0 sec -- ProjectChooser.loadProject()
+2021.04.26 20:01:03.222 MSK INFO: UI display time = 2 sec -- ProjectManager$2.run()
