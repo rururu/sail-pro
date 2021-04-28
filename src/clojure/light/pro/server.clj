@@ -15,7 +15,6 @@
              edu.stanford.smi.protege.ui.DisplayUtilities
              java.awt.Desktop
              java.net.URI))
-
 (def PORT 8448)
 (def ROOT (str (System/getProperty "user.dir") "/resources/public/"))
 (def SERV nil)

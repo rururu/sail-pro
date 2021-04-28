@@ -7,7 +7,6 @@
   edu.stanford.smi.protege.model.ValueType
   edu.stanford.smi.protege.ui.DisplayUtilities
   javax.swing.JOptionPane))
-
 (def LOGS (atom {}))
 (def RUN nil)
 (defn mk-templates [clss]

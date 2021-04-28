@@ -7,7 +7,6 @@
  edu.stanford.smi.protege.util.ComponentUtilities
  edu.stanford.smi.protege.widget.AbstractSlotWidget
  clojuretab.ClojureTab))
-
 (def ^:dynamic *prj* (.getCurrentProject (ProjectManager/getProjectManager)))
 (def ^:dynamic *kb* (.getKnowledgeBase *prj*))
 (defn ins [name]

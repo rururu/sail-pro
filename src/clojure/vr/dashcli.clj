@@ -4,8 +4,8 @@
   [clj-telnet.core :as tn])
 (:import
   ru.igis.omtab.OMT
-  ru.igis.omtab.MapOb))
-
+  ru.igis.omtab.MapOb
+  edu.stanford.smi.protege.ui.DisplayUtilities))
 (def defTELNET (defonce TELNET nil))
 (def NMEA nil)
 (def STOP-TOKEN "AIVDM")
@@ -101,4 +101,14 @@ BOAT-DATA)
     (.setLongitude acm (+ lor (srand 0.02)))
     (.setCourse acm crr)
     (.setSpeed acm spr))))
+
+(defn ask-telnet-port []
+  (if-let [vrdc (first (cls-instances "VRDashboardControl"))]
+  (let [port (sv vrdc "telnet-port")
+         port (DisplayUtilities/editString nil "Telnet Port" port nil)]
+    (try
+      (ssv vrdc "telnet-port" (int (read-string port)))
+      port
+      (catch Exception e
+        nil)))))
 

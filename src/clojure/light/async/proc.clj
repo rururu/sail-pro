@@ -1,7 +1,6 @@
 (ns light.async.proc
 (:require 
   [clojure.core.async :refer [chan alts!! put! <! <!! go timeout close!]]))
-
 (defn repeater
   ([func time-out]
   (go (while true

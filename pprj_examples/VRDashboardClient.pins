@@ -1,4 +1,4 @@
-; Mon Apr 26 20:35:32 MSK 2021
+; Wed Apr 28 18:50:22 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -26,7 +26,8 @@
 		[VRDashboardClient_Class30058]
 		[VRDashboardClient_Class120007]
 		[VRDashboardClient_Class120003]
-		[VRDashboardClient_Class130002])
+		[VRDashboardClient_Class130002]
+		[VRDashboardClient_Class140000])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20003]
@@ -62,7 +63,7 @@
 
 ([VRDashboardClient_Class10003] of  CloProgram
 
-	(cloFunctions [RuleEngine_Class220000])
+	(cloFunctions [VRDashboardClient_Class140002])
 	(cloNamespace [Clojure_Class300001])
 	(title "CW"))
 
@@ -137,9 +138,23 @@
 	(source "(when-let [ac (fifos \"NavOb\" \"label\" \"CVN-69\")]\n  (let [acm (OMT/getOrAdd ac)\n        rus (OMT/getMapOb \"russor\")\n        lar (.getLatitude rus)\n        lor (.getLongitude rus)\n        crr (.getCourse rus)\n        spr (.getSpeed rus)]\n    (.setLatitude acm (+ lar (srand 0.02)))\n    (.setLongitude acm (+ lor (srand 0.02)))\n    (.setCourse acm crr)\n    (.setSpeed acm spr)))")
 	(title "add-aircraft-carrier []"))
 
+([VRDashboardClient_Class140000] of  CloFunction
+
+	(source "(if-let [vrdc (first (cls-instances \"VRDashboardControl\"))]\n  (let [port (sv vrdc \"telnet-port\")\n         port (DisplayUtilities/editString nil \"Telnet Port\" port nil)]\n    (try\n      (ssv vrdc \"telnet-port\" (int (read-string port)))\n      port\n      (catch Exception e\n        nil))))")
+	(title "ask-telnet-port []"))
+
+([VRDashboardClient_Class140001] of  CloFuncall
+
+	(source "(invoke-later (ask-telnet-port))"))
+
+([VRDashboardClient_Class140002] of  CloFunction
+
+	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Assign Telnet Port\")\n  (println \"Telnet Port\" (ClojureTab/invoke \"vr.dashcli\" \"ask-telnet-port\"))\n(println \"3. Starting Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"EXPERT SYSTEM INITIALIZED\")")
+	(title "clojure-work []"))
+
 ([VRDashboardClient_Class2] of  CloNamespace
 
-	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb)")
+	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  edu.stanford.smi.protege.ui.DisplayUtilities)")
 	(title "vr.dashcli"))
 
 ([VRDashboardClient_Class20000] of  CloVar
