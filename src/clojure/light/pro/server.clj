@@ -174,3 +174,17 @@
 ([hm inst]
   (start-client)))
 
+(defn offset-latlon
+  ([meters course]
+  (let [rad (Math/toRadians (/ meters 1852 60))
+         dir (Math/toRadians course)]
+    [(* rad (Math/cos dir)) (* rad (Math/sin dir))]))
+([meters course position]
+  (let [d (condp = position
+              :bow course
+              :starboard (+ course 90)
+              :stern (+ course 180)
+              :port (+ course 270))
+          d (if (> d 360) (- d 360) d)]
+    (offset-latlon meters d))))
+

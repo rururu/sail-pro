@@ -99,3 +99,8 @@ Caused by: java.lang.ClassNotFoundException: com.bbn.openmap.gui.BasicMapPanel
 2021.04.28 17:30:10.641 MSK INFO: *** SYSTEM START ***
 2021.04.28 17:30:10.910 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
 2021.04.28 17:30:25.685 MSK INFO: Load time for file:/home/ru/clojure/sail-pro/pprj_examples/VRDashboardClient.pprj = 0 sec (project) + 2 sec (ui) -- ProjectManager$3.run()
+2021.04.28 19:55:21.795 MSK INFO: *** SYSTEM START ***
+2021.04.28 19:55:22.131 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2021.04.28 19:55:33.320 MSK INFO: Load time for file:/home/ru/clojure/sail-pro/pprj_examples/VRDashboardClient.pprj = 0 sec (project) + 2 sec (ui) -- ProjectManager$3.run()
+2021.04.28 20:12:06.060 MSK INFO: Project load time for file:/home/ru/clojure/sail-pro/pprj_base/CesiumEngine.pprj: 0 sec -- ProjectChooser.loadProject()
+2021.04.28 20:12:15.649 MSK INFO: UI display time = 9 sec -- ProjectManager$2.run()
