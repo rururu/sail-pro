@@ -6,6 +6,7 @@
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
   edu.stanford.smi.protege.ui.DisplayUtilities))
+
 (def defTELNET (defonce TELNET nil))
 (def NMEA nil)
 (def STOP-TOKEN "AIVDM")

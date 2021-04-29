@@ -4,6 +4,7 @@
     [light.async.proc :as asp]
     [clojure.data.json :as json])
 (:import java.util.Calendar))
+
 (def defo-CZ-CHAN (defonce CZ-CHAN (asp/mk-chan)))
 (def DOC-SENT false)
 (def BASE-URL "")
