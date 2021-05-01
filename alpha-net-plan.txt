@@ -1,0 +1,16 @@
+NMEAControl:
+ :?: {:? {"START" 0, "RUN" 4}}
+NMEAData:
+ :?: {:? {:? {:? 1}}}
+Clock0:
+ :?: {:? 2}
+VRDashboardControl:
+ :?: {:? {:? {:? {:? {:? {:? {:? {:? {:? {:? 3}}}}}}}}}}
+CZMLGenerator:
+ :?: {:? {:? 5}}
+MapObEvent0:
+ :?: {:? {"ADDED" 6, "REMOVED" 8, :? 9}}
+CZMLSpan:
+ :?: {:? {:? {:? 7}}}
+Onboard:
+ :?: {:? {:? {:? 10}}}

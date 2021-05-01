@@ -74,6 +74,17 @@
     (vswap! czm/CAMERA assoc :roll deg)
     (set-html! "roll-fld" deg))))
 
+(defn offset-latlon [meters crs post]
+  (let [dd (condp = post
+             "BOW" crs
+             "STARBOARD" (+ crs 90)
+             "STERN" (+ crs 180)
+             "PORT" (+ crs 270))
+        dd (if (> dd 360) (- dd 360) dd)
+        rad (* (/ js/Math.PI 180) (/ meters 1852 60))
+        dir (* (/ js/Math.PI 180) dd)]
+  [(* rad (js/Math.cos dir)) (* rad (js/Math.sin dir))]))
+
 (defn response-request []
   (let [resp @RESPONSE]
   (when (not (empty? resp))
@@ -102,9 +113,10 @@
   (let [[lat lon] (:coord vehicle)
        alt (:altitude vehicle)
        vev (or (:view-elevation vehicle) 0)
-       vla (or (:view-offset-lat vehicle) 0)
-       vlo (or (:view-offset-lon vehicle) 0)
+       vpo (or (:view-post vehicle) :stern)
+       vof (or (:view-offset vehicle) 0)
        crs (:course vehicle)
+       [vla vlo] (offset-latlon vof crs vpo)
        head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]
   (vswap! VEHICLE merge vehicle)
   (set-html! "onboard-fld" (:name vehicle))

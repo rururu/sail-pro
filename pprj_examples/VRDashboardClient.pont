@@ -1,4 +1,4 @@
-; Wed Apr 28 18:50:22 MSK 2021
+; Sat May 01 20:12:01 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -11,6 +11,26 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot view-offset
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view-elevation
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view-post
+		(type SYMBOL)
+		(allowed-values BOW STARBOARD STERN PORT)
+		(default STERN)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-view-apply
+		(type STRING)
+		(default "Apply View/vr.dashcli/apply-view")
+;+		(value "Apply View/vr.dashcli/apply-view")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot data
 		(type STRING)
 ;+		(cardinality 0 1)
@@ -19,7 +39,27 @@
 (defclass VRDashboardControl
 	(is-a CeziumControl)
 	(role concrete)
+	(single-slot view-offset
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-view-apply
+		(type STRING)
+		(default "Apply View/vr.dashcli/apply-view")
+;+		(value "Apply View/vr.dashcli/apply-view")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot telnet-port
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view-post
+		(type SYMBOL)
+		(allowed-values BOW STARBOARD STERN PORT)
+		(default STERN)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view-elevation
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))

@@ -1,12 +1,12 @@
-; Wed Apr 28 22:48:02 MSK 2021
+; Sat May 01 14:54:58 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
 ([CesiumEngine_Class8] of  CloFunction
 
-	(source "([meters course]\n  (let [rad (Math/toRadians (/ meters 1852 60))\n         dir (Math/toRadians course)]\n    [(* rad (Math/cos dir)) (* rad (Math/sin dir))]))\n([meters course position]\n  (let [d (condp = position\n              :bow course\n              :starboard (+ course 90)\n              :stern (+ course 180)\n              :port (+ course 270))\n          d (if (> d 360) (- d 360) d)]\n    (offset-latlon meters d)))")
-	(title "offset-latlon"))
+	(source "(let [dd (condp = post\n             \"BOW\" crs\n             \"STARBOARD\" (+ crs 90)\n             \"STERN\" (+ crs 180)\n             \"PORT\" (+ crs 270))\n        dd (if (> dd 360) (- dd 360) dd)\n        rad (* (/ js/Math.PI 180) (/ meters 1852 60))\n        dir (* (/ js/Math.PI 180) dd)]\n  [(* rad (js/Math.cos dir)) (* rad (js/Math.sin dir))])")
+	(title "offset-latlon [meters crs post]"))
 
 ([Cezium_Class0] of  ClsRequired
 
@@ -89,7 +89,7 @@
 
 ([Cezium_Class10010] of  CloFunction
 
-	(source "(let [[lat lon] (:coord vehicle)\n       alt (:altitude vehicle)\n       vev (or (:view-elevation vehicle) 0)\n       vla (or (:view-offset-lat vehicle) 0)\n       vlo (or (:view-offset-lon vehicle) 0)\n       crs (:course vehicle)\n       head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]\n  (vswap! VEHICLE merge vehicle)\n  (set-html! \"onboard-fld\" (:name vehicle))\n  (set-html! \"name-fld\" (:name vehicle))\n  (set-html! \"course-fld\" (:course vehicle))\n  (set-html! \"speed-fld\" (:speed vehicle))\n  (set-html! \"altitude-fld\" czm/ALT)\n  (set-html! \"view-dir\" (geo/rumb head))\n  (czm/fly-to (+ lat vla) (+ lon vlo) (+ alt vev) crs 1.2))")
+	(source "(let [[lat lon] (:coord vehicle)\n       alt (:altitude vehicle)\n       vev (or (:view-elevation vehicle) 0)\n       vpo (or (:view-post vehicle) :stern)\n       vof (or (:view-offset vehicle) 0)\n       crs (:course vehicle)\n       [vla vlo] (offset-latlon vof crs vpo)\n       head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]\n  (vswap! VEHICLE merge vehicle)\n  (set-html! \"onboard-fld\" (:name vehicle))\n  (set-html! \"name-fld\" (:name vehicle))\n  (set-html! \"course-fld\" (:course vehicle))\n  (set-html! \"speed-fld\" (:speed vehicle))\n  (set-html! \"altitude-fld\" czm/ALT)\n  (set-html! \"view-dir\" (geo/rumb head))\n  (czm/fly-to (+ lat vla) (+ lon vlo) (+ alt vev) crs 1.2))")
 	(title "handle-vehicle [vehicle]"))
 
 ([Cezium_Class110051] of  CloFunction
@@ -125,6 +125,7 @@
 		[Cezium_Class60003]
 		[Cezium_Class60004]
 		[Cezium_Class60005]
+		[CesiumEngine_Class8]
 		[Cezium_Class80003]
 		[Cezium_Class50003]
 		[Cezium_Class10010]
@@ -309,8 +310,7 @@
 		[Cezium_Class80001]
 		[Cezium_Class370002]
 		[Cezium_Class360005]
-		[CeziumEngineLight_Class1]
-		[CesiumEngine_Class8])
+		[CeziumEngineLight_Class1])
 	(cloNamespace [Cezium_Class30027])
 	(cloVars
 		[Cezium_Class30029]

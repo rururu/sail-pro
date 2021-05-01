@@ -1,32 +1,50 @@
 # sail-pro
 
-FIXME: description
+Simulation and modelling environment for virtual sailing.
+
+## Prerequisites
+
+You need to be installed on your machine:
+
+1. Java Runtime Environment
+
+2. [Git](https://git-scm.com/)
+
+3. [Leiningen](https://leiningen.org/) or [CLJ tools](https://clojure.org/guides/getting_started)
+
+3. [Python3](https://www.python.org/downloads/)
+
+4. [VR Dashboard](https://martinez58400.wixsite.com/navigationvirtuelle/vr-dashboard?lang=en)
+
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Download sail-pro from github:
+
+```clj
+$ cd <..>
+$ git clone https://github.com/rururu/sail-pro.git
+$ cd sail-pro
+```
+## Start with CLI tools
+
+```clj
+$ cd <..>/sail-pro
+$ clj
+Clojure 1.10.0
+user=> (edu.stanford.smi.protege.Application/main (into-array String []))
+```
+
+## Start with Leiningen
+
+```clj
+$ cd <..>/sail-pro
+$ lein run
+```
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar sail-pro-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+See [screencast](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
 ## License
 

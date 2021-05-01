@@ -106,10 +106,26 @@ BOAT-DATA)
 (defn ask-telnet-port []
   (if-let [vrdc (first (cls-instances "VRDashboardControl"))]
   (let [port (sv vrdc "telnet-port")
-         port (DisplayUtilities/editString nil "Telnet Port" port nil)]
+        port (DisplayUtilities/editString nil "Telnet Port" port nil)]
     (try
       (ssv vrdc "telnet-port" (int (read-string port)))
       port
       (catch Exception e
         nil)))))
+
+(defn apply-view [hm inst]
+  (ru.rules/assert-instances [inst]))
+
+(defn diff-view [ops vel vof vpt]
+  (let [vof (keyword (clojure.string/lower-case vof))]
+  (or (not= vel (ops :view-elevation))
+       (not= vof (ops :view-offset))
+       (not= vpt (ops :view-post)))))
+
+(defn update-view [ops vel vof vpt]
+  (let [vpt (keyword (clojure.string/lower-case vpt))]
+  (println :UW vel vof vpt)
+  (assoc ops :view-elevation vel
+                   :view-offset vof
+                   :view-post vpt)))
 
