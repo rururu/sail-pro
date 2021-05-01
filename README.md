@@ -44,7 +44,9 @@ $ lein run
 
 ## Usage
 
-See [screencast](https://www.youtube.com/watch?v=LYRTzwEeJqw)
+See [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
+
+See [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
 Note: Don't forget to check a checkbox NMEA on a Z VR Dashboard tab of a browser.
 
