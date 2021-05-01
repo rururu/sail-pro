@@ -46,6 +46,8 @@ $ lein run
 
 See [screencast](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
+Note: Don't forget to check a checkbox NMEA on a Z VR Dashboard tab of a browser.
+
 ## License
 
 Copyright © 2021 FIXME
