@@ -2,6 +2,8 @@
 
 Simulation and modelling environment for virtual sailing.
 
+![screenshot](1.png)
+
 ## Prerequisites
 
 You need to be installed on your machine:
@@ -46,9 +48,9 @@ $ lein run
 
 See [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
-See [Sailing Expert](https://youtu.be/VG87r7_gVz8)
-
 Note: Don't forget to check a checkbox NMEA on a Z VR Dashboard tab of a browser.
+
+See [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
 ## License
 

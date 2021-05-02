@@ -1,7 +1,6 @@
 (ns menu.item
 (:use protege.core)
 (:import clojuretab.ClojureTab))
-
 (defn clojure-work []
   (println "INITIALIZING EXPERT SYSTEM")
 (println "1. Loading Clojure Programs...")

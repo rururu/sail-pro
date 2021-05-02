@@ -1,4 +1,4 @@
-; Sat May 01 20:12:01 MSK 2021
+; Sun May 02 14:18:59 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -28,7 +28,6 @@
 		[VRDashboardClient_Class120003]
 		[VRDashboardClient_Class130002]
 		[VRDashboardClient_Class140000]
-		[VRDashboardClient_Class150020]
 		[VRDashboardClient_Class150024]
 		[VRDashboardClient_Class70000])
 	(cloNamespace [VRDashboardClient_Class2])
@@ -42,7 +41,7 @@
 
 ([VRDashboardClient_Class10000] of  CloFunction
 
-	(source "(try\n  (when (nil? TELNET)\n    (def TELNET (tn/get-telnet \"localhost\" port))\n    (println :TELNET \"connected\" :PORT port))\n  (let [nmea (tn/read-until TELNET STOP-TOKEN)\n        len (count nmea)]\n    (if (< len 100)\n      (do (println \"data length=\" len) nil)\n      (if-let [data (parse-nmea-data nmea)]\n        (do (def NMEA data) data)\n        (do (println \"no\" START-TOKEN \"in data\") nil))))\n  (catch Exception e\n    (println :TELNET (.getMessage e) :PORT port)\n    nil))")
+	(source "(try\n  (when (nil? TELNET)\n    (def TELNET (tn/get-telnet \"localhost\" port))\n    (println :TELNET \"connected\" :PORT port))\n  (let [nmea (tn/read-until TELNET STOP-TOKEN)\n        len (count nmea)]\n    (if (< len 100)\n      (do (println \"data length=\" len) (ctpl len) (ctpl nmea) nil)\n      (if-let [data (parse-nmea-data nmea)]\n        (do (def NMEA data) data)\n        (do (println \"no\" START-TOKEN \"in data\") nil))))\n  (catch Exception e\n    (println :TELNET (.getMessage e) :PORT port)\n    nil))")
 	(title "get-nmea-data [port]"))
 
 ([VRDashboardClient_Class100000] of  Rule
@@ -179,18 +178,6 @@
 
 	(source "(.setDescription ru \"{:gltf-url \"models/sailboat/1368 Sailboat.gltf\"   :view-elevation 100   :draft 8}\")"))
 
-([VRDashboardClient_Class150020] of  CloFunction
-
-	(source "(ru.rules/assert-instances [inst])")
-	(title "apply-view [hm inst]"))
-
-([VRDashboardClient_Class150023] of  Rule
-
-	(lhs "?vrc1 (VRDashboardControl onboard ?onb)\n?vrc2 (VRDashboardControl onboard ?onb\n	view-elevation ?vel\n	view-offset ?vof\n	view-post ?vpt)\n?czs (CZMLSpan object ?onb\n	options ?ops)")
-	(rhs "(retract ?vrc1)\n(if-let [mo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (let [ops (assoc ?ops :view-elevation ?vel :view-offset ?vof :view-post (str ?vpt))]\n    (.setDescription mo (str ops))\n    (modify ?czs options ops)))")
-	(salience 0)
-	(title "vr:View Updated"))
-
 ([VRDashboardClient_Class150024] of  CloFunction
 
 	(source "(let [vof (keyword (clojure.string/lower-case vof))]\n  (or (not= vel (ops :view-elevation))\n       (not= vof (ops :view-offset))\n       (not= vpt (ops :view-post))))")
@@ -245,7 +232,7 @@
 
 ([VRDashboardClient_Class30058] of  CloFunction
 
-	(source "(def BOAT-DATA \n  (or (get-nmea-data port) (Thread/sleep 10000)\n       (get-nmea-data port) (Thread/sleep 10000)\n       (get-nmea-data port) (Thread/sleep 10000)\n       (get-nmea-data port)))                      \n(close-telnet)\nBOAT-DATA")
+	(source "(def BOAT-DATA \n  (or (get-nmea-data port) (Thread/sleep 20000)\n       (get-nmea-data port) (Thread/sleep 20000)\n       (get-nmea-data port) (Thread/sleep 20000)\n       (get-nmea-data port)))                      \n(close-telnet)\nBOAT-DATA")
 	(title "get-boat-data [port]"))
 
 ([VRDashboardClient_Class30059] of  CloVar
@@ -315,7 +302,7 @@
 
 ([VRDashboardClient_Class30069] of  NMEAControl
 
-	(delay 300)
+	(delay 100)
 	(status "START"))
 
 ([VRDashboardClient_Class30070] of  NMEAData
@@ -351,8 +338,7 @@
 		[VRDashboardClient_Class30076]
 		[VRDashboardClient_Class30077]
 		[VRDashboardClient_Class80000]
-		[VRDashboardClient_Class100000]
-		[VRDashboardClient_Class150023])
+		[VRDashboardClient_Class100000])
 	(templates
 		[NMEAControl]
 		[NMEAData]
@@ -363,7 +349,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", :view-elevation 4, :draft 8, :view-offset 0, :view-post \"BOW\"}")
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -386,6 +372,10 @@
 	(salience 0)
 	(title "vr:NMEA Run"))
 
+([VRDashboardClient_Class40000] of  CloFuncall
+
+	(source "vr.dashcli/NMEA"))
+
 ([VRDashboardClient_Class40001] of  RuleSet
 
 	(rules
@@ -402,10 +392,7 @@
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
 	(onboard "russor")
-	(telnet-port 10482)
-	(view-elevation 4)
-	(view-offset 10)
-	(view-post BOW))
+	(telnet-port 10482))
 
 ([VRDashboardClient_Class60000] of  NavOb
 

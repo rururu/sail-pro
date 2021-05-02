@@ -72,7 +72,7 @@
 }
 #camera {
   position:fixed;
-  bottom:140px;
+  bottom:160px;
   left:60px;
   padding:5px;
   z-index:100;
@@ -80,7 +80,7 @@
 }
 #onboard {
   position:fixed;
-  bottom:130px;
+  bottom:150px;
   left:20px;
   padding:5px;
   z-index:100;
@@ -88,7 +88,7 @@
 }
 #onboard-fld {
   position:fixed;
-  bottom:130px;
+  bottom:150px;
   left:84px;
   padding:5px;
   z-index:100;
@@ -96,7 +96,7 @@
 }
 #view {
   position:fixed;
-  bottom:110px;
+  bottom:130px;
   left:22px;
   padding:5px;
   z-index:100;
@@ -104,7 +104,7 @@
 }
 #view-fld {
   position:fixed;
-  bottom:110px;
+  bottom:130px;
   left:64px;
   padding:5px;
   z-index:100;
@@ -112,14 +112,14 @@
 }
 #view-sld {
   position:fixed;
-  bottom:110px;
+  bottom:130px;
   left:100px;
   padding:5px;
   z-index:100;
 }
 #pitch {
   position:fixed;
-  bottom:90px;
+  bottom:110px;
   left:22px;
   padding:5px;
   z-index:100;
@@ -127,7 +127,7 @@
 }
 #pitch-fld {
   position:fixed;
-  bottom:90px;
+  bottom:110px;
   left:64px;
   padding:5px;
   z-index:100;
@@ -135,28 +135,43 @@
 }
 #pitch-sld {
   position:fixed;
-  bottom:90px;
+  bottom:110px;
   left:100px;
   padding:5px;
   z-index:100;
 }
 #roll {
   position:fixed;
-  bottom:70px;
-  left:28px;
+  bottom:90px;
+  left:22px;
   padding:5px;
   z-index:100;
   color:yellow
 }
 #roll-fld {
   position:fixed;
-  bottom:70px;
+  bottom:90px;
   left:64px;
   padding:5px;
   z-index:100;
   color:yellow
 }
 #roll-sld {
+  position:fixed;
+  bottom:90px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#elev {
+  position:fixed;
+  bottom:70px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#elev-fld {
   position:fixed;
   bottom:70px;
   left:100px;

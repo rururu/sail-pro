@@ -10,7 +10,6 @@
   java.util.HashMap
   edu.stanford.smi.protege.ui.DisplayUtilities
   java.awt.event.ActionListener))
-
 (def ES-TIMER nil)
 (def EVT-LISTENERS (volatile! {}))
 (defn start-evt-listen []

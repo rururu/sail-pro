@@ -6,7 +6,6 @@
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
   edu.stanford.smi.protege.ui.DisplayUtilities))
-
 (def defTELNET (defonce TELNET nil))
 (def NMEA nil)
 (def STOP-TOKEN "AIVDM")
@@ -45,7 +44,7 @@
   (let [nmea (tn/read-until TELNET STOP-TOKEN)
         len (count nmea)]
     (if (< len 100)
-      (do (println "data length=" len) nil)
+      (do (println "data length=" len) (ctpl len) (ctpl nmea) nil)
       (if-let [data (parse-nmea-data nmea)]
         (do (def NMEA data) data)
         (do (println "no" START-TOKEN "in data") nil))))
@@ -60,9 +59,9 @@
 
 (defn get-boat-data [port]
   (def BOAT-DATA 
-  (or (get-nmea-data port) (Thread/sleep 10000)
-       (get-nmea-data port) (Thread/sleep 10000)
-       (get-nmea-data port) (Thread/sleep 10000)
+  (or (get-nmea-data port) (Thread/sleep 20000)
+       (get-nmea-data port) (Thread/sleep 20000)
+       (get-nmea-data port) (Thread/sleep 20000)
        (get-nmea-data port)))                      
 (close-telnet)
 BOAT-DATA)
@@ -112,9 +111,6 @@ BOAT-DATA)
       port
       (catch Exception e
         nil)))))
-
-(defn apply-view [hm inst]
-  (ru.rules/assert-instances [inst]))
 
 (defn diff-view [ops vel vof vpt]
   (let [vof (keyword (clojure.string/lower-case vof))]

@@ -6,7 +6,6 @@
   clojuretab.ProgramGenerator
   java.io.File
   java.io.FileWriter))
-
 (def SEP ProgramGenerator/FILE_SEPARATOR)
 (defn ns-folder-and-name [nss]
   (let [s (seq (.split nss "\\."))

@@ -15,7 +15,8 @@
                :coord [60 30]
                :altitude 4000
                :speed 160
-               :course 270}))
+               :course 270
+               :view-elevation  4}))
 (def error-handler (fn [response]
   (let [{:keys [status status-text]} response]
     (println (str "AJAX ERROR: " status " " status-text)))))
@@ -74,17 +75,6 @@
     (vswap! czm/CAMERA assoc :roll deg)
     (set-html! "roll-fld" deg))))
 
-(defn offset-latlon [meters crs post]
-  (let [dd (condp = post
-             "BOW" crs
-             "STARBOARD" (+ crs 90)
-             "STERN" (+ crs 180)
-             "PORT" (+ crs 270))
-        dd (if (> dd 360) (- dd 360) dd)
-        rad (* (/ js/Math.PI 180) (/ meters 1852 60))
-        dir (* (/ js/Math.PI 180) dd)]
-  [(* rad (js/Math.cos dir)) (* rad (js/Math.sin dir))]))
-
 (defn response-request []
   (let [resp @RESPONSE]
   (when (not (empty? resp))
@@ -112,11 +102,8 @@
 (defn handle-vehicle [vehicle]
   (let [[lat lon] (:coord vehicle)
        alt (:altitude vehicle)
-       vev (or (:view-elevation vehicle) 0)
-       vpo (or (:view-post vehicle) :stern)
-       vof (or (:view-offset vehicle) 0)
+       vev (:view-elevation @VEHICLE)
        crs (:course vehicle)
-       [vla vlo] (offset-latlon vof crs vpo)
        head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]
   (vswap! VEHICLE merge vehicle)
   (set-html! "onboard-fld" (:name vehicle))
@@ -125,7 +112,7 @@
   (set-html! "speed-fld" (:speed vehicle))
   (set-html! "altitude-fld" czm/ALT)
   (set-html! "view-dir" (geo/rumb head))
-  (czm/fly-to (+ lat vla) (+ lon vlo) (+ alt vev) crs 1.2)))
+  (czm/fly-to lat lon (+ alt vev) crs 1.2)))
 
 (defn vehicle-hr [response]
   (let [resp (read-transit response)]
@@ -139,6 +126,9 @@
   (GET "/vehicle" {:params @czm/CAMERA
                          :handler vehicle-hr
                          :error-handler error-handler}))
+
+(defn elev [vev]
+  (vswap! VEHICLE assoc :view-elevation (num-val vev)))
 
 (defn left-controls []
   (set-html! "camera" "<h4>Camera</h4>")
@@ -161,7 +151,11 @@
 (set-html! "roll-sld" 
   "<input type='range' style='width:150px' id='roll-vals'
                min='-180' value='0' max='180'
-               oninput='javascript:light.view3d.client.roll(this.value)'>"))
+               oninput='javascript:light.view3d.client.roll(this.value)'>")
+(set-html! "elev" "Elevation:")
+(set-html! "elev-fld" 
+  "<input value='4' style='width:144px' id='input-elev'
+                     onchange='javascript:light.view3d.client.elev(this.value)'>"))
 
 (defn right-controls []
   (set-html! "vehicle" "<h4>Vehicle</h4>")

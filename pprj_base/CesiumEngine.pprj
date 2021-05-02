@@ -1,4 +1,4 @@
-; Sat May 01 14:54:58 MSK 2021
+; Sun May 02 12:01:37 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -469,34 +469,6 @@
 	(name "instances_file_name")
 	(string_value "CesiumEngine.pins"))
 
-([KB_444407_Class1601] of  Map
-
-	(entries
-		[KB_444407_Class1602]
-		[KB_444407_Class1603]
-		[KB_444407_Class1604]))
-
-([KB_444407_Class1602] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_444407_Class1603] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_444407_Class1604] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
 ([KB_684256_Class1343] of  Widget
 
 	(is_hidden FALSE)
@@ -542,6 +514,34 @@
 
 ([KB_684256_Class1349] of  Property_List
 )
+
+([KB_857436_Class1601] of  Map
+
+	(entries
+		[KB_857436_Class1602]
+		[KB_857436_Class1603]
+		[KB_857436_Class1604]))
+
+([KB_857436_Class1602] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_857436_Class1603] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_857436_Class1604] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([LAYOUT_PROPERTIES] of  Property_List
 
