@@ -50,6 +50,8 @@ See [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
 Note: Don't forget to check a checkbox NMEA on a Z VR Dashboard tab of a browser.
 
+See [Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
+
 See [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
 ## License

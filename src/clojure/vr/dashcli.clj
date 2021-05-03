@@ -1,16 +1,16 @@
 (ns vr.dashcli
 (:use protege.core)
 (:require
-  [clj-telnet.core :as tn])
+  [clj-telnet.core :as tn]
+  [light.async.proc :as lap])
 (:import
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
   edu.stanford.smi.protege.ui.DisplayUtilities))
 (def defTELNET (defonce TELNET nil))
-(def NMEA nil)
-(def STOP-TOKEN "AIVDM")
 (def START-TOKEN "RMC")
-(def BOAT-DATA nil)
+(def END-TOKEN "\r\n")
+(def BOAT-DATA [0 0 0 0 0 0])
 (defn round-speed [s]
   (let [s (* s 100)
        s (Math/round s)]
@@ -27,27 +27,24 @@
   (MapOb/getDeg (str d " " m))))
 
 (defn parse-nmea-data [data]
-  (if-let [data (seq (rest (.split data START-TOKEN)))]
-  (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] (.split (first data) ",")]
-    [time
-     (parse-coord lat1 lat2)
-     (parse-coord lon1 lon2)
-     (round-speed (read-string spd))
-     (read-string crs)
-     date])))
+  (let [d (.split data ",")]
+  (if (>= (count d) 10)
+    (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]
+      [time
+       (parse-coord lat1 lat2)
+       (parse-coord lon1 lon2)
+       (round-speed (read-string spd))
+       (read-string crs)
+       date]))))
 
 (defn get-nmea-data [port]
   (try
   (when (nil? TELNET)
     (def TELNET (tn/get-telnet "localhost" port))
     (println :TELNET "connected" :PORT port))
-  (let [nmea (tn/read-until TELNET STOP-TOKEN)
-        len (count nmea)]
-    (if (< len 100)
-      (do (println "data length=" len) (ctpl len) (ctpl nmea) nil)
-      (if-let [data (parse-nmea-data nmea)]
-        (do (def NMEA data) data)
-        (do (println "no" START-TOKEN "in data") nil))))
+  (let [nmea (tn/read-all TELNET)]
+    (if (.contains nmea START-TOKEN)
+      (first (.split nmea END-TOKEN))))
   (catch Exception e
     (println :TELNET (.getMessage e) :PORT port)
     nil)))
@@ -57,14 +54,21 @@
   (tn/kill-telnet TELNET)
   (def TELNET nil)))
 
+(defn diff-vector? [ndata odata]
+  (let [[tim1 lat1 lon1 spd1 crs1] ndata
+       [tim2 lat2 lon2 spd2 crs2] odata]
+  (or (not= lat1 lat2)
+       (not= lon1 lon2)
+       (not= spd1 spd2)
+       (not= crs1 crs2))))
+
 (defn get-boat-data [port]
-  (def BOAT-DATA 
-  (or (get-nmea-data port) (Thread/sleep 20000)
-       (get-nmea-data port) (Thread/sleep 20000)
-       (get-nmea-data port) (Thread/sleep 20000)
-       (get-nmea-data port)))                      
-(close-telnet)
-BOAT-DATA)
+  (let [bdata (if-let [nmea (get-nmea-data port)]
+                 (if-let [bd (parse-nmea-data nmea)]            
+                   (when (diff-vector? bd BOAT-DATA)
+                     (def BOAT-DATA bd)
+                     bd)))]
+  bdata))
 
 (defn srand [d]
   (- (rand (* d 2)) d))
