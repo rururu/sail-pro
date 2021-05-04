@@ -1,4 +1,4 @@
-; Mon May 03 20:20:41 MSK 2021
+; Tue May 04 18:19:27 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -30,7 +30,8 @@
 		[VRDashboardClient_Class130002]
 		[VRDashboardClient_Class140000]
 		[VRDashboardClient_Class150024]
-		[VRDashboardClient_Class70000])
+		[VRDashboardClient_Class70000]
+		[VRDashboardClient_Class150002])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20003]
@@ -87,10 +88,6 @@
 	(url "file:resources/public/img/yachtp.png")
 	(verticalSpeed 0.0))
 
-([VRDashboardClient_Class120000] of  CloFuncall
-
-	(source "(vr.dashcli/close-telnet)"))
-
 ([VRDashboardClient_Class120003] of  CloFunction
 
 	(source "(let [f (atom\n          {:b (fifos \"NavOb\" \"label\" \"Bylina\")\n            :v (fifos \"NavOb\" \"label\" \"Vela\")\n            :d (fifos \"NavOb\" \"label\" \"Diana\")\n            :a (fifos \"NavOb\" \"label\" \"Argo\")\n            :m (fifos \"NavOb\" \"label\" \"Mars\")})\n      rus (OMT/getMapOb \"russor\")\n      lar (.getLatitude rus)\n      lor (.getLongitude rus)\n      crr (.getCourse rus)\n      spr (.getSpeed rus)]\n  (doseq [k (keys @f)]\n    (swap! f assoc k (OMT/getOrAdd (@f k))))\n  (doseq [k (keys @f)]\n    (.setLatitude (@f k) (+ lar (srand 0.02)))\n    (.setLongitude (@f k) (+ lor (srand 0.02)))\n    (.setCourse (@f k) crr)\n    (.setSpeed (@f k) spr)))")
@@ -103,8 +100,8 @@
 
 ([VRDashboardClient_Class130000] of  Command
 
-	(label "Add Fleet")
-	(scenario "clojuretab.ClojureTab invoke vr.dashcli add-fleet"))
+	(label "Create Nearby Boat")
+	(scenario "clojuretab.ClojureTab invoke vr.dashcli create-nearby-boat"))
 
 ([VRDashboardClient_Class130001] of  Command
 
@@ -113,7 +110,7 @@
 
 ([VRDashboardClient_Class130002] of  CloFunction
 
-	(source "(when-let [ac (fifos \"NavOb\" \"label\" \"CVN-69\")]\n  (let [acm (OMT/getOrAdd ac)\n        rus (OMT/getMapOb \"russor\")\n        lar (.getLatitude rus)\n        lor (.getLongitude rus)\n        crr (.getCourse rus)\n        spr (.getSpeed rus)]\n    (.setLatitude acm (+ lar (srand 0.02)))\n    (.setLongitude acm (+ lor (srand 0.02)))\n    (.setCourse acm crr)\n    (.setSpeed acm spr)))")
+	(source "(if-let [ac (fifos \"NavOb\" \"label\" \"CVN-69\")]\n  (let [acm (OMT/getOrAdd ac)\n        rus (OMT/getMapOb \"russor\")\n        lar (.getLatitude rus)\n        lor (.getLongitude rus)\n        lac (+ lar (srand 0.02))\n        loc (+ lor (srand 0.02))\n        crs (int (rand 360))]\n    (.setLatitude acm lac)\n    (.setLongitude acm loc)\n    (.setCourse acm crs)\n    (if-let [h (fifos \"NavOb\" \"label\" \"h1\")]\n      (let [hm (OMT/getOrAdd h)]\n        (.setLatitude hm lac)\n        (.setLongitude hm loc)))\n    (if-let [i (fifos \"NavOb\" \"label\" \"i1\")]\n      (let [im (OMT/getOrAdd i)\n             icr (+ crs 180)\n             icr (if (> icr 360) (- icr 360) icr)] \n        (.setLatitude im lac)\n        (.setLongitude im loc)\n        (.setCourse im icr)))))")
 	(title "add-aircraft-carrier []"))
 
 ([VRDashboardClient_Class140000] of  CloFunction
@@ -126,23 +123,108 @@
 	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Assign Telnet Port\")\n  (println \"Telnet Port\" (ClojureTab/invoke \"vr.dashcli\" \"ask-telnet-port\"))\n(println \"3. Starting Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"EXPERT SYSTEM INITIALIZED\")\n(.show *prj* (first (cls-instances \"VRDashboardControl\")))")
 	(title "clojure-work []"))
 
+([VRDashboardClient_Class150000] of  NavOb
+
+	(altitude 2)
+	(course 323)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "yawa29")
+	(latitude "59 47.2")
+	(longitude "19 57.0")
+	(playground-index 0)
+	(speed 3.42)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class150001] of  NavOb
+
+	(altitude 2)
+	(course 265)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "zazamaria85")
+	(latitude "59 48.8")
+	(longitude "19 55.4")
+	(playground-index 0)
+	(speed 1.3)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class150002] of  CloFunction
+
+	(source "(let [onm (or @lps/ONBOARD\n                  (DisplayUtilities/editString nil \"Exsisting Boat Name\" \"\" nil))\n       nnm (DisplayUtilities/editString nil \"New Boat Name\" \"\" nil)]\n  (if (and (some? onm) (some? nnm))\n    (let [oi (fifos \"NavOb\" \"label\" onm)\n          ni (foc \"NavOb\" \"label\" nnm)\n          _ (ssv ni \"latitude\" \"0 0\")\n          _ (ssv ni \"longitude\" \"0 0\")\n          _ (ssv ni \"url\" (sv oi \"url\"))\n          _ (ssv ni \"description\" (sv oi \"description\"))\n          omo (OMT/getOrAdd oi)\n          nmo (OMT/getOrAdd ni)\n          crs (.getCourse omo)\n          [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]\n      (.setLatitude nmo lat)\n      (.setLongitude nmo lon)\n      (.setCourse nmo crs)\n      (.setSpeed nmo (.getSpeed omo)))))")
+	(title "create-nearby-boat []"))
+
 ([VRDashboardClient_Class150024] of  CloFunction
 
 	(source "(let [vof (keyword (clojure.string/lower-case vof))]\n  (or (not= vel (ops :view-elevation))\n       (not= vof (ops :view-offset))\n       (not= vpt (ops :view-post))))")
 	(title "diff-view [ops vel vof vpt]"))
 
+([VRDashboardClient_Class160000] of  CloFuncall
+
+	(source "(in-ns 'vr.dashcli)"))
+
 ([VRDashboardClient_Class170000] of  CloFuncall
 
-	(source "vr.dashcli/BOAT-DATA"))
+	(source "BOAT-DATA"))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
 	(source "(let [[tim1 lat1 lon1 spd1 crs1] ndata\n       [tim2 lat2 lon2 spd2 crs2] odata]\n  (or (not= lat1 lat2)\n       (not= lon1 lon2)\n       (not= spd1 spd2)\n       (not= crs1 crs2)))")
 	(title "diff-vector? [ndata odata]"))
 
+([VRDashboardClient_Class180000] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(label "Ascet")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class180002] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "Ruslan")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class180003] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "Rogdai")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class180004] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "AI")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtp.png")
+	(verticalSpeed 0.0))
+
 ([VRDashboardClient_Class2] of  CloNamespace
 
-	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.async.proc :as lap])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  edu.stanford.smi.protege.ui.DisplayUtilities)")
+	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities)")
 	(title "vr.dashcli"))
 
 ([VRDashboardClient_Class20000] of  CloVar
@@ -254,7 +336,7 @@
 
 ([VRDashboardClient_Class30069] of  NMEAControl
 
-	(delay 10)
+	(delay 60)
 	(status "START"))
 
 ([VRDashboardClient_Class30070] of  NMEAData
@@ -326,7 +408,7 @@
 
 ([VRDashboardClient_Class40000] of  CloFuncall
 
-	(source "vr.dashcli/NMEA"))
+	(source "(ru.rules/sp :all)"))
 
 ([VRDashboardClient_Class40001] of  RuleSet
 
@@ -341,13 +423,9 @@
 		[Onboard])
 	(title "CZML Generation Set2"))
 
-([VRDashboardClient_Class50000] of  CloFuncall
-
-	(source "(ru.rules/sp :all)"))
-
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
-	(onboard "Argo")
+	(onboard "russor")
 	(telnet-port 10482))
 
 ([VRDashboardClient_Class60000] of  NavOb
@@ -363,10 +441,6 @@
 	(url "file:resources/public/img/lnrR.gif")
 	(verticalSpeed 0.0))
 
-([VRDashboardClient_Class60002] of  CloFuncall
-
-	(source "(vr.dashcli/test)"))
-
 ([VRDashboardClient_Class60003] of  CloFunction
 
 	(source "(let [s (* s 100)\n       s (Math/round s)]\n  (double (/ s 100)))")
@@ -379,9 +453,9 @@
 
 ([VRDashboardClient_Class70001] of  NavOb
 
-	(altitude 20)
+	(altitude 150)
 	(course 0)
-	(description "{:gltf-url \"models/low_poly_helicopter/scene.gltf\"\n :model-scale 0.02}")
+	(description "{:gltf-url \"models/low_poly_helicopter/scene.gltf\"\n :model-scale 0.01}")
 	(label "h1")
 	(latitude "0 0")
 	(longitude "0 0")
@@ -392,7 +466,7 @@
 
 ([VRDashboardClient_Class70002] of  NavOb
 
-	(altitude 20)
+	(altitude 46)
 	(course 0)
 	(description "{:gltf-url \"models/idf-_plain/scene.gltf\"\n  :model-scale 0.2}")
 	(label "i1")
@@ -467,7 +541,3 @@
 	(rhs "(let [lab (.getName ?obj)\n      desc (.getDescription ?obj)]\n  (asser CZMLSpan object lab\n	options (read-string desc)\n	time ?t)\n  (println \"NavOb on map:\" lab))")
 	(salience 0)
 	(title "vr:NavOb on Map"))
-
-([VRDashboardClient_Class90000] of  CloFuncall
-
-	(source "(vr.dashcli/test1)"))

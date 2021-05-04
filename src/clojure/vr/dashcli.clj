@@ -2,10 +2,11 @@
 (:use protege.core)
 (:require
   [clj-telnet.core :as tn]
-  [light.async.proc :as lap])
+  [light.pro.server :as lps])
 (:import
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
+  ru.igis.omtab.Util
   edu.stanford.smi.protege.ui.DisplayUtilities))
 (def defTELNET (defonce TELNET nil))
 (def START-TOKEN "RMC")
@@ -94,17 +95,28 @@
     (.setSpeed (@f k) spr))))
 
 (defn add-aircraft-carrier []
-  (when-let [ac (fifos "NavOb" "label" "CVN-69")]
+  (if-let [ac (fifos "NavOb" "label" "CVN-69")]
   (let [acm (OMT/getOrAdd ac)
         rus (OMT/getMapOb "russor")
         lar (.getLatitude rus)
         lor (.getLongitude rus)
-        crr (.getCourse rus)
-        spr (.getSpeed rus)]
-    (.setLatitude acm (+ lar (srand 0.02)))
-    (.setLongitude acm (+ lor (srand 0.02)))
-    (.setCourse acm crr)
-    (.setSpeed acm spr))))
+        lac (+ lar (srand 0.02))
+        loc (+ lor (srand 0.02))
+        crs (int (rand 360))]
+    (.setLatitude acm lac)
+    (.setLongitude acm loc)
+    (.setCourse acm crs)
+    (if-let [h (fifos "NavOb" "label" "h1")]
+      (let [hm (OMT/getOrAdd h)]
+        (.setLatitude hm lac)
+        (.setLongitude hm loc)))
+    (if-let [i (fifos "NavOb" "label" "i1")]
+      (let [im (OMT/getOrAdd i)
+             icr (+ crs 180)
+             icr (if (> icr 360) (- icr 360) icr)] 
+        (.setLatitude im lac)
+        (.setLongitude im loc)
+        (.setCourse im icr))))))
 
 (defn ask-telnet-port []
   (if-let [vrdc (first (cls-instances "VRDashboardControl"))]
@@ -128,4 +140,24 @@
   (assoc ops :view-elevation vel
                    :view-offset vof
                    :view-post vpt)))
+
+(defn create-nearby-boat []
+  (let [onm (or @lps/ONBOARD
+                  (DisplayUtilities/editString nil "Exsisting Boat Name" "" nil))
+       nnm (DisplayUtilities/editString nil "New Boat Name" "" nil)]
+  (if (and (some? onm) (some? nnm))
+    (let [oi (fifos "NavOb" "label" onm)
+          ni (foc "NavOb" "label" nnm)
+          _ (ssv ni "latitude" "0 0")
+          _ (ssv ni "longitude" "0 0")
+          _ (ssv ni "url" (sv oi "url"))
+          _ (ssv ni "description" (sv oi "description"))
+          omo (OMT/getOrAdd oi)
+          nmo (OMT/getOrAdd ni)
+          crs (.getCourse omo)
+          [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]
+      (.setLatitude nmo lat)
+      (.setLongitude nmo lon)
+      (.setCourse nmo crs)
+      (.setSpeed nmo (.getSpeed omo))))))
 
