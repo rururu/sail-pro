@@ -10,7 +10,7 @@ You need to be installed on your machine:
 
 1. Java Runtime Environment
 
-2. [Git](https://git-scm.com/)
+2. [Git](https://git-scm.com/) (optional, you can download project from Github, button "Code" on project page)
 
 3. [Leiningen](https://leiningen.org/) or [CLJ tools](https://clojure.org/guides/getting_started)
 
@@ -25,7 +25,7 @@ Download sail-pro from github:
 
 ```clj
 $ cd <..>
-$ git clone https://github.com/rururu/sail-pro.git
+$ git clone https://github.com/rururu/sail-pro.git     # optional, see above
 $ cd sail-pro
 ```
 ## Start with CLI tools
