@@ -1,0 +1,3 @@
+2021.05.05 13:01:27.830 MSK INFO: *** SYSTEM START ***
+2021.05.05 13:01:28.177 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2021.05.05 13:01:36.451 MSK INFO: Load time for file:/home/ru/clojure/sail-pro/pprj_examples/VRDashboardClient.pprj = 0 sec (project) + 4 sec (ui) -- ProjectManager$3.run()

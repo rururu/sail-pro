@@ -48,15 +48,17 @@ $ lein run
 
 ### 1. Project VR Dashboard Client
 
-See: [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
+1.1 [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
 Note: Don't forget to check a checkbox NMEA on a Z VR Dashboard tab of a browser.
 
-See: [Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
+1.2 [Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
 
-See: [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
+1.3 [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
 
 Now you can use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. [Using Controls](https://youtu.be/pK9GTSEGQYQ)
+
+1.4 [Get off a shallow in the Nord Stream Race 3](https://youtu.be/U5gG5pHpdcY)
 
 ### 2. Project Sail Expert
 
