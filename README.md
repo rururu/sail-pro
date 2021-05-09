@@ -54,11 +54,12 @@ $ lein run
 4. Start sail-pro as shown above
 5. In Protege GUI navigate to and open project VRDashboarClient.pprj
 6. Load programs and start Expert system (Protege menu "Edit" -> "(clojure-work)")
-7. Select race on popup panel
-8. Start time on OpenMap tab (checkbox "Run Timer") and wait while boat jump into current position
-9. Start Cesium server on popup panel
-10. Start Cesium client on popup panel
-11. Go on board of boat 
+7. Start time on OpenMap tab (checkbox "Run Timer")
+8. Select race on popup panel
+9. Wait while boat jump into current position
+10. Start Cesium server on popup panel
+11. Start Cesium client on popup panel
+12. Go on board of boat 
 
 See details in screencast. Some details can be differen of earlier - these are deprecated!
 
