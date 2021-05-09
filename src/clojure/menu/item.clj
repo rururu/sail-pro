@@ -10,12 +10,9 @@
       (println (str " 1." i " " (sv (first pins) "title") " = " (ClojureTab/loadProgram (first pins)) ))
       (recur (inc i) (rest pins)) ) )
   (println "  Annotated instance of WorkingPrograms not found!"))
-(println "2. Assign Telnet Port")
-  (println "Telnet Port" (ClojureTab/invoke "vr.dashcli" "ask-telnet-port"))
-(println "3. Starting Expert System.")
+(println "2. Starting Expert System.")
 (if-let [run (ClojureTab/findAnnotated (cls-instances "Run") nil)]
   (ClojureTab/invoke "ru.rules" "run-engine" run)
   (println "  Annotated instance of Run not found!"))
-(println "EXPERT SYSTEM INITIALIZED")
-(.show *prj* (first (cls-instances "VRDashboardControl"))))
+(println "EXPERT SYSTEM INITIALIZED"))
 

@@ -2,16 +2,20 @@
 (:use protege.core)
 (:require
   [clj-telnet.core :as tn]
-  [light.pro.server :as lps])
+  [light.pro.server :as lps]
+  [clj-json.core :as json])
 (:import
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
   ru.igis.omtab.Util
-  edu.stanford.smi.protege.ui.DisplayUtilities))
+  edu.stanford.smi.protege.ui.DisplayUtilities
+  ru.vrd.nmea.VRdNMEAReciever))
 (def defTELNET (defonce TELNET nil))
+(def defVRDdNMEA (defonce VRDdNMEA false))
 (def START-TOKEN "RMC")
 (def END-TOKEN "\r\n")
 (def BOAT-DATA [0 0 0 0 0 0])
+(def RACES-URL "http://zezo.org/races2.json")
 (defn round-speed [s]
   (let [s (* s 100)
        s (Math/round s)]
@@ -50,6 +54,20 @@
     (println :TELNET (.getMessage e) :PORT port)
     nil)))
 
+(defn get-nmea-data2 [port path]
+  ;; Next call after > 20 sec
+(when (not VRDdNMEA)
+  (VRdNMEAReciever/startServer port path) 
+  (def VRDdNMEA true))
+(Thread/sleep 10000)
+(let [buf (VRdNMEAReciever/getBuffer)
+      cap (.capacity buf)]
+  (if (> cap 16)
+    (let [nmea (.toString buf)]
+      (VRdNMEAReciever/clearBuffer)
+      (if (.contains nmea START-TOKEN)
+        (first (.split nmea END-TOKEN)))))))
+
 (defn close-telnet []
   (when (some? TELNET)
   (tn/kill-telnet TELNET)
@@ -65,6 +83,14 @@
 
 (defn get-boat-data [port]
   (let [bdata (if-let [nmea (get-nmea-data port)]
+                 (if-let [bd (parse-nmea-data nmea)]            
+                   (when (diff-vector? bd BOAT-DATA)
+                     (def BOAT-DATA bd)
+                     bd)))]
+  bdata))
+
+(defn get-boat-data2 [port path]
+  (let [bdata (if-let [nmea (get-nmea-data2 port path)]
                  (if-let [bd (parse-nmea-data nmea)]            
                    (when (diff-vector? bd BOAT-DATA)
                      (def BOAT-DATA bd)
@@ -118,15 +144,19 @@
         (.setLongitude im loc)
         (.setCourse im icr))))))
 
-(defn ask-telnet-port []
-  (if-let [vrdc (first (cls-instances "VRDashboardControl"))]
-  (let [port (sv vrdc "telnet-port")
-        port (DisplayUtilities/editString nil "Telnet Port" port nil)]
-    (try
-      (ssv vrdc "telnet-port" (int (read-string port)))
-      port
-      (catch Exception e
-        nil)))))
+(defn select-race
+  ([hm inst]
+  (let [mp (into {} hm)
+         clw (mp "clsWidget")
+         rce (first (.getSelection (.getSlotWidget clw (slt "races"))))
+         tpt (first (.split rce "\\."))
+         tpt (+ 10000 (read-string tpt))]
+    (ssv inst "selected-race" rce)
+    (ssv inst "telnet-port" (str tpt))))
+([]
+ (clojuretab.ClojureTab/showModalInstance
+    (first (cls-instances "VRDashboardControl"))
+    "Select Active Race")))
 
 (defn diff-view [ops vel vof vpt]
   (let [vof (keyword (clojure.string/lower-case vof))]
@@ -160,4 +190,14 @@
       (.setLongitude nmo lon)
       (.setCourse nmo crs)
       (.setSpeed nmo (.getSpeed omo))))))
+
+(defn load-races []
+  (let [txt (slurp RACES-URL)
+      mp (json/parse-string txt)
+      rcs (map #(get % "id") (mp "races"))
+      vrd (first (cls-instances "VRDashboardControl"))]
+ (ssvs vrd "races" rcs)))
+
+(defn show-controls []
+  (.show *prj* (first (cls-instances "VRDashboardControl"))))
 

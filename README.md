@@ -48,17 +48,30 @@ $ lein run
 
 ### 1. Project VR Dashboard Client
 
-1.1 [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
+1. Open Virual Regatta page in browser
+2. Activate VR Dashboard plugin
+3. Select active race. Check race identificator on Z VR Dashboard tab and click checkbox NMEA
+4. Start sail-pro as shown above
+5. In Protege GUI navigate to and open project VRDashboarClient.pprj
+6. Load programs and start Expert system (Protege menu "Edit" -> "(clojure-work)")
+7. Select race on popup panel
+8. Start time on OpenMap tab (checkbox "Run Timer") and wait while boat jump into current position
+9. Start Cesium server on popup panel
+10. Start Cesium client on popup panel
+11. Go on board of boat 
 
-Note: Don't forget to check a checkbox NMEA on a Z VR Dashboard tab of a browser.
+See details in screencast. Some details can be differen of earlier - these are deprecated!
 
-1.2 [Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
+[Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
-1.3 [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
+[Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
 
-Now you can use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. [Using Controls](https://youtu.be/pK9GTSEGQYQ)
+[Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
 
-1.4 [Get off a shallow in the Nord Stream Race 3](https://youtu.be/U5gG5pHpdcY)
+Now you can use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. 
+[Using Controls](https://youtu.be/pK9GTSEGQYQ)
+
+[Get off a shallow in the Nord Stream Race 3](https://youtu.be/U5gG5pHpdcY)
 
 ### 2. Project Sail Expert
 

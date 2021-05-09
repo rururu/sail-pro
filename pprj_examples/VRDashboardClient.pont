@@ -1,4 +1,4 @@
-; Tue May 04 18:19:27 MSK 2021
+; Sun May 09 12:27:35 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -8,7 +8,23 @@
 	(is-a USER)
 	(role abstract)
 	(single-slot telnet-port
-		(type INTEGER)
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot selected-race
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot races
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot nmea-port
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-select-race
+		(type STRING)
+;+		(value "Select Race/vr.dashcli/select-race")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot data
@@ -19,8 +35,28 @@
 (defclass VRDashboardControl
 	(is-a CeziumControl)
 	(role concrete)
+	(single-slot selected-race
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot telnet-port
-		(type INTEGER)
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot races
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot but-select-race
+		(type STRING)
+;+		(value "Select Race/vr.dashcli/select-race")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nmea-port
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot port
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 

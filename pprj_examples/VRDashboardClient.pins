@@ -1,4 +1,4 @@
-; Tue May 04 18:19:27 MSK 2021
+; Sun May 09 12:27:35 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -22,22 +22,28 @@
 		[VRDashboardClient_Class30019]
 		[VRDashboardClient_Class30006]
 		[VRDashboardClient_Class10000]
+		[VRDashboardClient_Class230007]
 		[VRDashboardClient_Class30003]
 		[VRDashboardClient_Class170002]
 		[VRDashboardClient_Class30058]
+		[VRDashboardClient_Class90001]
 		[VRDashboardClient_Class120007]
 		[VRDashboardClient_Class120003]
 		[VRDashboardClient_Class130002]
 		[VRDashboardClient_Class140000]
 		[VRDashboardClient_Class150024]
 		[VRDashboardClient_Class70000]
-		[VRDashboardClient_Class150002])
+		[VRDashboardClient_Class150002]
+		[VRDashboardClient_Class90005]
+		[VRDashboardClient_Class160001])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20003]
+		[VRDashboardClient_Class170000]
 		[VRDashboardClient_Class20000]
 		[VRDashboardClient_Class30001]
-		[VRDashboardClient_Class30059])
+		[VRDashboardClient_Class30059]
+		[VRDashboardClient_Class90000])
 	(title "VR Dashboard Client"))
 
 ([VRDashboardClient_Class10000] of  CloFunction
@@ -66,7 +72,7 @@
 
 ([VRDashboardClient_Class10003] of  CloProgram
 
-	(cloFunctions [VRDashboardClient_Class140002])
+	(cloFunctions [RuleEngine_Class220000])
 	(cloNamespace [Clojure_Class300001])
 	(title "CW"))
 
@@ -87,6 +93,16 @@
 	(speed 0.0)
 	(url "file:resources/public/img/yachtp.png")
 	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class120000] of  CloFunction
+
+	(source ";; Send the given string message out over the given socket\n(let [writer (io/writer socket)]\n      (.write writer msg)\n      (.flush writer))")
+	(title "send [socket msg]"))
+
+([VRDashboardClient_Class120001] of  CloFunction
+
+	(source "(let [running (atom true)]\n    (future\n      (with-open [server-sock (ServerSocket. port)]\n        (while @running\n          (with-open [sock (.accept server-sock)]\n            (let [msg-in (receive sock)\n                  msg-out (handler msg-in)]\n              (send sock msg-out))))))\n    running)")
+	(title "serve [port handler]"))
 
 ([VRDashboardClient_Class120003] of  CloFunction
 
@@ -115,8 +131,8 @@
 
 ([VRDashboardClient_Class140000] of  CloFunction
 
-	(source "(if-let [vrdc (first (cls-instances \"VRDashboardControl\"))]\n  (let [port (sv vrdc \"telnet-port\")\n        port (DisplayUtilities/editString nil \"Telnet Port\" port nil)]\n    (try\n      (ssv vrdc \"telnet-port\" (int (read-string port)))\n      port\n      (catch Exception e\n        nil))))")
-	(title "ask-telnet-port []"))
+	(source "([hm inst]\n  (let [mp (into {} hm)\n         clw (mp \"clsWidget\")\n         rce (first (.getSelection (.getSlotWidget clw (slt \"races\"))))\n         tpt (first (.split rce \"\\\\.\"))\n         tpt (+ 10000 (read-string tpt))]\n    (ssv inst \"selected-race\" rce)\n    (ssv inst \"telnet-port\" (str tpt))))\n([]\n (clojuretab.ClojureTab/showModalInstance\n    (first (cls-instances \"VRDashboardControl\"))\n    \"Select Active Race\"))")
+	(title "select-race"))
 
 ([VRDashboardClient_Class140002] of  CloFunction
 
@@ -159,13 +175,22 @@
 	(source "(let [vof (keyword (clojure.string/lower-case vof))]\n  (or (not= vel (ops :view-elevation))\n       (not= vof (ops :view-offset))\n       (not= vpt (ops :view-post))))")
 	(title "diff-view [ops vel vof vpt]"))
 
-([VRDashboardClient_Class160000] of  CloFuncall
+([VRDashboardClient_Class160001] of  CloFunction
 
-	(source "(in-ns 'vr.dashcli)"))
+	(source "(.show *prj* (first (cls-instances \"VRDashboardControl\")))")
+	(title "show-controls []"))
 
-([VRDashboardClient_Class170000] of  CloFuncall
+([VRDashboardClient_Class160003] of  Rule
 
-	(source "BOAT-DATA"))
+	(lhs "(VRDashboardControl telnet-port ?tport)\n?c (NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	data ?data\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
+	(rhs "(if-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data (read-string ?tport))]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata)\n    (modify ?d data bdata\n	time (+ ?t1 ?del)))\n  (modify ?d time (+ ?t1 ?del)))")
+	(salience 0)
+	(title "vr:NMEA Run"))
+
+([VRDashboardClient_Class170000] of  CloVar
+
+	(source "(defonce VRDdNMEA false)")
+	(title "defVRDdNMEA"))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
@@ -222,9 +247,13 @@
 	(url "file:resources/public/img/yachtp.png")
 	(verticalSpeed 0.0))
 
+([VRDashboardClient_Class190000] of  CloFuncall
+
+	(source "(in-ns 'vr.dashcli)"))
+
 ([VRDashboardClient_Class2] of  CloNamespace
 
-	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities)")
+	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps]\n  [clj-json.core :as json])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever)")
 	(title "vr.dashcli"))
 
 ([VRDashboardClient_Class20000] of  CloVar
@@ -236,6 +265,11 @@
 
 	(source "(defonce TELNET nil)")
 	(title "defTELNET"))
+
+([VRDashboardClient_Class230007] of  CloFunction
+
+	(source ";; Next call after > 20 sec\n(when (not VRDdNMEA)\n  (VRdNMEAReciever/startServer port path) \n  (def VRDdNMEA true))\n(Thread/sleep 10000)\n(let [buf (VRdNMEAReciever/getBuffer)\n      cap (.capacity buf)]\n  (if (> cap 16)\n    (let [nmea (.toString buf)]\n      (VRdNMEAReciever/clearBuffer)\n      (if (.contains nmea START-TOKEN)\n        (first (.split nmea END-TOKEN))))))")
+	(title "get-nmea-data2 [port path]"))
 
 ([VRDashboardClient_Class30000] of  Rule
 
@@ -395,16 +429,16 @@
 ([VRDashboardClient_Class30076] of  Rule
 
 	(lhs "?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\"))")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/select-race)\n(vr.dashcli/show-controls)\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\"))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
 ([VRDashboardClient_Class30077] of  Rule
 
-	(lhs "(VRDashboardControl telnet-port ?tport)\n?c (NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	data ?data\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
-	(rhs "(if-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data ?tport)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata)\n    (modify ?d data bdata\n	time (+ ?t1 ?del)))\n  (modify ?d time (+ ?t1 ?del)))")
+	(lhs "(VRDashboardControl nmea-port ?nmp selected-race ?ser)\n?c (NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	data ?data\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
+	(rhs "(if-let [[tim lat lon spd crs dat :as bdata] \n         (vr.dashcli/get-boat-data2 (read-string ?nmp) (str \"/nmea/\" ?ser))]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata)\n    (modify ?d data bdata\n	time (+ ?t1 ?del)))\n  (modify ?d time (+ ?t1 ?del)))")
 	(salience 0)
-	(title "vr:NMEA Run"))
+	(title "vr:NMEA Run2"))
 
 ([VRDashboardClient_Class40000] of  CloFuncall
 
@@ -423,10 +457,29 @@
 		[Onboard])
 	(title "CZML Generation Set2"))
 
+([VRDashboardClient_Class50000] of  CloProgram
+
+	(cloFunctions
+		[VRDashboardClient_Class80004]
+		[VRDashboardClient_Class120000]
+		[VRDashboardClient_Class120001])
+	(cloNamespace [VRDashboardClient_Class60001])
+	(title "TCP Server"))
+
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
+	(nmea-port "8081")
 	(onboard "russor")
-	(telnet-port 10482))
+	(port "8448")
+	(races
+		"441.1"
+		"472.1"
+		"485.1"
+		"483.1"
+		"482.3"
+		"470.6")
+	(selected-race "482.3")
+	(telnet-port "10482"))
 
 ([VRDashboardClient_Class60000] of  NavOb
 
@@ -440,6 +493,11 @@
 	(speed 0.0)
 	(url "file:resources/public/img/lnrR.gif")
 	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class60001] of  CloNamespace
+
+	(source "(:require \n  [clojure.java.io :as io])\n(:import \n  [java.net ServerSocket])")
+	(title "tcp.server"))
 
 ([VRDashboardClient_Class60003] of  CloFunction
 
@@ -541,3 +599,23 @@
 	(rhs "(let [lab (.getName ?obj)\n      desc (.getDescription ?obj)]\n  (asser CZMLSpan object lab\n	options (read-string desc)\n	time ?t)\n  (println \"NavOb on map:\" lab))")
 	(salience 0)
 	(title "vr:NavOb on Map"))
+
+([VRDashboardClient_Class80004] of  CloFunction
+
+	(source ";; Read a line of textual data from the given socket\n(.readLine (io/reader socket))")
+	(title "receive [socket]"))
+
+([VRDashboardClient_Class90000] of  CloVar
+
+	(source "\"http://zezo.org/races2.json\"")
+	(title "RACES-URL"))
+
+([VRDashboardClient_Class90001] of  CloFunction
+
+	(source "(let [bdata (if-let [nmea (get-nmea-data2 port path)]\n                 (if-let [bd (parse-nmea-data nmea)]            \n                   (when (diff-vector? bd BOAT-DATA)\n                     (def BOAT-DATA bd)\n                     bd)))]\n  bdata)")
+	(title "get-boat-data2 [port path]"))
+
+([VRDashboardClient_Class90005] of  CloFunction
+
+	(source "(let [txt (slurp RACES-URL)\n      mp (json/parse-string txt)\n      rcs (map #(get % \"id\") (mp \"races\"))\n      vrd (first (cls-instances \"VRDashboardControl\"))]\n (ssvs vrd \"races\" rcs))")
+	(title "load-races []"))
