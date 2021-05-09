@@ -24,6 +24,7 @@
                  [http-kit "2.5.3"]
                  [clj-json "0.5.3"]
                  [clj-telnet "0.7.0"]
+                 [VRDnmea "0.1.0"]
                  [javax.xml.bind/jaxb-api "2.3.0"]]
   :repositories {"local" {:url ~(str (.toURI (java.io.File. "repo"))) :checksum :warn}}
   :main ^:skip-aot sail-pro.core
