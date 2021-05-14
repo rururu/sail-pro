@@ -1,0 +1,1992 @@
+; Sun Mar 26 22:49:07 MSK 2017
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([Example_Class10000] of  CloProgram
+
+	(cloFunctions
+		[Example_Class20050]
+		[GeoNames_Class11]
+		[GeoNames_Class28]
+		[GeoNames_Class10006]
+		[Example_Class30000]
+		[Example_Class40007]
+		[GeoNames_Class70000]
+		[Example_Class10003]
+		[Example_Class20000]
+		[Example_Class20005]
+		[Example_Class20021]
+		[GeoNames_Class60030]
+		[GeoNames_Class1]
+		[GeoNames_Class10001]
+		[GeoNames_Class50001]
+		[GeoNames_Class7]
+		[GeoNames_Class25]
+		[GeoNames_Class30]
+		[GeoNames_Class40000]
+		[GeoNames_Class80001]
+		[GeoNames_Class60000]
+		[GeoNames_Class100001]
+		[GeoNames_Class40001]
+		[GeoNames_Class20028]
+		[GeoNames_Class30001]
+		[GeoNames_Class40023]
+		[GeoNames_Class20000]
+		[GeoNames_Class30006]
+		[GeoNames_Class30010]
+		[GeoNames_Class50002])
+	(cloNamespace [Example_Class10001])
+	(cloVars
+		[Example_Class10002]
+		[Example_Class20001]
+		[Example_Class20002]
+		[Example_Class20020]
+		[GeoNames_Class60031]
+		[GeoNames_Class2]
+		[GeoNames_Class4]
+		[GeoNames_Class3]
+		[GeoNames_Class0]
+		[GeoNames_Class10000]
+		[GeoNames_Class20027]
+		[GeoNames_Class30000]
+		[GeoNames_Class20004]
+		[GeoNames_Class70001]
+		[GeoNames_Class50000]
+		[GeoNames_Class90001]
+		[GeoNames_Class80000]
+		[GeoNames_Class110001])
+	(title "geonames"))
+
+([Example_Class10001] of  CloNamespace
+
+	(source "(:use \n  protege.core\n  clojure.xml)\n(:import java.net.URL)\n(:gen-class :load-impl-ns false)")
+	(title "geo.names"))
+
+([Example_Class10002] of  CloVar
+
+	(source "\"http://api.geonames.org/ocean\"")
+	(title "^:dynamic *ocean-url*"))
+
+([Example_Class10003] of  CloFunction
+
+	(source "; Get ocean from Geonames Web Service\n(let [url (str *ocean-url* \"?lat=\" lat \"&lng=\" lng \"&username=\" *username*)]\n (try\n  (if-let [xml (clojure.xml/parse url)]\n    (if-let [mes (:message (:attrs (first (:content xml))))]\n       \"Land\"\n       (first (:content (first (:content (first (:content xml)))))) ))\n  (catch Exception e\n   (ctpl e)\n   ())))")
+	(title "call-geonames-ocean [lat lng]"))
+
+([Example_Class20000] of  CloFunction
+
+	(source "; Get country code from Geonames Web Service\n(let [url (str *country-code-url* \"?type=xml&lat=\" lat \"&lng=\" lng \"&username=\" *username*)]\n (try\n  (if-let [xml (clojure.xml/parse url)]\n    (if-let [mes (:message (:attrs (first (:content xml))))]\n       \"Not a country\"\n       (first (:content (first (:content (first (:content xml)))))) ))\n  (catch Exception e\n   (ctpl e)\n   ())))")
+	(title "call-geonames-country-code [lat lng]"))
+
+([Example_Class20001] of  CloVar
+
+	(source "\"http://api.geonames.org/countryCodeXML\"")
+	(title "^:dynamic *country-code-url*"))
+
+([Example_Class20002] of  CloVar
+
+	(source "\"http://ws.geonames.org/countryInfo\"")
+	(title "^:dynamic *country-info-url*"))
+
+([Example_Class20005] of  CloFunction
+
+	(source "; Get country info from Geonames Web Service\n(let [url (str *country-info-url* \"?lang=\" lang \"&country=\" code \"&username=\" *username*)]\n (try\n  (if-let [xml (clojure.xml/parse url)]\n    (xml-to-map (first (:content xml))) )\n  (catch Exception e\n   (ctpl e)\n   ())))")
+	(title "call-geonames-country-info [code lang]"))
+
+([Example_Class20020] of  CloVar
+
+	(source "\"http://api.geonames.org/findNearby\"")
+	(title "^:dynamic *nearby-url*"))
+
+([Example_Class20021] of  CloFunction
+
+	(source ";; Get near by place from Geonames Web Service\n;; max radius = 300\n(let [url (str *nearby-url* \"?lat=\" lat \"&lng=\" lng \"&username=\" *username*)\n       url (if (some? fea-class) (str url \"&featureClass=\" fea-class) url)\n       url (if (some? fea-code) (str url \"&featureCode=\" fea-code) url)\n       url (if (number? maxr) (str url \"&maxRows=\" maxr) url)\n       url (if (and (number? rad) (<= rad 300)) (str url \"&radius=\" rad) url)]\n (try\n   (if-let [xml (clojure.xml/parse url)]\n      (xml-to-map (first (:content xml))) )\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-nearby [lat lng fea-class fea-code maxr rad]"))
+
+([Example_Class20050] of  CloFunction
+
+	(source "(doseq [[k v] mp]\n   (if (slt k)\n       (ssv inst k v)))\ninst")
+	(title "map-into-inst [mp inst]"))
+
+([Example_Class30000] of  CloFunction
+
+	(source "(let [phi1 (Math/toRadians lat1)\n       lam1 (Math/toRadians lon1)\n       phi2 (Math/toRadians lat2)\n       lam2 (Math/toRadians lon2)\n       ldiff (- lam2 lam1)\n       cosp2 (Math/cos phi2)\n       cosin (* (Math/cos phi1)(Math/sin phi2))\n       sicos (* (Math/sin phi1) cosp2 (Math/cos ldiff))\n       diff2 (- cosin sicos)\n       cosil (* cosp2 (Math/sin ldiff))\n       azrad (Math/atan2 cosil diff2)\n       azdeg (Math/toDegrees azrad)]\n  (cond\n    (< azdeg 0)(+ azdeg 360)\n    (> azdeg 360)(- azdeg 360)\n    true  azdeg))")
+	(title "bearing [lat1 lon1 lat2 lon2]"))
+
+([Example_Class40007] of  CloFunction
+
+	(source "(condp > bear\n    22.5 \"north\"\n    67.5 \"north-east\"\n  112.5 \"east\"\n  157.5 \"south-east\"\n  202.5 \"south\"\n  247.5 \"south-west\"\n  292.5 \"west\"\n  337.5 \"north-west\"\n  \"north\")")
+	(title "direction [bear]"))
+
+([GeoNames_Class0] of  CloVar
+
+	(source "\"http://api.geonames.org/rssToGeoRSS\"")
+	(title "^:dynamic *rss-georss*"))
+
+([GeoNames_Class1] of  CloFunction
+
+	(source "; Get GeoRSS for RSS feed <item>s from Geonames Web Service\n(let [url (str *rss-georss* \"?feedUrl=\" feed \"&username=\" *username*)]\n  (seq (rss-item-map-list url)))")
+	(title "call-geonames-rss [feed]"))
+
+([GeoNames_Class10000] of  CloVar
+
+	(source "\"http://api.geonames.org/astergdemXML\"")
+	(title "^:dynamic *elev30-url*"))
+
+([GeoNames_Class100001] of  CloFunction
+
+	(source ";; Finds the nearest points of interests for a given lat/lng pair.\n;; max rows = 50, max radius = 1\n(let [url (str *pois-osm-url* \"?lat=\" lat \"&lng=\" lng \"&username=\" *username*)\n       url (if (and (number? maxr) (<= maxr 50)) (str url \"&maxRows=\" maxr) url)\n       url (if (and (number? rad) (<= rad 1)) (str url \"&radius=\" rad) url)]\n (try\n   (if-let [xml (clojure.xml/parse url)]\n      (map xml-to-map (:content xml)) )\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-pois-osm [lat lng maxr rad]"))
+
+([GeoNames_Class10001] of  CloFunction
+
+	(source ";; Get elevation (step 30m) from Geonames Web Service\n;; Arguments can be vectors (length <= 20 on free server)\n(let [url (if (vector? lat)\n	(let [lats (apply str (interpose \",\" lat))\n	       lngs (apply str (interpose \",\" lng))]\n	   (str *elev30-url* \"?lats=\" lats \"&lngs=\" lngs))\n	(str *elev30-url* \"?lat=\" lat \"&lng=\" lng))\n       url (str url \"&type=XML&username=\" *username*)]\n (try\n  (if-let [xml (clojure.xml/parse url)]\n    (if (vector? lat)\n        (map #(first (:content %)) (filter #(some #{:astergdem} (vals %)) (:content xml)))\n        (first (:content (first (:content xml)) )) ))\n  (catch Exception e\n   (ctpl e)\n   ())))")
+	(title "call-geonames-elev30 [lat lng]"))
+
+([GeoNames_Class10006] of  CloFunction
+
+	(source "; Get list of maps from url returning collection of entries\n(try\n  (if-let [xml (parse url)]\n    (if-let [tags (:content (first (:content xml)))]\n       (if-let [items (seq (filter #(= (:tag %) :item) tags))]\n           (filter #(not (empty? %)) (map xml-to-map items)))\n       (do (println [\"rss-item-map-list:\" xml]) nil)))\n  (catch Exception e\n    (ctpl e)\n    ()))")
+	(title "rss-item-map-list [url]"))
+
+([GeoNames_Class11] of  CloFunction
+
+	(source "(let [cnt (:content xml)\n       keys (map #(name (:tag %)) cnt)\n       vals (map #(first (:content %)) cnt)]\n  (apply hash-map (interleave keys vals)))")
+	(title "xml-to-map [xml]"))
+
+([GeoNames_Class110001] of  CloVar
+
+	(source "\"http://api.geonames.org/search\"")
+	(title "^:dynamic *search-url*"))
+
+([GeoNames_Class110003] of  FeatureClass
+
+	(code "A")
+	(features [GeoNames_Class110014])
+	(title "Administrative Boundary Features"))
+
+([GeoNames_Class110004] of  FeatureClass
+
+	(code "H")
+	(features
+		[GeoNames_Class110015]
+		[GeoNames_Class110016]
+		[GeoNames_Class110017]
+		[GeoNames_Class110019]
+		[GeoNames_Class110020]
+		[GeoNames_Class110022]
+		[GeoNames_Class110023]
+		[GeoNames_Class110024]
+		[GeoNames_Class110025]
+		[GeoNames_Class110021])
+	(title "Hydrographic Features"))
+
+([GeoNames_Class110005] of  FeatureClass
+
+	(code "L")
+	(title "Area Features"))
+
+([GeoNames_Class110006] of  FeatureClass
+
+	(code "P")
+	(features
+		[GeoNames_Class110026]
+		[GeoNames_Class110027])
+	(title "Populated Place Features"))
+
+([GeoNames_Class110007] of  FeatureClass
+
+	(code "R")
+	(features
+		[GeoNames_Class110028]
+		[GeoNames_Class110029]
+		[GeoNames_Class110030])
+	(title "Road / Railroad Features"))
+
+([GeoNames_Class110008] of  FeatureClass
+
+	(code "S")
+	(features
+		[GeoNames_Class110031]
+		[GeoNames_Class110032]
+		[GeoNames_Class110033]
+		[GeoNames_Class110034]
+		[GeoNames_Class110035]
+		[GeoNames_Class110036]
+		[GeoNames_Class110037]
+		[GeoNames_Class110038]
+		[GeoNames_Class110039]
+		[GeoNames_Class110040]
+		[GeoNames_Class110041]
+		[GeoNames_Class110042]
+		[GeoNames_Class110043]
+		[GeoNames_Class110044]
+		[GeoNames_Class110045]
+		[GeoNames_Class110046])
+	(title "Spot Features"))
+
+([GeoNames_Class110009] of  FeatureClass
+
+	(code "T")
+	(features
+		[GeoNames_Class110047]
+		[GeoNames_Class110048]
+		[GeoNames_Class110049]
+		[GeoNames_Class110050]
+		[GeoNames_Class110051]
+		[GeoNames_Class110052]
+		[GeoNames_Class110053]
+		[GeoNames_Class110054]
+		[GeoNames_Class110055]
+		[GeoNames_Class110056]
+		[GeoNames_Class110057]
+		[GeoNames_Class110058]
+		[GeoNames_Class110059])
+	(title "Hypsographic Features"))
+
+([GeoNames_Class110010] of  FeatureClass
+
+	(code "U")
+	(features
+		[GeoNames_Class110060]
+		[GeoNames_Class110061]
+		[GeoNames_Class110062])
+	(title "Undersea Features"))
+
+([GeoNames_Class110011] of  FeatureClass
+
+	(code "V")
+	(features
+		[GeoNames_Class110063]
+		[GeoNames_Class110064]
+		[GeoNames_Class110065]
+		[GeoNames_Class110066]
+		[GeoNames_Class110067])
+	(title "Vegetation Features"))
+
+([GeoNames_Class110014] of  Feature
+
+	(code "ADM1")
+	(featureClass [GeoNames_Class110003])
+	(title "first-order administrative division"))
+
+([GeoNames_Class110015] of  Feature
+
+	(code "BAY")
+	(featureClass [GeoNames_Class110004])
+	(title "bay"))
+
+([GeoNames_Class110016] of  Feature
+
+	(code "GULF")
+	(featureClass [GeoNames_Class110004])
+	(title "gulf"))
+
+([GeoNames_Class110017] of  Feature
+
+	(code "HBR")
+	(featureClass [GeoNames_Class110004])
+	(title "harbor(s)"))
+
+([GeoNames_Class110019] of  Feature
+
+	(code "LK")
+	(featureClass [GeoNames_Class110004])
+	(title "lake"))
+
+([GeoNames_Class110020] of  Feature
+
+	(code "OCN")
+	(featureClass [GeoNames_Class110004])
+	(title "ocean"))
+
+([GeoNames_Class110021] of  Feature
+
+	(code "PND")
+	(featureClass [GeoNames_Class110004])
+	(title "pond"))
+
+([GeoNames_Class110022] of  Feature
+
+	(code "RF")
+	(featureClass [GeoNames_Class110004])
+	(title "reef(s)"))
+
+([GeoNames_Class110023] of  Feature
+
+	(code "SEA")
+	(featureClass [GeoNames_Class110004])
+	(title "sea"))
+
+([GeoNames_Class110024] of  Feature
+
+	(code "SHOL")
+	(featureClass [GeoNames_Class110004])
+	(title "shoal(s)"))
+
+([GeoNames_Class110025] of  Feature
+
+	(code "STM")
+	(featureClass [GeoNames_Class110004])
+	(title "stream"))
+
+([GeoNames_Class110026] of  Feature
+
+	(code "PPL")
+	(featureClass [GeoNames_Class110006])
+	(title "populated place"))
+
+([GeoNames_Class110027] of  Feature
+
+	(code "PPLC")
+	(featureClass [GeoNames_Class110006])
+	(title "capital of a political entity"))
+
+([GeoNames_Class110028] of  Feature
+
+	(code "RD")
+	(featureClass [GeoNames_Class110007])
+	(title "road"))
+
+([GeoNames_Class110029] of  Feature
+
+	(code "RR")
+	(featureClass [GeoNames_Class110007])
+	(title "railroad"))
+
+([GeoNames_Class110030] of  Feature
+
+	(code "ST")
+	(featureClass [GeoNames_Class110007])
+	(title "street"))
+
+([GeoNames_Class110031] of  Feature
+
+	(code "AIRB")
+	(featureClass [GeoNames_Class110008])
+	(title "airbase"))
+
+([GeoNames_Class110032] of  Feature
+
+	(code "AIRP")
+	(featureClass [GeoNames_Class110008])
+	(title "airport"))
+
+([GeoNames_Class110033] of  Feature
+
+	(code "ANS")
+	(featureClass [GeoNames_Class110008])
+	(title "ancient site"))
+
+([GeoNames_Class110034] of  Feature
+
+	(code "BANK")
+	(featureClass [GeoNames_Class110008])
+	(title "bank"))
+
+([GeoNames_Class110035] of  Feature
+
+	(code "BDG")
+	(featureClass [GeoNames_Class110008])
+	(title "bridge"))
+
+([GeoNames_Class110036] of  Feature
+
+	(code "CH")
+	(featureClass [GeoNames_Class110008])
+	(title "church"))
+
+([GeoNames_Class110037] of  Feature
+
+	(code "CMTY")
+	(featureClass [GeoNames_Class110008])
+	(title "cemetery"))
+
+([GeoNames_Class110038] of  Feature
+
+	(code "COMC")
+	(featureClass [GeoNames_Class110008])
+	(title "communication center"))
+
+([GeoNames_Class110039] of  Feature
+
+	(code "CSTL")
+	(featureClass [GeoNames_Class110008])
+	(title "castle"))
+
+([GeoNames_Class110040] of  Feature
+
+	(code "FRM")
+	(featureClass [GeoNames_Class110008])
+	(title "farm"))
+
+([GeoNames_Class110041] of  Feature
+
+	(code "HSP")
+	(featureClass [GeoNames_Class110008])
+	(title "hospital"))
+
+([GeoNames_Class110042] of  Feature
+
+	(code "HTL")
+	(featureClass [GeoNames_Class110008])
+	(title "hotel"))
+
+([GeoNames_Class110043] of  Feature
+
+	(code "LTHSE")
+	(featureClass [GeoNames_Class110008])
+	(title "lighthouse"))
+
+([GeoNames_Class110044] of  Feature
+
+	(code "MN")
+	(featureClass [GeoNames_Class110008])
+	(title "mine(s)"))
+
+([GeoNames_Class110045] of  Feature
+
+	(code "SCH")
+	(featureClass [GeoNames_Class110008])
+	(title "school"))
+
+([GeoNames_Class110046] of  Feature
+
+	(code "UNIV")
+	(featureClass [GeoNames_Class110008])
+	(title "university"))
+
+([GeoNames_Class110047] of  Feature
+
+	(code "BCH")
+	(featureClass [GeoNames_Class110009])
+	(title "beach"))
+
+([GeoNames_Class110048] of  Feature
+
+	(code "CAPE")
+	(featureClass [GeoNames_Class110009])
+	(title "cape"))
+
+([GeoNames_Class110049] of  Feature
+
+	(code "DSRT")
+	(featureClass [GeoNames_Class110009])
+	(title "desert"))
+
+([GeoNames_Class110050] of  Feature
+
+	(code "HLL")
+	(featureClass [GeoNames_Class110009])
+	(title "hill"))
+
+([GeoNames_Class110051] of  Feature
+
+	(code "ISL")
+	(featureClass [GeoNames_Class110009])
+	(title "island"))
+
+([GeoNames_Class110052] of  Feature
+
+	(code "MT")
+	(featureClass [GeoNames_Class110009])
+	(title "mountain"))
+
+([GeoNames_Class110053] of  Feature
+
+	(code "MTS")
+	(featureClass [GeoNames_Class110009])
+	(title "mountains"))
+
+([GeoNames_Class110054] of  Feature
+
+	(code "PEN")
+	(featureClass [GeoNames_Class110009])
+	(title "peninsula"))
+
+([GeoNames_Class110055] of  Feature
+
+	(code "PK")
+	(featureClass [GeoNames_Class110009])
+	(title "peak"))
+
+([GeoNames_Class110056] of  Feature
+
+	(code "PLAT")
+	(featureClass [GeoNames_Class110009])
+	(title "plateau"))
+
+([GeoNames_Class110057] of  Feature
+
+	(code "SHOR")
+	(featureClass [GeoNames_Class110009])
+	(title "shore"))
+
+([GeoNames_Class110058] of  Feature
+
+	(code "VAL")
+	(featureClass [GeoNames_Class110009])
+	(title "valley"))
+
+([GeoNames_Class110059] of  Feature
+
+	(code "VLC")
+	(featureClass [GeoNames_Class110009])
+	(title "volcano"))
+
+([GeoNames_Class110060] of  Feature
+
+	(code "BNKU")
+	(featureClass [GeoNames_Class110010])
+	(title "bank"))
+
+([GeoNames_Class110061] of  Feature
+
+	(code "RFU")
+	(featureClass [GeoNames_Class110010])
+	(title "reef"))
+
+([GeoNames_Class110062] of  Feature
+
+	(code "SHLU")
+	(featureClass [GeoNames_Class110010])
+	(title "shoal"))
+
+([GeoNames_Class110063] of  Feature
+
+	(code "BUSH")
+	(featureClass [GeoNames_Class110011])
+	(title "bush(es)"))
+
+([GeoNames_Class110064] of  Feature
+
+	(code "FRST")
+	(featureClass [GeoNames_Class110011])
+	(title "forest(s)"))
+
+([GeoNames_Class110065] of  Feature
+
+	(code "CULT")
+	(featureClass [GeoNames_Class110011])
+	(title "cultivated area"))
+
+([GeoNames_Class110066] of  Feature
+
+	(code "GRSLD")
+	(featureClass [GeoNames_Class110011])
+	(title "grassland"))
+
+([GeoNames_Class110067] of  Feature
+
+	(code "TUND")
+	(featureClass [GeoNames_Class110011])
+	(title "tundra"))
+
+([GeoNames_Class120018] of  Country
+
+	(code "AD")
+	(title "Andorra"))
+
+([GeoNames_Class120019] of  Country
+
+	(code "AE")
+	(title "United Arab Emirates"))
+
+([GeoNames_Class120020] of  Country
+
+	(code "AF")
+	(title "Afghanistan"))
+
+([GeoNames_Class120021] of  Country
+
+	(code "AG")
+	(title "Antigua and Barbuda"))
+
+([GeoNames_Class130022] of  Country
+
+	(code "AI")
+	(title "Anguilla"))
+
+([GeoNames_Class130023] of  Country
+
+	(code "AL")
+	(title "Albania"))
+
+([GeoNames_Class130024] of  Country
+
+	(code "AM")
+	(title "Armenia"))
+
+([GeoNames_Class130025] of  Country
+
+	(code "AN")
+	(title "Netherlands Antilles"))
+
+([GeoNames_Class130026] of  Country
+
+	(code "AO")
+	(title "Angola"))
+
+([GeoNames_Class130027] of  Country
+
+	(code "AQ")
+	(title "Antarctica"))
+
+([GeoNames_Class130028] of  Country
+
+	(code "AR")
+	(title "Argentina"))
+
+([GeoNames_Class130029] of  Country
+
+	(code "AS")
+	(title "American Samoa"))
+
+([GeoNames_Class130030] of  Country
+
+	(code "AT")
+	(title "Austria"))
+
+([GeoNames_Class130031] of  Country
+
+	(code "AU")
+	(title "Australia"))
+
+([GeoNames_Class130032] of  Country
+
+	(code "AW")
+	(title "Aruba"))
+
+([GeoNames_Class130033] of  Country
+
+	(code "AX")
+	(title "Åland"))
+
+([GeoNames_Class130034] of  Country
+
+	(code "AZ")
+	(title "Azerbaijan"))
+
+([GeoNames_Class130035] of  Country
+
+	(code "BA")
+	(title "Bosnia and Herzegovina"))
+
+([GeoNames_Class130036] of  Country
+
+	(code "BB")
+	(title "Barbados"))
+
+([GeoNames_Class130037] of  Country
+
+	(code "BD")
+	(title "Bangladesh"))
+
+([GeoNames_Class130038] of  Country
+
+	(code "BE")
+	(title "Belgium"))
+
+([GeoNames_Class130039] of  Country
+
+	(code "BF")
+	(title "Burkina Faso"))
+
+([GeoNames_Class130040] of  Country
+
+	(code "BG")
+	(title "Bulgaria"))
+
+([GeoNames_Class130041] of  Country
+
+	(code "BH")
+	(title "Bahrain"))
+
+([GeoNames_Class130042] of  Country
+
+	(code "BI")
+	(title "Burundi"))
+
+([GeoNames_Class130043] of  Country
+
+	(code "BJ")
+	(title "Benin"))
+
+([GeoNames_Class130044] of  Country
+
+	(code "BL")
+	(title "Saint Barthélemy"))
+
+([GeoNames_Class130045] of  Country
+
+	(code "BM")
+	(title "Bermuda"))
+
+([GeoNames_Class130046] of  Country
+
+	(code "BN")
+	(title "Brunei"))
+
+([GeoNames_Class130047] of  Country
+
+	(code "BO")
+	(title "Bolivia"))
+
+([GeoNames_Class130048] of  Country
+
+	(code "BQ")
+	(title "Bonaire"))
+
+([GeoNames_Class130049] of  Country
+
+	(code "BR")
+	(title "Brazil"))
+
+([GeoNames_Class130050] of  Country
+
+	(code "BS")
+	(title "Bahamas"))
+
+([GeoNames_Class130051] of  Country
+
+	(code "BT")
+	(title "Bhutan"))
+
+([GeoNames_Class130052] of  Country
+
+	(code "BV")
+	(title "Bouvet Island"))
+
+([GeoNames_Class130053] of  Country
+
+	(code "BW")
+	(title "Botswana"))
+
+([GeoNames_Class130054] of  Country
+
+	(code "BY")
+	(title "Belarus"))
+
+([GeoNames_Class130055] of  Country
+
+	(code "BZ")
+	(title "Belize"))
+
+([GeoNames_Class130056] of  Country
+
+	(code "CA")
+	(title "Canada"))
+
+([GeoNames_Class130057] of  Country
+
+	(code "CC")
+	(title "Cocos [Keeling] Islands"))
+
+([GeoNames_Class130058] of  Country
+
+	(code "CD")
+	(title "Democratic Republic of the Congo"))
+
+([GeoNames_Class130059] of  Country
+
+	(code "CF")
+	(title "Central African Republic"))
+
+([GeoNames_Class130060] of  Country
+
+	(code "CG")
+	(title "Republic of the Congo"))
+
+([GeoNames_Class130061] of  Country
+
+	(code "CH")
+	(title "Switzerland"))
+
+([GeoNames_Class130062] of  Country
+
+	(code "CI")
+	(title "Ivory Coast"))
+
+([GeoNames_Class130063] of  Country
+
+	(code "CK")
+	(title "Cook Islands"))
+
+([GeoNames_Class130064] of  Country
+
+	(code "CL")
+	(title "Chile"))
+
+([GeoNames_Class130065] of  Country
+
+	(code "CM")
+	(title "Cameroon"))
+
+([GeoNames_Class130066] of  Country
+
+	(code "CN")
+	(title "China"))
+
+([GeoNames_Class130067] of  Country
+
+	(code "CO")
+	(title "Colombia"))
+
+([GeoNames_Class130068] of  Country
+
+	(code "CR")
+	(title "Costa Rica"))
+
+([GeoNames_Class130069] of  Country
+
+	(code "CS")
+	(title "Serbia and Montenegro"))
+
+([GeoNames_Class130070] of  Country
+
+	(code "CU")
+	(title "Cuba"))
+
+([GeoNames_Class130071] of  Country
+
+	(code "CV")
+	(title "Cape Verde"))
+
+([GeoNames_Class130072] of  Country
+
+	(code "CW")
+	(title "Curacao"))
+
+([GeoNames_Class130073] of  Country
+
+	(code "CX")
+	(title "Christmas Island"))
+
+([GeoNames_Class130074] of  Country
+
+	(code "CY")
+	(title "Cyprus"))
+
+([GeoNames_Class130075] of  Country
+
+	(code "CZ")
+	(title "Czechia"))
+
+([GeoNames_Class130076] of  Country
+
+	(code "DE")
+	(title "Germany"))
+
+([GeoNames_Class130077] of  Country
+
+	(code "DJ")
+	(title "Djibouti"))
+
+([GeoNames_Class130078] of  Country
+
+	(code "DK")
+	(title "Denmark"))
+
+([GeoNames_Class130079] of  Country
+
+	(code "DM")
+	(title "Dominica"))
+
+([GeoNames_Class130080] of  Country
+
+	(code "DO")
+	(title "Dominican Republic"))
+
+([GeoNames_Class130081] of  Country
+
+	(code "DZ")
+	(title "Algeria"))
+
+([GeoNames_Class130082] of  Country
+
+	(code "EC")
+	(title "Ecuador"))
+
+([GeoNames_Class130083] of  Country
+
+	(code "EE")
+	(title "Estonia"))
+
+([GeoNames_Class130084] of  Country
+
+	(code "EG")
+	(title "Egypt"))
+
+([GeoNames_Class130085] of  Country
+
+	(code "EH")
+	(title "Western Sahara"))
+
+([GeoNames_Class130086] of  Country
+
+	(code "ER")
+	(title "Eritrea"))
+
+([GeoNames_Class130087] of  Country
+
+	(code "ES")
+	(title "Spain"))
+
+([GeoNames_Class130088] of  Country
+
+	(code "ET")
+	(title "Ethiopia"))
+
+([GeoNames_Class130089] of  Country
+
+	(code "FI")
+	(title "Finland"))
+
+([GeoNames_Class130090] of  Country
+
+	(code "FJ")
+	(title "Fiji"))
+
+([GeoNames_Class130091] of  Country
+
+	(code "FK")
+	(title "Falkland Islands"))
+
+([GeoNames_Class130092] of  Country
+
+	(code "FM")
+	(title "Micronesia"))
+
+([GeoNames_Class130093] of  Country
+
+	(code "FO")
+	(title "Faroe Islands"))
+
+([GeoNames_Class130094] of  Country
+
+	(code "FR")
+	(title "France"))
+
+([GeoNames_Class130095] of  Country
+
+	(code "GA")
+	(title "Gabon"))
+
+([GeoNames_Class130096] of  Country
+
+	(code "GB")
+	(title "United Kingdom"))
+
+([GeoNames_Class130097] of  Country
+
+	(code "GD")
+	(title "Grenada"))
+
+([GeoNames_Class130098] of  Country
+
+	(code "GE")
+	(title "Georgia"))
+
+([GeoNames_Class130099] of  Country
+
+	(code "GF")
+	(title "French Guiana"))
+
+([GeoNames_Class130100] of  Country
+
+	(code "GG")
+	(title "Guernsey"))
+
+([GeoNames_Class130101] of  Country
+
+	(code "GH")
+	(title "Ghana"))
+
+([GeoNames_Class130102] of  Country
+
+	(code "GI")
+	(title "Gibraltar"))
+
+([GeoNames_Class130103] of  Country
+
+	(code "GL")
+	(title "Greenland"))
+
+([GeoNames_Class130104] of  Country
+
+	(code "GM")
+	(title "Gambia"))
+
+([GeoNames_Class130105] of  Country
+
+	(code "GN")
+	(title "Guinea"))
+
+([GeoNames_Class130106] of  Country
+
+	(code "GP")
+	(title "Guadeloupe"))
+
+([GeoNames_Class130107] of  Country
+
+	(code "GQ")
+	(title "Equatorial Guinea"))
+
+([GeoNames_Class130108] of  Country
+
+	(code "GR")
+	(title "Greece"))
+
+([GeoNames_Class130109] of  Country
+
+	(code "GS")
+	(title "South Georgia and the South Sandwich Islands"))
+
+([GeoNames_Class130110] of  Country
+
+	(code "GT")
+	(title "Guatemala"))
+
+([GeoNames_Class130111] of  Country
+
+	(code "GU")
+	(title "Guam"))
+
+([GeoNames_Class130112] of  Country
+
+	(code "GW")
+	(title "Guinea-Bissau"))
+
+([GeoNames_Class130113] of  Country
+
+	(code "GY")
+	(title "Guyana"))
+
+([GeoNames_Class130114] of  Country
+
+	(code "HK")
+	(title "Hong Kong"))
+
+([GeoNames_Class130115] of  Country
+
+	(code "HM")
+	(title "Heard Island and McDonald Islands"))
+
+([GeoNames_Class130116] of  Country
+
+	(code "HN")
+	(title "Honduras"))
+
+([GeoNames_Class130117] of  Country
+
+	(code "HR")
+	(title "Croatia"))
+
+([GeoNames_Class130118] of  Country
+
+	(code "HT")
+	(title "Haiti"))
+
+([GeoNames_Class130119] of  Country
+
+	(code "HU")
+	(title "Hungary"))
+
+([GeoNames_Class130120] of  Country
+
+	(code "ID")
+	(title "Indonesia"))
+
+([GeoNames_Class130121] of  Country
+
+	(code "IE")
+	(title "Ireland"))
+
+([GeoNames_Class130122] of  Country
+
+	(code "IL")
+	(title "Israel"))
+
+([GeoNames_Class130123] of  Country
+
+	(code "IM")
+	(title "Isle of Man"))
+
+([GeoNames_Class130124] of  Country
+
+	(code "IN")
+	(title "India"))
+
+([GeoNames_Class130125] of  Country
+
+	(code "IO")
+	(title "British Indian Ocean Territory"))
+
+([GeoNames_Class130126] of  Country
+
+	(code "IQ")
+	(title "Iraq"))
+
+([GeoNames_Class130127] of  Country
+
+	(code "IR")
+	(title "Iran"))
+
+([GeoNames_Class130128] of  Country
+
+	(code "IS")
+	(title "Iceland"))
+
+([GeoNames_Class130129] of  Country
+
+	(code "IT")
+	(title "Italy"))
+
+([GeoNames_Class130130] of  Country
+
+	(code "JE")
+	(title "Jersey"))
+
+([GeoNames_Class130131] of  Country
+
+	(code "JM")
+	(title "Jamaica"))
+
+([GeoNames_Class130132] of  Country
+
+	(code "JO")
+	(title "Jordan"))
+
+([GeoNames_Class130133] of  Country
+
+	(code "JP")
+	(title "Japan"))
+
+([GeoNames_Class130134] of  Country
+
+	(code "KE")
+	(title "Kenya"))
+
+([GeoNames_Class130135] of  Country
+
+	(code "KG")
+	(title "Kyrgyzstan"))
+
+([GeoNames_Class130136] of  Country
+
+	(code "KH")
+	(title "Cambodia"))
+
+([GeoNames_Class130137] of  Country
+
+	(code "KI")
+	(title "Kiribati"))
+
+([GeoNames_Class130138] of  Country
+
+	(code "KM")
+	(title "Comoros"))
+
+([GeoNames_Class130139] of  Country
+
+	(code "KN")
+	(title "Saint Kitts and Nevis"))
+
+([GeoNames_Class130140] of  Country
+
+	(code "KP")
+	(title "North Korea"))
+
+([GeoNames_Class130141] of  Country
+
+	(code "KR")
+	(title "South Korea"))
+
+([GeoNames_Class130142] of  Country
+
+	(code "KW")
+	(title "Kuwait"))
+
+([GeoNames_Class130143] of  Country
+
+	(code "KY")
+	(title "Cayman Islands"))
+
+([GeoNames_Class130144] of  Country
+
+	(code "KZ")
+	(title "Kazakhstan"))
+
+([GeoNames_Class130145] of  Country
+
+	(code "LA")
+	(title "Laos"))
+
+([GeoNames_Class130146] of  Country
+
+	(code "LB")
+	(title "Lebanon"))
+
+([GeoNames_Class130147] of  Country
+
+	(code "LC")
+	(title "Saint Lucia"))
+
+([GeoNames_Class130148] of  Country
+
+	(code "LI")
+	(title "Liechtenstein"))
+
+([GeoNames_Class130149] of  Country
+
+	(code "LK")
+	(title "Sri Lanka"))
+
+([GeoNames_Class130150] of  Country
+
+	(code "LR")
+	(title "Liberia"))
+
+([GeoNames_Class130151] of  Country
+
+	(code "LS")
+	(title "Lesotho"))
+
+([GeoNames_Class130152] of  Country
+
+	(code "LT")
+	(title "Lithuania"))
+
+([GeoNames_Class130153] of  Country
+
+	(code "LU")
+	(title "Luxembourg"))
+
+([GeoNames_Class130154] of  Country
+
+	(code "LV")
+	(title "Latvia"))
+
+([GeoNames_Class130155] of  Country
+
+	(code "LY")
+	(title "Libya"))
+
+([GeoNames_Class130156] of  Country
+
+	(code "MA")
+	(title "Morocco"))
+
+([GeoNames_Class130157] of  Country
+
+	(code "MC")
+	(title "Monaco"))
+
+([GeoNames_Class130158] of  Country
+
+	(code "MD")
+	(title "Moldova"))
+
+([GeoNames_Class130159] of  Country
+
+	(code "ME")
+	(title "Montenegro"))
+
+([GeoNames_Class130160] of  Country
+
+	(code "MF")
+	(title "Saint Martin"))
+
+([GeoNames_Class130161] of  Country
+
+	(code "MG")
+	(title "Madagascar"))
+
+([GeoNames_Class130162] of  Country
+
+	(code "MH")
+	(title "Marshall Islands"))
+
+([GeoNames_Class130163] of  Country
+
+	(code "MK")
+	(title "Macedonia"))
+
+([GeoNames_Class130164] of  Country
+
+	(code "ML")
+	(title "Mali"))
+
+([GeoNames_Class130165] of  Country
+
+	(code "MM")
+	(title "Myanmar [Burma]"))
+
+([GeoNames_Class130166] of  Country
+
+	(code "MN")
+	(title "Mongolia"))
+
+([GeoNames_Class130167] of  Country
+
+	(code "MO")
+	(title "Macao"))
+
+([GeoNames_Class130168] of  Country
+
+	(code "MP")
+	(title "Northern Mariana Islands"))
+
+([GeoNames_Class130169] of  Country
+
+	(code "MQ")
+	(title "Martinique"))
+
+([GeoNames_Class130170] of  Country
+
+	(code "MR")
+	(title "Mauritania"))
+
+([GeoNames_Class130171] of  Country
+
+	(code "MS")
+	(title "Montserrat"))
+
+([GeoNames_Class130172] of  Country
+
+	(code "MT")
+	(title "Malta"))
+
+([GeoNames_Class130173] of  Country
+
+	(code "MU")
+	(title "Mauritius"))
+
+([GeoNames_Class130174] of  Country
+
+	(code "MV")
+	(title "Maldives"))
+
+([GeoNames_Class130175] of  Country
+
+	(code "MW")
+	(title "Malawi"))
+
+([GeoNames_Class130176] of  Country
+
+	(code "MX")
+	(title "Mexico"))
+
+([GeoNames_Class130177] of  Country
+
+	(code "MY")
+	(title "Malaysia"))
+
+([GeoNames_Class130178] of  Country
+
+	(code "MZ")
+	(title "Mozambique"))
+
+([GeoNames_Class130179] of  Country
+
+	(code "NA")
+	(title "Namibia"))
+
+([GeoNames_Class130180] of  Country
+
+	(code "NC")
+	(title "New Caledonia"))
+
+([GeoNames_Class130181] of  Country
+
+	(code "NE")
+	(title "Niger"))
+
+([GeoNames_Class130182] of  Country
+
+	(code "NF")
+	(title "Norfolk Island"))
+
+([GeoNames_Class130183] of  Country
+
+	(code "NG")
+	(title "Nigeria"))
+
+([GeoNames_Class130184] of  Country
+
+	(code "NI")
+	(title "Nicaragua"))
+
+([GeoNames_Class130185] of  Country
+
+	(code "NL")
+	(title "Netherlands"))
+
+([GeoNames_Class130186] of  Country
+
+	(code "NO")
+	(title "Norway"))
+
+([GeoNames_Class130187] of  Country
+
+	(code "NP")
+	(title "Nepal"))
+
+([GeoNames_Class130188] of  Country
+
+	(code "NR")
+	(title "Nauru"))
+
+([GeoNames_Class130189] of  Country
+
+	(code "NU")
+	(title "Niue"))
+
+([GeoNames_Class130190] of  Country
+
+	(code "NZ")
+	(title "New Zealand"))
+
+([GeoNames_Class130191] of  Country
+
+	(code "OM")
+	(title "Oman"))
+
+([GeoNames_Class130192] of  Country
+
+	(code "PA")
+	(title "Panama"))
+
+([GeoNames_Class130193] of  Country
+
+	(code "PE")
+	(title "Peru"))
+
+([GeoNames_Class130194] of  Country
+
+	(code "PF")
+	(title "French Polynesia"))
+
+([GeoNames_Class130195] of  Country
+
+	(code "PG")
+	(title "Papua New Guinea"))
+
+([GeoNames_Class130196] of  Country
+
+	(code "PH")
+	(title "Philippines"))
+
+([GeoNames_Class130197] of  Country
+
+	(code "PK")
+	(title "Pakistan"))
+
+([GeoNames_Class130198] of  Country
+
+	(code "PL")
+	(title "Poland"))
+
+([GeoNames_Class130199] of  Country
+
+	(code "PM")
+	(title "Saint Pierre and Miquelon"))
+
+([GeoNames_Class130200] of  Country
+
+	(code "PN")
+	(title "Pitcairn Islands"))
+
+([GeoNames_Class130201] of  Country
+
+	(code "PR")
+	(title "Puerto Rico"))
+
+([GeoNames_Class130202] of  Country
+
+	(code "PS")
+	(title "Palestine"))
+
+([GeoNames_Class130203] of  Country
+
+	(code "PT")
+	(title "Portugal"))
+
+([GeoNames_Class130204] of  Country
+
+	(code "PW")
+	(title "Palau"))
+
+([GeoNames_Class130205] of  Country
+
+	(code "PY")
+	(title "Paraguay"))
+
+([GeoNames_Class130206] of  Country
+
+	(code "QA")
+	(title "Qatar"))
+
+([GeoNames_Class130207] of  Country
+
+	(code "RE")
+	(title "Réunion"))
+
+([GeoNames_Class130208] of  Country
+
+	(code "RO")
+	(title "Romania"))
+
+([GeoNames_Class130209] of  Country
+
+	(code "RS")
+	(title "Serbia"))
+
+([GeoNames_Class130210] of  Country
+
+	(code "RU")
+	(title "Russia"))
+
+([GeoNames_Class130211] of  Country
+
+	(code "RW")
+	(title "Rwanda"))
+
+([GeoNames_Class130212] of  Country
+
+	(code "SA")
+	(title "Saudi Arabia"))
+
+([GeoNames_Class130213] of  Country
+
+	(code "SB")
+	(title "Solomon Islands"))
+
+([GeoNames_Class130214] of  Country
+
+	(code "SC")
+	(title "Seychelles"))
+
+([GeoNames_Class130215] of  Country
+
+	(code "SD")
+	(title "Sudan"))
+
+([GeoNames_Class130216] of  Country
+
+	(code "SE")
+	(title "Sweden"))
+
+([GeoNames_Class130217] of  Country
+
+	(code "SG")
+	(title "Singapore"))
+
+([GeoNames_Class130218] of  Country
+
+	(code "SH")
+	(title "Saint Helena"))
+
+([GeoNames_Class130219] of  Country
+
+	(code "SI")
+	(title "Slovenia"))
+
+([GeoNames_Class130220] of  Country
+
+	(code "SJ")
+	(title "Svalbard and Jan Mayen"))
+
+([GeoNames_Class130221] of  Country
+
+	(code "SK")
+	(title "Slovakia"))
+
+([GeoNames_Class130222] of  Country
+
+	(code "SL")
+	(title "Sierra Leone"))
+
+([GeoNames_Class130223] of  Country
+
+	(code "SM")
+	(title "San Marino"))
+
+([GeoNames_Class130224] of  Country
+
+	(code "SN")
+	(title "Senegal"))
+
+([GeoNames_Class130225] of  Country
+
+	(code "SO")
+	(title "Somalia"))
+
+([GeoNames_Class130226] of  Country
+
+	(code "SR")
+	(title "Suriname"))
+
+([GeoNames_Class130227] of  Country
+
+	(code "SS")
+	(title "South Sudan"))
+
+([GeoNames_Class130228] of  Country
+
+	(code "ST")
+	(title "São Tomé and Príncipe"))
+
+([GeoNames_Class130229] of  Country
+
+	(code "SV")
+	(title "El Salvador"))
+
+([GeoNames_Class130230] of  Country
+
+	(code "SX")
+	(title "Sint Maarten"))
+
+([GeoNames_Class130231] of  Country
+
+	(code "SY")
+	(title "Syria"))
+
+([GeoNames_Class130232] of  Country
+
+	(code "SZ")
+	(title "Swaziland"))
+
+([GeoNames_Class130233] of  Country
+
+	(code "TC")
+	(title "Turks and Caicos Islands"))
+
+([GeoNames_Class130234] of  Country
+
+	(code "TD")
+	(title "Chad"))
+
+([GeoNames_Class130235] of  Country
+
+	(code "TF")
+	(title "French Southern Territories"))
+
+([GeoNames_Class130236] of  Country
+
+	(code "TG")
+	(title "Togo"))
+
+([GeoNames_Class130237] of  Country
+
+	(code "TH")
+	(title "Thailand"))
+
+([GeoNames_Class130238] of  Country
+
+	(code "TJ")
+	(title "Tajikistan"))
+
+([GeoNames_Class130239] of  Country
+
+	(code "TK")
+	(title "Tokelau"))
+
+([GeoNames_Class130240] of  Country
+
+	(code "TL")
+	(title "East Timor"))
+
+([GeoNames_Class130241] of  Country
+
+	(code "TM")
+	(title "Turkmenistan"))
+
+([GeoNames_Class130242] of  Country
+
+	(code "TN")
+	(title "Tunisia"))
+
+([GeoNames_Class130243] of  Country
+
+	(code "TO")
+	(title "Tonga"))
+
+([GeoNames_Class130244] of  Country
+
+	(code "TR")
+	(title "Turkey"))
+
+([GeoNames_Class130245] of  Country
+
+	(code "TT")
+	(title "Trinidad and Tobago"))
+
+([GeoNames_Class130246] of  Country
+
+	(code "TV")
+	(title "Tuvalu"))
+
+([GeoNames_Class130247] of  Country
+
+	(code "TW")
+	(title "Taiwan"))
+
+([GeoNames_Class130248] of  Country
+
+	(code "TZ")
+	(title "Tanzania"))
+
+([GeoNames_Class130249] of  Country
+
+	(code "UA")
+	(title "Ukraine"))
+
+([GeoNames_Class130250] of  Country
+
+	(code "UG")
+	(title "Uganda"))
+
+([GeoNames_Class130251] of  Country
+
+	(code "UM")
+	(title "U.S. Minor Outlying Islands"))
+
+([GeoNames_Class130252] of  Country
+
+	(code "US")
+	(title "United States"))
+
+([GeoNames_Class130253] of  Country
+
+	(code "UY")
+	(title "Uruguay"))
+
+([GeoNames_Class130254] of  Country
+
+	(code "UZ")
+	(title "Uzbekistan"))
+
+([GeoNames_Class130255] of  Country
+
+	(code "VA")
+	(title "Vatican City"))
+
+([GeoNames_Class130256] of  Country
+
+	(code "VC")
+	(title "Saint Vincent and the Grenadines"))
+
+([GeoNames_Class130257] of  Country
+
+	(code "VE")
+	(title "Venezuela"))
+
+([GeoNames_Class130258] of  Country
+
+	(code "VG")
+	(title "British Virgin Islands"))
+
+([GeoNames_Class130259] of  Country
+
+	(code "VI")
+	(title "U.S. Virgin Islands"))
+
+([GeoNames_Class130260] of  Country
+
+	(code "VN")
+	(title "Vietnam"))
+
+([GeoNames_Class130261] of  Country
+
+	(code "VU")
+	(title "Vanuatu"))
+
+([GeoNames_Class130262] of  Country
+
+	(code "WF")
+	(title "Wallis and Futuna"))
+
+([GeoNames_Class130263] of  Country
+
+	(code "WS")
+	(title "Samoa"))
+
+([GeoNames_Class130264] of  Country
+
+	(code "XK")
+	(title "Kosovo"))
+
+([GeoNames_Class130265] of  Country
+
+	(code "YE")
+	(title "Yemen"))
+
+([GeoNames_Class130266] of  Country
+
+	(code "YT")
+	(title "Mayotte"))
+
+([GeoNames_Class130267] of  Country
+
+	(code "ZA")
+	(title "South Africa"))
+
+([GeoNames_Class130268] of  Country
+
+	(code "ZM")
+	(title "Zambia"))
+
+([GeoNames_Class130269] of  Country
+
+	(code "ZW")
+	(title "Zimbabwe"))
+
+([GeoNames_Class2] of  CloVar
+
+	(source "\"http://api.geonames.org/wikipediaBoundingBox\"")
+	(title "^:dynamic *wiki-bbx*"))
+
+([GeoNames_Class20000] of  CloFunction
+
+	(source ";; Return geonameId of gn:Feature\n(if (= (:tag fea) :gn:Feature)\n    (let [rab (:rdf:about (:attrs fea))\n           lst (seq (.split rab \"/\"))]\n       (last lst)))")
+	(title "gn:Feature-gid [fea]"))
+
+([GeoNames_Class20004] of  CloVar
+
+	(source "\"liikalanjoki\"")
+	(title "^:dynamic *username*"))
+
+([GeoNames_Class20027] of  CloVar
+
+	(source "\"http://api.geonames.org/findNearbyPOIsOSM\"")
+	(title "^:dynamic *nearby-pois-osm*"))
+
+([GeoNames_Class20028] of  CloFunction
+
+	(source ";; Get nearby places of interest in OSM data from Geonames Web Service\n;; Return list of maps\n(let [url (str *nearby-pois-osm* \"?lat=\" lat \"&lng=\" lng \"&username=\" *username*)]\n (ctpl url)\n (try\n   (if-let [xml (clojure.xml/parse url)]\n      (let [lst (map :content (:content xml))]\n               (map tag-con-map lst)))\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "gn-pois-osm [lat lng]"))
+
+([GeoNames_Class25] of  CloFunction
+
+	(source "; Get Wikipedia articles for given bounding box\n(let [url (str *wiki-bbx* \"?north=\" north \"&south=\" south \"&west=\" west \"&east=\" east \"&lang=\" lang \"&maxRows=\" max \"&username=\" *username*)]\n  (seq (ws-map-list url)))")
+	(title "call-wiki-bbx [north west south east max lang]"))
+
+([GeoNames_Class28] of  CloFunction
+
+	(source "; Get list of maps from url returning collection of entries\n(try\n  (if-let [xml (parse url)]\n    (if-let [all (:content xml)]\n       (filter #(not (empty? %)) (map xml-to-map all)) ))\n  (catch Exception e\n    (ctpl e)\n    ()))")
+	(title "ws-map-list [url]"))
+
+([GeoNames_Class3] of  CloVar
+
+	(source "\"http://api.geonames.org/wikipediaSearch\"")
+	(title "^:dynamic *wiki-search*"))
+
+([GeoNames_Class30] of  CloFunction
+
+	(source "; Get Wikipedia articles near some point\n(let [url (str *wiki-nearby* \"?lat=\" lat \"&lng=\" lon \"&radius=\" radius-km \"&maxRows=\" max \"&username=\" *username*)]\n  (seq (ws-map-list url)))")
+	(title "call-wiki-nearby [lat lon radius-km max lang]"))
+
+([GeoNames_Class30000] of  CloVar
+
+	(source "\"http://api.geonames.org/findNearByWeather\"")
+	(title "^:dynamic *weather-url*"))
+
+([GeoNames_Class30001] of  CloFunction
+
+	(source ";; Return geoname attributes map by geonameId\n(try\n  (let [url (str \"http://api.geonames.org/get?geonameId=\" gid \"&username=\" *username*)\n              xml (clojure.xml/parse url)]\n          (if xml\n             (tag-con-map (:content xml))))\n(catch Exception e\n  (ctpl e)\n  nil))")
+	(title "gn-get [gid]"))
+
+([GeoNames_Class30006] of  CloFunction
+
+	(source ";; Return geonameId-s of gn:Feature gn:nearbyFeatures\n(if (= (:tag fea) :gn:Feature)\n    (let [rab (filter #(= (:tag %) :gn:nearbyFeatures) (:content fea))]\n       (if (seq rab)\n           (let [res (:rdf:resource (:attrs (first rab)))\n                  xml (clojure.xml/parse res)]\n               (if (map? xml)\n                   (map gn:Feature-gid (:content xml)) ))) ))")
+	(title "gn:Feature-neighbor-gids [fea]"))
+
+([GeoNames_Class30010] of  CloFunction
+
+	(source ";; Return neighbor gids in bbx=[w e s n] as set\n(let [gsb (gn-search-bbx-rdf \"\" 10 w e s n)]\n  (if (seq gsb)\n      (set (mapcat gn:Feature-neighbor-gids gsb)) ))")
+	(title "gn-neighbor-gids [w e s n]"))
+
+([GeoNames_Class4] of  CloVar
+
+	(source "\"http://api.geonames.org/findNearbyWikipedia\"")
+	(title "^:dynamic *wiki-nearby*"))
+
+([GeoNames_Class40000] of  CloFunction
+
+	(source ";: Get Elevation - Aster Global Digital Elevation Model V1 2009\n;: Returns map {coord1 elev1coord2 elev2 ..} \n(let [crds (take 20 coords)\n       lats (map first crds)\n       lngs (map second crds)\n       lats (apply str (interpose \",\" lats))\n       lngs (apply str (interpose \",\" lngs))\n       url (str *strm3-url* \"?lats=\" lats \"&lngs=\" lngs \"&username=\" *username*)]\n (try\n  (if-let [dat (slurp url)]\n    (let [v (read-string (str \"[\" dat \"]\"))\n           v (interleave coords v)]\n      (apply hash-map v)))\n  (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-20elevations [coords]"))
+
+([GeoNames_Class40001] of  CloFunction
+
+	(source "(letfn [(tac? [x] (let [cnt (:content x)]\n	(not (or (nil? (:tag x)) (not (or (nil? cnt) (seq cnt))) ) )))\n           (every-tac? [y] (every? #(tac? %) y))]\n   (cond\n      (nil? lst) lst\n      (every-tac? lst) (reduce #(assoc %1 (:tag %2) (tag-con-map (:content %2))) {} lst)\n      (> (count lst) 1) lst\n      true (first lst)))")
+	(title "tag-con-map [lst]"))
+
+([GeoNames_Class40023] of  CloFunction
+
+	(source ";; For q=\"\" and specified bbx return list of gn:Feature-s as rdf standard xml map\n(let [url (str \"http://api.geonames.org/search?q=\" q \"&maxRows=\" lim \"&type=rdf&username=\" *username* \"&south=\" s \"&east=\" e \"&north=\" n \"&west=\" w)]\n (try\n   (if-let [xml (clojure.xml/parse url)]\n      (:content xml))\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "gn-search-bbx-rdf [q lim w e s n]"))
+
+([GeoNames_Class50000] of  CloVar
+
+	(source "\"http://api.geonames.org/gtopo30\"")
+	(title "^:dynamic *gtopo30*"))
+
+([GeoNames_Class50001] of  CloFunction
+
+	(source "; Get near by weather from Geonames Web Service\n(let [url (str *weather-url* \"?lat=\" lat \"&lng=\" lng \"&style=full&username=\"  *username*)]\n (try\n   (if-let [xml (clojure.xml/parse url)]\n      (xml-to-map (first (:content xml))) )\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-weather [lat lng]"))
+
+([GeoNames_Class50002] of  CloFunction
+
+	(source ";; Get Wikipedia articles of title\n(let [url (str *wiki-search* \"?title=\" (java.net.URLEncoder/encode title \"utf-8\") \"&lang=\" lang \"&maxRows=\" max)]\n  (seq (ws-map-list url)))")
+	(title "gn-wiki-title [title max lang]"))
+
+([GeoNames_Class60000] of  CloFunction
+
+	(source ";; Returns all GeoNames higher up in the hierarchy of a place name.\n(let [url (str *hierarchy-url* \"?geonameId=\" gid \"&username=\" *username*)]\n(ctpl url)\n (try\n   (when-let [xml (clojure.xml/parse url)]\n      (ctpl xml)\n      (ctpl (count (:content xml)))\n      (map xml-to-map (:content xml)))\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-hierarchy [gid]"))
+
+([GeoNames_Class60001] of  CloFunction
+
+	(source "(java.io.ByteArrayInputStream.  (.getBytes s java.nio.charset.StandardCharsets/UTF_8))")
+	(title "istream [s]"))
+
+([GeoNames_Class60030] of  CloFunction
+
+	(source "; Get  the most detailed information available for the lat/lng from Geonames Web Service\n(let [url (str *ext-nearby-url* \"?lat=\" lat \"&lng=\" lng \"&username=\" *username*)]\n (try\n   (if-let [xml (clojure.xml/parse url)]\n      (map xml-to-map (:content xml)) )\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-nearby-ext [lat lng]"))
+
+([GeoNames_Class60031] of  CloVar
+
+	(source "\"http://api.geonames.org/extendedFindNearby\"")
+	(title "^:dynamic *ext-nearby-url*"))
+
+([GeoNames_Class7] of  CloFunction
+
+	(source "; Get Wikipedia articles containing text\n(let [url (str *wiki-search* \"?q=\" (java.net.URLEncoder/encode text \"utf-8\") \"&lang=\" lang \"&maxRows=\" max \"&username=\" *username*)]\n  (seq (ws-map-list url)))")
+	(title "call-wiki-search [text max lang]"))
+
+([GeoNames_Class70000] of  CloFunction
+
+	(source ";; mp - parameters map \n;; see http://www.geonames.org/export/geonames-search.html\n(let [url (str *search-url* \"?username=\" *username*\n              (apply str (for [[k v] (seq mp)] (str \"&\" (name k) \"=\" v))))]\n (try\n   (if-let [xml (clojure.xml/parse url)]\n      (map xml-to-map (rest (:content xml))) )\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-search [mp]"))
+
+([GeoNames_Class70001] of  CloVar
+
+	(source "\"http://api.geonames.org/srtm3\"")
+	(title "^:dynamic *strm3-url*"))
+
+([GeoNames_Class80000] of  CloVar
+
+	(source "\"http://api.geonames.org/findNearbyPOIsOSM\"")
+	(title "^:dynamic *pois-osm-url*"))
+
+([GeoNames_Class80001] of  CloFunction
+
+	(source "; Get Elevation - GTOPO30\n(let [url (str *gtopo30* \"?lat=\" lat \"&lng=\" lng \"&username=\"  *username*)]\n (try\n   (if-let [gtp (slurp url)]\n     (read-string gtp))\n (catch Exception e\n   (ctpl e)\n   nil)))")
+	(title "call-geonames-gtopo30 [lat lng]"))
+
+([GeoNames_Class90001] of  CloVar
+
+	(source "\"http://api.geonames.org/hierarchy\"")
+	(title "^:dynamic *hierarchy-url*"))

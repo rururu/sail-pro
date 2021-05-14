@@ -1,0 +1,73 @@
+; Sun Mar 26 22:49:07 MSK 2017
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot code
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot featureClass
+		(type INSTANCE)
+;+		(allowed-classes FeatureClass)
+;+		(cardinality 0 1)
+;+		(inverse-slot features)
+		(create-accessor read-write))
+	(multislot features
+		(type INSTANCE)
+;+		(allowed-classes Feature)
+;+		(inverse-slot featureClass)
+		(create-accessor read-write)))
+
+(defclass GeoNames
+	(is-a USER)
+	(role abstract))
+
+(defclass FeatureClass
+	(is-a GeoNames)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot code
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot features
+		(type INSTANCE)
+;+		(allowed-classes Feature)
+		(create-accessor read-write)))
+
+(defclass Feature
+	(is-a GeoNames)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot featureClass
+		(type INSTANCE)
+;+		(allowed-classes FeatureClass)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot code
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Country
+	(is-a GeoNames)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot code
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))

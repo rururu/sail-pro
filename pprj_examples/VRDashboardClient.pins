@@ -1,4 +1,4 @@
-; Sun May 09 12:27:35 MSK 2021
+; Fri May 14 21:54:42 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -12,6 +12,8 @@
 		[Cezium_Class30043]
 		[Cezium_Class30026]
 		[CeziumEngineLight_Class40011]
+		[Example_Class10000]
+		[GeoNamesWikipedia_Class0]
 		[VRDashboardClient_Class1])
 	(title "VR Programs"))
 
@@ -35,7 +37,12 @@
 		[VRDashboardClient_Class70000]
 		[VRDashboardClient_Class150002]
 		[VRDashboardClient_Class90005]
-		[VRDashboardClient_Class160001])
+		[VRDashboardClient_Class160001]
+		[VRDashboardClient_Class200006]
+		[VRDashboardClient_Class200008]
+		[VRDashboardClient_Class230057]
+		[VRDashboardClient_Class240720]
+		[VRDashboardClient_Class200007])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20003]
@@ -43,7 +50,9 @@
 		[VRDashboardClient_Class20000]
 		[VRDashboardClient_Class30001]
 		[VRDashboardClient_Class30059]
-		[VRDashboardClient_Class90000])
+		[VRDashboardClient_Class90000]
+		[VRDashboardClient_Class210000]
+		[VRDashboardClient_Class250016])
 	(title "VR Dashboard Client"))
 
 ([VRDashboardClient_Class10000] of  CloFunction
@@ -175,6 +184,14 @@
 	(source "(let [vof (keyword (clojure.string/lower-case vof))]\n  (or (not= vel (ops :view-elevation))\n       (not= vof (ops :view-offset))\n       (not= vpt (ops :view-post))))")
 	(title "diff-view [ops vel vof vpt]"))
 
+([VRDashboardClient_Class160000] of  BBXWiki
+
+	(bbx [VRDashboardClient_Class170001])
+	(button-bbx "submit/wiki.gis/submit-bbx")
+	(button-clear-articles "Clear Articles/wiki.gis/clear-articles")
+	(language English-en)
+	(max-responses 40))
+
 ([VRDashboardClient_Class160001] of  CloFunction
 
 	(source "(.show *prj* (first (cls-instances \"VRDashboardControl\")))")
@@ -191,6 +208,11 @@
 
 	(source "(defonce VRDdNMEA false)")
 	(title "defVRDdNMEA"))
+
+([VRDashboardClient_Class170001] of  BBX
+
+	(title "Current")
+	(wsen 6.0575 58.883335 6.1241665 58.95))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
@@ -253,7 +275,7 @@
 
 ([VRDashboardClient_Class2] of  CloNamespace
 
-	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps]\n  [clj-json.core :as json])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever)")
+	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps]\n  [clj-json.core :as json]\n  [wiki.gis :as wig]\n  [light.cesium.core :as cz])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever\n  ru.igis.omtab.gui.RuMapMouseAdapter)")
 	(title "vr.dashcli"))
 
 ([VRDashboardClient_Class20000] of  CloVar
@@ -261,15 +283,91 @@
 	(source "\"RMC\"")
 	(title "START-TOKEN"))
 
+([VRDashboardClient_Class200000] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VRDashboardClient_Class160000])
+	(%3AANNOTATION-TEXT "Current BBXWiki Request")
+	(%3ACREATION-TIMESTAMP "2021.05.10 12:10:38.095 MSK")
+	(%3ACREATOR "ru"))
+
+([VRDashboardClient_Class200006] of  CloFunction
+
+	(source "([onb]\n  (if-let [mo (OMT/getMapOb onb)]\n    (set-wiki-coords (.getLatitude mo) (.getLongitude mo))))\n([lat lon]\n  (when-let [wc (first (cls-instances \"WikipediaControl\"))]\n    (ssv wc \"lat\" (float lat))\n    (ssv wc \"lng\" (float lon))))")
+	(title "set-wiki-coords"))
+
+([VRDashboardClient_Class200007] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n       lat (mp \"lat\")\n       lon (mp \"lng\")\n       vic (mp \"vicinity\")\n       v (/ vic 60)\n       [w s e n] [(- lon v) (- lat v) (+ lon v) (+ lat v)]]\n  (if (nil? RMMA)\n    (set-mouse-adapter2))\n  (invoke-later\n    (let [bbi (foc \"BBX\" \"title\" \"Current\")\n           rqi (fainst (cls-instances \"BBXWiki\") \"Current BBXWiki Request\")]\n      (if (and bbi rqi)\n        (do\n          (ssvs bbi \"wsen\" (vec (map float [w s e n])))\n          (ssv rqi \"bbx\" bbi)\n          (ssvs rqi \"responses\" [])\n          (wig/submit-bbx (itm rqi 0) rqi)\n          (if-let [rr (seq (svs rqi \"responses\"))]\n            (doseq [r rr]\n              (pum-out-place r lat lon vic)\n              (add-pm-desc r))))\n        (println \"Instance of \\\"Current BBXWiki Request\\\" not found!\")))))")
+	(title "wikipedia-scan [hm inst]"))
+
+([VRDashboardClient_Class200008] of  CloFunction
+
+	(source "(let [tit (sv wai \"title\")\n      la1 (sv wai \"lat\")\n      lo1 (sv wai \"lng\")\n      dis (MapOb/distanceNM lat lon la1 lo1)\n      min-scl 0.25\n      max-scl 1.25\n      scl (min max-scl (- max-scl (/ dis vic)))]\n  (cz/location tit scl \"img/arrdn.png\" la1 lo1 100 60))")
+	(title "pum-out-place [wai lat lon vic]"))
+
+([VRDashboardClient_Class200009] of  CloFunction
+
+	(source "(if-let [pmi (fifos \"Wikimark\" \"label\" (or (sv wai \"feature\") \"default\"))]\n  (let [wmi (.copy pmi *kb* nil false)]\n    (.setDirectType wmi (cls \"Wikimark\"))\n    (ssv wmi \"latitude\" (MapOb/getDegMin (sv wai \"lat\")))\n    (ssv wmi \"longitude\" (MapOb/getDegMin (sv wai \"lng\")))\n    (ssv ins \"reference\" wia)\n    (ssv wia \"reference\" ins)))\n    (OMT/getOrAdd wmi)))")
+	(title "placemark-on-map [wai]"))
+
 ([VRDashboardClient_Class20003] of  CloVar
 
 	(source "(defonce TELNET nil)")
 	(title "defTELNET"))
 
+([VRDashboardClient_Class210000] of  CloVar
+
+	(source "nil")
+	(title "RMMA"))
+
+([VRDashboardClient_Class220018] of  CloFuncall
+
+	(source "(ru.rules/save-bnet-plan)"))
+
+([VRDashboardClient_Class230000] of  WikipediaControl
+
+	(lat 58.916668)
+	(lng 6.090833)
+	(vicinity 2.0))
+
 ([VRDashboardClient_Class230007] of  CloFunction
 
 	(source ";; Next call after > 20 sec\n(when (not VRDdNMEA)\n  (VRdNMEAReciever/startServer port path) \n  (def VRDdNMEA true))\n(Thread/sleep 10000)\n(let [buf (VRdNMEAReciever/getBuffer)\n      cap (.capacity buf)]\n  (if (> cap 16)\n    (let [nmea (.toString buf)]\n      (VRdNMEAReciever/clearBuffer)\n      (if (.contains nmea START-TOKEN)\n        (first (.split nmea END-TOKEN))))))")
 	(title "get-nmea-data2 [port path]"))
+
+([VRDashboardClient_Class230054] of  CloFuncall
+
+	(source "(ru.rules/pp 'CZMLSpan)"))
+
+([VRDashboardClient_Class230057] of  CloFunction
+
+	(source "(let [tit (sv wia \"title\")\n      fea (sv wia \"feature\")]\n  (if-let [mo (OMT/getMapOb tit)]\n    (.setDescription mo\n      (or (DESC-MAP fea)\n           (DESC-MAP \"default\")))))")
+	(title "add-pm-desc [wia]"))
+
+([VRDashboardClient_Class230075] of  Rule
+
+	(lhs "(CZMLGenerator)\n?onb (Onboard label ?lab\n	time ?tim)\n(Clock0 time ?t (> ?t ?tim))")
+	(rhs "(vr.dashcli/set-wiki-coords ?lab)")
+	(salience 1)
+	(title "vr:Set Wikipedia Coordinates"))
+
+([VRDashboardClient_Class230126] of  CloFuncall
+
+	(source "(ru.rules/pp 'Onboard)"))
+
+([VRDashboardClient_Class230127] of  CloFuncall
+
+	(source "(ru.rules/pp 'Clock0)"))
+
+([VRDashboardClient_Class240720] of  CloFunction
+
+	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (let [wc (first (cls-instances \"WikipediaControl\"))\n                                      lat (sv wc \"lat\")\n                                      lon (sv wc \"lng\")\n                                      vic (sv wc \"vicinity\")]\n                                  (pum-out-place art lat lon vic)\n                                  (.show *prj* art))))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
+	(title "set-mouse-adapter2 []"))
+
+([VRDashboardClient_Class250016] of  CloVar
+
+	(source "{\"default\" \"{:gltf-url \\\"models/piramida/scene.gltf\\\"}\"}")
+	(title "DESC-MAP"))
 
 ([VRDashboardClient_Class30000] of  Rule
 
@@ -403,6 +501,7 @@
 ([VRDashboardClient_Class30074] of  RuleSet
 
 	(rules
+		[VRDashboardClient_Class230075]
 		[VRDashboardClient_Class30076]
 		[VRDashboardClient_Class30077]
 		[VRDashboardClient_Class80000]
@@ -410,7 +509,9 @@
 	(templates
 		[NMEAControl]
 		[NMEAData]
-		[VRDashboardControl])
+		[VRDashboardControl]
+		[Onboard]
+		[Clock0])
 	(title "VR Rules"))
 
 ([VRDashboardClient_Class30075] of  NavOb
@@ -429,7 +530,7 @@
 ([VRDashboardClient_Class30076] of  Rule
 
 	(lhs "?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/select-race)\n(vr.dashcli/show-controls)\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\"))")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/select-race)\n(vr.dashcli/show-controls)\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
@@ -479,7 +580,8 @@
 		"482.3"
 		"470.6")
 	(selected-race "482.3")
-	(telnet-port "10482"))
+	(telnet-port "10482")
+	(wikipedia_control [VRDashboardClient_Class230000]))
 
 ([VRDashboardClient_Class60000] of  NavOb
 
@@ -595,7 +697,7 @@
 
 ([VRDashboardClient_Class80000] of  Rule
 
-	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"ADDED\"\n	object ?obj)\n(Clock0 time ?t)\n(not CZMLSpan object ?lab\n	(= ?lab (.getName ?obj)))")
+	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"ADDED\"\n	object ?obj\n                      (= (class ?obj) ru.igis.omtab.NavOb))\n(Clock0 time ?t)\n(not CZMLSpan object ?lab\n	(= ?lab (.getName ?obj)))")
 	(rhs "(let [lab (.getName ?obj)\n      desc (.getDescription ?obj)]\n  (asser CZMLSpan object lab\n	options (read-string desc)\n	time ?t)\n  (println \"NavOb on map:\" lab))")
 	(salience 0)
 	(title "vr:NavOb on Map"))

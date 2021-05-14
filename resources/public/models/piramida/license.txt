@@ -1,0 +1,11 @@
+Model Information:
+* title:	cetverostrana piramida
+* source:	https://sketchfab.com/3d-models/cetverostrana-piramida-0b91e939b7f64174b005640fd0c596fa
+* author:	e-sfera (https://sketchfab.com/kresimir)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "cetverostrana piramida" (https://sketchfab.com/3d-models/cetverostrana-piramida-0b91e939b7f64174b005640fd0c596fa) by e-sfera (https://sketchfab.com/kresimir) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

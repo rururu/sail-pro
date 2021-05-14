@@ -72,6 +72,7 @@
            :availability (str (iso8601curt) "/" (iso8601futt span-sec))
            :label {:scale scale
                      :pixelOffset {:cartesian2 [8, -24]}
+                     :heightReference "RELATIVE_TO_GROUND"
                      :text label}
            :billboard {:scale scale
                             :image img-url}
@@ -98,8 +99,9 @@
 
 (defn point-out [txt [lat lon] dist max-dist]
   (let [min-scl 0.25
-       scl (+ min-scl (* (- 1 min-scl) (- 1 (/ dist max-dist))))]
-  (location txt scl "img/arrdn.png" lat lon 100 40)))
+       max-scl 1.25
+       scl (min max-scl (- max-scl (/ dist max-dist)))]
+  (location txt scl "img/arrdn.png" lat lon 100 60)))
 
 (defn new-doc []
   (def DOC-SENT false))

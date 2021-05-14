@@ -69,10 +69,15 @@ See details in screencast. Some details can be differen of earlier - these are d
 
 [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
 
-Now you can use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. 
+13. Use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. 
+
 [Using Controls](https://youtu.be/pK9GTSEGQYQ)
 
 [Get off a shallow in the Nord Stream Race 3](https://youtu.be/U5gG5pHpdcY)
+
+14. Acquaintance with neighborhood using Wikipedia while virtually sailing
+
+[Using Wikipedia in races](https://youtu.be/GZFYdvlLbbw)
 
 ### 2. Project Sail Expert
 

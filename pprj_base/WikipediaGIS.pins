@@ -1,0 +1,152 @@
+; Fri May 14 13:23:39 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([GeoNamesWikipedia_Class0] of  CloProgram
+
+	(cloFunctions
+		[WikipediaGIS_Class0]
+		[WikipediaGIS_Class11]
+		[WikipediaGIS_Class10000]
+		[WikipediaGIS_Class18]
+		[WikipediaGIS_Class20008]
+		[WikipediaGIS_Class40015]
+		[WikipediaGIS_Class10003]
+		[WikipediaGIS_Class17]
+		[WikipediaGIS_Class20005]
+		[WikipediaGIS_Class40028]
+		[WikipediaGIS_Class20007]
+		[WikipediaGIS_Class50049]
+		[WikipediaGIS_Class20000]
+		[WikipediaGIS_Class30023]
+		[WikipediaGIS_Class80115]
+		[WikipediaGIS_Class50068]
+		[WikipediaGIS_Class60088]
+		[WikipediaGIS_Class70002]
+		[WikipediaGIS_Class80211])
+	(cloNamespace [GeoNamesWikipedia_Class1])
+	(cloVars
+		[WikipediaGIS_Class1]
+		[WikipediaGIS_Class40012])
+	(title "Wikipedia GIS"))
+
+([GeoNamesWikipedia_Class1] of  CloNamespace
+
+	(source "(:use\n  protege.core\n  geo.names)\n(:import\n  java.awt.Image\n  javax.swing.ImageIcon\n  javax.swing.JOptionPane\n  com.bbn.openmap.omGraphics.OMScalingIcon\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.OpenMapTab\n  ru.igis.omtab.gui.RuMapMouseAdapter)")
+	(title "wiki.gis"))
+
+([WikipediaGIS_Class0] of  CloMacro
+
+	(source "`(let [f# (future (do ~@body))\n         v# (gensym)\n         result# (deref f# ~msec v#)]\n    (if (= v# result#)\n      (do\n        (println :FUTURE-CANCELLING)\n        (future-cancel f#)\n        (println :FUTURE-CANCELLED)\n        nil)\n      result#))")
+	(title "with-timeout [msec & body]"))
+
+([WikipediaGIS_Class1] of  CloVar
+
+	(source "15000")
+	(title "TIMEOUT"))
+
+([WikipediaGIS_Class10000] of  CloFunction
+
+	(source "(letfn [(trim-fea [f]\n             (if f (first (.split f \"}}\"))))]\n  (-> mp\n    (assoc \"feature\" (trim-fea (mp \"feature\")))))")
+	(title "trim-article [mp]"))
+
+([WikipediaGIS_Class10003] of  CloFunction
+
+	(source "([hm inst]\n  (let [mp (into {} hm)\n         max (mp \"max-responses\")\n         lang (request-lang (mp \"language\"))\n         [west south east north] (seq (svs (mp \"bbx\") \"wsen\"))\n         rsp (if-let [r (with-timeout TIMEOUT\n	    (call-wiki-bbx north west south east max lang))]\n                 (filter some? (map #(article-from-map % \"WikiArticle\") r))\n                 [])]\n    (doall (map add-placemark rsp))\n    (ssvs inst \"responses\" rsp)))\n([inst bbx-title bbx]\n  (if-let [bbx-inst (fifos \"BBX\" \"title\" bbx-title)]\n    (ssv inst \"bbx\" bbx-inst)\n    (let [[w s e n] bbx]\n      (ssv inst \"bbx\" (bbx-of-list [[n w] [s e]] bbx-title))))\n  (submit-bbx (itm inst 0) inst)\n  inst)")
+	(title "submit-bbx"))
+
+([WikipediaGIS_Class11] of  CloFunction
+
+	(source "(let [spl (.split sv \"-\")]\n  (aget spl 1))")
+	(title "request-lang [sv]"))
+
+([WikipediaGIS_Class17] of  CloFunction
+
+	(source "([hm inst]\n  (let [mp (into {} hm)\n         max (mp \"max-responses\")\n         lang (request-lang (mp \"language\"))\n         text (mp \"text\")\n         rsp (if-let [r (with-timeout TIMEOUT\n	   (call-wiki-search text max lang))]\n                 (filter some? (map #(article-from-map % \"WikiArticle\") r))\n                 [])]\n    (doall (map add-placemark rsp))\n    (ssvs inst \"responses\" rsp)))\n([inst any txt]\n  (ssv inst \"text\" txt)\n  (ssvs inst \"responses\" \n    (if-let [resp (call-wiki-search txt \n	(sv inst \"max-responses\") \n	(request-lang (sv inst  \"language\")))]\n      (filter some? (map #(article-from-map % \"WikiArticle\") resp))\n      []))\n  (doall (map add-placemark (svs inst \"responses\")))\n  inst)")
+	(title "submit-search"))
+
+([WikipediaGIS_Class18] of  CloFunction
+
+	(source "(if-let [ins (fifos typ \"title\" (mp \"title\"))]\n  (delin ins))\n(let [mp (trim-article mp)]\n  (mti (assoc mp :DIRTYP typ :DEPTH 0)))")
+	(title "article-from-map [mp typ]"))
+
+([WikipediaGIS_Class2] of  %3AINSTANCE-ANNOTATION
+
+	(%3ACREATION-TIMESTAMP "2016.05.23 12:00:48.647 MSK")
+	(%3ACREATOR "ru"))
+
+([WikipediaGIS_Class20000] of  CloFunction
+
+	(source "([hm inst]\n  (let [mp (into {} hm)\n         url (first (selection mp \"feedURL\"))]\n    (if url\n      (if-let [resp (with-timeout TIMEOUT\n	   (call-geonames-rss url))]\n          (let [[inss bbx] (irss-bbx url resp)]\n             (ssvs inst \"georss_items\" inss)\n             (ssv inst \"bbx\" bbx))) )))\n([inst any url]\n  (if-let [resp (call-geonames-rss url)]\n    (let [[inss bbx] (irss-bbx url resp)]\n      (ssvs inst \"georss_items\" inss)\n      (ssv inst \"bbx\" bbx)\n      inst)))")
+	(title "submit-rss"))
+
+([WikipediaGIS_Class20005] of  CloFunction
+
+	(source ";; returns [lat lon]\n(let [[w s e n] (seq (svs bbx-ins \"wsen\"))]\n  [(float (/ (+ s n) 2)) (float (/ (+ w e) 2))])")
+	(title "get-bbx-center [bbx-ins]"))
+
+([WikipediaGIS_Class20007] of  CloFunction
+
+	(source ";; Collect coords from list of instances for given slot names\n(map #(map read-string [(sv % slat) (sv % slon)]) list)")
+	(title "coords-from-instances [list slat slon]"))
+
+([WikipediaGIS_Class20008] of  CloFunction
+
+	(source ";; crds = ([lat lon]..)\n([crds title]\n  ;; return instance of BBX class\n  (if-let [wsen (bbx-of-list  crds)]\n    (let [ins (crin \"BBX\")]\n       (ssv ins \"title\" title)\n       (ssvs ins \"wsen\" wsen)\n       ins)))\n([crds]\n  ;; return [west south east north] or nil\n  (try\n    (letfn [(apl [mx fst]\n	(float (apply mx (map fst crds))))]\n      [(apl min second) (apl min first) (apl max second) (apl max first)])\n  (catch Exception e\n     (println [:bbx-of-list crds :exception e])\n     nil)))")
+	(title "bbx-of-list"))
+
+([WikipediaGIS_Class30023] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n       url (or (mp \"wikipediaUrl\") (mp \"link\"))]\n  (if url\n    (.browse (java.awt.Desktop/getDesktop) (java.net.URI. url))))")
+	(title "open-site [hm inst]"))
+
+([WikipediaGIS_Class40012] of  CloVar
+
+	(source "{\"PATH\"               \"file:resources/public/img/placemark/\"\n \"adm1st\"            \"admin.png\"\n \"adm2nd\"           \"admin.png\"\n \"adm3rd\"           \"admin.png\"\n \"airport\"             \"airport.png\"\n \"city\"                  \"city.png\"\n \"country\"            \"home.gif\"\n \"edu\"                  \"edu.png\"\n \"event\"               \"event.png\"\n \"forest\"               \"forest.png\"\n \"glacier\"              \"glacier.png\"\n \"isle\"                   \"isle.png\"\n \"landmark\"          \"landmark.png\"\n \"mountain\"          \"mountain.png\"\n \"pass\"                \"pass.png\"\n \"railwaystation\"   \"railwaystation.png\"\n \"river\"                 \"river.png\"\n \"satellite\"            \"satellite.png\"\n \"waterbody\"        \"waterbody.png\"\n \"default-pois\"      \"place1.png\"\n \"default\"             \"landmark.png\"\n \"\"                       \"info.png\"}")
+	(title "PM-FILES"))
+
+([WikipediaGIS_Class40015] of  CloFunction
+
+	(source "([wia]\n  (let [tit (sv wia \"title\")\n        ins (add-placemark tit (sv wia \"feature\") (sv wia \"lat\") (sv wia \"lng\"))]\n    (ssv ins \"reference\" wia)\n    (ssv wia \"reference\" ins)))\n([lab feature lat lon]\n  (let [ins (foc \"Placemark\" \"label\" lab)]\n    (ssv ins \"latitude\" (MapOb/getDegMin lat))\n    (ssv ins \"longitude\" (MapOb/getDegMin lon))\n    (ssv ins \"url\" (str (PM-FILES \"PATH\") (or (PM-FILES feature) feature)))\n    (OMT/getOrAdd ins)\n    ins))")
+	(title "add-placemark"))
+
+([WikipediaGIS_Class40028] of  CloFunction
+
+	(source "([hm inst]\n  (let [mp (into {} hm)\n         max (mp \"max-responses\")\n         lang (request-lang (mp \"language\"))\n         radius-km (mp \"radius-km\")\n         lat (mp \"lat\")\n         lon (mp \"lng\")\n         rsp (if-let [r (with-timeout TIMEOUT\n	   (call-wiki-nearby lat lon radius-km max lang))]\n                 (filter some? (map #(article-from-map % \"WikiArticle\") r))\n                 [])]\n    (doall (map add-placemark rsp))\n    (ssvs inst \"responses\" rsp)))\n([inst lat lon]\n  (ssv inst \"lat\" lat)\n  (ssv inst \"lng\" lon)\n  (submit-nearby (itm inst 0) inst)\n  inst)")
+	(title "submit-nearby"))
+
+([WikipediaGIS_Class50049] of  CloFunction
+
+	(source "(let [geos (filter #(and (get % \"geo:lat\") (get %\"geo:long\")) resp)\n       inss (map #(map-into-inst % (crin \"GeoRSSItem\")) geos)\n       crds (coords-from-instances inss \"geo:lat\" \"geo:long\")\n       bbx (if (seq crds) (bbx-of-list crds url))]\n  [inss bbx])")
+	(title "irss-bbx [url resp]"))
+
+([WikipediaGIS_Class50068] of  CloFunction
+
+	(source "(let [ans (JOptionPane/showConfirmDialog nil \"All articles?\")]\n  (if (= ans (JOptionPane/YES_OPTION))\n        (doall (map del-article (cls-instances \"WikiArticle\")))\n        (let [ans (JOptionPane/showConfirmDialog nil \"Responses articles?\")]\n          (if (= ans (JOptionPane/YES_OPTION))\n            (doall (map del-article (svs inst \"responses\"))) ))))")
+	(title "clear-articles [hm inst]"))
+
+([WikipediaGIS_Class60088] of  CloFunction
+
+	(source "(let [ans (JOptionPane/showConfirmDialog nil \"Are you shure?\")]\n  (if (= ans (JOptionPane/YES_OPTION))\n      (doall (map delin (cls-instances \"GeoRSSItem\"))) ))")
+	(title "clear-rss [hm inst]"))
+
+([WikipediaGIS_Class70002] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n       max (mp \"max-responses\")\n       lang (request-lang (mp \"language\"))\n       mb (OpenMapTab/getMapBean)\n       prj (.getProjection mb)\n       lrp (.getLowerRight prj)\n       ulp (.getUpperLeft prj)\n       [w s e n] [(.getX ulp) (.getY lrp) (.getX lrp) (.getY ulp)]\n       rsp (if-let [r (with-timeout TIMEOUT\n                            (call-wiki-bbx n w s e max lang))]\n               (filter some? (map #(article-from-map % \"WikiArticle\") r))\n               [])]\n  (doall (map add-placemark rsp))\n  (ssvs inst \"responses\" rsp))")
+	(title "submit-current-bbx [hm inst]"))
+
+([WikipediaGIS_Class80115] of  CloFunction
+
+	(source "(if-let [ref (sv ari \"reference\")]\n  (OMT/removeMapOb ref true))\n(delin ari)")
+	(title "del-article [ari]"))
+
+([WikipediaGIS_Class80211] of  CloFunction
+
+	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (.show *prj* art)))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
+	(title "set-mouse-adapter []"))
+
+([WikipediaGIS_Class80238] of  Command
+
+	(label "Activate Right Mouse Button")
+	(scenario "clojuretab.ClojureTab invoke wiki.gis set-mouse-adapter"))

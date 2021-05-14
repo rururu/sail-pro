@@ -3,19 +3,24 @@
 (:require
   [clj-telnet.core :as tn]
   [light.pro.server :as lps]
-  [clj-json.core :as json])
+  [clj-json.core :as json]
+  [wiki.gis :as wig]
+  [light.cesium.core :as cz])
 (:import
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
   ru.igis.omtab.Util
   edu.stanford.smi.protege.ui.DisplayUtilities
-  ru.vrd.nmea.VRdNMEAReciever))
+  ru.vrd.nmea.VRdNMEAReciever
+  ru.igis.omtab.gui.RuMapMouseAdapter))
 (def defTELNET (defonce TELNET nil))
 (def defVRDdNMEA (defonce VRDdNMEA false))
 (def START-TOKEN "RMC")
 (def END-TOKEN "\r\n")
 (def BOAT-DATA [0 0 0 0 0 0])
 (def RACES-URL "http://zezo.org/races2.json")
+(def RMMA nil)
+(def DESC-MAP {"default" "{:gltf-url \"models/piramida/scene.gltf\"}"})
 (defn round-speed [s]
   (let [s (* s 100)
        s (Math/round s)]
@@ -200,4 +205,71 @@
 
 (defn show-controls []
   (.show *prj* (first (cls-instances "VRDashboardControl"))))
+
+(defn set-wiki-coords
+  ([onb]
+  (if-let [mo (OMT/getMapOb onb)]
+    (set-wiki-coords (.getLatitude mo) (.getLongitude mo))))
+([lat lon]
+  (when-let [wc (first (cls-instances "WikipediaControl"))]
+    (ssv wc "lat" (float lat))
+    (ssv wc "lng" (float lon)))))
+
+(defn pum-out-place [wai lat lon vic]
+  (let [tit (sv wai "title")
+      la1 (sv wai "lat")
+      lo1 (sv wai "lng")
+      dis (MapOb/distanceNM lat lon la1 lo1)
+      min-scl 0.25
+      max-scl 1.25
+      scl (min max-scl (- max-scl (/ dis vic)))]
+  (cz/location tit scl "img/arrdn.png" la1 lo1 100 60)))
+
+(defn add-pm-desc [wia]
+  (let [tit (sv wia "title")
+      fea (sv wia "feature")]
+  (if-let [mo (OMT/getMapOb tit)]
+    (.setDescription mo
+      (or (DESC-MAP fea)
+           (DESC-MAP "default"))))))
+
+(defn set-mouse-adapter2 []
+  (let [rmma (proxy [RuMapMouseAdapter] []
+	(mouseRightButtonClickedOn [mo llp runa]
+                            (if mo
+                              (if-let [art (sv (.getInstance mo) "reference")]
+                                (let [wc (first (cls-instances "WikipediaControl"))
+                                      lat (sv wc "lat")
+                                      lon (sv wc "lng")
+                                      vic (sv wc "vicinity")]
+                                  (pum-out-place art lat lon vic)
+                                  (.show *prj* art))))
+	  true))
+       pgs (seq (OMT/getPlaygrounds))]
+  (.setRuMapMouseAdapter (first pgs) rmma)
+  rmma))
+
+(defn wikipedia-scan [hm inst]
+  (let [mp (into {} hm)
+       lat (mp "lat")
+       lon (mp "lng")
+       vic (mp "vicinity")
+       v (/ vic 60)
+       [w s e n] [(- lon v) (- lat v) (+ lon v) (+ lat v)]]
+  (if (nil? RMMA)
+    (set-mouse-adapter2))
+  (invoke-later
+    (let [bbi (foc "BBX" "title" "Current")
+           rqi (fainst (cls-instances "BBXWiki") "Current BBXWiki Request")]
+      (if (and bbi rqi)
+        (do
+          (ssvs bbi "wsen" (vec (map float [w s e n])))
+          (ssv rqi "bbx" bbi)
+          (ssvs rqi "responses" [])
+          (wig/submit-bbx (itm rqi 0) rqi)
+          (if-let [rr (seq (svs rqi "responses"))]
+            (doseq [r rr]
+              (pum-out-place r lat lon vic)
+              (add-pm-desc r))))
+        (println "Instance of \"Current BBXWiki Request\" not found!"))))))
 

@@ -1,4 +1,4 @@
-; Sun May 09 12:27:35 MSK 2021
+; Fri May 14 21:54:42 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -11,8 +11,27 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot wikipedia_control
+		(type INSTANCE)
+;+		(allowed-classes WikipediaControl)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-wiki-scan
+		(type STRING)
+;+		(value "Wikipedia Scan/vr.dashcli/wikipedia-scan")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot vicinity
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot selected-race
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-wiki-clear
+		(type STRING)
+;+		(value "Wikipedia Clear/wiki.gis/clear-articles")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot races
@@ -37,6 +56,11 @@
 	(role concrete)
 	(single-slot selected-race
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot wikipedia_control
+		(type INSTANCE)
+;+		(allowed-classes WikipediaControl)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot telnet-port
@@ -90,5 +114,31 @@
 		(create-accessor read-write))
 	(single-slot delay
 		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass WikipediaControl
+	(is-a VR+Ontology)
+	(role concrete)
+	(single-slot vicinity
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lat
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-wiki-clear
+		(type STRING)
+;+		(value "Wikipedia Clear/wiki.gis/clear-articles")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-wiki-scan
+		(type STRING)
+;+		(value "Wikipedia Scan/vr.dashcli/wikipedia-scan")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lng
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))

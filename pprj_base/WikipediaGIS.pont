@@ -1,0 +1,406 @@
+; Fri May 14 13:23:39 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot button-bbx
+		(type STRING)
+;+		(value "Submit BBX/wiki.gis/submit-bbx")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot geo%3Along
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot population
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot link
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot radius-km
+		(type INTEGER)
+		(range 1 20)
+		(default 10)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot category
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lang
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-rss
+		(type STRING)
+		(default "submit/wiki.gis/submit-rss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot max-responses
+		(type INTEGER)
+		(default 12)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-nearby
+		(type STRING)
+		(default "submit/wiki.gis/submit-nearby")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot language
+		(type SYMBOL)
+		(allowed-values English-en Russian-ru)
+		(default English-en)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot bbx
+		(type INSTANCE)
+;+		(allowed-classes BBX)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rank
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-clear-rss
+		(type STRING)
+		(default "Clear RSS/wiki.gis/clear-rss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot feature
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot guid
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot summary
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot wsen
+		(type FLOAT)
+		(create-accessor read-write))
+	(multislot feedURL
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot button-search
+		(type STRING)
+		(default "submit/wiki.gis/submit-search")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot geo%3Alat
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot countryCode
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot elevation
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot georss_items
+		(type INSTANCE)
+;+		(allowed-classes GeoRSSItem)
+		(create-accessor read-write))
+	(single-slot lng
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot responses
+		(type INSTANCE)
+;+		(allowed-classes WikiArticle)
+		(create-accessor read-write))
+	(single-slot button-current-map
+		(type STRING)
+;+		(value "Submit Current Map/wiki.gis/submit-current-bbx")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot wikipediaUrl
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pubDate
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-open-site
+		(type STRING)
+		(default "Open Site/wiki.gis/open-site")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot reference
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lat
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dc%3Adate
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot thumbnailImg
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-clear-articles
+		(type STRING)
+		(default "Clear Articles/wiki.gis/clear-articles")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass WikiGIS+Onto
+	(is-a USER)
+	(role abstract))
+
+(defclass RSSRequest
+	(is-a WikiGIS+Onto)
+	(role concrete)
+	(single-slot bbx
+		(type INSTANCE)
+;+		(allowed-classes BBX)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot feedURL
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot button-rss
+		(type STRING)
+		(default "submit/wiki.gis/submit-rss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-clear-rss
+		(type STRING)
+		(default "Clear RSS/wiki.gis/clear-rss")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot georss_items
+		(type INSTANCE)
+;+		(allowed-classes GeoRSSItem)
+		(create-accessor read-write)))
+
+(defclass WikiArticle
+	(is-a WikiGIS+Onto)
+	(role concrete)
+	(single-slot feature
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-open-site
+		(type STRING)
+		(default "Open Site/wiki.gis/open-site")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rank
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lat
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lang
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lng
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot reference
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot population
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot wikipediaUrl
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot summary
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot countryCode
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot elevation
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot thumbnailImg
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass WikiNearArticle
+	(is-a WikiArticle)
+	(role concrete)
+	(single-slot distance
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Request
+	(is-a WikiGIS+Onto)
+	(role abstract)
+	(single-slot language
+		(type SYMBOL)
+		(allowed-values English-en Russian-ru)
+		(default English-en)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot max-responses
+		(type INTEGER)
+		(default 12)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-clear-articles
+		(type STRING)
+		(default "Clear Articles/wiki.gis/clear-articles")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot responses
+		(type INSTANCE)
+;+		(allowed-classes WikiArticle)
+		(create-accessor read-write)))
+
+(defclass FulltextSearch
+	(is-a Request)
+	(role concrete)
+	(single-slot text
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-search
+		(type STRING)
+		(default "submit/wiki.gis/submit-search")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass BBXWiki
+	(is-a Request)
+	(role concrete)
+	(single-slot button-current-map
+		(type STRING)
+;+		(value "Submit Current Map/wiki.gis/submit-current-bbx")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot bbx
+		(type INSTANCE)
+;+		(allowed-classes BBX)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-bbx
+		(type STRING)
+;+		(value "Submit BBX/wiki.gis/submit-bbx")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass NearbySearch
+	(is-a Request)
+	(role concrete)
+	(single-slot lat
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot radius-km
+		(type INTEGER)
+		(range 1 20)
+		(default 10)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot button-nearby
+		(type STRING)
+		(default "submit/wiki.gis/submit-nearby")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lng
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass GeoRSSItem
+	(is-a WikiGIS+Onto)
+	(role concrete)
+	(single-slot button-open-site
+		(type STRING)
+		(default "Open Site/wiki.gis/open-site")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot guid
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot geo%3Alat
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pubDate
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot description
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot geo%3Along
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot link
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot category
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dc%3Adate
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass BBX
+	(is-a WikiGIS+Onto)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot wsen
+		(type FLOAT)
+		(create-accessor read-write)))
+
+(defclass Placemark
+	(is-a WikiGIS+Onto OMTRaster)
+	(role concrete)
+	(single-slot reference
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
