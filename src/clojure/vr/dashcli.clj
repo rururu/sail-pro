@@ -60,13 +60,12 @@
     nil)))
 
 (defn get-nmea-data2 [port path]
-  ;; Next call after > 20 sec
-(when (not VRDdNMEA)
+  (when (not VRDdNMEA)
   (VRdNMEAReciever/startServer port path) 
   (def VRDdNMEA true))
-(Thread/sleep 10000)
 (let [buf (VRdNMEAReciever/getBuffer)
       cap (.capacity buf)]
+  ;;(println :buf cap)
   (if (> cap 16)
     (let [nmea (.toString buf)]
       (VRdNMEAReciever/clearBuffer)

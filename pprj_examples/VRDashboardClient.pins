@@ -1,4 +1,4 @@
-; Fri May 14 21:54:42 MSK 2021
+; Sat May 15 22:22:28 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -212,7 +212,7 @@
 ([VRDashboardClient_Class170001] of  BBX
 
 	(title "Current")
-	(wsen 6.0575 58.883335 6.1241665 58.95))
+	(wsen 8.745565 44.137558 9.145565 44.53756))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
@@ -320,19 +320,27 @@
 	(source "nil")
 	(title "RMMA"))
 
+([VRDashboardClient_Class220000] of  CloFuncall
+
+	(source "(VRdNMEAReciever/startServer 8081 \"/nmea/485.1\")"))
+
+([VRDashboardClient_Class220001] of  CloFuncall
+
+	(source "(.toString (VRdNMEAReciever/getBuffer))"))
+
 ([VRDashboardClient_Class220018] of  CloFuncall
 
 	(source "(ru.rules/save-bnet-plan)"))
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 58.916668)
-	(lng 6.090833)
-	(vicinity 2.0))
+	(lat 43.4131)
+	(lng 8.8999405)
+	(vicinity 12.0))
 
 ([VRDashboardClient_Class230007] of  CloFunction
 
-	(source ";; Next call after > 20 sec\n(when (not VRDdNMEA)\n  (VRdNMEAReciever/startServer port path) \n  (def VRDdNMEA true))\n(Thread/sleep 10000)\n(let [buf (VRdNMEAReciever/getBuffer)\n      cap (.capacity buf)]\n  (if (> cap 16)\n    (let [nmea (.toString buf)]\n      (VRdNMEAReciever/clearBuffer)\n      (if (.contains nmea START-TOKEN)\n        (first (.split nmea END-TOKEN))))))")
+	(source "(when (not VRDdNMEA)\n  (VRdNMEAReciever/startServer port path) \n  (def VRDdNMEA true))\n(let [buf (VRdNMEAReciever/getBuffer)\n      cap (.capacity buf)]\n  ;;(println :buf cap)\n  (if (> cap 16)\n    (let [nmea (.toString buf)]\n      (VRdNMEAReciever/clearBuffer)\n      (if (.contains nmea START-TOKEN)\n        (first (.split nmea END-TOKEN))))))")
 	(title "get-nmea-data2 [port path]"))
 
 ([VRDashboardClient_Class230054] of  CloFuncall
@@ -358,6 +366,22 @@
 ([VRDashboardClient_Class230127] of  CloFuncall
 
 	(source "(ru.rules/pp 'Clock0)"))
+
+([VRDashboardClient_Class240080] of  CloFuncall
+
+	(source "(ru.rules/pp 'NMEAData)"))
+
+([VRDashboardClient_Class240081] of  CloFuncall
+
+	(source "BOAT-DATA"))
+
+([VRDashboardClient_Class240082] of  CloFuncall
+
+	(source "(get-boat-data2 8081 \"/nmea/485.1\")"))
+
+([VRDashboardClient_Class240083] of  CloFuncall
+
+	(source "(get-nmea-data2 8081 \"/nmea/485.1\")"))
 
 ([VRDashboardClient_Class240720] of  CloFunction
 
@@ -468,7 +492,7 @@
 
 ([VRDashboardClient_Class30069] of  NMEAControl
 
-	(delay 60)
+	(delay 4)
 	(status "START"))
 
 ([VRDashboardClient_Class30070] of  NMEAData
@@ -579,8 +603,8 @@
 		"483.1"
 		"482.3"
 		"470.6")
-	(selected-race "482.3")
-	(telnet-port "10482")
+	(selected-race "485.1")
+	(telnet-port "10485")
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
 ([VRDashboardClient_Class60000] of  NavOb
