@@ -8,7 +8,7 @@ Simulation and modelling environment for virtual sailing.
 
 You need to be installed on your machine:
 
-1. Java Runtime Environment
+1. Java Runtime Environment version 11 and above
 
 2. [Git](https://git-scm.com/) (optional, you can download project from Github, button "Code" on project page)
 
