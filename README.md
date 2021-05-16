@@ -24,13 +24,6 @@ $ cd <..>
 $ git clone https://github.com/rururu/sail-pro.git     # optional, see above
 $ cd sail-pro
 ```
-## Start
-
-```clj
-$ cd <..>/sail-pro
-$ ./run.sh 			# Linux, MacOS
-$ ./run.bat 	    # Windows
-```
 ## Usage
 
 ### 1. Project VR Dashboard Client
@@ -38,7 +31,14 @@ $ ./run.bat 	    # Windows
 1. Open Virual Regatta page in a browser
 2. Activate VR Dashboard plugin
 3. Select an active race. Check the race identificator on Z VR Dashboard tab and click a checkbox NMEA
-4. Start sail-pro as shown above
+4. Start sail-pro:
+
+```clj
+$ cd <..>/sail-pro
+$ ./run_VR.sh 			# Linux, MacOS
+$ .\run_VR.bat 	    	# Windows
+```
+
 5. In Protege GUI navigate to and open a project VRDashboarClient.pprj
 6. Load programs and start Expert system (Protege menu "Edit" -> "(clojure-work)")
 7. Start time on OpenMap tab (checkbox "Run Timer")
@@ -67,6 +67,14 @@ See details in screencast. Some details can be differen of earlier - these are d
 [Using Wikipedia in races](https://youtu.be/GZFYdvlLbbw)
 
 ### 2. Project Sail Expert
+
+1. Start sail-pro:
+
+```clj
+$ cd <..>/sail-pro
+$ ./run_SE.sh 			# Linux, MacOS
+$ .\run_SE.bat 	    	# Windows
+```
 
 See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
