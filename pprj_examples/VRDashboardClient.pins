@@ -1,4 +1,4 @@
-; Sat May 15 22:22:28 MSK 2021
+; Sun May 16 05:13:15 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -334,13 +334,13 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 43.4131)
-	(lng 8.8999405)
+	(lat 42.597057)
+	(lng 8.720114)
 	(vicinity 12.0))
 
 ([VRDashboardClient_Class230007] of  CloFunction
 
-	(source "(when (not VRDdNMEA)\n  (VRdNMEAReciever/startServer port path) \n  (def VRDdNMEA true))\n(let [buf (VRdNMEAReciever/getBuffer)\n      cap (.capacity buf)]\n  ;;(println :buf cap)\n  (if (> cap 16)\n    (let [nmea (.toString buf)]\n      (VRdNMEAReciever/clearBuffer)\n      (if (.contains nmea START-TOKEN)\n        (first (.split nmea END-TOKEN))))))")
+	(source "(VRdNMEAReciever/startServer port path) \n(Thread/sleep 1000)\n(let [buf (VRdNMEAReciever/getBuffer)\n      cap (.capacity buf)\n      data (if (> cap 16)\n                (let [nmea (.toString buf)]\n                  (VRdNMEAReciever/clearBuffer)\n                  (if (.contains nmea START-TOKEN)\n                    (first (.split nmea END-TOKEN)))))]\n  (VRdNMEAReciever/stopServer 10)\n  data)")
 	(title "get-nmea-data2 [port path]"))
 
 ([VRDashboardClient_Class230054] of  CloFuncall
@@ -367,6 +367,14 @@
 
 	(source "(ru.rules/pp 'Clock0)"))
 
+([VRDashboardClient_Class240000] of  CloFuncall
+
+	(source "(ru.rules/pp 'NMEAControl)"))
+
+([VRDashboardClient_Class240001] of  CloFuncall
+
+	(source "(println 1)"))
+
 ([VRDashboardClient_Class240080] of  CloFuncall
 
 	(source "(ru.rules/pp 'NMEAData)"))
@@ -387,6 +395,10 @@
 
 	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (let [wc (first (cls-instances \"WikipediaControl\"))\n                                      lat (sv wc \"lat\")\n                                      lon (sv wc \"lng\")\n                                      vic (sv wc \"vicinity\")]\n                                  (pum-out-place art lat lon vic)\n                                  (.show *prj* art))))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
 	(title "set-mouse-adapter2 []"))
+
+([VRDashboardClient_Class250000] of  CloFuncall
+
+	(source "(VRdNMEAReciever/stopServer 60)"))
 
 ([VRDashboardClient_Class250016] of  CloVar
 
@@ -492,7 +504,7 @@
 
 ([VRDashboardClient_Class30069] of  NMEAControl
 
-	(delay 4)
+	(delay 60)
 	(status "START"))
 
 ([VRDashboardClient_Class30070] of  NMEAData
@@ -513,7 +525,7 @@
 		[VRDashboardClient_Class30070]
 		[VRDashboardClient_Class10005]
 		[VRDashboardClient_Class70009])
-	(instances [VRDashboardClient_Class50001])
+	(instances [VRDashboardClient_Class30069])
 	(mode run)
 	(rule-sets
 		[VRDashboardClient_Class30074]

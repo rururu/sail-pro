@@ -60,17 +60,17 @@
     nil)))
 
 (defn get-nmea-data2 [port path]
-  (when (not VRDdNMEA)
   (VRdNMEAReciever/startServer port path) 
-  (def VRDdNMEA true))
+(Thread/sleep 1000)
 (let [buf (VRdNMEAReciever/getBuffer)
-      cap (.capacity buf)]
-  ;;(println :buf cap)
-  (if (> cap 16)
-    (let [nmea (.toString buf)]
-      (VRdNMEAReciever/clearBuffer)
-      (if (.contains nmea START-TOKEN)
-        (first (.split nmea END-TOKEN)))))))
+      cap (.capacity buf)
+      data (if (> cap 16)
+                (let [nmea (.toString buf)]
+                  (VRdNMEAReciever/clearBuffer)
+                  (if (.contains nmea START-TOKEN)
+                    (first (.split nmea END-TOKEN)))))]
+  (VRdNMEAReciever/stopServer 10)
+  data))
 
 (defn close-telnet []
   (when (some? TELNET)
