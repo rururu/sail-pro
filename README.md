@@ -12,10 +12,6 @@ You need to be installed on your machine:
 
 2. [Git](https://git-scm.com/) (optional, you can download project from Github, button "Code" on project page)
 
-3. [Leiningen](https://leiningen.org/) or [CLJ tools](https://clojure.org/guides/getting_started)
-
-3. [Python3](https://www.python.org/downloads/)
-
 4. [VR Dashboard](https://martinez58400.wixsite.com/navigationvirtuelle/vr-dashboard?lang=en)
 
 
@@ -28,38 +24,29 @@ $ cd <..>
 $ git clone https://github.com/rururu/sail-pro.git     # optional, see above
 $ cd sail-pro
 ```
-## Start with CLI tools
+## Start
 
 ```clj
 $ cd <..>/sail-pro
-$ clj
-Clojure 1.10.0
-user=> (edu.stanford.smi.protege.Application/main (into-array String []))
+$ ./run.sh 			# Linux, MacOS
+$ ./run.bat 	    # Windows
 ```
-
-## Start with Leiningen
-
-```clj
-$ cd <..>/sail-pro
-$ lein run
-```
-
 ## Usage
 
 ### 1. Project VR Dashboard Client
 
-1. Open Virual Regatta page in browser
+1. Open Virual Regatta page in a browser
 2. Activate VR Dashboard plugin
-3. Select active race. Check race identificator on Z VR Dashboard tab and click checkbox NMEA
+3. Select an active race. Check the race identificator on Z VR Dashboard tab and click a checkbox NMEA
 4. Start sail-pro as shown above
-5. In Protege GUI navigate to and open project VRDashboarClient.pprj
+5. In Protege GUI navigate to and open a project VRDashboarClient.pprj
 6. Load programs and start Expert system (Protege menu "Edit" -> "(clojure-work)")
 7. Start time on OpenMap tab (checkbox "Run Timer")
-8. Select race on popup panel
-9. Wait while boat jump into current position
-10. Start Cesium server on popup panel
-11. Start Cesium client on popup panel
-12. Go on board of boat 
+8. Select the race on a popup panel
+9. Wait while a boat jump into current position
+10. Start Cesium server on the popup panel
+11. Start Cesium client on the popup panel
+12. Go on board of the boat 
 
 See details in screencast. Some details can be differen of earlier - these are deprecated!
 

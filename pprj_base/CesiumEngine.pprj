@@ -641,7 +641,7 @@
 	(default_slot_metaclass ":STANDARD-SLOT")
 	(included_projects
 		"igis.pprj"
-		"Clojure.pprj"
+		"ProtegeAPI.pprj"
 		"RuleEngine.pprj")
 	(journaling_enabled FALSE)
 	(next_frame_number 0)

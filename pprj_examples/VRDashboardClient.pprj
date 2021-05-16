@@ -1,4 +1,4 @@
-; Sun May 16 05:13:15 MSK 2021
+; Sun May 16 14:54:49 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -221,54 +221,6 @@
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
 
-([KB_554713_Class2145] of  Map
-
-	(entries
-		[KB_554713_Class2146]
-		[KB_554713_Class2149]
-		[KB_554713_Class2150]
-		[KB_554713_Class2151])
-	(referenced_maps [KB_554713_Class2147]))
-
-([KB_554713_Class2146] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_554713_Class2147] of  Map
-
-	(entries [KB_554713_Class2148]))
-
-([KB_554713_Class2148] of  Map_Entry
-
-	(key "WikipediaGIS_Class2")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "12 479 212 124")
-	(value_class "java.awt.Rectangle"))
-
-([KB_554713_Class2149] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "KB_554713_Class2147")
-	(value_class "java.util.Map"))
-
-([KB_554713_Class2150] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_554713_Class2151] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
 ([KB_651995_Class0] of  String
 
 	(name "factory_class_name")
@@ -370,6 +322,54 @@
 
 	(name "instances_file_name")
 	(string_value "VRDashboardClient.pins"))
+
+([KB_984155_Class2145] of  Map
+
+	(entries
+		[KB_984155_Class2146]
+		[KB_984155_Class2149]
+		[KB_984155_Class2150]
+		[KB_984155_Class2151])
+	(referenced_maps [KB_984155_Class2147]))
+
+([KB_984155_Class2146] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_984155_Class2147] of  Map
+
+	(entries [KB_984155_Class2148]))
+
+([KB_984155_Class2148] of  Map_Entry
+
+	(key "WikipediaGIS_Class2")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "12 479 212 124")
+	(value_class "java.awt.Rectangle"))
+
+([KB_984155_Class2149] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "KB_984155_Class2147")
+	(value_class "java.util.Map"))
+
+([KB_984155_Class2150] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_984155_Class2151] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([LAYOUT_PROPERTIES] of  Property_List
 

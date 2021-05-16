@@ -1,4 +1,4 @@
-; Sun May 16 05:13:15 MSK 2021
+; Sun May 16 14:54:49 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -190,7 +190,48 @@
 	(button-bbx "submit/wiki.gis/submit-bbx")
 	(button-clear-articles "Clear Articles/wiki.gis/clear-articles")
 	(language English-en)
-	(max-responses 40))
+	(max-responses 40)
+	(responses
+		[VRDashboardClient_Class260000]
+		[VRDashboardClient_Class260001]
+		[VRDashboardClient_Class260002]
+		[VRDashboardClient_Class260003]
+		[VRDashboardClient_Class260004]
+		[VRDashboardClient_Class260005]
+		[VRDashboardClient_Class260006]
+		[VRDashboardClient_Class260007]
+		[VRDashboardClient_Class260008]
+		[VRDashboardClient_Class260009]
+		[VRDashboardClient_Class260010]
+		[VRDashboardClient_Class260011]
+		[VRDashboardClient_Class260012]
+		[VRDashboardClient_Class260013]
+		[VRDashboardClient_Class260014]
+		[VRDashboardClient_Class260015]
+		[VRDashboardClient_Class260016]
+		[VRDashboardClient_Class260017]
+		[VRDashboardClient_Class260018]
+		[VRDashboardClient_Class260019]
+		[VRDashboardClient_Class260020]
+		[VRDashboardClient_Class260021]
+		[VRDashboardClient_Class260022]
+		[VRDashboardClient_Class260023]
+		[VRDashboardClient_Class260024]
+		[VRDashboardClient_Class260025]
+		[VRDashboardClient_Class260026]
+		[VRDashboardClient_Class260027]
+		[VRDashboardClient_Class260028]
+		[VRDashboardClient_Class260029]
+		[VRDashboardClient_Class260030]
+		[VRDashboardClient_Class260031]
+		[VRDashboardClient_Class260064]
+		[VRDashboardClient_Class260065]
+		[VRDashboardClient_Class260066]
+		[VRDashboardClient_Class260067]
+		[VRDashboardClient_Class260068]
+		[VRDashboardClient_Class260069]
+		[VRDashboardClient_Class260070]
+		[VRDashboardClient_Class260071]))
 
 ([VRDashboardClient_Class160001] of  CloFunction
 
@@ -212,7 +253,7 @@
 ([VRDashboardClient_Class170001] of  BBX
 
 	(title "Current")
-	(wsen 8.745565 44.137558 9.145565 44.53756))
+	(wsen 7.4851966 40.400845 8.81853 41.73418))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
@@ -334,9 +375,9 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 42.597057)
-	(lng 8.720114)
-	(vicinity 12.0))
+	(lat 41.03451)
+	(lng 8.069659)
+	(vicinity 40.0))
 
 ([VRDashboardClient_Class230007] of  CloFunction
 
@@ -404,6 +445,989 @@
 
 	(source "{\"default\" \"{:gltf-url \\\"models/piramida/scene.gltf\\\"}\"}")
 	(title "DESC-MAP"))
+
+([VRDashboardClient_Class260000] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 158)
+	(feature "city")
+	(lang "en")
+	(lat 40.7333)
+	(lng 8.55)
+	(rank 100)
+	(reference [VRDashboardClient_Class260032])
+	(summary "Sassari (listen; ;) is an Italian city and the second-largest of Sardinia in terms of population with 127,525 inhabitants, and a Functional Urban Area of about 222,000 inhabitants.http://appsso.eurostat.ec.europa.eu/nui/show (...)")
+	(thumbnailImg "http://www.geonames.org/img/wikipedia/72000/thumb-71097-100.jpg")
+	(title "Sassari")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Sassari"))
+
+([VRDashboardClient_Class260001] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 25)
+	(lang "en")
+	(lat 40.5578)
+	(lng 8.3219)
+	(rank 100)
+	(reference [VRDashboardClient_Class260033])
+	(summary "Alghero , also known as L'Alguer , is a town of about 44,000 inhabitants in the Italian insular province of Sassari in northwestern Sardinia, next to the Mediterranean Sea. Part of its population descends from Catalan conquerors from the end of the Middle Ages, when Sardinia was part of the Crown of (...)")
+	(thumbnailImg "http://www.geonames.org/img/wikipedia/17000/thumb-16109-100.jpg")
+	(title "Alghero")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Alghero"))
+
+([VRDashboardClient_Class260002] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 16)
+	(lang "en")
+	(lat 40.8333)
+	(lng 8.4)
+	(rank 100)
+	(reference [VRDashboardClient_Class260034])
+	(summary "Porto Torres is a comune and city in the Province of Sassari, northern Sardinia, Italy. It is situated on the north-west coast about east of the Gorditanian promontory (Capo del Falcone), and on the spacious bay of the Gulf of Asinara.  (...)")
+	(title "Porto Torres")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Porto_Torres"))
+
+([VRDashboardClient_Class260003] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 108)
+	(lang "en")
+	(lat 40.8)
+	(lng 8.5667)
+	(rank 100)
+	(reference [VRDashboardClient_Class260035])
+	(summary "Sorso is a comune (municipality) of c. 14,700 inhabitants in the province of Sassari in the Italian region Sardinia, located about north of Sassari.  (...)")
+	(title "Sorso")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Sorso"))
+
+([VRDashboardClient_Class260004] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(feature "city")
+	(lang "en")
+	(lat 40.9167)
+	(lng 8.7167)
+	(rank 100)
+	(reference [VRDashboardClient_Class260036])
+	(summary "Castelsardo is a town and comune in Sardinia, Italy, located in the northwest of the island within the Province of Sassari, at the east end of the Gulf of Asinara.  (...)")
+	(title "Castelsardo")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Castelsardo"))
+
+([VRDashboardClient_Class260005] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 509)
+	(lang "en")
+	(lat 40.4167)
+	(lng 8.7667)
+	(rank 100)
+	(reference [VRDashboardClient_Class260037])
+	(summary "Bonorva is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari.  (...)")
+	(title "Bonorva")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Bonorva"))
+
+([VRDashboardClient_Class260006] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 445)
+	(feature "city")
+	(lang "en")
+	(lat 40.6)
+	(lng 8.5667)
+	(rank 100)
+	(reference [VRDashboardClient_Class260038])
+	(summary "Ittiri is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about northwest of Cagliari and about south of Sassari. It is part of the Logudoro traditional region. Ittiri is located on a plateau at m. 450 on the sea level (...)")
+	(title "Ittiri")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Ittiri"))
+
+([VRDashboardClient_Class260007] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 439)
+	(lang "en")
+	(lat 40.7333)
+	(lng 8.6667)
+	(rank 100)
+	(reference [VRDashboardClient_Class260039])
+	(summary "Osilo is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about east of Sassari. It is part of the Anglona traditional region. The municipality of Osilo contains the frazioni (subdivisions, mainly villages and hamlets) Santa (...)")
+	(title "Osilo")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Osilo"))
+
+([VRDashboardClient_Class260008] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 291)
+	(lang "en")
+	(lat 40.5833)
+	(lng 8.7333)
+	(rank 100)
+	(reference [VRDashboardClient_Class260040])
+	(summary "Siligo is a comune (municipality) in the region of Logudoro - Meilogu in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Siligo borders the following municipalities: Ardara, Banari, Bessude, Bonnanaro, Codrongianos, Florinas, (...)")
+	(title "Siligo")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Siligo"))
+
+([VRDashboardClient_Class260009] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 432)
+	(feature "city")
+	(lang "en")
+	(lat 40.7833)
+	(lng 8.75)
+	(rank 100)
+	(reference [VRDashboardClient_Class260041])
+	(summary "Nulvi is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about northeast of Sassari. It is one of the main centers of the Anglona historical regione (...)")
+	(title "Nulvi")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Nulvi"))
+
+([VRDashboardClient_Class260010] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 325)
+	(feature "city")
+	(lang "en")
+	(lat 40.6748)
+	(lng 8.5921)
+	(rank 100)
+	(reference [VRDashboardClient_Class260042])
+	(summary "Ossi is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about northwest of Cagliari and about southeast of Sassari in the Logudoro. Located in the territory is a Domus de Janas, a pre-historic tomb.  (...)")
+	(title "Ossi, Sardinia")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Ossi%2C_Sardinia"))
+
+([VRDashboardClient_Class260011] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 467)
+	(feature "city")
+	(lang "en")
+	(lat 40.4)
+	(lng 8.6667)
+	(rank 100)
+	(reference [VRDashboardClient_Class260043])
+	(summary "Pozzomaggiore is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about northwest of Cagliari and about south of Sassari. As of 31 December 2004, it had a population of 2,871 and an area of  (...)")
+	(title "Pozzomaggiore")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Pozzomaggiore"))
+
+([VRDashboardClient_Class260012] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 1)
+	(lang "en")
+	(lat 40.9403)
+	(lng 8.2328)
+	(rank 100)
+	(reference [VRDashboardClient_Class260044])
+	(summary "Stintino is a coastal comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about northwest of Sassari.  (...)")
+	(title "Stintino")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Stintino"))
+
+([VRDashboardClient_Class260013] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 203)
+	(lang "en")
+	(lat 40.6667)
+	(lng 8.5333)
+	(rank 100)
+	(reference [VRDashboardClient_Class260045])
+	(summary "Usini is a town and comune in the province of Sassari, Sardinia, Italy.  (...)")
+	(title "Usini")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Usini"))
+
+([VRDashboardClient_Class260014] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 605)
+	(feature "city")
+	(lang "en")
+	(lat 40.4508)
+	(lng 8.7561)
+	(rank 100)
+	(reference [VRDashboardClient_Class260046])
+	(summary "Giave is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. As of 31 December 2004, it had a population of 655 and an area of .All demographics and other statistics: Italian statistical institute Istat (...)")
+	(title "Giave")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Giave"))
+
+([VRDashboardClient_Class260015] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 426)
+	(feature "city")
+	(lang "en")
+	(lat 40.6667)
+	(lng 8.75)
+	(rank 100)
+	(reference [VRDashboardClient_Class260047])
+	(summary "Ploaghe is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Ploaghe borders the following municipalities: Ardara, Chiaramonti, Codrongianos, Nulvi, Osilo, Siligo.  (...)")
+	(title "Ploaghe")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Ploaghe"))
+
+([VRDashboardClient_Class260016] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 657)
+	(feature "city")
+	(lang "en")
+	(lat 40.5)
+	(lng 8.4667)
+	(rank 99)
+	(reference [VRDashboardClient_Class260048])
+	(summary "Villanova Monteleone is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about northwest of Cagliari and about southwest of Sassari. As of 31 December 2004, it had a population of 2,528 and an area of  (...)")
+	(title "Villanova Monteleone")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Villanova_Monteleone"))
+
+([VRDashboardClient_Class260017] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 361)
+	(feature "city")
+	(lang "en")
+	(lat 40.7833)
+	(lng 8.6)
+	(rank 99)
+	(reference [VRDashboardClient_Class260049])
+	(summary "Sennori is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about northeast of Sassari. As of 31 December 2004, it had a population of 7,298 and an area of  (...)")
+	(title "Sennori")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Sennori"))
+
+([VRDashboardClient_Class260018] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 116)
+	(feature "isle")
+	(lang "en")
+	(lat 41.0667)
+	(lng 8.2667)
+	(rank 99)
+	(reference [VRDashboardClient_Class260050])
+	(summary "Asinara is an Italian island of in area. The name is Italian for \"donkey-inhabited\", but it is thought to derive from the Latin \"sinuaria\", and meaning sinus-shaped. The island is virtually uninhabited. The census of population of 2001 lists one man (...)")
+	(thumbnailImg "http://www.geonames.org/img/wikipedia/80000/thumb-79496-100.png")
+	(title "Asinara")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Asinara"))
+
+([VRDashboardClient_Class260019] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 543)
+	(feature "city")
+	(lang "en")
+	(lat 40.4325)
+	(lng 8.7164)
+	(rank 99)
+	(reference [VRDashboardClient_Class260051])
+	(summary "Cossoine is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Cossoine borders the following municipalities: Bonorva, Cheremule, Giave, Mara, Padria, Pozzomaggiore, Romana, Semestene, Thiesi (...)")
+	(title "Cossoine")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Cossoine"))
+
+([VRDashboardClient_Class260020] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 326)
+	(lang "en")
+	(lat 40.6675)
+	(lng 8.6156)
+	(rank 99)
+	(reference [VRDashboardClient_Class260052])
+	(summary "Cargeghe is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Cargeghe borders the following municipalities: Codrongianos, Florinas, Muros, Osilo, Ossi (...)")
+	(title "Cargeghe")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Cargeghe"))
+
+([VRDashboardClient_Class260021] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 246)
+	(feature "city")
+	(lang "en")
+	(lat 40.6772)
+	(lng 8.5627)
+	(rank 99)
+	(reference [VRDashboardClient_Class260053])
+	(summary "Tissi is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about northwest of Cagliari and about south of Sassari. As of 31 December 2004, it had a population of 2,017 and an area of .All demographics and other statistics: Italian statistical institute Istat (...)")
+	(title "Tissi")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Tissi"))
+
+([VRDashboardClient_Class260022] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 274)
+	(lang "en")
+	(lat 40.4117)
+	(lng 8.6367)
+	(rank 99)
+	(reference [VRDashboardClient_Class260054])
+	(summary "Mara is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about northwest of Cagliari and about south of Sassari. Mara borders the following municipalities: Cossoine, Padria, Pozzomaggiore.  (...)")
+	(title "Mara, Sardinia")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Mara%2C_Sardinia"))
+
+([VRDashboardClient_Class260023] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 383)
+	(lang "en")
+	(lat 40.5333)
+	(lng 8.7667)
+	(rank 99)
+	(reference [VRDashboardClient_Class260055])
+	(summary "Bonnanaro is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Bonnanaro borders the following municipalities: Bessude, Borutta, Mores, Siligo, Torralba.  (...)")
+	(title "Bonnanaro")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Bonnanaro"))
+
+([VRDashboardClient_Class260024] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 464)
+	(lang "en")
+	(lat 40.5255)
+	(lng 8.7176)
+	(rank 99)
+	(reference [VRDashboardClient_Class260056])
+	(summary "Thiesi is a town and comune located in the northern province of Sassari, in Sardinia, Italy. It has a population of 3,165. File:IL COMUNE - panoramio.jpgCity Hall File:SANTUARIO DI SEUNIS - panoramio.jpgSanctuary of Seunis File:Thiesi, ginestre - panoramio.jpgPanorama File:S. VITTORIA - panoramio (...)")
+	(title "Thiesi")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Thiesi"))
+
+([VRDashboardClient_Class260025] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 277)
+	(lang "en")
+	(lat 40.8667)
+	(lng 8.7167)
+	(rank 99)
+	(reference [VRDashboardClient_Class260057])
+	(summary "Tergu is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about northeast of Sassari in the Anglona historical regiona. It is home to the Romanesque church of Nostra Signora di Tergu.  (...)")
+	(title "Tergu")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Tergu"))
+
+([VRDashboardClient_Class260026] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 151)
+	(feature "city")
+	(lang "en")
+	(lat 40.6333)
+	(lng 8.5)
+	(rank 99)
+	(reference [VRDashboardClient_Class260058])
+	(summary "Uri is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about from Alghero (airport) and about northwest of Sassari and about from Cagliari (airport). It is known for its artichoke festival, held annually in March (...)")
+	(title "Uri, Sardinia")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Uri%2C_Sardinia"))
+
+([VRDashboardClient_Class260027] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 415)
+	(lang "en")
+	(lat 40.5078)
+	(lng 8.7706)
+	(rank 99)
+	(reference [VRDashboardClient_Class260059])
+	(summary "Torralba is a town and comune in Sardinia, Italy, administratively part of the province of Sassari. The communal territory is home to the Nuraghe palace of Nuraghe Santu Antine, the highest and best preserved in Sardinia.")
+	(title "Torralba, Sardinia")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Torralba%2C_Sardinia"))
+
+([VRDashboardClient_Class260028] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 282)
+	(lang "en")
+	(lat 40.6167)
+	(lng 8.8167)
+	(rank 99)
+	(reference [VRDashboardClient_Class260060])
+	(summary "Ardara is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. It was one of the capitals of Giudicato di Torres. The village houses the ruins of the Castle of the Giudicato of Torres (11th century), the (...)")
+	(title "Ardara, Sardinia")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Ardara%2C_Sardinia"))
+
+([VRDashboardClient_Class260029] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 308)
+	(lang "en")
+	(lat 40.85)
+	(lng 8.8167)
+	(rank 99)
+	(reference [VRDashboardClient_Class260061])
+	(summary "Sedini is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about northeast of Sassari. It is part of the Anglona traditional subregion. Sedini borders the following municipalities: Bulzi, Castelsardo, Laerru, Nulvi, Santa Maria (...)")
+	(title "Sedini")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Sedini"))
+
+([VRDashboardClient_Class260030] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 452)
+	(feature "city")
+	(lang "en")
+	(lat 40.5528)
+	(lng 8.7303)
+	(rank 99)
+	(reference [VRDashboardClient_Class260062])
+	(summary "Bessude is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Bessude borders the following municipalities: Banari, Bonnanaro, Borutta, Ittiri, Siligo, Thiesi.  (...)")
+	(title "Bessude")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Bessude"))
+
+([VRDashboardClient_Class260031] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 68)
+	(feature "city")
+	(lang "en")
+	(lat 40.65)
+	(lng 8.3833)
+	(rank 99)
+	(reference [VRDashboardClient_Class260063])
+	(summary "Olmedo is a comune (municipality) in the Province of Sassari in the Italian region of Sardinia, located about northwest of Cagliari and about southwest of Sassari. As of 31 December 2004, it had a population of 3,041 and an area of  (...)")
+	(title "Olmedo, Sardinia")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Olmedo%2C_Sardinia"))
+
+([VRDashboardClient_Class260032] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Sassari")
+	(latitude "40 44")
+	(longitude "8 33")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260000])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260033] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Alghero")
+	(latitude "40 33.47")
+	(longitude "8 19.31")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260001])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260034] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Porto Torres")
+	(latitude "40 50")
+	(longitude "8 24")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260002])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260035] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Sorso")
+	(latitude "40 48")
+	(longitude "8 34")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260003])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260036] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Castelsardo")
+	(latitude "40 55")
+	(longitude "8 43")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260004])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260037] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Bonorva")
+	(latitude "40 25")
+	(longitude "8 46")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260005])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260038] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Ittiri")
+	(latitude "40 36")
+	(longitude "8 34")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260006])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260039] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Osilo")
+	(latitude "40 44")
+	(longitude "8 40")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260007])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260040] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Siligo")
+	(latitude "40 35")
+	(longitude "8 44")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260008])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260041] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Nulvi")
+	(latitude "40 47")
+	(longitude "8 45")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260009])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260042] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Ossi, Sardinia")
+	(latitude "40 40.49")
+	(longitude "8 35.53")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260010])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260043] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Pozzomaggiore")
+	(latitude "40 24")
+	(longitude "8 40")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260011])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260044] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Stintino")
+	(latitude "40 56.42")
+	(longitude "8 13.97")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260012])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260045] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Usini")
+	(latitude "40 40")
+	(longitude "8 32")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260013])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260046] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Giave")
+	(latitude "40 27.05")
+	(longitude "8 45.37")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260014])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260047] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Ploaghe")
+	(latitude "40 40")
+	(longitude "8 45")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260015])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260048] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Villanova Monteleone")
+	(latitude "40 30")
+	(longitude "8 28")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260016])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260049] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Sennori")
+	(latitude "40 47")
+	(longitude "8 36")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260017])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260050] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Asinara")
+	(latitude "41 4")
+	(longitude "8 16")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260018])
+	(url "file:resources/public/img/placemark/isle.png"))
+
+([VRDashboardClient_Class260051] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Cossoine")
+	(latitude "40 25.95")
+	(longitude "8 42.98")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260019])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260052] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Cargeghe")
+	(latitude "40 40.05")
+	(longitude "8 36.94")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260020])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260053] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Tissi")
+	(latitude "40 40.63")
+	(longitude "8 33.76")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260021])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260054] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Mara, Sardinia")
+	(latitude "40 24.7")
+	(longitude "8 38.2")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260022])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260055] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Bonnanaro")
+	(latitude "40 32")
+	(longitude "8 46")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260023])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260056] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Thiesi")
+	(latitude "40 31.53")
+	(longitude "8 43.06")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260024])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260057] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Tergu")
+	(latitude "40 52")
+	(longitude "8 43")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260025])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260058] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Uri, Sardinia")
+	(latitude "40 38")
+	(longitude "8 30")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260026])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260059] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Torralba, Sardinia")
+	(latitude "40 30.47")
+	(longitude "8 46.24")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260027])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260060] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Ardara, Sardinia")
+	(latitude "40 37")
+	(longitude "8 49")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260028])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260061] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Sedini")
+	(latitude "40 51")
+	(longitude "8 49")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260029])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260062] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Bessude")
+	(latitude "40 33.17")
+	(longitude "8 43.82")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260030])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260063] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Olmedo, Sardinia")
+	(latitude "40 39")
+	(longitude "8 23")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260031])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260064] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 421)
+	(feature "city")
+	(lang "en")
+	(lat 40.65)
+	(lng 8.6667)
+	(rank 99)
+	(reference [VRDashboardClient_Class260072])
+	(summary "Florinas is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Florinas borders the following municipalities: Banari, Cargeghe, Codrongianos, Ittiri, Ossi, Siligo.  (...)")
+	(title "Florinas")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Florinas"))
+
+([VRDashboardClient_Class260065] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 11)
+	(lang "en")
+	(lat 40.9333)
+	(lng 8.8167)
+	(rank 99)
+	(reference [VRDashboardClient_Class260073])
+	(summary "Valledoria (Gallurese: Codaruìna, , Sassarese: Codaruìna) is a town and comune in the province of Sassari situated at the center of the Gulf of Asinara, near the mouth of the Coghinas river.  (...)")
+	(title "Valledoria")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Valledoria"))
+
+([VRDashboardClient_Class260066] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 474)
+	(lang "en")
+	(lat 40.5233)
+	(lng 8.7456)
+	(rank 99)
+	(reference [VRDashboardClient_Class260074])
+	(summary "Borutta is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Borutta borders the following municipalities: Bessude, Bonnanaro, Cheremule, Thiesi, Torralba (...)")
+	(title "Borutta")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Borutta"))
+
+([VRDashboardClient_Class260067] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 442)
+	(feature "city")
+	(lang "en")
+	(lat 40.75)
+	(lng 8.8167)
+	(rank 99)
+	(reference [VRDashboardClient_Class260075])
+	(summary "Chiaramonti (Gallurese: Chjaramònti) is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about east of Sassari. It is part of the Anglona historical regione (...)")
+	(title "Chiaramonti")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Chiaramonti"))
+
+([VRDashboardClient_Class260068] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 537)
+	(feature "city")
+	(lang "en")
+	(lat 40.5044)
+	(lng 8.7256)
+	(rank 99)
+	(reference [VRDashboardClient_Class260076])
+	(summary "Cheremule is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari. Cheremule borders the following municipalities: Borutta, Cossoine, Giave, Thiesi, Torralba.  (...)")
+	(title "Cheremule")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Cheremule"))
+
+([VRDashboardClient_Class260069] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 277)
+	(feature "city")
+	(lang "en")
+	(lat 40.4)
+	(lng 8.6333)
+	(rank 99)
+	(reference [VRDashboardClient_Class260077])
+	(summary "Padria is a comune (municipality) in the Province of Sassari on the Italian island of Sardinia, located about northwest of Cagliari and about south of Sassari. As of 31 December 2004, it had a population of 785 and an area of  (...)")
+	(title "Padria")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Padria"))
+
+([VRDashboardClient_Class260070] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 281)
+	(lang "en")
+	(lat 40.6667)
+	(lng 8.6833)
+	(rank 99)
+	(reference [VRDashboardClient_Class260078])
+	(summary "Codrongianos (Codronzànu or Codronzànos in Sardinian language) is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about north of Cagliari and about southeast of Sassari (...)")
+	(title "Codrongianos")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Codrongianos"))
+
+([VRDashboardClient_Class260071] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "IT")
+	(elevation 269)
+	(feature "city")
+	(lang "en")
+	(lat 40.4844)
+	(lng 8.5853)
+	(rank 98)
+	(reference [VRDashboardClient_Class260079])
+	(summary "Romana is a comune (municipality) in the Province of Sassari in the Italian region Sardinia, located about northwest of Cagliari and about south of Sassari. As of 31 December 2004, it had a population of 608 and an area of .All demographics and other statistics: Italian statistical institute Istat (...)")
+	(title "Romana, Sardinia")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Romana%2C_Sardinia"))
+
+([VRDashboardClient_Class260072] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Florinas")
+	(latitude "40 39")
+	(longitude "8 40")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260064])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260073] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Valledoria")
+	(latitude "40 56")
+	(longitude "8 49")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260065])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260074] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Borutta")
+	(latitude "40 31.4")
+	(longitude "8 44.74")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260066])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260075] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Chiaramonti")
+	(latitude "40 45")
+	(longitude "8 49")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260067])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260076] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Cheremule")
+	(latitude "40 30.26")
+	(longitude "8 43.54")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260068])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260077] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Padria")
+	(latitude "40 24")
+	(longitude "8 38")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260069])
+	(url "file:resources/public/img/placemark/city.png"))
+
+([VRDashboardClient_Class260078] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Codrongianos")
+	(latitude "40 40")
+	(longitude "8 41")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260070])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class260079] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Romana, Sardinia")
+	(latitude "40 29.06")
+	(longitude "8 35.12")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class260071])
+	(url "file:resources/public/img/placemark/city.png"))
 
 ([VRDashboardClient_Class30000] of  Rule
 
