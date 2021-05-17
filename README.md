@@ -39,14 +39,14 @@ $ ./run_VR.sh 			# Linux, MacOS
 $ .\run_VR.bat 	    	# Windows
 ```
 
-5. In Protege GUI navigate to and open a project VRDashboarClient.pprj
-6. Load programs and start Expert system (Protege menu "Edit" -> "(clojure-work)")
-7. Start time on OpenMap tab (checkbox "Run Timer")
-8. Select the race on a popup panel
-9. Wait while a boat jump into current position
-10. Start Cesium server on the popup panel
-11. Start Cesium client on the popup panel
-12. Go on board of the boat 
+
+5. Wait while programs will be loaded
+6. Start time on OpenMap tab (checkbox "Run Timer")
+7. Select the race on a popup panel
+8. Wait while a boat jump into current position
+9. Start Cesium server on the popup panel
+10. Start Cesium client on the popup panel
+11. Go on board of the boat 
 
 See details in screencast. Some details can be differen of earlier - these are deprecated!
 
@@ -56,13 +56,13 @@ See details in screencast. Some details can be differen of earlier - these are d
 
 [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
 
-13. Use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. 
+12. Use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. 
 
 [Using Controls](https://youtu.be/pK9GTSEGQYQ)
 
 [Get off a shallow in the Nord Stream Race 3](https://youtu.be/U5gG5pHpdcY)
 
-14. Acquaintance with neighborhood using Wikipedia while virtually sailing
+13. Acquaintance with neighborhood using Wikipedia while virtually sailing
 
 [Using Wikipedia in races](https://youtu.be/GZFYdvlLbbw)
 
