@@ -78,6 +78,12 @@ $ .\run_SE.bat 	    	# Windows
 
 See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
+## FAQ
+
+1. How to rename a boat? 
+
+	Before starting time go to Instances Tab. Open NavOb class: IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. Select russor instance. Update a label slot.
+
 ## License
 
 Copyright © 2021 FIXME
