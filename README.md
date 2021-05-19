@@ -39,7 +39,10 @@ $ ./run_VR.sh 			# Linux, MacOS
 $ .\run_VR.bat 	    	# Windows
 ```
 
-5. Wait while programs will be loaded
+5. Wait while programs will be loaded and expert system initialized (see a message in the terminal)
+
+![screenshot](2.png)
+
 6. Start time on OpenMap tab (checkbox "Run Timer")
 7. Select the race on a popup panel
 8. Wait while a boat jump into current position
