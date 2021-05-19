@@ -280,25 +280,36 @@
 (defn get-fleet-data []
   (def FLEET (filter some? (map parse-AIVDM @NMEA))))
 
+(defn short-id [uid]
+  (let [id (str uid)
+      c (count id)]
+  (str (.substring id 0 2) (.substring id (- c 3) c))))
+
+(defn round-sog [sog]
+  (let [s (str sog)
+      s (str (.substring s 0 (dec (count s))) "." (last s))]
+  (read-string s)))
+
 (defn neighbor [nmp obm vis]
-  (let [[lat lon] (nmp 'pos)
-       sog (nmp 'sog)
-       cog (nmp 'cog)
-       sog (float (/ sog 10))
-       cog (float (/ cog 10))
-       dis (MapOb/distanceNM lat lon (.getLatitude obm) (.getLongitude obm))]
+  (let [uid (nmp 'userId)
+      [lat lon] (nmp 'pos)
+      sog (nmp 'sog)
+      cog (nmp 'cog)
+      uid (short-id uid)
+      sog (round-sog sog)
+      cog (float (/ cog 10))
+      dis (MapOb/distanceNM lat lon (.getLatitude obm) (.getLongitude obm))]
   (if (< dis vis)
-    [lat lon sog cog dis])))
+    [uid lat lon sog cog dis])))
 
 (defn show-neighbors [onb vis]
   (if-let [obm (OMT/getMapOb onb)]
   (if (seq FLEET)
     (let [nbs (map #(neighbor % obm vis) FLEET)
-           nbs (filter some? nbs)
-           nbs (map #(list %1 %2) (range (count nbs)) nbs)]
-      (doseq [[i [lat lon sog cog dis]] nbs]
-        (let [nbi (foc "NavOb" "label" (str i))
-               pat (fifos "NavOb" "label" "neighbor")]
+           nbs (filter some? nbs)]
+      (doseq [[uid lat lon sog cog dis] nbs]
+        (let [nbi (foc "NavOb" "label" uid)
+              pat (fifos "NavOb" "label" "neighbor")]
           (ssv nbi "url" (sv pat "url"))
           (ssv nbi "description" (sv pat "description"))
           (let [nbm (OMT/getOrAdd nbi)]

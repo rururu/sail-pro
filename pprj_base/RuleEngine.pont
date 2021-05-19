@@ -1,4 +1,4 @@
-; Mon Mar 11 11:20:23 MSK 2019
+; Wed May 19 20:14:13 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -7,6 +7,11 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
+	(single-slot butt-modify-inss
+		(type STRING)
+;+		(value "Modify Instance/ru.rules/modify-inst")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(multislot instances
 		(type INSTANCE)
 ;+		(allowed-classes)

@@ -1,4 +1,4 @@
-; Wed May 19 14:50:45 MSK 2021
+; Wed May 19 22:36:39 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -43,6 +43,8 @@
 		[VRDashboardClient_Class200007]
 		[VRDashboardClient_Class280012]
 		[VRDashboardClient_Class290010]
+		[VRDashboardClient_Class190000]
+		[VRDashboardClient_Class190005]
 		[VRDashboardClient_Class100083]
 		[VRDashboardClient_Class100098])
 	(cloNamespace [VRDashboardClient_Class2])
@@ -162,7 +164,7 @@
 
 ([VRDashboardClient_Class100083] of  CloFunction
 
-	(source "(let [[lat lon] (nmp 'pos)\n       sog (nmp 'sog)\n       cog (nmp 'cog)\n       sog (float (/ sog 10))\n       cog (float (/ cog 10))\n       dis (MapOb/distanceNM lat lon (.getLatitude obm) (.getLongitude obm))]\n  (if (< dis vis)\n    [lat lon sog cog dis]))")
+	(source "(let [uid (nmp 'userId)\n      [lat lon] (nmp 'pos)\n      sog (nmp 'sog)\n      cog (nmp 'cog)\n      uid (short-id uid)\n      sog (round-sog sog)\n      cog (float (/ cog 10))\n      dis (MapOb/distanceNM lat lon (.getLatitude obm) (.getLongitude obm))]\n  (if (< dis vis)\n    [uid lat lon sog cog dis]))")
 	(title "neighbor [nmp obm vis]"))
 
 ([VRDashboardClient_Class100084] of  CloFuncall
@@ -171,151 +173,8 @@
 
 ([VRDashboardClient_Class100098] of  CloFunction
 
-	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (seq FLEET)\n    (let [nbs (map #(neighbor % obm vis) FLEET)\n           nbs (filter some? nbs)\n           nbs (map #(list %1 %2) (range (count nbs)) nbs)]\n      (doseq [[i [lat lon sog cog dis]] nbs]\n        (let [nbi (foc \"NavOb\" \"label\" (str i))\n               pat (fifos \"NavOb\" \"label\" \"neighbor\")]\n          (ssv nbi \"url\" (sv pat \"url\"))\n          (ssv nbi \"description\" (sv pat \"description\"))\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (.setSpeed nbm (double sog))))))))")
+	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (seq FLEET)\n    (let [nbs (map #(neighbor % obm vis) FLEET)\n           nbs (filter some? nbs)]\n      (doseq [[uid lat lon sog cog dis] nbs]\n        (let [nbi (foc \"NavOb\" \"label\" uid)\n              pat (fifos \"NavOb\" \"label\" \"neighbor\")]\n          (ssv nbi \"url\" (sv pat \"url\"))\n          (ssv nbi \"description\" (sv pat \"description\"))\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (.setSpeed nbm (double sog))))))))")
 	(title "show-neighbors [onb vis]"))
-
-([VRDashboardClient_Class100104] of  NavOb
-
-	(altitude 0)
-	(course 247)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "0")
-	(latitude "35 43.85")
-	(longitude "-6 10.03")
-	(playground-index 0)
-	(speed 14.5)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100105] of  NavOb
-
-	(altitude 0)
-	(course 190)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "1")
-	(latitude "35 59.44")
-	(longitude "-3 54.06")
-	(playground-index 0)
-	(speed 4.2)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100106] of  NavOb
-
-	(altitude 0)
-	(course 249)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "2")
-	(latitude "36 0.6")
-	(longitude "-5 25.9")
-	(playground-index 0)
-	(speed 13.9)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100107] of  NavOb
-
-	(altitude 0)
-	(course 298)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "3")
-	(latitude "35 40.97")
-	(longitude "-3 24.33")
-	(playground-index 0)
-	(speed 4.1)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100108] of  NavOb
-
-	(altitude 0)
-	(course 238)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "4")
-	(latitude "35 54.33")
-	(longitude "-4 17.5")
-	(playground-index 0)
-	(speed 5.1)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100109] of  NavOb
-
-	(altitude 0)
-	(course 350)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "5")
-	(latitude "35 53.68")
-	(longitude "-4 30.61")
-	(playground-index 0)
-	(speed 4.3)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100110] of  NavOb
-
-	(altitude 0)
-	(course 8)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "6")
-	(latitude "35 54.14")
-	(longitude "-5 6.58")
-	(playground-index 0)
-	(speed 9.3)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100111] of  NavOb
-
-	(altitude 0)
-	(course 251)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "7")
-	(latitude "35 43.09")
-	(longitude "-6 15.51")
-	(playground-index 0)
-	(speed 15.1)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100112] of  NavOb
-
-	(altitude 0)
-	(course 259)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "8")
-	(latitude "36 11.78")
-	(longitude "-4 4.44")
-	(playground-index 0)
-	(speed 3.5)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100113] of  NavOb
-
-	(altitude 0)
-	(course 280)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "9")
-	(latitude "35 41.19")
-	(longitude "-3 33.16")
-	(playground-index 0)
-	(speed 4.4)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class100114] of  NavOb
-
-	(altitude 0)
-	(course 267)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "10")
-	(latitude "35 45.95")
-	(longitude "-4 22.22")
-	(playground-index 0)
-	(speed 3.7)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class100115] of  NavOb
 
@@ -346,17 +205,6 @@
 ([VRDashboardClient_Class110053] of  CloFuncall
 
 	(source "(ru.rules/pp 'Onboard)"))
-
-([VRDashboardClient_Class110054] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "11")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class120000] of  CloFunction
 
@@ -517,6 +365,60 @@
 	(url "file:resources/public/img/yachtp.png")
 	(verticalSpeed 0.0))
 
+([VRDashboardClient_Class190000] of  CloFunction
+
+	(source "(let [id (str uid)\n      c (count id)]\n  (str (.substring id 0 2) (.substring id (- c 3) c)))")
+	(title "short-id [uid]"))
+
+([VRDashboardClient_Class190001] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "44273")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class190002] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "45887")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class190003] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "34879")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class190004] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "11982")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class190005] of  CloFunction
+
+	(source "(let [s (str sog)\n      s (str (.substring s 0 (dec (count s))) \".\" (last s))]\n  (read-string s))")
+	(title "round-sog [sog]"))
+
 ([VRDashboardClient_Class2] of  CloNamespace
 
 	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps]\n  [clj-json.core :as json]\n  [wiki.gis :as wig]\n  [light.cesium.core :as cz])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever\n  ru.igis.omtab.gui.RuMapMouseAdapter\n  dk.dma.ais.sentence.Vdm\n  dk.dma.ais.message.AisMessage)")
@@ -571,8 +473,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 36.024345)
-	(lng -5.4866705)
+	(lat 35.10422)
+	(lng -7.052253)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -1138,10 +1040,6 @@
 	(rhs "(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis))\n(modify ?d time (+ ?t1 ?del))")
 	(salience 0)
 	(title "vr:NMEA Run"))
-
-([VRDashboardClient_Class40000] of  CloFuncall
-
-	(source "(OMT/getMapOb \"russor\")"))
 
 ([VRDashboardClient_Class40001] of  RuleSet
 

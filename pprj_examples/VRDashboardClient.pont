@@ -1,4 +1,4 @@
-; Wed May 19 14:50:45 MSK 2021
+; Wed May 19 22:36:39 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -85,6 +85,11 @@
 		(create-accessor read-write))
 	(single-slot port
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-modify-inss
+		(type STRING)
+;+		(value "Modify Instance/ru.rules/modify-inst")
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 

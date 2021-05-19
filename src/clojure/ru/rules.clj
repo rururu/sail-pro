@@ -294,3 +294,7 @@
 (defn save-bnet-plan []
   (rete/log-lst "beta-net-plan.txt" rete/BNET))
 
+(defn modify-inst [hm inst]
+  (retract-instances [inst])
+(assert-instances [inst]))
+

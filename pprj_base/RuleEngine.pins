@@ -1,4 +1,4 @@
-; Mon Mar 11 11:20:23 MSK 2019
+; Wed May 19 20:14:13 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -158,6 +158,11 @@
 	(source "(rete/log-lst \"beta-net-plan.txt\" rete/BNET)")
 	(title "save-bnet-plan []"))
 
+([RuleEngine_Class290001] of  CloFunction
+
+	(source "(retract-instances [inst])\n(assert-instances [inst])")
+	(title "modify-inst [hm inst]"))
+
 ([RuleEngine_Class30000] of  CloProgram
 
 	(cloFunctions
@@ -194,7 +199,8 @@
 		[RuleEngine_Class260004]
 		[RuleEngine_Class260000]
 		[RuleEngine_Class280000]
-		[RuleEngine_Class280001])
+		[RuleEngine_Class280001]
+		[RuleEngine_Class290001])
 	(cloNamespace [RuleEngine_Class40000])
 	(cloVars
 		[RuleEngine_Class180001]
