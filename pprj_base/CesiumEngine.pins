@@ -1,4 +1,4 @@
-; Thu May 13 17:58:29 MSK 2021
+; Wed May 19 14:28:12 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -838,7 +838,7 @@
 
 ([CeziumEngineLight_Class40005] of  Rule
 
-	(lhs "?moe (MapObEvent0 object ?obj)")
+	(lhs "?moe (MapObEvent0 object ?obj label ?lab)")
 	(rhs "(retract ?moe)")
 	(salience -10)
 	(title "sim0:RetractMapObEvent0"))
@@ -901,7 +901,7 @@
 
 ([CeziumEngineLight_Class40015] of  CloFunction
 
-	(source "(doseq[pg (OMT/getPlaygrounds)]\n  (let [al (proxy [ActionListener] []\n	(actionPerformed [evt] \n	  ;; (println :OMT-GEN-EVT evt)\n  	(rete/assert-frame ['MapObEvent0 'status (.getActionCommand evt) 'object (.getSource evt)])))]\n    (.addActionListener pg al)\n    (vswap! EVT-LISTENERS assoc pg al)))")
+	(source "(doseq[pg (OMT/getPlaygrounds)]\n  (let [al (proxy [ActionListener] []\n	(actionPerformed [evt] \n	  ;; (println :OMT-GEN-EVT evt)\n  	(rete/assert-frame ['MapObEvent0 \n                                                     'status (.getActionCommand evt)\n                                                     'object (.getSource evt)\n                                                     'label (.getName (.getSource evt))])))]\n    (.addActionListener pg al)\n    (vswap! EVT-LISTENERS assoc pg al)))")
 	(title "start-evt-listen []"))
 
 ([CeziumEngineLight_Class40016] of  CloFunction

@@ -1,4 +1,4 @@
-; Thu May 13 17:58:29 MSK 2021
+; Wed May 19 14:28:12 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -173,6 +173,10 @@
 	(is-a CeziumEngine+Ontology)
 	(role concrete)
 	(single-slot status
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot label
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))

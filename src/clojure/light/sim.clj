@@ -17,7 +17,10 @@
   (let [al (proxy [ActionListener] []
 	(actionPerformed [evt] 
 	  ;; (println :OMT-GEN-EVT evt)
-  	(rete/assert-frame ['MapObEvent0 'status (.getActionCommand evt) 'object (.getSource evt)])))]
+  	(rete/assert-frame ['MapObEvent0 
+                                                     'status (.getActionCommand evt)
+                                                     'object (.getSource evt)
+                                                     'label (.getName (.getSource evt))])))]
     (.addActionListener pg al)
     (vswap! EVT-LISTENERS assoc pg al))))
 

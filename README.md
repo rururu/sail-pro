@@ -39,7 +39,6 @@ $ ./run_VR.sh 			# Linux, MacOS
 $ .\run_VR.bat 	    	# Windows
 ```
 
-
 5. Wait while programs will be loaded
 6. Start time on OpenMap tab (checkbox "Run Timer")
 7. Select the race on a popup panel
@@ -50,13 +49,16 @@ $ .\run_VR.bat 	    	# Windows
 
 See details in screencast. Some details can be differen of earlier - these are deprecated!
 
+[Gibraltar in Vela Cup race](https://youtu.be/QsDpSx6kahg)
+
 [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
 [Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
 
 [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
 
-12. Use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. You can even create aircraft carrier and to control helicopter or fighter. 
+12. Use controls to create nearby boats, give them names, coordinates, speed and course of real boats and enjoy real competition. 
+    You can even create aircraft carrier and control helicopter or fighter. 
 
 [Using Controls](https://youtu.be/pK9GTSEGQYQ)
 

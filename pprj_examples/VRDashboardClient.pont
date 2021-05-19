@@ -1,4 +1,4 @@
-; Sun May 16 14:54:49 MSK 2021
+; Wed May 19 14:50:45 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -73,6 +73,10 @@
 	(single-slot but-select-race
 		(type STRING)
 ;+		(value "Select Race/vr.dashcli/select-race")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot visibility
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot nmea-port

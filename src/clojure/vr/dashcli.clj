@@ -12,15 +12,19 @@
   ru.igis.omtab.Util
   edu.stanford.smi.protege.ui.DisplayUtilities
   ru.vrd.nmea.VRdNMEAReciever
-  ru.igis.omtab.gui.RuMapMouseAdapter))
+  ru.igis.omtab.gui.RuMapMouseAdapter
+  dk.dma.ais.sentence.Vdm
+  dk.dma.ais.message.AisMessage))
 (def defTELNET (defonce TELNET nil))
-(def defVRDdNMEA (defonce VRDdNMEA false))
-(def START-TOKEN "RMC")
+(def GPRMC-TOKEN "$GPRMC")
 (def END-TOKEN "\r\n")
 (def BOAT-DATA [0 0 0 0 0 0])
 (def RACES-URL "http://zezo.org/races2.json")
 (def RMMA nil)
 (def DESC-MAP {"default" "{:gltf-url \"models/piramida/scene.gltf\"}"})
+(def NMEA (atom nil))
+(def NMEA-FLAG true)
+(def FLEET nil)
 (defn round-speed [s]
   (let [s (* s 100)
        s (Math/round s)]
@@ -36,7 +40,18 @@
       d (if (or (= c2 "S") (= c2 "W")) (* d -1) d)]
   (MapOb/getDeg (str d " " m))))
 
-(defn parse-nmea-data [data]
+(defn get-external-data [port path]
+  (VRdNMEAReciever/startServer port path) 
+(Thread/sleep 30000)
+(let [buf (VRdNMEAReciever/getBuffer)]
+  (when (> (.capacity buf) 16)
+    (reset! NMEA (.split (.toString buf) END-TOKEN))
+    (VRdNMEAReciever/clearBuffer)))
+(VRdNMEAReciever/stopServer 10)
+(if NMEA-FLAG
+  (get-external-data port path)))
+
+(defn parse-gprmc-data [data]
   (let [d (.split data ",")]
   (if (>= (count d) 10)
     (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]
@@ -46,31 +61,6 @@
        (round-speed (read-string spd))
        (read-string crs)
        date]))))
-
-(defn get-nmea-data [port]
-  (try
-  (when (nil? TELNET)
-    (def TELNET (tn/get-telnet "localhost" port))
-    (println :TELNET "connected" :PORT port))
-  (let [nmea (tn/read-all TELNET)]
-    (if (.contains nmea START-TOKEN)
-      (first (.split nmea END-TOKEN))))
-  (catch Exception e
-    (println :TELNET (.getMessage e) :PORT port)
-    nil)))
-
-(defn get-nmea-data2 [port path]
-  (VRdNMEAReciever/startServer port path) 
-(Thread/sleep 1000)
-(let [buf (VRdNMEAReciever/getBuffer)
-      cap (.capacity buf)
-      data (if (> cap 16)
-                (let [nmea (.toString buf)]
-                  (VRdNMEAReciever/clearBuffer)
-                  (if (.contains nmea START-TOKEN)
-                    (first (.split nmea END-TOKEN)))))]
-  (VRdNMEAReciever/stopServer 10)
-  data))
 
 (defn close-telnet []
   (when (some? TELNET)
@@ -85,20 +75,13 @@
        (not= spd1 spd2)
        (not= crs1 crs2))))
 
-(defn get-boat-data [port]
-  (let [bdata (if-let [nmea (get-nmea-data port)]
-                 (if-let [bd (parse-nmea-data nmea)]            
-                   (when (diff-vector? bd BOAT-DATA)
-                     (def BOAT-DATA bd)
-                     bd)))]
-  bdata))
-
-(defn get-boat-data2 [port path]
-  (let [bdata (if-let [nmea (get-nmea-data2 port path)]
-                 (if-let [bd (parse-nmea-data nmea)]            
-                   (when (diff-vector? bd BOAT-DATA)
-                     (def BOAT-DATA bd)
-                     bd)))]
+(defn get-boat-data []
+  (let [bdata (if (> (count @NMEA) 0)
+                    (let [bd (filter #(.startsWith % GPRMC-TOKEN) @NMEA)
+                           bd (parse-gprmc-data (first bd))]            
+                     (when (diff-vector? bd BOAT-DATA)
+                       (def BOAT-DATA bd)
+                       bd)))]
   bdata))
 
 (defn srand [d]
@@ -271,4 +254,56 @@
               (pum-out-place r lat lon vic)
               (add-pm-desc r))))
         (println "Instance of \"Current BBXWiki Request\" not found!"))))))
+
+(defn parse-AIVDM [aivdm]
+  (letfn [(to-map [s]
+             (let [s (.substring s 1 (dec (count s)))
+                    s (.split s " ")
+                    s (remove #(.startsWith % "pos") s)
+                    s (remove #(.startsWith % "=") s)
+                    s (remove #(.startsWith % "(") s)
+                    s (apply str s)
+                    s (.replaceAll s "=" " ")
+                    s (str "{" s "}")]   
+               (read-string s)))]
+  (try
+    (let [vdm (Vdm.)
+           _ (.parse vdm aivdm)
+           mes (AisMessage/getInstance vdm)
+           pos (.getValidPosition mes)
+           tos (.toString mes)
+           mp (to-map tos)]
+      (assoc mp 'pos [(.getLatitude pos) (.getLongitude pos)]))
+    (catch Exception e
+      nil))))
+
+(defn get-fleet-data []
+  (def FLEET (filter some? (map parse-AIVDM @NMEA))))
+
+(defn neighbor [nmp obm vis]
+  (let [[lat lon] (nmp 'pos)
+       sog (nmp 'sog)
+       cog (nmp 'cog)
+       sog (float (/ sog 10))
+       cog (float (/ cog 10))
+       dis (MapOb/distanceNM lat lon (.getLatitude obm) (.getLongitude obm))]
+  (if (< dis vis)
+    [lat lon sog cog dis])))
+
+(defn show-neighbors [onb vis]
+  (if-let [obm (OMT/getMapOb onb)]
+  (if (seq FLEET)
+    (let [nbs (map #(neighbor % obm vis) FLEET)
+           nbs (filter some? nbs)
+           nbs (map #(list %1 %2) (range (count nbs)) nbs)]
+      (doseq [[i [lat lon sog cog dis]] nbs]
+        (let [nbi (foc "NavOb" "label" (str i))
+               pat (fifos "NavOb" "label" "neighbor")]
+          (ssv nbi "url" (sv pat "url"))
+          (ssv nbi "description" (sv pat "description"))
+          (let [nbm (OMT/getOrAdd nbi)]
+            (.setLatitude nbm lat)
+            (.setLongitude nbm lon)
+            (.setCourse nbm (int cog))
+            (.setSpeed nbm (double sog)))))))))
 
