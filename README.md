@@ -50,9 +50,11 @@ $ .\run_VR.bat 	    	# Windows
 10. Start Cesium client on the popup panel
 11. Go on board of the boat 
 
-See details in screencast. Some details can be differen of earlier - these are deprecated!
+See details in screencasts. Some details can be differen of earlier - these are deprecated!
 
 [Gibraltar in Vela Cup race](https://youtu.be/QsDpSx6kahg)
+
+[Nearby yachts during Vela Cup race](https://youtu.be/57WU1qmrENQ)
 
 [Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 

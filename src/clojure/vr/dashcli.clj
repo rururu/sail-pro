@@ -25,6 +25,7 @@
 (def NMEA (atom nil))
 (def NMEA-FLAG true)
 (def FLEET nil)
+(def ONMAP (volatile! []))
 (defn round-speed [s]
   (let [s (* s 100)
        s (Math/round s)]
@@ -307,6 +308,7 @@
   (if (seq FLEET)
     (let [nbs (map #(neighbor % obm vis) FLEET)
            nbs (filter some? nbs)]
+      (def ONMAP (volatile! []))
       (doseq [[uid lat lon sog cog dis] nbs]
         (let [nbi (foc "NavOb" "label" uid)
               pat (fifos "NavOb" "label" "neighbor")]
@@ -316,5 +318,13 @@
             (.setLatitude nbm lat)
             (.setLongitude nbm lon)
             (.setCourse nbm (int cog))
-            (.setSpeed nbm (double sog)))))))))
+            (.setSpeed nbm (double sog)))
+          (vswap! ONMAP conj uid)))))))
+
+(defn unvisible-offmap [onb]
+  (doseq [no (OMT/getNavObInstances)]
+  (let [nam (sv no "label")]
+    (if (and (not= nam onb) 
+          (not (some #{nam} @ONMAP)))
+      (OMT/removeMapOb no false)))))
 

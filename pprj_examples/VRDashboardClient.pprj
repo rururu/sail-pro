@@ -1,4 +1,4 @@
-; Wed May 19 22:36:39 MSK 2021
+; Thu May 20 22:06:54 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -21,13 +21,13 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[VRDashboardClient_ProjectKB_Class42209]
-		[VRDashboardClient_ProjectKB_Class42210]
-		[VRDashboardClient_ProjectKB_Class42211]
-		[VRDashboardClient_ProjectKB_Class42212]
-		[VRDashboardClient_ProjectKB_Class42213]
-		[VRDashboardClient_ProjectKB_Class42214]
-		[VRDashboardClient_ProjectKB_Class42215]))
+		[VRDashboardClient_ProjectKB_Class32157]
+		[VRDashboardClient_ProjectKB_Class32158]
+		[VRDashboardClient_ProjectKB_Class32159]
+		[VRDashboardClient_ProjectKB_Class32160]
+		[VRDashboardClient_ProjectKB_Class32161]
+		[VRDashboardClient_ProjectKB_Class32162]
+		[VRDashboardClient_ProjectKB_Class32163]))
 
 ([CLSES_TAB] of  Widget
 
@@ -71,54 +71,6 @@
 
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
-
-([KB_200624_Class2145] of  Map
-
-	(entries
-		[KB_200624_Class2146]
-		[KB_200624_Class2149]
-		[KB_200624_Class2150]
-		[KB_200624_Class2151])
-	(referenced_maps [KB_200624_Class2147]))
-
-([KB_200624_Class2146] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_200624_Class2147] of  Map
-
-	(entries [KB_200624_Class2148]))
-
-([KB_200624_Class2148] of  Map_Entry
-
-	(key "WikipediaGIS_Class2")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "12 479 212 124")
-	(value_class "java.awt.Rectangle"))
-
-([KB_200624_Class2149] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "KB_200624_Class2147")
-	(value_class "java.util.Map"))
-
-([KB_200624_Class2150] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_200624_Class2151] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([KB_444845_Class1538] of  Widget
 
@@ -276,8 +228,8 @@
 
 ([KB_651995_Class1] of  Map
 
-	(entries [VRDashboardClient_ProjectKB_Class42221])
-	(referenced_maps [VRDashboardClient_ProjectKB_Class42216]))
+	(entries [VRDashboardClient_ProjectKB_Class32169])
+	(referenced_maps [VRDashboardClient_ProjectKB_Class32164]))
 
 ([KB_651995_Class13] of  Property_List
 
@@ -370,6 +322,54 @@
 
 	(name "instances_file_name")
 	(string_value "VRDashboardClient.pins"))
+
+([KB_666384_Class2145] of  Map
+
+	(entries
+		[KB_666384_Class2146]
+		[KB_666384_Class2149]
+		[KB_666384_Class2150]
+		[KB_666384_Class2151])
+	(referenced_maps [KB_666384_Class2147]))
+
+([KB_666384_Class2146] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_666384_Class2147] of  Map
+
+	(entries [KB_666384_Class2148]))
+
+([KB_666384_Class2148] of  Map_Entry
+
+	(key "WikipediaGIS_Class2")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "12 479 212 124")
+	(value_class "java.awt.Rectangle"))
+
+([KB_666384_Class2149] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "KB_666384_Class2147")
+	(value_class "java.util.Map"))
+
+([KB_666384_Class2150] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_666384_Class2151] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([LAYOUT_PROPERTIES] of  Property_List
 
@@ -1309,6 +1309,84 @@
 ([VRDashboardClient_ProjectKB_Class31735] of  Property_List
 )
 
+([VRDashboardClient_ProjectKB_Class32157] of  String
+
+	(name "NMEAData")
+	(string_value "{NMEAData+}object{+time+}time"))
+
+([VRDashboardClient_ProjectKB_Class32158] of  String
+
+	(name "WikipediaControl")
+	(string_value "{WikipediaControl}"))
+
+([VRDashboardClient_ProjectKB_Class32159] of  String
+
+	(name "Placemark")
+	(string_value "label"))
+
+([VRDashboardClient_ProjectKB_Class32160] of  String
+
+	(name "VRDashboardControl")
+	(string_value "{VRDashboardConterol+port+}port"))
+
+([VRDashboardClient_ProjectKB_Class32161] of  String
+
+	(name "Onboard")
+	(string_value "{Onboard+}label"))
+
+([VRDashboardClient_ProjectKB_Class32162] of  String
+
+	(name "BBXWiki")
+	(string_value "bbx"))
+
+([VRDashboardClient_ProjectKB_Class32163] of  String
+
+	(name "NMEAControl")
+	(string_value "{NMEAControl+}status{+delay+}delay"))
+
+([VRDashboardClient_ProjectKB_Class32164] of  Map
+
+	(entries
+		[VRDashboardClient_ProjectKB_Class32165]
+		[VRDashboardClient_ProjectKB_Class32166]
+		[VRDashboardClient_ProjectKB_Class32167]
+		[VRDashboardClient_ProjectKB_Class32168]))
+
+([VRDashboardClient_ProjectKB_Class32165] of  Map_Entry
+
+	(key "VRDashboardClient_Class30065")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "6 752 202 123")
+	(value_class "java.awt.Rectangle"))
+
+([VRDashboardClient_ProjectKB_Class32166] of  Map_Entry
+
+	(key "VRDashboardClient_Class10001")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "8 406 202 123")
+	(value_class "java.awt.Rectangle"))
+
+([VRDashboardClient_ProjectKB_Class32167] of  Map_Entry
+
+	(key "VRDashboardClient_Class10002")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "11 585 202 123")
+	(value_class "java.awt.Rectangle"))
+
+([VRDashboardClient_ProjectKB_Class32168] of  Map_Entry
+
+	(key "VRDashboardClient_Class200000")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "7 442 202 123")
+	(value_class "java.awt.Rectangle"))
+
+([VRDashboardClient_ProjectKB_Class32169] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "VRDashboardClient_ProjectKB_Class32164")
+	(value_class "java.util.Map"))
+
 ([VRDashboardClient_ProjectKB_Class32170] of  Boolean
 
 	(boolean_value FALSE)
@@ -1473,84 +1551,6 @@
 
 	(name "vertical_stretcher")
 	(string_value "<<none>>"))
-
-([VRDashboardClient_ProjectKB_Class42209] of  String
-
-	(name "NMEAData")
-	(string_value "{NMEAData+}object{+time+}time"))
-
-([VRDashboardClient_ProjectKB_Class42210] of  String
-
-	(name "WikipediaControl")
-	(string_value "{WikipediaControl}"))
-
-([VRDashboardClient_ProjectKB_Class42211] of  String
-
-	(name "Placemark")
-	(string_value "label"))
-
-([VRDashboardClient_ProjectKB_Class42212] of  String
-
-	(name "VRDashboardControl")
-	(string_value "{VRDashboardConterol+port+}port"))
-
-([VRDashboardClient_ProjectKB_Class42213] of  String
-
-	(name "Onboard")
-	(string_value "{Onboard+}label"))
-
-([VRDashboardClient_ProjectKB_Class42214] of  String
-
-	(name "BBXWiki")
-	(string_value "bbx"))
-
-([VRDashboardClient_ProjectKB_Class42215] of  String
-
-	(name "NMEAControl")
-	(string_value "{NMEAControl+}status{+delay+}delay"))
-
-([VRDashboardClient_ProjectKB_Class42216] of  Map
-
-	(entries
-		[VRDashboardClient_ProjectKB_Class42217]
-		[VRDashboardClient_ProjectKB_Class42218]
-		[VRDashboardClient_ProjectKB_Class42219]
-		[VRDashboardClient_ProjectKB_Class42220]))
-
-([VRDashboardClient_ProjectKB_Class42217] of  Map_Entry
-
-	(key "VRDashboardClient_Class30065")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "6 752 202 123")
-	(value_class "java.awt.Rectangle"))
-
-([VRDashboardClient_ProjectKB_Class42218] of  Map_Entry
-
-	(key "VRDashboardClient_Class10001")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "8 406 202 123")
-	(value_class "java.awt.Rectangle"))
-
-([VRDashboardClient_ProjectKB_Class42219] of  Map_Entry
-
-	(key "VRDashboardClient_Class10002")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "11 585 202 123")
-	(value_class "java.awt.Rectangle"))
-
-([VRDashboardClient_ProjectKB_Class42220] of  Map_Entry
-
-	(key "VRDashboardClient_Class200000")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "7 442 202 123")
-	(value_class "java.awt.Rectangle"))
-
-([VRDashboardClient_ProjectKB_Class42221] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "VRDashboardClient_ProjectKB_Class42216")
-	(value_class "java.util.Map"))
 
 ([VRDashboardClient_ProjectKB_Class51733] of  Boolean
 

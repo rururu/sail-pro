@@ -1,4 +1,4 @@
-; Wed May 19 22:36:39 MSK 2021
+; Thu May 20 22:06:54 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -46,7 +46,8 @@
 		[VRDashboardClient_Class190000]
 		[VRDashboardClient_Class190005]
 		[VRDashboardClient_Class100083]
-		[VRDashboardClient_Class100098])
+		[VRDashboardClient_Class100098]
+		[VRDashboardClient_Class80001])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20003]
@@ -58,7 +59,8 @@
 		[VRDashboardClient_Class250016]
 		[VRDashboardClient_Class290011]
 		[VRDashboardClient_Class170000]
-		[VRDashboardClient_Class20001])
+		[VRDashboardClient_Class20001]
+		[VRDashboardClient_Class40000])
 	(title "VR Dashboard Client"))
 
 ([VRDashboardClient_Class10000] of  CloFuncall
@@ -173,7 +175,7 @@
 
 ([VRDashboardClient_Class100098] of  CloFunction
 
-	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (seq FLEET)\n    (let [nbs (map #(neighbor % obm vis) FLEET)\n           nbs (filter some? nbs)]\n      (doseq [[uid lat lon sog cog dis] nbs]\n        (let [nbi (foc \"NavOb\" \"label\" uid)\n              pat (fifos \"NavOb\" \"label\" \"neighbor\")]\n          (ssv nbi \"url\" (sv pat \"url\"))\n          (ssv nbi \"description\" (sv pat \"description\"))\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (.setSpeed nbm (double sog))))))))")
+	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (seq FLEET)\n    (let [nbs (map #(neighbor % obm vis) FLEET)\n           nbs (filter some? nbs)]\n      (def ONMAP (volatile! []))\n      (doseq [[uid lat lon sog cog dis] nbs]\n        (let [nbi (foc \"NavOb\" \"label\" uid)\n              pat (fifos \"NavOb\" \"label\" \"neighbor\")]\n          (ssv nbi \"url\" (sv pat \"url\"))\n          (ssv nbi \"description\" (sv pat \"description\"))\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (.setSpeed nbm (double sog)))\n          (vswap! ONMAP conj uid))))))")
 	(title "show-neighbors [onb vis]"))
 
 ([VRDashboardClient_Class100115] of  NavOb
@@ -370,50 +372,6 @@
 	(source "(let [id (str uid)\n      c (count id)]\n  (str (.substring id 0 2) (.substring id (- c 3) c)))")
 	(title "short-id [uid]"))
 
-([VRDashboardClient_Class190001] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "44273")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class190002] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "45887")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class190003] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "34879")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class190004] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "11982")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
 ([VRDashboardClient_Class190005] of  CloFunction
 
 	(source "(let [s (str sog)\n      s (str (.substring s 0 (dec (count s))) \".\" (last s))]\n  (read-string s))")
@@ -473,8 +431,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 35.10422)
-	(lng -7.052253)
+	(lat 33.123814)
+	(lng -16.897682)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -1037,9 +995,14 @@
 ([VRDashboardClient_Class30077] of  Rule
 
 	(lhs "(VRDashboardControl onboard ?onb visibility ?vis)\n(NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
-	(rhs "(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis))\n(modify ?d time (+ ?t1 ?del))")
+	(rhs "(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis)\n  (vr.dashcli/unvisible-offmap ?onb))\n(modify ?d time (+ ?t1 ?del))")
 	(salience 0)
 	(title "vr:NMEA Run"))
+
+([VRDashboardClient_Class40000] of  CloVar
+
+	(source "(volatile! [])")
+	(title "ONMAP"))
 
 ([VRDashboardClient_Class40001] of  RuleSet
 
@@ -1198,6 +1161,11 @@
 	(rhs "(asser CZMLSpan object ?lab\n	options (read-string (.getDescription ?obj))\n	time ?t)\n(println \"NavOb on map:\" ?lab)")
 	(salience 0)
 	(title "vr:NavOb on Map"))
+
+([VRDashboardClient_Class80001] of  CloFunction
+
+	(source "(doseq [no (OMT/getNavObInstances)]\n  (let [nam (sv no \"label\")]\n    (if (and (not= nam onb) \n          (not (some #{nam} @ONMAP)))\n      (OMT/removeMapOb no false))))")
+	(title "unvisible-offmap [onb]"))
 
 ([VRDashboardClient_Class80002] of  CloFunction
 
