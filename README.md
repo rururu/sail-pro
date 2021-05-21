@@ -91,6 +91,19 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
 	Before starting time go to Instances Tab. Open NavOb class: IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. Select russor instance. Update a label slot.
 
+2. Quick start () often fails.
+
+   Use a longer start () with manual loading of programs and start of the expert system:
+   Menu: Protege -> (clojure-work).
+   
+3. When we climb aboard, we find ourselves under water.
+
+   Climb 100 meters (Elevation: 100) or more and then descend 4 meters.
+   
+4. Can we restart Sail-Pro without restarting VR and VRDashboard?
+
+   Yes, you can.   
+
 ## License
 
 Copyright © 2021 FIXME
