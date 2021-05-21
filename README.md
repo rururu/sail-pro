@@ -56,7 +56,9 @@ See details in screencasts. Some details can be differen of earlier - these are 
 
 [Nearby yachts during Vela Cup race](https://youtu.be/57WU1qmrENQ)
 
-[Virtual Regatta](https://www.youtube.com/watch?v=LYRTzwEeJqw)
+[Skirting the western tip of Madeira in Vela Cup race](https://youtu.be/E_OxINj428U)
+
+[Finish of Tara race in Iquique bay](https://www.youtube.com/watch?v=LYRTzwEeJqw)
 
 [Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
 
@@ -91,9 +93,9 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
 	Before starting time go to Instances Tab. Open NavOb class: IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. Select russor instance. Update a label slot.
 
-2. Quick start () often fails.
+2. Quick start (run_VR.sh) often fails.
 
-   Use a longer start () with manual loading of programs and start of the expert system:
+   Use a longer start (run.sh) with manual loading of programs and start of the expert system:
    Menu: Protege -> (clojure-work).
    
 3. When we climb aboard, we find ourselves under water.
