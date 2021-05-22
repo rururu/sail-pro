@@ -68,19 +68,16 @@
   (tn/kill-telnet TELNET)
   (def TELNET nil)))
 
-(defn diff-vector? [ndata odata]
-  (let [[tim1 lat1 lon1 spd1 crs1] ndata
-       [tim2 lat2 lon2 spd2 crs2] odata]
-  (or (not= lat1 lat2)
-       (not= lon1 lon2)
-       (not= spd1 spd2)
-       (not= crs1 crs2))))
+(defn diff-time? [ndata odata]
+  (let [[tim1 & _] ndata
+       [tim2 & _] odata]
+  (not= tim1 tim2)))
 
 (defn get-boat-data []
   (let [bdata (if (> (count @NMEA) 0)
                     (let [bd (filter #(.startsWith % GPRMC-TOKEN) @NMEA)
                            bd (parse-gprmc-data (first bd))]            
-                     (when (diff-vector? bd BOAT-DATA)
+                     (when (diff-time? bd BOAT-DATA)
                        (def BOAT-DATA bd)
                        bd)))]
   bdata))

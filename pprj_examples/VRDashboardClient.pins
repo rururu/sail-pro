@@ -1,4 +1,4 @@
-; Thu May 20 22:06:54 MSK 2021
+; Sat May 22 21:51:23 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -96,73 +96,10 @@
 	(cloNamespace [Clojure_Class300001])
 	(title "CW"))
 
-([VRDashboardClient_Class100041] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Fuengirola")
-	(latitude "36 32.33")
-	(longitude "-4 37.4")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
 ([VRDashboardClient_Class10005] of  CZMLGenerator
 
 	(delay 4)
 	(visibility 16.0))
-
-([VRDashboardClient_Class100052] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "HMS Ark Royal (91)")
-	(latitude "36 3")
-	(longitude "-4 45")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class100062] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Genalguacil")
-	(latitude "36 32")
-	(longitude "-5 14")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class100072] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Paterna de Rivera")
-	(latitude "36 31")
-	(longitude "-5 52")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class100075] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Benalup-Casas Viejas")
-	(latitude "36 20.57")
-	(longitude "-5 48.56")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class100076] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "North Mole, Gibraltar Harbour")
-	(latitude "36 8.91")
-	(longitude "-5 21.91")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class100079] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "HMS Vanoc (H33)")
-	(latitude "35 55")
-	(longitude "-5 41")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
 
 ([VRDashboardClient_Class100083] of  CloFunction
 
@@ -310,12 +247,12 @@
 ([VRDashboardClient_Class170001] of  BBX
 
 	(title "Current")
-	(wsen -5.6511455 35.858917 -5.3178124 36.192253))
+	(wsen -5.652773 35.74527 -5.31944 36.078606))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
-	(source "(let [[tim1 lat1 lon1 spd1 crs1] ndata\n       [tim2 lat2 lon2 spd2 crs2] odata]\n  (or (not= lat1 lat2)\n       (not= lon1 lon2)\n       (not= spd1 spd2)\n       (not= crs1 crs2)))")
-	(title "diff-vector? [ndata odata]"))
+	(source "(let [[tim1 & _] ndata\n       [tim2 & _] odata]\n  (not= tim1 tim2))")
+	(title "diff-time? [ndata odata]"))
 
 ([VRDashboardClient_Class180000] of  NavOb
 
@@ -429,10 +366,43 @@
 	(source "nil")
 	(title "RMMA"))
 
+([VRDashboardClient_Class220000] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "22351")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class220001] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "11982")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class220002] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "94320")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 33.123814)
-	(lng -16.897682)
+	(lat 35.972694)
+	(lng -5.2539616)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -456,366 +426,6 @@
 
 	(source "{\"default\" \"{:gltf-url \\\"models/piramida/scene.gltf\\\"}\"}")
 	(title "DESC-MAP"))
-
-([VRDashboardClient_Class260032] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Sassari")
-	(latitude "40 44")
-	(longitude "8 33")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260033] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Alghero")
-	(latitude "40 33.47")
-	(longitude "8 19.31")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260034] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Porto Torres")
-	(latitude "40 50")
-	(longitude "8 24")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260035] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Sorso")
-	(latitude "40 48")
-	(longitude "8 34")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260036] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Castelsardo")
-	(latitude "40 55")
-	(longitude "8 43")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260037] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Bonorva")
-	(latitude "40 25")
-	(longitude "8 46")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260038] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Ittiri")
-	(latitude "40 36")
-	(longitude "8 34")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260039] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Osilo")
-	(latitude "40 44")
-	(longitude "8 40")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260040] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Siligo")
-	(latitude "40 35")
-	(longitude "8 44")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260041] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Nulvi")
-	(latitude "40 47")
-	(longitude "8 45")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260042] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Ossi, Sardinia")
-	(latitude "40 40.49")
-	(longitude "8 35.53")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260043] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Pozzomaggiore")
-	(latitude "40 24")
-	(longitude "8 40")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260044] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Stintino")
-	(latitude "40 56.42")
-	(longitude "8 13.97")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260045] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Usini")
-	(latitude "40 40")
-	(longitude "8 32")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260046] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Giave")
-	(latitude "40 27.05")
-	(longitude "8 45.37")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260047] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Ploaghe")
-	(latitude "40 40")
-	(longitude "8 45")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260048] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Villanova Monteleone")
-	(latitude "40 30")
-	(longitude "8 28")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260049] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Sennori")
-	(latitude "40 47")
-	(longitude "8 36")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260050] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Asinara")
-	(latitude "41 4")
-	(longitude "8 16")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/isle.png"))
-
-([VRDashboardClient_Class260051] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Cossoine")
-	(latitude "40 25.95")
-	(longitude "8 42.98")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260052] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Cargeghe")
-	(latitude "40 40.05")
-	(longitude "8 36.94")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260053] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Tissi")
-	(latitude "40 40.63")
-	(longitude "8 33.76")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260054] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Mara, Sardinia")
-	(latitude "40 24.7")
-	(longitude "8 38.2")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260055] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Bonnanaro")
-	(latitude "40 32")
-	(longitude "8 46")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260056] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Thiesi")
-	(latitude "40 31.53")
-	(longitude "8 43.06")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260057] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Tergu")
-	(latitude "40 52")
-	(longitude "8 43")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260058] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Uri, Sardinia")
-	(latitude "40 38")
-	(longitude "8 30")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260059] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Torralba, Sardinia")
-	(latitude "40 30.47")
-	(longitude "8 46.24")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260060] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Ardara, Sardinia")
-	(latitude "40 37")
-	(longitude "8 49")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260061] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Sedini")
-	(latitude "40 51")
-	(longitude "8 49")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260062] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Bessude")
-	(latitude "40 33.17")
-	(longitude "8 43.82")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260063] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Olmedo, Sardinia")
-	(latitude "40 39")
-	(longitude "8 23")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260072] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Florinas")
-	(latitude "40 39")
-	(longitude "8 40")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260073] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Valledoria")
-	(latitude "40 56")
-	(longitude "8 49")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260074] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Borutta")
-	(latitude "40 31.4")
-	(longitude "8 44.74")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260075] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Chiaramonti")
-	(latitude "40 45")
-	(longitude "8 49")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260076] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Cheremule")
-	(latitude "40 30.26")
-	(longitude "8 43.54")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260077] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Padria")
-	(latitude "40 24")
-	(longitude "8 38")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
-
-([VRDashboardClient_Class260078] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Codrongianos")
-	(latitude "40 40")
-	(longitude "8 41")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class260079] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Romana, Sardinia")
-	(latitude "40 29.06")
-	(longitude "8 35.12")
-	(playground-index 0)
-	(url "file:resources/public/img/placemark/city.png"))
 
 ([VRDashboardClient_Class280012] of  CloFunction
 
@@ -1184,7 +794,7 @@
 
 ([VRDashboardClient_Class90001] of  CloFunction
 
-	(source "(let [bdata (if (> (count @NMEA) 0)\n                    (let [bd (filter #(.startsWith % GPRMC-TOKEN) @NMEA)\n                           bd (parse-gprmc-data (first bd))]            \n                     (when (diff-vector? bd BOAT-DATA)\n                       (def BOAT-DATA bd)\n                       bd)))]\n  bdata)")
+	(source "(let [bdata (if (> (count @NMEA) 0)\n                    (let [bd (filter #(.startsWith % GPRMC-TOKEN) @NMEA)\n                           bd (parse-gprmc-data (first bd))]            \n                     (when (diff-time? bd BOAT-DATA)\n                       (def BOAT-DATA bd)\n                       bd)))]\n  bdata)")
 	(title "get-boat-data []"))
 
 ([VRDashboardClient_Class90005] of  CloFunction
