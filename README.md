@@ -104,7 +104,7 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
    
 4. Can we restart Sail-Pro without restarting VR and VRDashboard?
 
-   Yes, you can.
+   Yes, you can. And vice versa too.
    
 5. How to change Fleet visibility?
    

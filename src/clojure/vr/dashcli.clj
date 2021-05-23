@@ -18,7 +18,7 @@
 (def defTELNET (defonce TELNET nil))
 (def GPRMC-TOKEN "$GPRMC")
 (def END-TOKEN "\r\n")
-(def BOAT-DATA [0 0 0 0 0 0])
+(def defBOAT-DATA (def BOAT-DATA [0 0 0 0 0 0]))
 (def RACES-URL "http://zezo.org/races2.json")
 (def RMMA nil)
 (def DESC-MAP {"default" "{:gltf-url \"models/piramida/scene.gltf\"}"})
@@ -38,7 +38,7 @@
       d (int dm)
       m (int (* (- dm d) 100))
       m (+ m mf)
-      d (if (or (= c2 "S") (= c2 "W")) (* d -1) d)]
+      d (if (or (= c2 "S") (= c2 "W")) (str "-" d) d)]
   (MapOb/getDeg (str d " " m))))
 
 (defn get-external-data [port path]

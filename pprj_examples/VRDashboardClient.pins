@@ -1,4 +1,4 @@
-; Sat May 22 21:51:23 MSK 2021
+; Sun May 23 19:48:39 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -247,7 +247,7 @@
 ([VRDashboardClient_Class170001] of  BBX
 
 	(title "Current")
-	(wsen -5.652773 35.74527 -5.31944 36.078606))
+	(wsen 0.58153486 36.243927 0.91486824 36.577263))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
@@ -401,8 +401,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 35.972694)
-	(lng -5.2539616)
+	(lat 36.570877)
+	(lng 0.5268406)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -417,10 +417,54 @@
 	(salience 1)
 	(title "vr:Set Wikipedia Coordinates"))
 
+([VRDashboardClient_Class240000] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "60069")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class240001] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "76379")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
 ([VRDashboardClient_Class240720] of  CloFunction
 
 	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (let [wc (first (cls-instances \"WikipediaControl\"))\n                                      lat (sv wc \"lat\")\n                                      lon (sv wc \"lng\")\n                                      vic (sv wc \"vicinity\")]\n                                  (pum-out-place art lat lon vic)\n                                  (.show *prj* art))))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
 	(title "set-mouse-adapter2 []"))
+
+([VRDashboardClient_Class250012] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "12931")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class250013] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
+	(label "12566")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class250016] of  CloVar
 
@@ -466,13 +510,13 @@
 
 ([VRDashboardClient_Class30019] of  CloFunction
 
-	(source "(let [c (read-string c1)\n      mf (- c (int c))\n      dm (/ (int c) 100)\n      d (int dm)\n      m (int (* (- dm d) 100))\n      m (+ m mf)\n      d (if (or (= c2 \"S\") (= c2 \"W\")) (* d -1) d)]\n  (MapOb/getDeg (str d \" \" m)))")
+	(source "(let [c (read-string c1)\n      mf (- c (int c))\n      dm (/ (int c) 100)\n      d (int dm)\n      m (int (* (- dm d) 100))\n      m (+ m mf)\n      d (if (or (= c2 \"S\") (= c2 \"W\")) (str \"-\" d) d)]\n  (MapOb/getDeg (str d \" \" m)))")
 	(title "parse-coord [c1 c2]"))
 
 ([VRDashboardClient_Class30059] of  CloVar
 
-	(source "[0 0 0 0 0 0]")
-	(title "BOAT-DATA"))
+	(source "(def BOAT-DATA [0 0 0 0 0 0])")
+	(title "defBOAT-DATA"))
 
 ([VRDashboardClient_Class30064] of  Openmap
 
