@@ -1,4 +1,4 @@
-; Wed May 19 14:28:12 MSK 2021
+; Mon Jun 07 15:11:48 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -795,7 +795,7 @@
 
 ([CeziumEngineLight_Class1] of  CloFunction
 
-	(source "([]\n  (if-let [serv SERV]\n    (invoke-later (.browse (Desktop/getDesktop) (URI/create (str \"http://0.0.0.0:\" PORT))))))\n([hm inst]\n  (start-client))")
+	(source "([]\n  (if-let [serv SERV]\n    (invoke-later (.browse (Desktop/getDesktop) (URI/create (str \"http://localhost:\" PORT))))))\n([hm inst]\n  (start-client))")
 	(title "start-client"))
 
 ([CeziumEngineLight_Class10000] of  CloVar
