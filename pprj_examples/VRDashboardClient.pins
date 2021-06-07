@@ -1,4 +1,4 @@
-; Sun May 23 19:48:39 MSK 2021
+; Mon Jun 07 13:07:41 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -444,6 +444,18 @@
 	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (let [wc (first (cls-instances \"WikipediaControl\"))\n                                      lat (sv wc \"lat\")\n                                      lon (sv wc \"lng\")\n                                      vic (sv wc \"vicinity\")]\n                                  (pum-out-place art lat lon vic)\n                                  (.show *prj* art))))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
 	(title "set-mouse-adapter2 []"))
 
+([VRDashboardClient_Class250000] of  CloFuncall
+
+	(source "(slurp RACES-URL)"))
+
+([VRDashboardClient_Class250001] of  CloFuncall
+
+	(source "(load-races)"))
+
+([VRDashboardClient_Class250002] of  CloFuncall
+
+	(source "(ru.rules/dr)"))
+
 ([VRDashboardClient_Class250012] of  NavOb
 
 	(altitude 0)
@@ -642,7 +654,7 @@
 ([VRDashboardClient_Class30076] of  Rule
 
 	(lhs "(VRDashboardControl nmea-port ?nmp selected-race ?ser)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/select-race)\n(vr.dashcli/show-controls)\n(future (vr.dashcli/get-external-data (read-string ?nmp) (str \"/nmea/\" ?ser)))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/load-races)\n(vr.dashcli/select-race)\n(vr.dashcli/show-controls)\n(future (vr.dashcli/get-external-data (read-string ?nmp) (str \"/nmea/\" ?ser)))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
@@ -685,15 +697,7 @@
 	(nmea-port "8081")
 	(onboard "russor")
 	(port "8448")
-	(races
-		"441.1"
-		"472.1"
-		"485.1"
-		"483.1"
-		"482.3"
-		"470.6")
-	(selected-race "485.1")
-	(telnet-port "10485")
+	(telnet-port "10476")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 

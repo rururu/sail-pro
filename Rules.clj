@@ -43,7 +43,7 @@
 			(read-string (protege.core/sv % "argument"))) ?ops))))
 
 (sim0:RetractMapObEvent0 -10
-?moe (MapObEvent0 object ?obj)
+?moe (MapObEvent0 object ?obj label ?lab)
 =>
 (retract ?moe))
 
@@ -95,41 +95,52 @@
 (vr:NavOb off Map 0
 (CZMLGenerator)
 (MapObEvent0 status "REMOVED"
-	object ?obj)
-?czs (CZMLSpan object ?lab
-	(= ?lab (.getName ?obj)))
+	label ?lab)
+?czs (CZMLSpan object ?lab)
 =>
 (retract ?czs)
-(println "NavOb off map:" (.getName ?obj)))
+(println "NavOb off map:" ?lab))
 
-(vr:View Updated 0
-?vrc1 (VRDashboardControl onboard ?onb
-	view-elevation ?vel1
-	view-offset ?vof1
-	view-post ?vpt1)
-?vrc2 (VRDashboardControl onboard ?onb
-	view-elevation ?vel2
-	view-offset ?vof2
-	view-post ?vpt2
-	[(not= ?vel1 ?vel2)
-	 (not= ?vof1 ?vof2)
-	 (not= ?vpt1 ?vpt2)])
-?czs (CZMLSpan object ?onb
-	options ?ops)
+(vr:Set Wikipedia Coordinates 1
+(CZMLGenerator)
+?onb (Onboard label ?lab
+	time ?tim)
+(Clock0 time ?t (> ?t ?tim))
 =>
-(if (vr.dashcli/same-view ?ops ?vel1 ?vof1 ?vpt1)
-  (do (retract ?vrc1)
-    (modify ?czs options (vr.dashcli/update-view ?ops ?vel2 ?vof2 ?vpt2))
-  (do (retract ?vrc2)
-    (modify ?czs options (vr.dashcli/update-view ?ops ?vel1 ?vof1 ?vpt1))))
+(vr.dashcli/set-wiki-coords ?lab))
+
+(czm0:CZML Navob Leg Generation2 1
+(CZMLGenerator delay ?del
+	visibility ?vis)
+(Onboard label ?onb)
+?cs (CZMLSpan time ?tim
+	object ?obj
+	options ?ops)
+(Clock0 time ?t ((not= ?obj ?onb)
+                       (> ?t ?tim)))
+=>
+(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]
+  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]
+    (let [dis (.distanceNM omo nmo)]
+      (if (< dis ?vis)
+        (light.cesium.core/navob-leg 
+	nmo
+	dis
+	(+ ?del 2)
+	?ops))
+      (modify ?cs time (+ ?t ?del))))))
 
 (vr:NMEA Start 0
+(VRDashboardControl nmea-port ?nmp selected-race ?ser)
 ?c (NMEAControl status "START"
 	delay ?del)
 ?d (NMEAData object ?obj)
 (Clock0 time ?t)
 =>
 (println "NMEA Start boat" (protege.core/sv ?obj "label"))
+(vr.dashcli/select-race)
+(vr.dashcli/show-controls)
+(future (vr.dashcli/get-external-data (read-string ?nmp) (str "/nmea/" ?ser)))
 (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]
   (modify ?d data [""
 	(.getLatitude mo)
@@ -138,45 +149,41 @@
 	(.getSpeed mo)
 	""]
 	time ?t)
-  (modify ?c status "RUN")))
+  (modify ?c status "RUN")
+  (if (nil? light.sim/ES-TIMER)
+    (light.sim/start-sim))))
 
 (vr:NMEA Run 0
-(VRDashboardControl telnet-port ?tport)
-?c (NMEAControl status "RUN"
+(VRDashboardControl onboard ?onb visibility ?vis)
+(NMEAControl status "RUN"
 	delay ?del)
 ?d (NMEAData object ?obj
-	data ?data
 	time ?t0)
 (Clock0 time ?t1 (> ?t1 ?t0))
 =>
-(if-let [[tim lat lon spd crs dat :as nmea] (vr.dashcli/get-boat-data ?tport)]
-  (let [[?tim ?lat ?lon ?spd ?crs ?dat] ?data]
-    (if (or (not= lat ?lat)
-             (not= lon ?lon)
-             (not= crs ?crs)
-             (not= spd ?spd))
-      (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]
-        (.setLatitude mo lat)
-        (.setLongitude mo lon)
-        (.setCourse mo (int crs))
-        (.setSpeed mo spd)
-        (println (protege.core/sv ?obj "label") lat lon crs spd)
-        (modify ?d data nmea
-	time (+ ?t1 ?del)))))
-  (modify ?d time (+ ?t1 ?del))))
+(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]
+  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]
+    (.setLatitude mo lat)
+    (.setLongitude mo lon)
+    (.setCourse mo (int crs))
+    (.setSpeed mo spd)
+    (println "boat:" (protege.core/sv ?obj "label") bdata))
+  (vr.dashcli/get-fleet-data)
+  (vr.dashcli/show-neighbors ?onb ?vis)
+  (vr.dashcli/unvisible-offmap ?onb))
+(modify ?d time (+ ?t1 ?del)))
 
 (vr:NavOb on Map 0
 (CZMLGenerator)
 (MapObEvent0 status "ADDED"
-	object ?obj)
+	object ?obj
+	label ?lab
+                      (= (.getName (class ?obj)) "ru.igis.omtab.NavOb"))
 (Clock0 time ?t)
-(not CZMLSpan object ?lab
-	(= ?lab (.getName ?obj)))
+(not CZMLSpan object ?lab)
 =>
-(let [lab (.getName ?obj)
-      desc (.getDescription ?obj)]
-  (asser CZMLSpan object lab
-	options (read-string desc)
+(asser CZMLSpan object ?lab
+	options (read-string (.getDescription ?obj))
 	time ?t)
-  (println "NavOb on map:" lab)))
+(println "NavOb on map:" ?lab))
 
