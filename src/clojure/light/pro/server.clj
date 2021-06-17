@@ -170,7 +170,7 @@
 (defn start-client
   ([]
   (if-let [serv SERV]
-    (invoke-later (.browse (Desktop/getDesktop) (URI/create (str "http://0.0.0.0:" PORT))))))
+    (invoke-later (.browse (Desktop/getDesktop) (URI/create (str "http://localhost:" PORT))))))
 ([hm inst]
   (start-client)))
 

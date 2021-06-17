@@ -1,4 +1,4 @@
-; Mon Jun 07 13:07:41 MSK 2021
+; Mon Jun 07 15:20:23 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -697,6 +697,15 @@
 	(nmea-port "8081")
 	(onboard "russor")
 	(port "8448")
+	(races
+		"476.1"
+		"472.1"
+		"473.1"
+		"485.1"
+		"487.1"
+		"470.7"
+		"470.6")
+	(selected-race "476.1")
 	(telnet-port "10476")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))

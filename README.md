@@ -87,6 +87,10 @@ $ .\run_SE.bat 	    	# Windows
 
 See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
+### 3. More videos
+
+[Virtual Regatta Videos](https://github.com/rururu/sail-pro/tree/main/doc/vr_videos.md)
+
 ## FAQ
 
 1. How to rename a boat? 
@@ -109,6 +113,7 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 5. How to change Fleet visibility?
    
    Set a new Fleet visibility value and click Modify Instance button.
+   
 
 ## License
 
