@@ -53,7 +53,8 @@
   (get-external-data port path)))
 
 (defn parse-gprmc-data [data]
-  (let [d (.split data ",")]
+  (try
+(let [d (.split data ",")]
   (if (>= (count d) 10)
     (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]
       [time
@@ -61,7 +62,10 @@
        (parse-coord lon1 lon2)
        (round-speed (read-string spd))
        (read-string crs)
-       date]))))
+       date])))
+(catch Exception e
+  (println :gprmc-data :FAILURE)
+  nil)))
 
 (defn close-telnet []
   (when (some? TELNET)
@@ -315,7 +319,8 @@
             (.setLatitude nbm lat)
             (.setLongitude nbm lon)
             (.setCourse nbm (int cog))
-            (.setSpeed nbm (double sog)))
+            (if (number? sog)
+              (.setSpeed nbm (double sog))))
           (vswap! ONMAP conj uid)))))))
 
 (defn unvisible-offmap [onb]
