@@ -52,6 +52,8 @@ $ .\run_VR.bat 	    	# Windows
 
 See details in screencasts. Some details can be differen of earlier - these are deprecated!
 
+[Start of Summer Cup race Miami - Cancun 10 july 2021](https://www.youtube.com/watch?v=UwYsDwf3jN0)
+
 [Gibraltar in Vela Cup race](https://youtu.be/QsDpSx6kahg)
 
 [Nearby yachts during Vela Cup race](https://youtu.be/57WU1qmrENQ)

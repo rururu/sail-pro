@@ -6,3 +6,11 @@
 2. [Blambangan Peninsula](https://youtu.be/np3k5zpl4V0)
 3. [BaliStrait](https://youtu.be/ICiHosrS72c)
 4. [Getting off shallow between Lubang island and Ambil island](https://youtu.be/9CROT_wKL7M)
+
+## Global 40. Tanger to Sao Vicente
+
+1. [Finish of the race](https://www.youtube.com/watch?v=3TiLT9fwbO8)
+
+## Summer Cup. Miami to Cancun
+
+1. [Start of the race 10 july 2021](https://www.youtube.com/watch?v=UwYsDwf3jN0)

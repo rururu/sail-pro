@@ -1,4 +1,4 @@
-; Sun Jul 04 01:18:16 MSK 2021
+; Sat Jul 10 15:17:51 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -1028,14 +1028,12 @@
 	(onboard "russor")
 	(port "8448")
 	(races
-		"476.1"
+		"493.1"
 		"475.1"
 		"477.1"
-		"487.1"
-		"496.1"
-		"470.7")
-	(selected-race "477.1")
-	(telnet-port "10477")
+		"496.1")
+	(selected-race "493.1")
+	(telnet-port "10493")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
