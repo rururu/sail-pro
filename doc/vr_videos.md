@@ -9,7 +9,13 @@
 
 ## Global 40. Tanger to Sao Vicente
 
-1. [Finish of the race](https://www.youtube.com/watch?v=3TiLT9fwbO8)
+1. [Roundabout Madeira(https://youtu.be/findsTv8DmA)
+
+2. [Canary Islands](https://youtu.be/zDbkmsyHUwQ)
+
+3. [Africa Shore](https://youtu.be/4ua9TNRKq68)
+
+4. [Finish of the race](https://www.youtube.com/watch?v=3TiLT9fwbO8)
 
 ## Summer Cup. Miami to Cancun
 
