@@ -15,6 +15,7 @@
 3. [Africa Shore](https://youtu.be/4ua9TNRKq68)
 4. [Finish of the race](https://www.youtube.com/watch?v=3TiLT9fwbO8)
 
-## Summer Cup. Miami to Cancun
+## Summer Cup 2021. Miami to Cancun
 
 1. [Start of the race 10 july 2021](https://www.youtube.com/watch?v=UwYsDwf3jN0)
+2. [Bimini](https://youtu.be/f76lMWsXYzI)
