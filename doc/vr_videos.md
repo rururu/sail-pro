@@ -19,3 +19,4 @@
 
 1. [Start of the race 10 july 2021](https://www.youtube.com/watch?v=UwYsDwf3jN0)
 2. [Bimini](https://youtu.be/f76lMWsXYzI)
+3. [Eleuthera](https://youtu.be/MYBSFriXsNI)
