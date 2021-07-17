@@ -20,3 +20,11 @@
 1. [Start of the race 10 july 2021](https://www.youtube.com/watch?v=UwYsDwf3jN0)
 2. [Bimini](https://youtu.be/f76lMWsXYzI)
 3. [Eleuthera](https://youtu.be/MYBSFriXsNI)
+4. [Mayaguana](https://youtu.be/H-hU3tfJffA)
+4. [Grand Turk Island](https://youtu.be/o59NBmw-xvI)
+5. [Passage near Puerto Rico](https://youtu.be/J8n-fpthWV8)
+6. [Roundabout Barbados](https://youtu.be/HwE0gjQDo-k)
+
+## Others
+
+1. [Meaipe](https://youtu.be/E8kdpT2fQfU)

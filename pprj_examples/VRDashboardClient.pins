@@ -1,4 +1,4 @@
-; Sun Jul 11 17:22:35 MSK 2021
+; Fri Jul 16 22:19:38 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -247,7 +247,7 @@
 ([VRDashboardClient_Class170001] of  BBX
 
 	(title "Current")
-	(wsen 0.58153486 36.243927 0.91486824 36.577263))
+	(wsen -67.9808 17.994673 -67.64747 18.328005))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
@@ -366,43 +366,14 @@
 	(source "nil")
 	(title "RMMA"))
 
-([VRDashboardClient_Class220000] of  NavOb
+([VRDashboardClient_Class220000] of  CloFuncall
 
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "22351")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class220001] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "11982")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class220002] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "94320")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
+	(source "(ru.rules/f 0)"))
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 25.576006)
-	(lng -76.770256)
+	(lat 18.121038)
+	(lng -67.76867)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -416,28 +387,6 @@
 	(rhs "(vr.dashcli/set-wiki-coords ?lab)")
 	(salience 1)
 	(title "vr:Set Wikipedia Coordinates"))
-
-([VRDashboardClient_Class240000] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "60069")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class240001] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "76379")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class240720] of  CloFunction
 
@@ -456,362 +405,28 @@
 
 	(source "(ru.rules/dr)"))
 
-([VRDashboardClient_Class250012] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "12931")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class250013] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "12566")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
 ([VRDashboardClient_Class250016] of  CloVar
 
 	(source "{\"default\" \"{:gltf-url \\\"models/piramida/scene.gltf\\\"}\"}")
 	(title "DESC-MAP"))
 
-([VRDashboardClient_Class260000] of  NavOb
+([VRDashboardClient_Class280000] of  NavOb
 
-	(altitude 0)
+	(altitude 2)
 	(course 0)
 	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "33295")
+	(label "poverolt")
+	(latitude "60 0")
+	(longitude "30 0")
 	(playground-index 0)
 	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
+	(url "file:resources/public/img/yachtp.png")
 	(verticalSpeed 0.0))
 
-([VRDashboardClient_Class270000] of  NavOb
+([VRDashboardClient_Class280001] of  NMEAData
 
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "23169")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270001] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "63449")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270002] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "90325")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270003] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "54332")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270004] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "15075")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270005] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "39533")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270006] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "80464")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270007] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "86158")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270008] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "95493")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270009] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "95050")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270010] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "36813")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270011] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "72040")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270012] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "10527")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270013] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "41244")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270014] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "83796")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270015] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "58185")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270016] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "50940")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270017] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "57079")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270018] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "55106")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270019] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "16224")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270020] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "10837")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270021] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "28800")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270022] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "72395")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270023] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "14168")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270024] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "21345")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270025] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "18869")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270026] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "31293")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270027] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "56341")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class270028] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 8}")
-	(label "10292")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
+	(object [VRDashboardClient_Class280000])
+	(time 0))
 
 ([VRDashboardClient_Class280012] of  CloFunction
 
@@ -1031,6 +646,7 @@
 		"493.1"
 		"475.1"
 		"477.1"
+		"477.2"
 		"496.1")
 	(selected-race "493.1")
 	(telnet-port "10493")
