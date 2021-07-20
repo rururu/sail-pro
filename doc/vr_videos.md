@@ -24,6 +24,7 @@
 4. [Grand Turk Island](https://youtu.be/o59NBmw-xvI)
 5. [Passage near Puerto Rico](https://youtu.be/J8n-fpthWV8)
 6. [Roundabout Barbados](https://youtu.be/HwE0gjQDo-k)
+7. [Jamaica](https://youtu.be/G_-VMiS-mSM)
 
 ## Others
 
