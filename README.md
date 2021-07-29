@@ -99,7 +99,7 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
 	Before starting time go to Instances Tab. Open NavOb class: IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. Select russor instance. Update a label slot.
 	```diff
-	- Also update a slot onboard in VRDashboardControl instance. It is important!
+	- Also update a slot onboard in VRDashboardControl instance. Save and reload project. It is important!
 	```
 
 2. Quick start (run_VR.sh) often fails.
