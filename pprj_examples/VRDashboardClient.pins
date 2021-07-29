@@ -1,4 +1,4 @@
-; Fri Jul 16 22:19:38 MSK 2021
+; Sat Jul 24 14:35:18 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -542,7 +542,7 @@
 
 ([VRDashboardClient_Class30070] of  NMEAData
 
-	(object [VRDashboardClient_Class100115])
+	(object [VRDashboardClient_Class280000])
 	(time 0))
 
 ([VRDashboardClient_Class30073] of  Run
@@ -640,16 +640,15 @@
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
 	(nmea-port "8081")
-	(onboard "russor")
+	(onboard "poverolt")
 	(port "8448")
 	(races
 		"493.1"
-		"475.1"
-		"477.1"
+		"498.1"
 		"477.2"
 		"496.1")
-	(selected-race "493.1")
-	(telnet-port "10493")
+	(selected-race "496.1")
+	(telnet-port "10496")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
