@@ -30,4 +30,5 @@
 
 1. [Meaipe](https://youtu.be/E8kdpT2fQfU)
 2. [Going along the Strait Of Magellan](https://youtu.be/0VbBxUmGszg)
-2. [Rounding the Cape Horn](https://youtu.be/eRwe14Fn5Ac)
+3. [Rounding the Cape Horn](https://youtu.be/eRwe14Fn5Ac)
+4. [Finish in San Francisco](https://www.youtube.com/watch?v=wzTJfI7dEAU)
