@@ -8,7 +8,7 @@ Simulation and modelling environment for virtual sailing.
 
 You need to be installed on your machine:
 
-1. Java Runtime Environment version 11 and above
+1. Java Runtime Environment version 11 and above.
 
 2. [Git](https://git-scm.com/) (optional, you can download project from Github, button "Code" on project page)
 
@@ -28,8 +28,8 @@ $ cd sail-pro
 
 ### 1. Project VR Dashboard Client
 
-1. Open "Virual Regatta" page in a browser
-2. Activate "VR Dashboard" plugin
+1. Open "Virual Regatta" page in a browser.
+2. Activate "VR Dashboard" plugin.
 3. Select an active race. Check the race identificator on "Z VR Dashboard" tab and click a checkbox NMEA.
 4. Start "sail-pro":
 
@@ -45,15 +45,15 @@ $ .\run_VR.bat 	    	# Windows
 
 6. Wait while a panel popup.
 7. Only first time change a boat from "russor" to yours.
-   - For tis go to "Instances" tab. Open "NavOb" class: 
+   - For this go to "Instances" tab. Open "NavOb" class: 
        IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. 
    - Select "russor" instance. Update a "label" slot.
    - Also update a slot "onboard" in "VRDashboardControl" instance. 
    - Save the project and restart.
 8. Select a race on the popup panel, if needed (race number is on "Z VR Dashboard" tab).
 9. Wait while the boat jump into current position.
-10. Start a "Cesium" server on the popup panel.
-11. Start a "Cesium" client on the popup panel.
+10. Start a "Cesium server" on the popup panel.
+11. Start a "Cesium client" on the popup panel.
 12. Go on board of the boat.
 
 See details in screencasts. Some details can be differen of earlier - these are deprecated!
