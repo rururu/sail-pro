@@ -28,10 +28,10 @@ $ cd sail-pro
 
 ### 1. Project VR Dashboard Client
 
-1. Open Virual Regatta page in a browser
-2. Activate VR Dashboard plugin
-3. Select an active race. Check the race identificator on Z VR Dashboard tab and click a checkbox NMEA
-4. Start sail-pro:
+1. Open "Virual Regatta" page in a browser
+2. Activate "VR Dashboard" plugin
+3. Select an active race. Check the race identificator on "Z VR Dashboard" tab and click a checkbox NMEA.
+4. Start "sail-pro":
 
 ```clj
 $ cd <..>/sail-pro
@@ -39,16 +39,22 @@ $ ./run_VR.sh 			# Linux, MacOS
 $ .\run_VR.bat 	    	# Windows
 ```
 
-5. Wait while programs will be loaded and expert system initialized (see a message in the terminal)
+5. Wait while programs will be loaded and expert system initialized (see a message in the terminal).
 
 ![screenshot](2.png)
 
-6. Start time on OpenMap tab (checkbox "Run Timer")
-7. Select the race on a popup panel
-8. Wait while a boat jump into current position
-9. Start Cesium server on the popup panel
-10. Start Cesium client on the popup panel
-11. Go on board of the boat 
+6. Wait while a panel popup.
+7. Only first time change a boat from "russor" to yours.
+   - For tis go to "Instances" tab. Open "NavOb" class: 
+       IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. 
+   - Select "russor" instance. Update a "label" slot.
+   - Also update a slot "onboard" in "VRDashboardControl" instance. 
+   - Save the project and restart.
+8. Select a race on the popup panel, if needed (race number is on "Z VR Dashboard" tab).
+9. Wait while the boat jump into current position.
+10. Start a "Cesium" server on the popup panel.
+11. Start a "Cesium" client on the popup panel.
+12. Go on board of the boat.
 
 See details in screencasts. Some details can be differen of earlier - these are deprecated!
 
@@ -66,14 +72,14 @@ See details in screencasts. Some details can be differen of earlier - these are 
 
 [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
 
-12. Use controls to create nearby boats, give them names, coordinates, speed and course. 
-    You can even create aircraft carrier and control helicopter or fighter. 
+13. Use controls to create nearby boats, give them names, coordinates, speed and course. 
+    You can even create an aircraft carrier and control a helicopter or a fighter. 
 
 [Using Controls](https://youtu.be/pK9GTSEGQYQ)
 
 [Get off a shallow in the Nord Stream Race 3](https://youtu.be/U5gG5pHpdcY)
 
-13. Acquaintance with neighborhood using Wikipedia while virtually sailing
+14. Acquaintance with neighborhood using Wikipedia while virtually sailing.
 
 [Using Wikipedia in races](https://youtu.be/GZFYdvlLbbw)
 
@@ -95,17 +101,9 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
 
 ## FAQ
 
-1. How to rename a boat? 
+1. Quick start (run_VR.sh) sometimes fails.
 
-	Before starting time go to Instances Tab. Open NavOb class: IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. Select russor instance. Update a label slot.
-	```diff
-	- Also update a slot onboard in VRDashboardControl instance. 
-	- Save and reload project. It is important!
-	```
-
-2. Quick start (run_VR.sh) often fails.
-
-   Use a longer start (run.sh) with manual loading of programs and start of the expert system:
+   Use a longer start (run.sh or run.bat) with manual loading of programs and start of the expert system:
    Menu: Protege -> (clojure-work).
    
 3. When we climb aboard, we find ourselves under water.
@@ -118,7 +116,7 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
    
 5. How to change Fleet visibility?
    
-   Set a new Fleet visibility value and click Modify Instance button.
+   Set a new "Fleet visibility" value and click "Modify Instance" button.
    
 
 ## License
