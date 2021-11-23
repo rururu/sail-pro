@@ -1,0 +1,2917 @@
+; Fri Jun 11 17:45:50 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([ANNOTATED_INSTANCE_WIDGET] of  Widget
+
+	(name ":ANNOTATED-INSTANCE"))
+
+([ANNOTATION_TEXT_WIDGET] of  Widget
+
+	(height 100)
+	(is_hidden FALSE)
+	(name ":ANNOTATION-TEXT")
+	(widget_class_name "edu.stanford.smi.protege.widget.YellowStickyWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([BROWSER_SLOT_NAMES] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class100004]
+		[Clojure_ProjectKB_Class100005]
+		[Clojure_ProjectKB_Class100006]
+		[Clojure_ProjectKB_Class100007]
+		[Clojure_ProjectKB_Class100008]
+		[Clojure_ProjectKB_Class100009]
+		[Clojure_ProjectKB_Class100010]
+		[Clojure_ProjectKB_Class110011]
+		[Clojure_ProjectKB_Class110012]
+		[Clojure_ProjectKB_Class130013]
+		[Clojure_ProjectKB_Class130014]
+		[Clojure_ProjectKB_Class130015]
+		[Clojure_ProjectKB_Class130016]
+		[Clojure_ProjectKB_Class130017]
+		[Clojure_ProjectKB_Class130018]))
+
+([Clojure_ProjectKB_Class100004] of  String
+
+	(name "WorkingPrograms")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class100005] of  String
+
+	(name "CloFunction")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class100006] of  String
+
+	(name "CloExtendType")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class100007] of  String
+
+	(name "CloRecord")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class100008] of  String
+
+	(name "CloProgram")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class100009] of  String
+
+	(name "CSS")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class100010] of  String
+
+	(name "CloProtocol")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class100011] of  Widget
+
+	(height 240)
+	(is_hidden FALSE)
+	(name "cloProtocols")
+	(property_list [Clojure_ProjectKB_Class100012])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 200)
+	(y 60))
+
+([Clojure_ProjectKB_Class100012] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class100013]
+		[Clojure_ProjectKB_Class100014]))
+
+([Clojure_ProjectKB_Class100013] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class100014] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class100015] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "fields")
+	(property_list [Clojure_ProjectKB_Class100016])
+	(widget_class_name "edu.stanford.smi.protege.widget.StringListWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class100016] of  Property_List
+)
+
+([Clojure_ProjectKB_Class100021] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "options")
+	(property_list [Clojure_ProjectKB_Class100022])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 0)
+	(y 180))
+
+([Clojure_ProjectKB_Class100022] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class100023]
+		[Clojure_ProjectKB_Class100024]))
+
+([Clojure_ProjectKB_Class100023] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class100024] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class10004] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class10005] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class109] of  String
+
+	(name "SearchTab_Query"))
+
+([Clojure_ProjectKB_Class11] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class12]
+		[Clojure_ProjectKB_Class13]
+		[Clojure_ProjectKB_Class15]
+		[Clojure_ProjectKB_Class60012]))
+
+([Clojure_ProjectKB_Class110004] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110005] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110006] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110007] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110008] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110009] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110010] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110011] of  String
+
+	(name "CloFuncall")
+	(string_value "source"))
+
+([Clojure_ProjectKB_Class110012] of  String
+
+	(name "CloVar")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class110013] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110014] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110015] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110016] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110017] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110018] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110019] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110020] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110021] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class110069] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110070]
+		[Clojure_ProjectKB_Class110071]
+		[Clojure_ProjectKB_Class110076]
+		[Clojure_ProjectKB_Class110081]
+		[Clojure_ProjectKB_Class110083]
+		[Clojure_ProjectKB_Class110088]
+		[Clojure_ProjectKB_Class110093]
+		[Clojure_ProjectKB_Class110098]
+		[Clojure_ProjectKB_Class110103]
+		[Clojure_ProjectKB_Class110108]
+		[Clojure_ProjectKB_Class110113]
+		[Clojure_ProjectKB_Class110118]
+		[Clojure_ProjectKB_Class110120]
+		[Clojure_ProjectKB_Class110122]
+		[Clojure_ProjectKB_Class110124]
+		[Clojure_ProjectKB_Class110126]
+		[Clojure_ProjectKB_Class110128]
+		[Clojure_ProjectKB_Class110132]
+		[Clojure_ProjectKB_Class110134]
+		[Clojure_ProjectKB_Class110192]
+		[Clojure_ProjectKB_Class110202]))
+
+([Clojure_ProjectKB_Class110070] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class110071] of  Widget
+
+	(height 400)
+	(is_hidden FALSE)
+	(name "cloFunctions")
+	(property_list [Clojure_ProjectKB_Class110072])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 210)
+	(x 0)
+	(y 240))
+
+([Clojure_ProjectKB_Class110072] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110073]
+		[Clojure_ProjectKB_Class110074]
+		[Clojure_ProjectKB_Class110075]
+		[Clojure_ProjectKB_Class110013]))
+
+([Clojure_ProjectKB_Class110073] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110074] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110075] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110076] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "cloVars")
+	(property_list [Clojure_ProjectKB_Class110077])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 210)
+	(y 120))
+
+([Clojure_ProjectKB_Class110077] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110078]
+		[Clojure_ProjectKB_Class110079]
+		[Clojure_ProjectKB_Class110080]
+		[Clojure_ProjectKB_Class110014]))
+
+([Clojure_ProjectKB_Class110078] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110079] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110080] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110081] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class110082])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 210)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class110082] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110083] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "cloNamespace")
+	(property_list [Clojure_ProjectKB_Class110084])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 210)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class110084] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110085]
+		[Clojure_ProjectKB_Class110086]
+		[Clojure_ProjectKB_Class110087]
+		[Clojure_ProjectKB_Class110015]))
+
+([Clojure_ProjectKB_Class110085] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110086] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110087] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110088] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "cloProtocols")
+	(property_list [Clojure_ProjectKB_Class110089])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 120))
+
+([Clojure_ProjectKB_Class110089] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110090]
+		[Clojure_ProjectKB_Class110091]
+		[Clojure_ProjectKB_Class110092]
+		[Clojure_ProjectKB_Class110016]))
+
+([Clojure_ProjectKB_Class110090] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110091] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110092] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110093] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "cloTypes")
+	(property_list [Clojure_ProjectKB_Class110094])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 210)
+	(y 440))
+
+([Clojure_ProjectKB_Class110094] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110095]
+		[Clojure_ProjectKB_Class110096]
+		[Clojure_ProjectKB_Class110097]
+		[Clojure_ProjectKB_Class110017]))
+
+([Clojure_ProjectKB_Class110095] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110096] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110097] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110098] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "cloRecords")
+	(property_list [Clojure_ProjectKB_Class110099])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 210)
+	(y 280))
+
+([Clojure_ProjectKB_Class110099] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110100]
+		[Clojure_ProjectKB_Class110101]
+		[Clojure_ProjectKB_Class110102]
+		[Clojure_ProjectKB_Class110018]))
+
+([Clojure_ProjectKB_Class110100] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110101] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110102] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110103] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "cloExtendProtocols")
+	(property_list [Clojure_ProjectKB_Class110104])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 280))
+
+([Clojure_ProjectKB_Class110104] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110105]
+		[Clojure_ProjectKB_Class110106]
+		[Clojure_ProjectKB_Class110107]
+		[Clojure_ProjectKB_Class110019]))
+
+([Clojure_ProjectKB_Class110105] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110106] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110107] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110108] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "cloExtendTypes")
+	(property_list [Clojure_ProjectKB_Class110109])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 440))
+
+([Clojure_ProjectKB_Class110109] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110110]
+		[Clojure_ProjectKB_Class110111]
+		[Clojure_ProjectKB_Class110112]
+		[Clojure_ProjectKB_Class110020]))
+
+([Clojure_ProjectKB_Class110110] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110111] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110112] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110113] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "documentation")
+	(property_list [Clojure_ProjectKB_Class110114])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 220)
+	(x 210)
+	(y 60))
+
+([Clojure_ProjectKB_Class110114] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110115]
+		[Clojure_ProjectKB_Class110116]
+		[Clojure_ProjectKB_Class110117]
+		[Clojure_ProjectKB_Class110021]))
+
+([Clojure_ProjectKB_Class110115] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110116] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110117] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class110118] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "store-in")
+	(property_list [Clojure_ProjectKB_Class110119])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 220)
+	(x 430)
+	(y 200))
+
+([Clojure_ProjectKB_Class110119] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110120] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "asset-path")
+	(property_list [Clojure_ProjectKB_Class110121])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 220)
+	(x 430)
+	(y 380))
+
+([Clojure_ProjectKB_Class110121] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110122] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "epilogue")
+	(property_list [Clojure_ProjectKB_Class110123])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 210)
+	(x 0)
+	(y 640))
+
+([Clojure_ProjectKB_Class110123] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110124] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "output-dir")
+	(property_list [Clojure_ProjectKB_Class110125])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 220)
+	(x 430)
+	(y 260))
+
+([Clojure_ProjectKB_Class110125] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110126] of  Widget
+
+	(height 100)
+	(is_hidden FALSE)
+	(name "compiler-options")
+	(property_list [Clojure_ProjectKB_Class110127])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 220)
+	(x 430)
+	(y 440))
+
+([Clojure_ProjectKB_Class110127] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110128] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "required")
+	(property_list [Clojure_ProjectKB_Class110129])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 210)
+	(x 0)
+	(y 120))
+
+([Clojure_ProjectKB_Class110129] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110130]
+		[Clojure_ProjectKB_Class110131]
+		[Clojure_ProjectKB_Class120022]
+		[Clojure_ProjectKB_Class120023]))
+
+([Clojure_ProjectKB_Class110130] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110131] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110132] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "butt-build")
+	(property_list [Clojure_ProjectKB_Class110133])
+	(widget_class_name "clojuretab.ClojureActionButton")
+	(width 220)
+	(x 430)
+	(y 540))
+
+([Clojure_ProjectKB_Class110133] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110134] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "output-to")
+	(property_list [Clojure_ProjectKB_Class110135])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 220)
+	(x 430)
+	(y 320))
+
+([Clojure_ProjectKB_Class110135] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110152] of  Widget
+
+	(is_hidden FALSE)
+	(name "HTML")
+	(property_list [Clojure_ProjectKB_Class110178])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class110161] of  Widget
+
+	(is_hidden FALSE)
+	(name "CSS")
+	(property_list [Clojure_ProjectKB_Class110170])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class110170] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110171]
+		[Clojure_ProjectKB_Class110172]
+		[Clojure_ProjectKB_Class110174]
+		[Clojure_ProjectKB_Class110176]))
+
+([Clojure_ProjectKB_Class110171] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class110172] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "store-in")
+	(property_list [Clojure_ProjectKB_Class110173])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 330)
+	(x 0)
+	(y 460))
+
+([Clojure_ProjectKB_Class110173] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110174] of  Widget
+
+	(height 400)
+	(is_hidden FALSE)
+	(name "source")
+	(property_list [Clojure_ProjectKB_Class110175])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 330)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class110175] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110176] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class110177])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class110177] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110178] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110179]
+		[Clojure_ProjectKB_Class110180]
+		[Clojure_ProjectKB_Class110182]
+		[Clojure_ProjectKB_Class110184]))
+
+([Clojure_ProjectKB_Class110179] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class110180] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "store-in")
+	(property_list [Clojure_ProjectKB_Class110181])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 330)
+	(x 0)
+	(y 460))
+
+([Clojure_ProjectKB_Class110181] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110182] of  Widget
+
+	(height 400)
+	(is_hidden FALSE)
+	(name "source")
+	(property_list [Clojure_ProjectKB_Class110183])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 330)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class110183] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110184] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class110185])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class110185] of  Property_List
+)
+
+([Clojure_ProjectKB_Class110192] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "html")
+	(property_list [Clojure_ProjectKB_Class110193])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 210)
+	(y 600))
+
+([Clojure_ProjectKB_Class110193] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110194]
+		[Clojure_ProjectKB_Class110195]
+		[Clojure_ProjectKB_Class120024]
+		[Clojure_ProjectKB_Class120025]))
+
+([Clojure_ProjectKB_Class110194] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110195] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class110202] of  Widget
+
+	(height 160)
+	(is_hidden FALSE)
+	(name "css")
+	(property_list [Clojure_ProjectKB_Class110203])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 600))
+
+([Clojure_ProjectKB_Class110203] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class110204]
+		[Clojure_ProjectKB_Class110205]
+		[Clojure_ProjectKB_Class120026]
+		[Clojure_ProjectKB_Class120027]))
+
+([Clojure_ProjectKB_Class110204] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class110205] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class12] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class120011] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120012] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120013] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120014] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120022] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120023] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120024] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120025] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120026] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120027] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120028] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120029]
+		[Clojure_ProjectKB_Class120030]
+		[Clojure_ProjectKB_Class120036]
+		[Clojure_ProjectKB_Class120042]
+		[Clojure_ProjectKB_Class120044]
+		[Clojure_ProjectKB_Class120050]
+		[Clojure_ProjectKB_Class120056]
+		[Clojure_ProjectKB_Class120062]
+		[Clojure_ProjectKB_Class120068]
+		[Clojure_ProjectKB_Class120074]
+		[Clojure_ProjectKB_Class120080]))
+
+([Clojure_ProjectKB_Class120029] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class120030] of  Widget
+
+	(height 670)
+	(is_hidden FALSE)
+	(name "cloFunctions")
+	(property_list [Clojure_ProjectKB_Class120031])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 210)
+	(x 0)
+	(y 120))
+
+([Clojure_ProjectKB_Class120031] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120032]
+		[Clojure_ProjectKB_Class120033]
+		[Clojure_ProjectKB_Class120034]
+		[Clojure_ProjectKB_Class120035]))
+
+([Clojure_ProjectKB_Class120032] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120033] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120034] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120035] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120036] of  Widget
+
+	(height 670)
+	(is_hidden FALSE)
+	(name "cloVars")
+	(property_list [Clojure_ProjectKB_Class120037])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 210)
+	(y 120))
+
+([Clojure_ProjectKB_Class120037] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120038]
+		[Clojure_ProjectKB_Class120039]
+		[Clojure_ProjectKB_Class120040]
+		[Clojure_ProjectKB_Class120041]))
+
+([Clojure_ProjectKB_Class120038] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120039] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120040] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120041] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120042] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class120043])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 210)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class120043] of  Property_List
+)
+
+([Clojure_ProjectKB_Class120044] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "cloNamespace")
+	(property_list [Clojure_ProjectKB_Class120045])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 210)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class120045] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120046]
+		[Clojure_ProjectKB_Class120047]
+		[Clojure_ProjectKB_Class120048]
+		[Clojure_ProjectKB_Class120049]))
+
+([Clojure_ProjectKB_Class120046] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120047] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120048] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120049] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120050] of  Widget
+
+	(height 140)
+	(is_hidden FALSE)
+	(name "cloProtocols")
+	(property_list [Clojure_ProjectKB_Class120051])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 120))
+
+([Clojure_ProjectKB_Class120051] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120052]
+		[Clojure_ProjectKB_Class120053]
+		[Clojure_ProjectKB_Class120054]
+		[Clojure_ProjectKB_Class120055]))
+
+([Clojure_ProjectKB_Class120052] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120053] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120054] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120055] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120056] of  Widget
+
+	(height 130)
+	(is_hidden FALSE)
+	(name "cloTypes")
+	(property_list [Clojure_ProjectKB_Class120057])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 530))
+
+([Clojure_ProjectKB_Class120057] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120058]
+		[Clojure_ProjectKB_Class120059]
+		[Clojure_ProjectKB_Class120060]
+		[Clojure_ProjectKB_Class120061]))
+
+([Clojure_ProjectKB_Class120058] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120059] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120060] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120061] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120062] of  Widget
+
+	(height 140)
+	(is_hidden FALSE)
+	(name "cloRecords")
+	(property_list [Clojure_ProjectKB_Class120063])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 390))
+
+([Clojure_ProjectKB_Class120063] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120064]
+		[Clojure_ProjectKB_Class120065]
+		[Clojure_ProjectKB_Class120066]
+		[Clojure_ProjectKB_Class120067]))
+
+([Clojure_ProjectKB_Class120064] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120065] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120066] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120067] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120068] of  Widget
+
+	(height 130)
+	(is_hidden FALSE)
+	(name "cloExtendProtocols")
+	(property_list [Clojure_ProjectKB_Class120069])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 260))
+
+([Clojure_ProjectKB_Class120069] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120070]
+		[Clojure_ProjectKB_Class120071]
+		[Clojure_ProjectKB_Class120072]
+		[Clojure_ProjectKB_Class120073]))
+
+([Clojure_ProjectKB_Class120070] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120071] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120072] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120073] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120074] of  Widget
+
+	(height 130)
+	(is_hidden FALSE)
+	(name "cloExtendTypes")
+	(property_list [Clojure_ProjectKB_Class120075])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 660))
+
+([Clojure_ProjectKB_Class120075] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120076]
+		[Clojure_ProjectKB_Class120077]
+		[Clojure_ProjectKB_Class120078]
+		[Clojure_ProjectKB_Class120079]))
+
+([Clojure_ProjectKB_Class120076] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120077] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120078] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120079] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class120080] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "documentation")
+	(property_list [Clojure_ProjectKB_Class120081])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 220)
+	(x 210)
+	(y 60))
+
+([Clojure_ProjectKB_Class120081] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class120082]
+		[Clojure_ProjectKB_Class120083]
+		[Clojure_ProjectKB_Class120084]
+		[Clojure_ProjectKB_Class120085]))
+
+([Clojure_ProjectKB_Class120082] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class120083] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class120084] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class120085] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Показать ссылки на Выделенное Значение  "))
+
+([Clojure_ProjectKB_Class13] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class14])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class130013] of  String
+
+	(name "CloMacro")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class130014] of  String
+
+	(name "HTML")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class130015] of  String
+
+	(name "CloNamespace")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class130016] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([Clojure_ProjectKB_Class130017] of  String
+
+	(name "CloDocumentation")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class130018] of  String
+
+	(name "CloExtendProtocol")
+	(string_value "title"))
+
+([Clojure_ProjectKB_Class130019] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([Clojure_ProjectKB_Class130020] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([Clojure_ProjectKB_Class130021] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([Clojure_ProjectKB_Class14] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14544] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloFunction")
+	(property_list [Clojure_ProjectKB_Class14545])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class14545] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class14546]
+		[Clojure_ProjectKB_Class14547]
+		[Clojure_ProjectKB_Class14549]
+		[Clojure_ProjectKB_Class50008]))
+
+([Clojure_ProjectKB_Class14546] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class14547] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class14548])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 520)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class14548] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14549] of  Widget
+
+	(height 390)
+	(is_hidden FALSE)
+	(name "source")
+	(property_list [Clojure_ProjectKB_Class14550])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 520)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class14550] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14551] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloNamespace")
+	(property_list [Clojure_ProjectKB_Class14552])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class14552] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class14553]
+		[Clojure_ProjectKB_Class14554]
+		[Clojure_ProjectKB_Class14556]))
+
+([Clojure_ProjectKB_Class14553] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class14554] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class14555])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class14555] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14556] of  Widget
+
+	(height 130)
+	(is_hidden FALSE)
+	(name "source")
+	(property_list [Clojure_ProjectKB_Class14557])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 260)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class14557] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14558] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloVar")
+	(property_list [Clojure_ProjectKB_Class14559])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class14559] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class14560]
+		[Clojure_ProjectKB_Class14561]
+		[Clojure_ProjectKB_Class14563]))
+
+([Clojure_ProjectKB_Class14560] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class14561] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class14562])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class14562] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14563] of  Widget
+
+	(height 140)
+	(is_hidden FALSE)
+	(name "source")
+	(property_list [Clojure_ProjectKB_Class14564])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 290)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class14564] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14565] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloProgram")
+	(property_list [Clojure_ProjectKB_Class14566])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class14566] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class14567]
+		[Clojure_ProjectKB_Class14568]
+		[Clojure_ProjectKB_Class14572]
+		[Clojure_ProjectKB_Class14576]
+		[Clojure_ProjectKB_Class14578]
+		[Clojure_ProjectKB_Class20021]
+		[Clojure_ProjectKB_Class20008]
+		[Clojure_ProjectKB_Class20018]
+		[Clojure_ProjectKB_Class50070]
+		[Clojure_ProjectKB_Class50080]
+		[Clojure_ProjectKB_Class40004]))
+
+([Clojure_ProjectKB_Class14567] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class14568] of  Widget
+
+	(height 670)
+	(is_hidden FALSE)
+	(name "cloFunctions")
+	(property_list [Clojure_ProjectKB_Class14569])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 210)
+	(x 0)
+	(y 120))
+
+([Clojure_ProjectKB_Class14569] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class14570]
+		[Clojure_ProjectKB_Class14571]
+		[Clojure_ProjectKB_Class3]
+		[Clojure_ProjectKB_Class110005]))
+
+([Clojure_ProjectKB_Class14570] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class14571] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class14572] of  Widget
+
+	(height 670)
+	(is_hidden FALSE)
+	(name "cloVars")
+	(property_list [Clojure_ProjectKB_Class14573])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 210)
+	(y 120))
+
+([Clojure_ProjectKB_Class14573] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class14574]
+		[Clojure_ProjectKB_Class14575]
+		[Clojure_ProjectKB_Class10004]
+		[Clojure_ProjectKB_Class110006]))
+
+([Clojure_ProjectKB_Class14574] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class14575] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class14576] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class14577])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 210)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class14577] of  Property_List
+)
+
+([Clojure_ProjectKB_Class14578] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "cloNamespace")
+	(property_list [Clojure_ProjectKB_Class14579])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 210)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class14579] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class14580]
+		[Clojure_ProjectKB_Class14581]
+		[Clojure_ProjectKB_Class10005]
+		[Clojure_ProjectKB_Class110007]))
+
+([Clojure_ProjectKB_Class14580] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class14581] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class15] of  Widget
+
+	(height 330)
+	(is_hidden FALSE)
+	(name "source")
+	(property_list [Clojure_ProjectKB_Class16])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 330)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class16] of  Property_List
+)
+
+([Clojure_ProjectKB_Class2] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class20004] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class20005] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class20006] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class20007] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class20008] of  Widget
+
+	(height 130)
+	(is_hidden FALSE)
+	(name "cloTypes")
+	(property_list [Clojure_ProjectKB_Class20009])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 530))
+
+([Clojure_ProjectKB_Class20009] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class20010]
+		[Clojure_ProjectKB_Class20011]
+		[Clojure_ProjectKB_Class20005]
+		[Clojure_ProjectKB_Class110009]))
+
+([Clojure_ProjectKB_Class20010] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class20011] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class20018] of  Widget
+
+	(height 140)
+	(is_hidden FALSE)
+	(name "cloRecords")
+	(property_list [Clojure_ProjectKB_Class20019])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 390))
+
+([Clojure_ProjectKB_Class20019] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class20020]
+		[Clojure_ProjectKB_Class30021]
+		[Clojure_ProjectKB_Class20006]
+		[Clojure_ProjectKB_Class110010]))
+
+([Clojure_ProjectKB_Class20020] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class20021] of  Widget
+
+	(height 140)
+	(is_hidden FALSE)
+	(name "cloProtocols")
+	(property_list [Clojure_ProjectKB_Class20022])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 120))
+
+([Clojure_ProjectKB_Class20022] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class20023]
+		[Clojure_ProjectKB_Class20024]
+		[Clojure_ProjectKB_Class20004]
+		[Clojure_ProjectKB_Class110008]))
+
+([Clojure_ProjectKB_Class20023] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class20024] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class3] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class30004] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloDocumentation")
+	(property_list [Clojure_ProjectKB_Class30005])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class30005] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class30006]
+		[Clojure_ProjectKB_Class30007]
+		[Clojure_ProjectKB_Class60004]))
+
+([Clojure_ProjectKB_Class30006] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class30007] of  Widget
+
+	(height 620)
+	(is_hidden FALSE)
+	(name "source")
+	(property_list [Clojure_ProjectKB_Class40008])
+	(widget_class_name "edu.stanford.smi.protegex.widget.editorpane.EditorPaneWidget")
+	(width 830)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class30008] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class30012] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloExtendType")
+	(property_list [Clojure_ProjectKB_Class30013])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class30013] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class30014]
+		[Clojure_ProjectKB_Class30015]
+		[Clojure_ProjectKB_Class30017]))
+
+([Clojure_ProjectKB_Class30014] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class30015] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class30016])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class30016] of  Property_List
+)
+
+([Clojure_ProjectKB_Class30017] of  Widget
+
+	(height 170)
+	(is_hidden FALSE)
+	(name "cloImplementations")
+	(property_list [Clojure_ProjectKB_Class30018])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class30018] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class30019]
+		[Clojure_ProjectKB_Class30020]
+		[Clojure_ProjectKB_Class50013]))
+
+([Clojure_ProjectKB_Class30019] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class30020] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class30021] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class4] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloMacro")
+	(property_list [Clojure_ProjectKB_Class11])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class40004] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "documentation")
+	(property_list [Clojure_ProjectKB_Class40005])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 220)
+	(x 210)
+	(y 60))
+
+([Clojure_ProjectKB_Class40005] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class40006]
+		[Clojure_ProjectKB_Class40007]
+		[Clojure_ProjectKB_Class70004]
+		[Clojure_ProjectKB_Class120013]))
+
+([Clojure_ProjectKB_Class40006] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class40007] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class40008] of  Property_List
+)
+
+([Clojure_ProjectKB_Class40024] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloType")
+	(property_list [Clojure_ProjectKB_Class40025])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class40025] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class40026]
+		[Clojure_ProjectKB_Class40031]
+		[Clojure_ProjectKB_Class100011]
+		[Clojure_ProjectKB_Class100015]
+		[Clojure_ProjectKB_Class100021]))
+
+([Clojure_ProjectKB_Class40026] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class40031] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class40032])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class40032] of  Property_List
+)
+
+([Clojure_ProjectKB_Class4538] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [Clojure_ProjectKB_Class4539])
+	(widget_class_name "ru.igis.omtab.OpenMapTab"))
+
+([Clojure_ProjectKB_Class4539] of  Property_List
+)
+
+([Clojure_ProjectKB_Class4540] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [Clojure_ProjectKB_Class4541])
+	(widget_class_name "edu.stanford.smi.protege.widget.ProtegePropertiesTab"))
+
+([Clojure_ProjectKB_Class4541] of  Property_List
+)
+
+([Clojure_ProjectKB_Class4560] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [Clojure_ProjectKB_Class4561])
+	(widget_class_name "edu.stanford.smi.protege.widget.ClsesAndInstancesTab"))
+
+([Clojure_ProjectKB_Class4561] of  Property_List
+)
+
+([Clojure_ProjectKB_Class4576] of  Widget
+
+	(is_hidden FALSE)
+	(property_list [Clojure_ProjectKB_Class4577])
+	(widget_class_name "clojuretab.ClojureTab"))
+
+([Clojure_ProjectKB_Class4577] of  Property_List
+)
+
+([Clojure_ProjectKB_Class4584] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [Clojure_ProjectKB_Class4585])
+	(widget_class_name "edu.stanford.smi.protege.widget.KAToolTab"))
+
+([Clojure_ProjectKB_Class4585] of  Property_List
+)
+
+([Clojure_ProjectKB_Class50004] of  Widget
+
+	(is_hidden FALSE)
+	(name "WorkingPrograms")
+	(property_list [Clojure_ProjectKB_Class50005])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class50005] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class50006]
+		[Clojure_ProjectKB_Class50007]
+		[Clojure_ProjectKB_Class60009]
+		[Clojure_ProjectKB_Class80004]))
+
+([Clojure_ProjectKB_Class50006] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class50007] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class60008])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class50008] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "documentation")
+	(property_list [Clojure_ProjectKB_Class50009])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 330)
+	(x 0)
+	(y 450))
+
+([Clojure_ProjectKB_Class50009] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class50010]
+		[Clojure_ProjectKB_Class50011]
+		[Clojure_ProjectKB_Class70005]
+		[Clojure_ProjectKB_Class120014]))
+
+([Clojure_ProjectKB_Class50010] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class50011] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class50012] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class50013] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class50045] of  Widget
+
+	(is_hidden FALSE)
+	(name "CloExtendProtocol")
+	(property_list [Clojure_ProjectKB_Class50046])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class50046] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class50047]
+		[Clojure_ProjectKB_Class50048]
+		[Clojure_ProjectKB_Class50050]))
+
+([Clojure_ProjectKB_Class50047] of  Property_List
+
+	(name "layout properties"))
+
+([Clojure_ProjectKB_Class50048] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class50049])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class50049] of  Property_List
+)
+
+([Clojure_ProjectKB_Class50050] of  Widget
+
+	(height 170)
+	(is_hidden FALSE)
+	(name "cloImplementations")
+	(property_list [Clojure_ProjectKB_Class50051])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class50051] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class50052]
+		[Clojure_ProjectKB_Class50053]
+		[Clojure_ProjectKB_Class50012]))
+
+([Clojure_ProjectKB_Class50052] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class50053] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class50070] of  Widget
+
+	(height 130)
+	(is_hidden FALSE)
+	(name "cloExtendProtocols")
+	(property_list [Clojure_ProjectKB_Class50071])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 260))
+
+([Clojure_ProjectKB_Class50071] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class50072]
+		[Clojure_ProjectKB_Class50073]
+		[Clojure_ProjectKB_Class20007]
+		[Clojure_ProjectKB_Class120011]))
+
+([Clojure_ProjectKB_Class50072] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class50073] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class50080] of  Widget
+
+	(height 130)
+	(is_hidden FALSE)
+	(name "cloExtendTypes")
+	(property_list [Clojure_ProjectKB_Class50081])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 110)
+	(x 320)
+	(y 660))
+
+([Clojure_ProjectKB_Class50081] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class50082]
+		[Clojure_ProjectKB_Class50083]
+		[Clojure_ProjectKB_Class30008]
+		[Clojure_ProjectKB_Class120012]))
+
+([Clojure_ProjectKB_Class50082] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class50083] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class60004] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "title")
+	(property_list [Clojure_ProjectKB_Class60005])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([Clojure_ProjectKB_Class60005] of  Property_List
+)
+
+([Clojure_ProjectKB_Class60008] of  Property_List
+)
+
+([Clojure_ProjectKB_Class60009] of  Widget
+
+	(height 240)
+	(is_hidden FALSE)
+	(name "cloPrograms")
+	(property_list [Clojure_ProjectKB_Class60010])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([Clojure_ProjectKB_Class60010] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class60011]
+		[Clojure_ProjectKB_Class70012]))
+
+([Clojure_ProjectKB_Class60011] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class60012] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "documentation")
+	(property_list [Clojure_ProjectKB_Class60013])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 330)
+	(x 0)
+	(y 390))
+
+([Clojure_ProjectKB_Class60013] of  Property_List
+
+	(properties
+		[Clojure_ProjectKB_Class60014]
+		[Clojure_ProjectKB_Class60015]))
+
+([Clojure_ProjectKB_Class60014] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([Clojure_ProjectKB_Class60015] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class70004] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class70005] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([Clojure_ProjectKB_Class70012] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([Clojure_ProjectKB_Class80004] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "butt-load-progs")
+	(property_list [Clojure_ProjectKB_Class80005])
+	(widget_class_name "clojuretab.ClojureActionButton")
+	(width 200)
+	(x 0)
+	(y 300))
+
+([Clojure_ProjectKB_Class80005] of  Property_List
+)
+
+([Clojure_ProjectKB_Class80020] of  Widget
+
+	(is_hidden FALSE)
+	(name "ClsMain")
+	(property_list [Clojure_ProjectKB_Class110069])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([Clojure_ProjectKB_Class90004] of  Widget
+
+	(is_hidden FALSE)
+	(name "ClsRequired")
+	(property_list [Clojure_ProjectKB_Class120028])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([CLSES_TAB] of  Widget
+
+	(is_hidden FALSE)
+	(widget_class_name "edu.stanford.smi.protege.widget.ClsesTab"))
+
+([CREATION_TIMESTAMP_WIDGET] of  Widget
+
+	(name ":CREATION-TIMESTAMP"))
+
+([CREATOR_WIDGET] of  Widget
+
+	(name ":CREATOR"))
+
+([FORMS_TAB] of  Widget
+
+	(is_hidden FALSE)
+	(widget_class_name "edu.stanford.smi.protege.widget.FormsTab"))
+
+([INSTANCE_ANNOTATION_FORM_WIDGET] of  Widget
+
+	(height 476)
+	(is_hidden FALSE)
+	(name ":INSTANCE-ANNOTATION")
+	(property_list [INSTANCE_ANNOTATION_PROPERTY_LIST])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
+	(width 603)
+	(x 0)
+	(y 0))
+
+([INSTANCE_ANNOTATION_PROPERTY_LIST] of  Property_List
+
+	(properties
+		[ANNOTATED_INSTANCE_WIDGET]
+		[CREATOR_WIDGET]
+		[CREATION_TIMESTAMP_WIDGET]
+		[ANNOTATION_TEXT_WIDGET]))
+
+([INSTANCES_TAB] of  Widget
+
+	(is_hidden FALSE)
+	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
+
+([KB_127677_Class0] of  String
+
+	(name "factory_class_name")
+	(string_value "edu.stanford.smi.protege.storage.clips.ClipsKnowledgeBaseFactory"))
+
+([KB_127677_Class1] of  Map
+
+	(entries
+		[Clojure_ProjectKB_Class130019]
+		[Clojure_ProjectKB_Class130020]
+		[Clojure_ProjectKB_Class130021]))
+
+([KB_127677_Class100] of  Property_List
+)
+
+([KB_127677_Class101] of  Property_List
+)
+
+([KB_127677_Class102] of  Property_List
+)
+
+([KB_127677_Class103] of  Property_List
+)
+
+([KB_127677_Class104] of  Property_List
+)
+
+([KB_127677_Class105] of  Property_List
+)
+
+([KB_127677_Class106] of  Property_List
+
+	(properties [Clojure_ProjectKB_Class109]))
+
+([KB_127677_Class107] of  String
+
+	(name "classes_file_name")
+	(string_value "Clojure.pont"))
+
+([KB_127677_Class108] of  String
+
+	(name "instances_file_name")
+	(string_value "Clojure.pins"))
+
+([KB_127677_Class85] of  Property_List
+
+	(properties
+		[KB_127677_Class86]
+		[KB_127677_Class87]
+		[Clojure_ProjectKB_Class2]
+		[Clojure_ProjectKB_Class110004]))
+
+([KB_127677_Class86] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([KB_127677_Class87] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([KB_127677_Class88] of  Property_List
+)
+
+([KB_127677_Class89] of  Property_List
+)
+
+([KB_127677_Class90] of  Property_List
+
+	(properties
+		[KB_127677_Class91]
+		[KB_127677_Class92]))
+
+([KB_127677_Class91] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Move up"))
+
+([KB_127677_Class92] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Move down"))
+
+([KB_127677_Class93] of  Property_List
+)
+
+([KB_127677_Class94] of  Property_List
+
+	(name "layout properties"))
+
+([KB_127677_Class95] of  Property_List
+)
+
+([KB_127677_Class96] of  Property_List
+)
+
+([KB_127677_Class97] of  Property_List
+)
+
+([KB_127677_Class98] of  Property_List
+)
+
+([KB_127677_Class99] of  Property_List
+)
+
+([KB_863871_Class3] of  Map
+)
+
+([LAYOUT_PROPERTIES] of  Property_List
+
+	(name "layout properties")
+	(properties [VERTICAL_STRETCHER]))
+
+([option_instance] of  Options
+
+	(confirm_on_remove FALSE)
+	(display_abstract_class_icon TRUE)
+	(display_hidden_classes TRUE)
+	(display_multi_parent_class_icon TRUE)
+	(is_readonly FALSE)
+	(tabbed_instance_form_layout FALSE)
+	(undo_enabled TRUE)
+	(update_modification_slots FALSE))
+
+([PAL_DESCRIPTION_WIDGET] of  Widget
+
+	(height 180)
+	(is_hidden FALSE)
+	(label "Description")
+	(name ":PAL-DESCRIPTION")
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 250)
+	(x 275)
+	(y 0))
+
+([PAL_FORM_WIDGET] of  Widget
+
+	(height 476)
+	(is_hidden FALSE)
+	(name ":PAL-CONSTRAINT")
+	(property_list [PAL_PROPERTY_LIST])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
+	(width 603)
+	(x 0)
+	(y 0))
+
+([PAL_NAME_WIDGET] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(label "Name")
+	(name ":PAL-NAME")
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 275)
+	(x 0)
+	(y 0))
+
+([PAL_PROPERTY_LIST] of  Property_List
+
+	(properties
+		[PAL_NAME_WIDGET]
+		[PAL_RANGE_WIDGET]
+		[PAL_DESCRIPTION_WIDGET]
+		[PAL_STATEMENT_WIDGET]))
+
+([PAL_RANGE_WIDGET] of  Widget
+
+	(height 180)
+	(is_hidden FALSE)
+	(label "Range")
+	(name ":PAL-RANGE")
+	(widget_class_name "edu.stanford.smi.protegex.widget.pal.constraint.PalRangeWidget")
+	(width 250)
+	(x 275)
+	(y 180))
+
+([PAL_STATEMENT_WIDGET] of  Widget
+
+	(height 300)
+	(is_hidden FALSE)
+	(label "Statement")
+	(name ":PAL-STATEMENT")
+	(widget_class_name "edu.stanford.smi.protegex.widget.pal.constraint.PalConstraintWidget")
+	(width 275)
+	(x 0)
+	(y 60))
+
+([PROJECT] of  Project
+
+	(browser_slot_names [BROWSER_SLOT_NAMES])
+	(customized_instance_widgets
+		[STANDARD_CLASS_FORM_WIDGET]
+		[Clojure_ProjectKB_Class50004]
+		[Clojure_ProjectKB_Class14544]
+		[STANDARD_SLOT_FORM_WIDGET]
+		[Clojure_ProjectKB_Class30012]
+		[Clojure_ProjectKB_Class80020]
+		[Clojure_ProjectKB_Class14565]
+		[Clojure_ProjectKB_Class90004]
+		[Clojure_ProjectKB_Class110161]
+		[Clojure_ProjectKB_Class14558]
+		[INSTANCE_ANNOTATION_FORM_WIDGET]
+		[Clojure_ProjectKB_Class4]
+		[Clojure_ProjectKB_Class110152]
+		[STANDARD_FACET_FORM_WIDGET]
+		[PAL_FORM_WIDGET]
+		[Clojure_ProjectKB_Class14551]
+		[Clojure_ProjectKB_Class30004]
+		[Clojure_ProjectKB_Class40024]
+		[Clojure_ProjectKB_Class50045])
+	(default_cls_metaclass ":STANDARD-CLASS")
+	(default_facet_metaclass ":STANDARD-FACET")
+	(default_instance_widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
+	(default_slot_metaclass ":STANDARD-SLOT")
+	(journaling_enabled FALSE)
+	(next_frame_number 0)
+	(options [option_instance])
+	(property_map [KB_127677_Class1])
+	(sources [SOURCES])
+	(tabs
+		[CLSES_TAB]
+		[SLOTS_TAB]
+		[FORMS_TAB]
+		[INSTANCES_TAB]
+		[QUERIES_TAB]
+		[Clojure_ProjectKB_Class4576]
+		[Clojure_ProjectKB_Class4560]
+		[Clojure_ProjectKB_Class4584]
+		[Clojure_ProjectKB_Class4538]
+		[Clojure_ProjectKB_Class4540]))
+
+([QUERIES_TAB] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [KB_127677_Class106])
+	(widget_class_name "edu.stanford.smi.protegex.queries_tab.QueriesTab"))
+
+([SLOTS_TAB] of  Widget
+
+	(is_hidden FALSE)
+	(widget_class_name "edu.stanford.smi.protege.widget.SlotsTab"))
+
+([SOURCES] of  Property_List
+
+	(properties
+		[KB_127677_Class0]
+		[KB_127677_Class107]
+		[KB_127677_Class108]))
+
+([STANDARD_CLASS_CONSTRAINTS_WIDGET] of  Widget
+
+	(height 120)
+	(label "Constraints")
+	(name ":SLOT-CONSTRAINTS")
+	(property_list [KB_127677_Class85])
+	(widget_class_name "edu.stanford.smi.protege.widget.ConstraintsWidget")
+	(width 200)
+	(x 400)
+	(y 0))
+
+([STANDARD_CLASS_DIRECT_INSTANCES_WIDGET] of  Widget
+
+	(name ":DIRECT-INSTANCES"))
+
+([STANDARD_CLASS_DIRECT_SUBCLASSES_WIDGET] of  Widget
+
+	(name ":DIRECT-SUBCLASSES"))
+
+([STANDARD_CLASS_DIRECT_SUPERCLASSES_WIDGET] of  Widget
+
+	(name ":DIRECT-SUPERCLASSES"))
+
+([STANDARD_CLASS_DIRECT_TYPE_WIDGET] of  Widget
+
+	(name ":DIRECT-TYPE"))
+
+([STANDARD_CLASS_DOCUMENTATION_WIDGET] of  Widget
+
+	(height 120)
+	(label "Documentation")
+	(name ":DOCUMENTATION")
+	(property_list [KB_127677_Class88])
+	(widget_class_name "edu.stanford.smi.protege.widget.DocumentationWidget")
+	(width 200)
+	(x 200)
+	(y 0))
+
+([STANDARD_CLASS_FORM_WIDGET] of  Widget
+
+	(name ":STANDARD-CLASS")
+	(property_list [STANDARD_CLASS_WIDGETS])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([STANDARD_CLASS_NAME_WIDGET] of  Widget
+
+	(height 60)
+	(label "Name")
+	(name ":NAME")
+	(property_list [KB_127677_Class89])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceNameWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([STANDARD_CLASS_ROLE_WIDGET] of  Widget
+
+	(height 60)
+	(label "Role")
+	(name ":ROLE")
+	(property_list [KB_127677_Class93])
+	(widget_class_name "edu.stanford.smi.protege.widget.RoleWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([STANDARD_CLASS_TEMPLATE_SLOTS_WIDGET] of  Widget
+
+	(height 150)
+	(label "Template Slots")
+	(name ":DIRECT-TEMPLATE-SLOTS")
+	(property_list [KB_127677_Class90])
+	(widget_class_name "edu.stanford.smi.protege.widget.TemplateSlotsWidget")
+	(width 600)
+	(x 0)
+	(y 120))
+
+([STANDARD_CLASS_WIDGETS] of  Property_List
+
+	(name "class widget properties")
+	(properties
+		[STANDARD_CLASS_CONSTRAINTS_WIDGET]
+		[STANDARD_CLASS_DIRECT_INSTANCES_WIDGET]
+		[STANDARD_CLASS_DIRECT_SUBCLASSES_WIDGET]
+		[STANDARD_CLASS_DIRECT_SUPERCLASSES_WIDGET]
+		[STANDARD_CLASS_DOCUMENTATION_WIDGET]
+		[STANDARD_CLASS_NAME_WIDGET]
+		[STANDARD_CLASS_ROLE_WIDGET]
+		[STANDARD_CLASS_DIRECT_TYPE_WIDGET]
+		[STANDARD_CLASS_TEMPLATE_SLOTS_WIDGET]
+		[LAYOUT_PROPERTIES]))
+
+([STANDARD_FACET_ASSOCIATED_SLOT_WIDGET] of  Widget
+
+	(height 60)
+	(label "Associated Slot")
+	(name ":ASSOCIATED-SLOT")
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([STANDARD_FACET_DOCUMENTATION_WIDGET] of  Widget
+
+	(height 120)
+	(label "Documentation")
+	(name ":DOCUMENTATION")
+	(widget_class_name "edu.stanford.smi.protege.widget.DocumentationWidget")
+	(width 200)
+	(x 200)
+	(y 0))
+
+([STANDARD_FACET_FORM_WIDGET] of  Widget
+
+	(name ":STANDARD-FACET")
+	(property_list [STANDARD_FACET_WIDGETS])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([STANDARD_FACET_NAME_WIDGET] of  Widget
+
+	(height 60)
+	(label "Name")
+	(name ":NAME")
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceNameWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([STANDARD_FACET_WIDGETS] of  Property_List
+
+	(name "facet widget properties")
+	(properties
+		[STANDARD_FACET_NAME_WIDGET]
+		[STANDARD_FACET_DOCUMENTATION_WIDGET]
+		[STANDARD_FACET_ASSOCIATED_SLOT_WIDGET]))
+
+([STANDARD_SLOT_ASSOCIATED_FACET_WIDGET] of  Widget
+
+	(name ":ASSOCIATED-FACET"))
+
+([STANDARD_SLOT_CONSTRAINTS_WIDGET] of  Widget
+
+	(name ":SLOT-CONSTRAINTS"))
+
+([STANDARD_SLOT_DEFAULT_VALUE_WIDGET] of  Widget
+
+	(height 90)
+	(label "Default")
+	(name ":SLOT-DEFAULTS")
+	(property_list [KB_127677_Class97])
+	(widget_class_name "edu.stanford.smi.protege.widget.DefaultValuesWidget")
+	(width 200)
+	(x 400)
+	(y 90))
+
+([STANDARD_SLOT_DIRECT_DOMAIN_WIDGET] of  Widget
+
+	(height 95)
+	(label "Domain")
+	(name ":DIRECT-DOMAIN")
+	(property_list [KB_127677_Class95])
+	(widget_class_name "edu.stanford.smi.protege.widget.DirectDomainWidget")
+	(width 200)
+	(x 400)
+	(y 180))
+
+([STANDARD_SLOT_DIRECT_TYPE_WIDGET] of  Widget
+
+	(name ":DIRECT-TYPE"))
+
+([STANDARD_SLOT_DOCUMENTATION_WIDGET] of  Widget
+
+	(height 120)
+	(label "Documentation")
+	(name ":DOCUMENTATION")
+	(property_list [KB_127677_Class98])
+	(widget_class_name "edu.stanford.smi.protege.widget.DocumentationWidget")
+	(width 200)
+	(x 200)
+	(y 0))
+
+([STANDARD_SLOT_FORM_WIDGET] of  Widget
+
+	(name ":STANDARD-SLOT")
+	(property_list [STANDARD_SLOT_WIDGETS])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([STANDARD_SLOT_INVERSE_WIDGET] of  Widget
+
+	(height 60)
+	(label "Inverse Slot")
+	(name ":SLOT-INVERSE")
+	(property_list [KB_127677_Class104])
+	(widget_class_name "edu.stanford.smi.protege.widget.InverseSlotWidget")
+	(width 200)
+	(x 200)
+	(y 215))
+
+([STANDARD_SLOT_MAXIMUM_CARDINALITY_WIDGET] of  Widget
+
+	(height 35)
+	(name ":SLOT-MAXIMUM-CARDINALITY")
+	(property_list [KB_127677_Class103])
+	(widget_class_name "edu.stanford.smi.protege.widget.MaximumCardinalityWidget")
+	(width 200)
+	(x 200)
+	(y 180))
+
+([STANDARD_SLOT_MAXIMUM_VALUE_WIDGET] of  Widget
+
+	(height 60)
+	(label "Maximum")
+	(name ":SLOT-NUMERIC-MAXIMUM")
+	(property_list [KB_127677_Class99])
+	(widget_class_name "edu.stanford.smi.protege.widget.NumericMaximumWidget")
+	(width 100)
+	(x 100)
+	(y 215))
+
+([STANDARD_SLOT_MINIMUM_CARDINALITY_WIDGET] of  Widget
+
+	(height 60)
+	(label "Cardinality")
+	(name ":SLOT-MINIMUM-CARDINALITY")
+	(property_list [KB_127677_Class102])
+	(widget_class_name "edu.stanford.smi.protege.widget.MinimumCardinalityWidget")
+	(width 200)
+	(x 200)
+	(y 120))
+
+([STANDARD_SLOT_MINIMUM_VALUE_WIDGET] of  Widget
+
+	(height 60)
+	(label "Minimum")
+	(name ":SLOT-NUMERIC-MINIMUM")
+	(property_list [KB_127677_Class100])
+	(widget_class_name "edu.stanford.smi.protege.widget.NumericMinimumWidget")
+	(width 100)
+	(x 0)
+	(y 215))
+
+([STANDARD_SLOT_NAME_WIDGET] of  Widget
+
+	(height 60)
+	(label "Name")
+	(name ":NAME")
+	(property_list [KB_127677_Class101])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceNameWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([STANDARD_SLOT_SUBSLOTS_WIDGET] of  Widget
+
+	(name ":DIRECT-SUBSLOTS"))
+
+([STANDARD_SLOT_SUPERSLOTS_WIDGET] of  Widget
+
+	(name ":DIRECT-SUPERSLOTS"))
+
+([STANDARD_SLOT_TYPE_WIDGET] of  Widget
+
+	(height 155)
+	(label "Value Type")
+	(name ":SLOT-VALUE-TYPE")
+	(property_list [KB_127677_Class105])
+	(widget_class_name "edu.stanford.smi.protege.widget.ValueTypeWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([STANDARD_SLOT_VALUES_WIDGET] of  Widget
+
+	(height 90)
+	(label "Template Values")
+	(name ":SLOT-VALUES")
+	(property_list [KB_127677_Class96])
+	(widget_class_name "edu.stanford.smi.protege.widget.SlotValuesWidget")
+	(width 200)
+	(x 400)
+	(y 0))
+
+([STANDARD_SLOT_WIDGETS] of  Property_List
+
+	(name "slot widget properties")
+	(properties
+		[STANDARD_SLOT_MINIMUM_CARDINALITY_WIDGET]
+		[STANDARD_SLOT_MAXIMUM_CARDINALITY_WIDGET]
+		[STANDARD_SLOT_CONSTRAINTS_WIDGET]
+		[STANDARD_SLOT_DIRECT_TYPE_WIDGET]
+		[STANDARD_SLOT_DIRECT_DOMAIN_WIDGET]
+		[STANDARD_SLOT_VALUES_WIDGET]
+		[STANDARD_SLOT_SUPERSLOTS_WIDGET]
+		[STANDARD_SLOT_SUBSLOTS_WIDGET]
+		[STANDARD_SLOT_DEFAULT_VALUE_WIDGET]
+		[STANDARD_SLOT_DOCUMENTATION_WIDGET]
+		[STANDARD_SLOT_MAXIMUM_VALUE_WIDGET]
+		[STANDARD_SLOT_MINIMUM_VALUE_WIDGET]
+		[STANDARD_SLOT_ASSOCIATED_FACET_WIDGET]
+		[STANDARD_SLOT_NAME_WIDGET]
+		[STANDARD_SLOT_INVERSE_WIDGET]
+		[STANDARD_SLOT_TYPE_WIDGET]
+		[KB_127677_Class94]))
+
+([VERTICAL_STRETCHER] of  String
+
+	(name "vertical_stretcher")
+	(string_value ":DIRECT-TEMPLATE-SLOTS"))

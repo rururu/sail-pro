@@ -138,6 +138,7 @@
 (Clock0 time ?t)
 =>
 (println "NMEA Start boat" (protege.core/sv ?obj "label"))
+(vr.dashcli/load-races)
 (vr.dashcli/select-race)
 (vr.dashcli/show-controls)
 (future (vr.dashcli/get-external-data (read-string ?nmp) (str "/nmea/" ?ser)))

@@ -1,0 +1,26 @@
+{:deps
+ {org.clojure/clojure {:mvn/version "1.10.1"}
+  protege/protege {:local/root "lib_pro/protege-3.5.0.jar"}
+  protege/standard-extensions {:local/root "lib_pro/standard-extensions-3.5.0.jar"}
+  protege/looks {:local/root "lib_pro/looks-3.5.0.jar"}
+  protege/unicode_panel {:local/root "lib_pro/unicode_panel-3.5.0.jar"}
+  protege/JGo {:local/root "lib_pro/JGo-3.5.0.jar"}
+  protege/JGoLayout {:local/root "lib_pro/JGoLayout-3.5.0.jar"}
+  protege/ClojureTab {:local/root "lib/ClojureTab-1.5.jar"}
+  OpenMapTab/OpenMapTab {:local/root "lib/OpenMapTab-5.2.1.jar"}
+  org.openmap-java/openmap {:local/root "lib_ext/openmap-5.1.15.jar"}
+  rete/rete {:mvn/version "5.3.0-SNAPSHOT"}
+  org.clojure/clojurescript {:mvn/version "1.10.439"}
+  org.clojure/core.async {:mvn/version "0.4.490"}
+  ring/ring {:mvn/version "1.7.1"}
+  compojure/compojure {:mvn/version "1.6.1"}
+  cljs-ajax/cljs-ajax {:mvn/version "0.8.0"}
+  com.cognitect/transit-clj {:mvn/version "0.8.313"}
+  com.cognitect/transit-cljs {:mvn/version "0.8.256"}
+  hiccup/hiccup {:mvn/version "1.0.5"}
+  clj-json/clj-json {:mvn/version "0.5.3"}
+  clj-time/clj-time {:mvn/version "0.15.0"}
+  javax.xml.bind/jaxb-api {:mvn/version "2.3.0"}}
+  :paths ["src" "src/clojure" "resources"]}
+
+

@@ -1,4 +1,4 @@
-; Sat Oct 09 16:30:18 MSK 2021
+; Tue Nov 23 11:20:53 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -47,7 +47,8 @@
 		[VRDashboardClient_Class190005]
 		[VRDashboardClient_Class100083]
 		[VRDashboardClient_Class100098]
-		[VRDashboardClient_Class80001])
+		[VRDashboardClient_Class80001]
+		[VRDashboardClient_Class240001])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20003]
@@ -62,10 +63,6 @@
 		[VRDashboardClient_Class20001]
 		[VRDashboardClient_Class40000])
 	(title "VR Dashboard Client"))
-
-([VRDashboardClient_Class10000] of  CloFuncall
-
-	(source "(in-ns 'vr.dashcli)"))
 
 ([VRDashboardClient_Class100000] of  Rule
 
@@ -182,8 +179,8 @@
 
 ([VRDashboardClient_Class140000] of  CloFunction
 
-	(source "([hm inst]\n  (let [mp (into {} hm)\n         clw (mp \"clsWidget\")\n         rce (first (.getSelection (.getSlotWidget clw (slt \"races\"))))\n         tpt (first (.split rce \"\\\\.\"))\n         tpt (+ 10000 (read-string tpt))]\n    (ssv inst \"selected-race\" rce)\n    (ssv inst \"telnet-port\" (str tpt))))\n([]\n (clojuretab.ClojureTab/showModalInstance\n    (first (cls-instances \"VRDashboardControl\"))\n    \"Select Active Race\"))")
-	(title "select-race"))
+	(source "(let [mp (into {} hm)\n       clw (mp \"clsWidget\")\n       rce (first (.getSelection (.getSlotWidget clw (slt \"races\"))))\n       tpt (first (.split rce \"\\\\.\"))\n       tpt (+ 10000 (read-string tpt))]\n  (ssv inst \"selected-race\" rce))")
+	(title "select-race [hm inst]"))
 
 ([VRDashboardClient_Class140002] of  CloFunction
 
@@ -366,10 +363,6 @@
 	(source "nil")
 	(title "RMMA"))
 
-([VRDashboardClient_Class220000] of  CloFuncall
-
-	(source "(ru.rules/f 0)"))
-
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
 	(lat 48.44785)
@@ -388,9 +381,18 @@
 	(salience 1)
 	(title "vr:Set Wikipedia Coordinates"))
 
+([VRDashboardClient_Class240000] of  CloFuncall
+
+	(source "(ru.rules/f 10)"))
+
+([VRDashboardClient_Class240001] of  CloFunction
+
+	(source "(let [mp (into {} hm)]\n  (if-let [rce (mp \"selected-race\")]\n    (let [tpt (first (.split rce \"\\\\.\"))\n          tpt (+ 10000 (read-string tpt))]\n      (ssv inst \"selected-race\" rce)\n      (ru.rules/assert-instances [inst]))\n    (println \"Select race before!\")))")
+	(title "start [hm inst]"))
+
 ([VRDashboardClient_Class240060] of  CloFunction
 
-	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Start Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"3. Start Time.\")\n(OMT/setTimerRunning true)\n(println \"EXPERT SYSTEM INITIALIZED\")")
+	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Start Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"3. Start Time.\")\n(OMT/setTimerRunning true)\n(println \"EXPERT SYSTEM INITIALIZED\")\n(ClojureTab/invoke \"vr.dashcli\" \"show-controls\")")
 	(title "clojure-work []"))
 
 ([VRDashboardClient_Class240061] of  CloNamespace
@@ -402,14 +404,6 @@
 
 	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (let [wc (first (cls-instances \"WikipediaControl\"))\n                                      lat (sv wc \"lat\")\n                                      lon (sv wc \"lng\")\n                                      vic (sv wc \"vicinity\")]\n                                  (pum-out-place art lat lon vic)\n                                  (.show *prj* art))))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
 	(title "set-mouse-adapter2 []"))
-
-([VRDashboardClient_Class250000] of  CloFuncall
-
-	(source "(slurp RACES-URL)"))
-
-([VRDashboardClient_Class250001] of  CloFuncall
-
-	(source "(load-races)"))
 
 ([VRDashboardClient_Class250002] of  CloFuncall
 
@@ -549,7 +543,6 @@
 	(butt-run "Run/ru.rules/run-engine")
 	(butt-step "Step/ru.rules/step-engine")
 	(facts
-		[VRDashboardClient_Class50001]
 		[VRDashboardClient_Class30069]
 		[VRDashboardClient_Class280001]
 		[VRDashboardClient_Class10005]
@@ -595,7 +588,7 @@
 ([VRDashboardClient_Class30076] of  Rule
 
 	(lhs "(VRDashboardControl nmea-port ?nmp selected-race ?ser)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/load-races)\n(vr.dashcli/select-race)\n(vr.dashcli/show-controls)\n(future (vr.dashcli/get-external-data (read-string ?nmp) (str \"/nmea/\" ?ser)))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/load-races)\n(future (vr.dashcli/get-external-data (read-string ?nmp) (str \"/nmea/\" ?ser)))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
@@ -639,17 +632,16 @@
 	(onboard "russor")
 	(port "8448")
 	(races
-		"480.1"
-		"477.3"
-		"494.1"
-		"500.1"
-		"502.1"
-		"470.8"
-		"501.1"
-		"484.1"
-		"496.1")
-	(selected-race "500.1")
-	(telnet-port "10500")
+		"488.1"
+		"489.1"
+		"490.1"
+		"491.1"
+		"480.2"
+		"477.5"
+		"470.9"
+		"503.1")
+	(selected-race "470.9")
+	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 

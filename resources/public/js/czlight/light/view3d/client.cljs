@@ -15,8 +15,7 @@
                :coord [60 30]
                :altitude 4000
                :speed 160
-               :course 270
-               :view-elevation  4}))
+               :course 270}))
 (def error-handler (fn [response]
   (let [{:keys [status status-text]} response]
     (println (str "AJAX ERROR: " status " " status-text)))))
@@ -75,6 +74,29 @@
     (vswap! czm/CAMERA assoc :roll deg)
     (set-html! "roll-fld" deg))))
 
+(defn zoom [mode]
+  (let[zoom-on (fn[]
+       (set-html! "zoom-dn" 
+         "<img src='img/binS.png' width='24' height='24' id='zdn'
+           onclick='javascript:light.view3d.client.zoom(-1);'>")
+       (set-html! "zoom-no" 
+         "<img src='img/binN.png' width='24' height='24' id='zno'
+           onclick='javascript:light.view3d.client.zoom(0);'>"))
+     zoom-off (fn[]
+       (set-html! "zoom-dn" "")
+       (set-html! "zoom-no" ""))]
+  (condp = mode
+    1 (do (czm/zoom-in) 
+         (zoom-on))
+    -1 (do (czm/zoom-out)
+         (if (empty? czm/ZOOM)
+           (zoom-off)))
+    0 (do (czm/zoom-no)
+         (zoom-off)))))
+
+(defn zoom_amount [amount]
+  (czm/zoom-amount amount))
+
 (defn response-request []
   (let [resp @RESPONSE]
   (when (not (empty? resp))
@@ -112,7 +134,8 @@
   (set-html! "speed-fld" (:speed vehicle))
   (set-html! "altitude-fld" czm/ALT)
   (set-html! "view-dir" (geo/rumb head))
-  (czm/fly-to lat lon (+ alt vev) crs 1.2)))
+  (if (empty? czm/ZOOM)
+    (czm/fly-to lat lon (+ alt vev) crs 1.2))))
 
 (defn vehicle-hr [response]
   (let [resp (read-transit response)]
@@ -168,9 +191,19 @@
 (set-html! "altitude" "Altitude:")
 (set-html! "altitude-fld" ""))
 
+(defn middle-controls []
+  (set-html! "zoom-up" 
+  "<img src='img/binB.png' width='24' height='24' id='zup' 
+    onclick='javascript:light.view3d.client.zoom(1);'>")
+(set-html! "zoom-amount" 
+  "<input type='range' style='width:150px' id='zfa'
+               min='10' value='200' max='10000'
+               oninput='javascript:light.view3d.client.zoom_amount(this.value)'>"))
+
 (defn show-controls []
   (right-controls)
-(left-controls))
+(left-controls)
+(middle-controls))
 
 (defn on-load []
   (czm/init-3D-view (str "http://0.0.0.0:" PORT))

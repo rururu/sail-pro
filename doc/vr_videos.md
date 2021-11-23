@@ -26,6 +26,10 @@
 6. [Roundabout Barbados](https://youtu.be/HwE0gjQDo-k)
 7. [Jamaica](https://youtu.be/G_-VMiS-mSM)
 
+## From Salvador de Bahia to Rio de Janeiro. November 2021
+
+1. [Start](https://youtu.be/xm6EzumcY7Y)
+
 ## Others
 
 1. [Meaipe](https://youtu.be/E8kdpT2fQfU)

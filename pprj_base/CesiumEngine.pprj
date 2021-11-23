@@ -1,4 +1,4 @@
-; Mon Jun 07 15:11:48 MSK 2021
+; Tue Nov 23 10:29:57 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -469,28 +469,28 @@
 	(name "instances_file_name")
 	(string_value "CesiumEngine.pins"))
 
-([KB_398977_Class1601] of  Map
+([KB_483624_Class1601] of  Map
 
 	(entries
-		[KB_398977_Class1602]
-		[KB_398977_Class1603]
-		[KB_398977_Class1604]))
+		[KB_483624_Class1602]
+		[KB_483624_Class1603]
+		[KB_483624_Class1604]))
 
-([KB_398977_Class1602] of  Map_Entry
+([KB_483624_Class1602] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_398977_Class1603] of  Map_Entry
+([KB_483624_Class1603] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_398977_Class1604] of  Map_Entry
+([KB_483624_Class1604] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
@@ -641,7 +641,6 @@
 	(default_slot_metaclass ":STANDARD-SLOT")
 	(included_projects
 		"igis.pprj"
-		"ProtegeAPI.pprj"
 		"RuleEngine.pprj")
 	(journaling_enabled FALSE)
 	(next_frame_number 0)

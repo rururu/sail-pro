@@ -1,4 +1,4 @@
-; Sat Oct 09 16:30:18 MSK 2021
+; Tue Nov 23 11:20:53 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -34,6 +34,11 @@
 ;+		(value "Wikipedia Clear/wiki.gis/clear-articles")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot but-start
+		(type STRING)
+;+		(value "Start/vr.dashcli/start")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(multislot races
 		(type STRING)
 		(create-accessor read-write))
@@ -56,6 +61,11 @@
 	(role concrete)
 	(single-slot selected-race
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-start
+		(type STRING)
+;+		(value "Start/vr.dashcli/start")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot wikipedia_control

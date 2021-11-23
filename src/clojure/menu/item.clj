@@ -18,5 +18,6 @@
   (println "  Annotated instance of Run not found!"))
 (println "3. Start Time.")
 (OMT/setTimerRunning true)
-(println "EXPERT SYSTEM INITIALIZED"))
+(println "EXPERT SYSTEM INITIALIZED")
+(ClojureTab/invoke "vr.dashcli" "show-controls"))
 

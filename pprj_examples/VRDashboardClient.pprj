@@ -1,4 +1,4 @@
-; Sat Oct 09 16:30:18 MSK 2021
+; Tue Nov 23 11:20:53 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -221,54 +221,6 @@
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
 
-([KB_538830_Class2145] of  Map
-
-	(entries
-		[KB_538830_Class2146]
-		[KB_538830_Class2149]
-		[KB_538830_Class2150]
-		[KB_538830_Class2151])
-	(referenced_maps [KB_538830_Class2147]))
-
-([KB_538830_Class2146] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_538830_Class2147] of  Map
-
-	(entries [KB_538830_Class2148]))
-
-([KB_538830_Class2148] of  Map_Entry
-
-	(key "WikipediaGIS_Class2")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "12 479 212 124")
-	(value_class "java.awt.Rectangle"))
-
-([KB_538830_Class2149] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "KB_538830_Class2147")
-	(value_class "java.util.Map"))
-
-([KB_538830_Class2150] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_538830_Class2151] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
 ([KB_651995_Class0] of  String
 
 	(name "factory_class_name")
@@ -371,6 +323,54 @@
 	(name "instances_file_name")
 	(string_value "VRDashboardClient.pins"))
 
+([KB_979971_Class2145] of  Map
+
+	(entries
+		[KB_979971_Class2146]
+		[KB_979971_Class2149]
+		[KB_979971_Class2150]
+		[KB_979971_Class2151])
+	(referenced_maps [KB_979971_Class2147]))
+
+([KB_979971_Class2146] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_979971_Class2147] of  Map
+
+	(entries [KB_979971_Class2148]))
+
+([KB_979971_Class2148] of  Map_Entry
+
+	(key "WikipediaGIS_Class2")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "12 479 212 124")
+	(value_class "java.awt.Rectangle"))
+
+([KB_979971_Class2149] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "KB_979971_Class2147")
+	(value_class "java.util.Map"))
+
+([KB_979971_Class2150] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_979971_Class2151] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
 ([LAYOUT_PROPERTIES] of  Property_List
 
 	(name "layout properties")
@@ -468,8 +468,8 @@
 	(default_instance_widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
 	(default_slot_metaclass ":STANDARD-SLOT")
 	(included_projects
-		"../pprj_base/CesiumEngine.pprj"
-		"../pprj_base/WikipediaGIS.pprj")
+		"file:/home/ru/clojure/sail-pro/pprj_base/CesiumEngine.pprj"
+		"file:/home/ru/clojure/sail-pro/pprj_base/WikipediaGIS.pprj")
 	(journaling_enabled FALSE)
 	(next_frame_number 0)
 	(options [option_instance])
@@ -1308,7 +1308,8 @@
 		[VRDashboardClient_ProjectKB_Class41721]
 		[VRDashboardClient_ProjectKB_Class2152]
 		[VRDashboardClient_ProjectKB_Class12165]
-		[VRDashboardClient_ProjectKB_Class12152]))
+		[VRDashboardClient_ProjectKB_Class12152]
+		[VRDashboardClient_ProjectKB_Class32154]))
 
 ([VRDashboardClient_ProjectKB_Class31725] of  Property_List
 
@@ -1385,6 +1386,20 @@
 	(y 120))
 
 ([VRDashboardClient_ProjectKB_Class31735] of  Property_List
+)
+
+([VRDashboardClient_ProjectKB_Class32154] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "but-start")
+	(property_list [VRDashboardClient_ProjectKB_Class32155])
+	(widget_class_name "clojuretab.ClojureActionButton")
+	(width 200)
+	(x 200)
+	(y 580))
+
+([VRDashboardClient_ProjectKB_Class32155] of  Property_List
 )
 
 ([VRDashboardClient_ProjectKB_Class32170] of  Boolean
@@ -1531,13 +1546,14 @@
 
 ([VRDashboardClient_ProjectKB_Class41794] of  Widget
 
-	(height 0)
+	(height 60)
 	(is_hidden FALSE)
 	(name "telnet-port")
 	(property_list [VRDashboardClient_ProjectKB_Class41795])
-	(width 0)
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
 	(x 0)
-	(y 0))
+	(y 580))
 
 ([VRDashboardClient_ProjectKB_Class41795] of  Property_List
 )

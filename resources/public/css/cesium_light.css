@@ -181,8 +181,32 @@
 #view-dir {
   position: absolute;
   left: 0;
-  bottom: 10%;
+  bottom: 15%;
   width: 100%;
   text-align: center;
   color:yellow
+}
+#zoom-amount {
+  position: absolute;
+  bottom: 8%;
+  right:33%;
+  z-index:100;
+}
+#zoom-up {
+  position: absolute;
+  bottom: 8%;
+  right:30%;
+  z-index:100;
+}
+#zoom-dn {
+  position: absolute;
+  bottom: 8%;
+  right:27%;
+  z-index:100;
+}
+#zoom-no {
+  position: absolute;
+  bottom: 8%;
+  right:24%;
+  z-index:100;
 }

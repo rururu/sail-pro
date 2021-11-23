@@ -51,7 +51,7 @@ $ .\run_VR.bat 	    	# Windows
    - Also update a slot "onboard" in "VRDashboardControl" instance. 
    - Save the project and restart.
 8. Select a race on the popup panel, if needed (race number is on "Z VR Dashboard" tab).
-9. Click OK on popup and wait while the boat jump into current position.
+9. Click "Start" on popup and wait while the boat jumps into current position.
 10. Start a "Cesium server" on the popup panel.
 11. Start a "Cesium client" on the popup panel.
 12. Go on board of the boat.

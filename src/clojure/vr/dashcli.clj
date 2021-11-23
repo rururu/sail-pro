@@ -133,19 +133,13 @@
         (.setLongitude im loc)
         (.setCourse im icr))))))
 
-(defn select-race
-  ([hm inst]
+(defn select-race [hm inst]
   (let [mp (into {} hm)
-         clw (mp "clsWidget")
-         rce (first (.getSelection (.getSlotWidget clw (slt "races"))))
-         tpt (first (.split rce "\\."))
-         tpt (+ 10000 (read-string tpt))]
-    (ssv inst "selected-race" rce)
-    (ssv inst "telnet-port" (str tpt))))
-([]
- (clojuretab.ClojureTab/showModalInstance
-    (first (cls-instances "VRDashboardControl"))
-    "Select Active Race")))
+       clw (mp "clsWidget")
+       rce (first (.getSelection (.getSlotWidget clw (slt "races"))))
+       tpt (first (.split rce "\\."))
+       tpt (+ 10000 (read-string tpt))]
+  (ssv inst "selected-race" rce)))
 
 (defn diff-view [ops vel vof vpt]
   (let [vof (keyword (clojure.string/lower-case vof))]
@@ -329,4 +323,13 @@
     (if (and (not= nam onb) 
           (not (some #{nam} @ONMAP)))
       (OMT/removeMapOb no false)))))
+
+(defn start [hm inst]
+  (let [mp (into {} hm)]
+  (if-let [rce (mp "selected-race")]
+    (let [tpt (first (.split rce "\\."))
+          tpt (+ 10000 (read-string tpt))]
+      (ssv inst "selected-race" rce)
+      (ru.rules/assert-instances [inst]))
+    (println "Select race before!"))))
 
