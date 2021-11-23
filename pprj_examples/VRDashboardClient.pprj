@@ -468,8 +468,8 @@
 	(default_instance_widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
 	(default_slot_metaclass ":STANDARD-SLOT")
 	(included_projects
-		"file:/home/ru/clojure/sail-pro/pprj_base/CesiumEngine.pprj"
-		"file:/home/ru/clojure/sail-pro/pprj_base/WikipediaGIS.pprj")
+		"../pprj_base/CesiumEngine.pprj"
+		"../pprj_base/WikipediaGIS.pprj")
 	(journaling_enabled FALSE)
 	(next_frame_number 0)
 	(options [option_instance])
