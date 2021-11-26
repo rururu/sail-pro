@@ -97,8 +97,8 @@
 
 (defn zoom-out []
   (when (seq ZOOM)
-  (.zoomOut (.-camera VIEWER) (peek ZOOM))
-  (def ZOOM (pop ZOOM))))
+  (.zoomOut (.-camera VIEWER) (first ZOOM))
+  (def ZOOM (rest ZOOM))))
 
 (defn zoom-no []
   (while (seq ZOOM)

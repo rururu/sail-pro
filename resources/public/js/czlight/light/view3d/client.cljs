@@ -24,6 +24,9 @@
    :value nil}))
 (def RESPONSE (volatile! {}))
 (def PORT 8448)
+(defn format [fmt & args]
+  (apply gstring/format fmt args))
+
 (defn repeater
   ([func time-out]
   (go (while true
@@ -74,6 +77,11 @@
     (vswap! czm/CAMERA assoc :roll deg)
     (set-html! "roll-fld" deg))))
 
+(defn zoom-format [m]
+  (if (>= m 1000) 
+  (format "%.0f км" (/ m 1000.0)) 
+  (format "%.0f м" (/ m 1.0))))
+
 (defn zoom [mode]
   (let[zoom-on (fn[]
        (set-html! "zoom-dn" 
@@ -92,10 +100,11 @@
          (if (empty? czm/ZOOM)
            (zoom-off)))
     0 (do (czm/zoom-no)
-         (zoom-off)))))
+         (zoom-off)))
+  (set-html! "zoom-val" (zoom-format (apply + czm/ZOOM)))))
 
 (defn zoom_amount [amount]
-  (czm/zoom-amount amount))
+  (czm/zoom-amount (num-val amount)))
 
 (defn response-request []
   (let [resp @RESPONSE]

@@ -204,9 +204,17 @@
   right:27%;
   z-index:100;
 }
+#zoom-val {
+  position: absolute;
+  right: 23%;
+  bottom: 8%;
+  width: 100%;
+  text-align: right;
+  color:yellow
+}
 #zoom-no {
   position: absolute;
   bottom: 8%;
-  right:24%;
+  right:20%;
   z-index:100;
 }
