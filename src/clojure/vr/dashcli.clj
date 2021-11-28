@@ -14,7 +14,8 @@
   ru.vrd.nmea.VRdNMEAReciever
   ru.igis.omtab.gui.RuMapMouseAdapter
   dk.dma.ais.sentence.Vdm
-  dk.dma.ais.message.AisMessage))
+  dk.dma.ais.message.AisMessage
+  ru.igis.ais.AIVDMProcessor))
 (def defTELNET (defonce TELNET nil))
 (def GPRMC-TOKEN "$GPRMC")
 (def END-TOKEN "\r\n")
@@ -24,7 +25,7 @@
 (def DESC-MAP {"default" "{:gltf-url \"models/piramida/scene.gltf\"}"})
 (def NMEA (atom nil))
 (def NMEA-FLAG true)
-(def FLEET nil)
+(def FLEET (volatile! {}))
 (def ONMAP (volatile! []))
 (defn round-speed [s]
   (let [s (* s 100)
@@ -262,24 +263,28 @@
                     s (.replaceAll s "=" " ")
                     s (str "{" s "}")]   
                (read-string s)))]
-  (try
-    (let [vdm (Vdm.)
-           _ (.parse vdm aivdm)
-           mes (AisMessage/getInstance vdm)
-           pos (.getValidPosition mes)
-           tos (.toString mes)
-           mp (to-map tos)]
-      (assoc mp 'pos [(.getLatitude pos) (.getLongitude pos)]))
-    (catch Exception e
-      nil))))
+  (if (.startsWith aivdm "!AIVDM")
+    (try
+      (let [vdm (Vdm.)
+             _ (.parse vdm aivdm)
+             mes (AisMessage/getInstance vdm)
+             pos (.getValidPosition mes)
+             tos (.toString mes)
+             mp (to-map tos)
+             mp (assoc mp 'pos [(.getLatitude pos) (.getLongitude pos)])
+             imo (mp 'userId)]
+        (vswap! FLEET assoc imo (merge mp (@FLEET imo))))
+      (catch Exception e
+        (let [lio (.lastIndexOf aivdm "*")]
+          (when (= (.substring aivdm (dec lio) lio) "4")
+            (AIVDMProcessor/process aivdm)
+            (let [imo (AIVDMProcessor/getIMO)
+                   snm (AIVDMProcessor/getShipName)]
+              (vswap! FLEET assoc imo (assoc (@FLEET imo) 'name snm))) ))) ))))
 
 (defn get-fleet-data []
-  (def FLEET (filter some? (map parse-AIVDM @NMEA))))
-
-(defn short-id [uid]
-  (let [id (str uid)
-      c (count id)]
-  (str (.substring id 0 2) (.substring id (- c 3) c))))
+  (doseq [nmea @NMEA]
+  (parse-AIVDM nmea)))
 
 (defn round-sog [sog]
   (let [s (str sog)
@@ -291,21 +296,22 @@
       [lat lon] (nmp 'pos)
       sog (nmp 'sog)
       cog (nmp 'cog)
-      uid (short-id uid)
+      nam (nmp 'name)
+      lab (or nam (str uid))
       sog (round-sog sog)
       cog (float (/ cog 10))
       dis (MapOb/distanceNM lat lon (.getLatitude obm) (.getLongitude obm))]
   (if (< dis vis)
-    [uid lat lon sog cog dis])))
+    [lab lat lon sog cog dis])))
 
 (defn show-neighbors [onb vis]
   (if-let [obm (OMT/getMapOb onb)]
-  (if (seq FLEET)
-    (let [nbs (map #(neighbor % obm vis) FLEET)
+  (if (not (empty? @FLEET))
+    (let [nbs (map #(neighbor % obm vis) (vals @FLEET))
            nbs (filter some? nbs)]
       (def ONMAP (volatile! []))
-      (doseq [[uid lat lon sog cog dis] nbs]
-        (let [nbi (foc "NavOb" "label" uid)
+      (doseq [[lab lat lon sog cog dis] nbs]
+        (let [nbi (foc "NavOb" "label" lab)
               pat (fifos "NavOb" "label" "neighbor")]
           (ssv nbi "url" (sv pat "url"))
           (ssv nbi "description" (sv pat "description"))
@@ -315,7 +321,7 @@
             (.setCourse nbm (int cog))
             (if (number? sog)
               (.setSpeed nbm (double sog))))
-          (vswap! ONMAP conj uid)))))))
+          (vswap! ONMAP conj lab)))))))
 
 (defn unvisible-offmap [onb]
   (doseq [no (OMT/getNavObInstances)]
