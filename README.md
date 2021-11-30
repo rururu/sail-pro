@@ -60,6 +60,8 @@ See details in screencasts. Some details can be differen of earlier - these are 
 
 [Normal start](https://youtu.be/Gg3DsVKulhY)
 
+[Using binocular](https://youtu.be/1KAI8eP-DxM)
+
 [Start of Summer Cup race Miami - Cancun 10 july 2021](https://www.youtube.com/watch?v=UwYsDwf3jN0)
 
 [Gibraltar in Vela Cup race](https://youtu.be/QsDpSx6kahg)

@@ -29,6 +29,7 @@
 ## From Salvador de Bahia to Rio de Janeiro. November 2021
 
 1. [Start](https://youtu.be/xm6EzumcY7Y)
+2. [Using binocular](https://youtu.be/1KAI8eP-DxM)
 
 ## Others
 
