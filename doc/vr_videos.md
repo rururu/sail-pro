@@ -30,6 +30,7 @@
 
 1. [Start](https://youtu.be/xm6EzumcY7Y)
 2. [Using binocular](https://youtu.be/1KAI8eP-DxM)
+3. [Finish](https://youtu.be/4T41q49LNPc)
 
 ## Others
 
