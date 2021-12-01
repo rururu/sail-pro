@@ -63,7 +63,26 @@
   (let [deg (num-val deg)]
   (when (<= -180 deg 180)
     (vswap! czm/CAMERA assoc :view deg)
-    (set-html! "view-fld" deg))))
+    (if (or (< deg -90) (> deg 90))
+      (do (set-html! "viewF-fld" "")
+        (set-html! "viewB-fld" val))
+      (do(set-html! "viewF-fld" deg)
+        (set-html! "view-fld" ""))))))
+
+(defn viewF [deg]
+  (let [deg (num-val deg)]
+  (when (<= -90 deg 90)
+    (vswap! czm/CAMERA assoc :view deg)
+    (set-html! "viewF-fld" deg)
+    (set-html! "viewB-fld" ""))))
+
+(defn viewB [deg]
+  (let [deg (num-val deg)]
+  (if (<= -90 deg 90)
+    (let [val (if (< deg 0) (+ deg 180) (- deg 180))]
+      (vswap! czm/CAMERA assoc :view val)
+      (set-html! "viewF-fld" "")
+      (set-html! "viewB-fld" val)))))
 
 (defn pitch [deg]
   (let [deg (num-val deg)]
@@ -166,28 +185,34 @@
   (set-html! "camera" "<h4>Camera</h4>")
 (set-html! "onboard" "Onboard:")
 (set-html! "onboard-fld" "")
-(set-html! "view" "View:")
-(set-html! "view-fld" 0)
-(set-html! "view-sld" 
-  "<input type='range' style='width:150px' id='roll-vals'
-               min='-180' value='0' max='180'
-               oninput='javascript:light.view3d.client.view(this.value)'>")
-(set-html! "pitch" "Pitch:")
-(set-html! "pitch-fld" 0)
-(set-html! "pitch-sld" 
-  "<input type='range' style='width:150px' id='pitch-vals'
-               min='-90' value='0' max='90'
-               oninput='javascript:light.view3d.client.pitch(this.value)'>")
+(set-html! "elev" "Elevation:")
+(set-html! "elev-fld" 
+  "<input value='4' style='width:100px' id='input-elev'
+                     onchange='javascript:light.view3d.client.elev(this.value)'>")
 (set-html! "roll" "Roll:")
 (set-html! "roll-fld" 0)
 (set-html! "roll-sld" 
-  "<input type='range' style='width:150px' id='roll-vals'
+  "<input type='range' style='width:200px' id='roll-vals'
                min='-180' value='0' max='180'
                oninput='javascript:light.view3d.client.roll(this.value)'>")
-(set-html! "elev" "Elevation:")
-(set-html! "elev-fld" 
-  "<input value='4' style='width:144px' id='input-elev'
-                     onchange='javascript:light.view3d.client.elev(this.value)'>"))
+(set-html! "pitch" "Pitch:")
+(set-html! "pitch-fld" 0)
+(set-html! "pitch-sld" 
+  "<input type='range' style='width:400px' id='pitch-vals'
+               min='-90' value='0' max='90'
+               oninput='javascript:light.view3d.client.pitch(this.value)'>")
+(set-html! "viewF" "View Fwd:")
+(set-html! "viewF-fld" 0)
+(set-html! "viewF-sld" 
+  "<input type='range' style='width:400px' id='roll-vals'
+               min='-90' value='0' max='90'
+               oninput='javascript:light.view3d.client.viewF(this.value)'>")
+(set-html! "viewB" "View Bwd:")
+(set-html! "viewB-fld" 0)
+(set-html! "viewB-sld" 
+  "<input type='range' style='width:400px' id='roll-vals'
+               min='-90' value='0' max='90'
+               oninput='javascript:light.view3d.client.viewB(this.value)'>"))
 
 (defn right-controls []
   (set-html! "vehicle" "<h4>Vehicle</h4>")

@@ -72,7 +72,7 @@
 }
 #camera {
   position:fixed;
-  bottom:160px;
+  bottom:180px;
   left:60px;
   padding:5px;
   z-index:100;
@@ -80,7 +80,7 @@
 }
 #onboard {
   position:fixed;
-  bottom:150px;
+  bottom:170px;
   left:20px;
   padding:5px;
   z-index:100;
@@ -88,13 +88,28 @@
 }
 #onboard-fld {
   position:fixed;
-  bottom:150px;
-  left:84px;
+  bottom:170px;
+  left:100px;
   padding:5px;
   z-index:100;
   color:cyan
 }
-#view {
+#elev {
+  position:fixed;
+  bottom:150px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#elev-fld {
+  position:fixed;
+  bottom:150px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#roll {
   position:fixed;
   bottom:130px;
   left:22px;
@@ -102,33 +117,25 @@
   z-index:100;
   color:yellow
 }
-#view-fld {
-  position:fixed;
-  bottom:130px;
-  left:64px;
-  padding:5px;
-  z-index:100;
-  color:yellow
-}
-#view-sld {
+#roll-sld {
   position:fixed;
   bottom:130px;
   left:100px;
   padding:5px;
   z-index:100;
 }
-#pitch {
+#roll-fld {
   position:fixed;
-  bottom:110px;
-  left:22px;
+  bottom:130px;
+  left:304px;
   padding:5px;
   z-index:100;
   color:yellow
 }
-#pitch-fld {
+#pitch {
   position:fixed;
   bottom:110px;
-  left:64px;
+  left:22px;
   padding:5px;
   z-index:100;
   color:yellow
@@ -140,7 +147,15 @@
   padding:5px;
   z-index:100;
 }
-#roll {
+#pitch-fld {
+  position:fixed;
+  bottom:110px;
+  left:504px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#viewF {
   position:fixed;
   bottom:90px;
   left:22px;
@@ -148,22 +163,22 @@
   z-index:100;
   color:yellow
 }
-#roll-fld {
-  position:fixed;
-  bottom:90px;
-  left:64px;
-  padding:5px;
-  z-index:100;
-  color:yellow
-}
-#roll-sld {
+#viewF-sld {
   position:fixed;
   bottom:90px;
   left:100px;
   padding:5px;
   z-index:100;
 }
-#elev {
+#viewF-fld {
+  position:fixed;
+  bottom:90px;
+  left:504px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#viewB {
   position:fixed;
   bottom:70px;
   left:22px;
@@ -171,12 +186,20 @@
   z-index:100;
   color:yellow
 }
-#elev-fld {
+#viewB-sld {
   position:fixed;
   bottom:70px;
   left:100px;
   padding:5px;
   z-index:100;
+}
+#viewB-fld {
+  position:fixed;
+  bottom:70px;
+  left:504px;
+  padding:5px;
+  z-index:100;
+  color:yellow
 }
 #view-dir {
   position: absolute;

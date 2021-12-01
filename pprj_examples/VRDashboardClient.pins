@@ -1,4 +1,4 @@
-; Sun Nov 28 23:48:49 MSK 2021
+; Wed Dec 01 17:32:31 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -334,50 +334,6 @@
 	(source "nil")
 	(title "RMMA"))
 
-([VRDashboardClient_Class220000] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
-	(label "CHEF CHAUDARD - FRAN")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class220001] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
-	(label "JACK SPADES")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class220002] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
-	(label "BADOUNET")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class220003] of  NavOb
-
-	(altitude 0)
-	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
-	(label "SURCOUF61")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
 ([VRDashboardClient_Class220004] of  NavOb
 
 	(altitude 0)
@@ -391,8 +347,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat -21.895708)
-	(lng -36.03542)
+	(lat 60.0)
+	(lng 30.0)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
