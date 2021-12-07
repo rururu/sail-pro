@@ -1,4 +1,4 @@
-; Wed Dec 01 17:38:50 MSK 2021
+; Mon Dec 06 20:24:34 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -74,13 +74,37 @@
 
 ([CesiumEngine_Class30016] of  CloFunction
 
-	(source "(if (>= m 1000) \n  (format \"%.0f км\" (/ m 1000.0)) \n  (format \"%.0f м\" (/ m 1.0)))")
+	(source "(if (>= m 1000) \n  (format \"%.0f nm\" (/ (/ m 1000.0) 1.852)) \n  (format \"%.0f м\" (/ m 1.0)))")
 	(title "zoom-format [m]"))
 
 ([CesiumEngine_Class4] of  CloFunction
 
 	(source "(when (seq ZOOM)\n  (.zoomOut (.-camera VIEWER) (first ZOOM))\n  (def ZOOM (rest ZOOM)))")
 	(title "zoom-out []"))
+
+([CesiumEngine_Class40000] of  CloFuncall
+
+	(source "(/ (/ 4 1000.0) 1.852)"))
+
+([CesiumEngine_Class40001] of  CloFuncall
+
+	(source "(/ (/ 40000 1000.0) 1.852)"))
+
+([CesiumEngine_Class40002] of  CloFuncall
+
+	(source "(/ (/ 2000 1000.0) 1.852)"))
+
+([CesiumEngine_Class40003] of  CloFuncall
+
+	(source "(/ (/ 4000 1000.0) 1.852)"))
+
+([CesiumEngine_Class40004] of  CloFuncall
+
+	(source "(format \"%.0f nm\" (/ (/ 4000 1000.0) 1.852))"))
+
+([CesiumEngine_Class40005] of  CloFuncall
+
+	(source "(format \"%.0f nm\" (/ (/ 7000 1000.0) 1.852))"))
 
 ([CesiumEngine_Class5] of  CloFunction
 
@@ -139,8 +163,8 @@
 
 ([Cezium_Class100000] of  CloFunction
 
-	(source "(let [p {:id label\n           :label {:text label\n                     :scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}}\n           :model {:gltf gltf-url\n                       :heightReference \"RELATIVE_TO_GROUND\"\n                       :scale mod-scl}\n           :orientation {:velocityReference \"#position\"}\n           :position {:interpolationAlgorithm \"LINEAR\"\n                           :forwardExtrapolationType \"HOLD\"\n                           :cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
-	(title "model-leg [label lab-scl lab-off gltf-url mod-scl [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
+	(source "(let [p {:id label\n           :label {:text label\n                     :scale lab-scl\n                     :heightReference lab-hre\n                     :pixelOffset {:cartesian2 lab-off}}\n           :model {:gltf gltf-url\n                       :heightReference mod-hre\n                       :scale mod-scl}\n           :orientation {:velocityReference \"#position\"}\n           :position {:interpolationAlgorithm \"LINEAR\"\n                           :forwardExtrapolationType \"HOLD\"\n                           :cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(title "model-leg [label lab-scl lab-hre lab-off gltf-url mod-scl mod-hre [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
 
 ([Cezium_Class100005] of  CloVar
 
@@ -275,8 +299,8 @@
 
 ([Cezium_Class180000] of  CloFunction
 
-	(source "(let [p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :heightReference \"RELATIVE_TO_GROUND\"\n                     :text label}\n           :billboard {:scale bil-scl\n                            :heightReference \"RELATIVE_TO_GROUND\"\n                            :verticalOrigin \"BOTTOM\"\n                            :rotation bil-rot\n                            :image img-url}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
-	(title "billboard-leg [label lab-scl lab-off img-url bil-scl bil-rot [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
+	(source "(let [p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :heightReference lab-hre\n                     :text label}\n           :billboard {:scale bil-scl\n                            :heightReference bil-hre\n                            :verticalOrigin \"BOTTOM\"\n                            :rotation bil-rot\n                            :image img-url}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(title "billboard-leg [label lab-scl lab-hre lab-off img-url bil-scl bil-hre bil-rot [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
 
 ([Cezium_Class190001] of  CloVar
 
@@ -306,7 +330,7 @@
 
 ([Cezium_Class200012] of  CloFunction
 
-	(source "([no dis sec ops]\n  (let [[c4d1 c4d2] (trace4d no sec ops)]\n    (navob-leg no dis c4d1 c4d2 ops)))\n([no dis c4d1 c4d2 ops]\n  (let [lab (.getName no)\n         gltf-url (ops :gltf-url)\n         mod-scl (or (ops :model-scale) 1.0)\n         lab-scl (or (ops :label-scale) 0.5)\n         lab-off (or (ops :label-offset) [0.0 -40.0])]\n    (if gltf-url \n      (model-leg lab lab-scl lab-off gltf-url mod-scl c4d1 c4d2)\n      (let [url (.getURL no)\n             bil (or (ops :billboard) (icon-file url) \"no.png\")\n             bil (str BASE-URL IMG-PATH bil)\n             bil-scl (or (ops :billboard-scale) 1.0)\n             vis (or (ops :visibility) 4.0)\n             bil-scl (if (> dis 0) \n                          (min (* 2 bil-scl) (* bil-scl 0.1 (/ vis dis)))\n                          bil-scl)\n             bil-rot (or (ops :billboarg-rotation) 0)]\n        (billboard-leg lab lab-scl lab-off bil bil-scl bil-rot c4d1 c4d2)))))")
+	(source "([no dis sec ops]\n  (let [[c4d1 c4d2] (trace4d no sec ops)]\n    (navob-leg no dis c4d1 c4d2 ops)))\n([no dis c4d1 c4d2 ops]\n  (let [lab (.getName no)\n         gltf-url (ops :gltf-url)\n         mod-scl (or (ops :model-scale) 1.0)\n         lab-scl (or (ops :label-scale) 0.5)\n         lab-hre (or (ops :label-height-reference) \"NONE\")\n         mod-hre (or (ops :model-height-reference) \"NONE\")\n         lab-off (or (ops :label-offset) [0.0 -40.0])]\n    (if gltf-url \n      (model-leg lab lab-scl lab-hre lab-off gltf-url mod-scl mod-hre c4d1 c4d2)\n      (let [url (.getURL no)\n             bil (or (ops :billboard) (icon-file url) \"no.png\")\n             bil (str BASE-URL IMG-PATH bil)\n             bil-scl (or (ops :billboard-scale) 1.0)\n             bil-hre (or (ops :billboard-height-reference) \"NONE\")\n             vis (or (ops :visibility) 4.0)\n             bil-scl (if (> dis 0) \n                          (min (* 2 bil-scl) (* bil-scl 0.1 (/ vis dis)))\n                          bil-scl)\n             bil-rot (or (ops :billboarg-rotation) 0)]\n        (billboard-leg lab lab-scl lab-hre lab-off bil bil-scl bil-hre bil-rot c4d1 c4d2)))))")
 	(title "navob-leg"))
 
 ([Cezium_Class20002] of  CSS

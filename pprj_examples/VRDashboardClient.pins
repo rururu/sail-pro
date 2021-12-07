@@ -1,4 +1,4 @@
-; Wed Dec 01 17:32:31 MSK 2021
+; Tue Dec 07 11:48:48 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -120,14 +120,14 @@
 
 ([VRDashboardClient_Class100098] of  CloFunction
 
-	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (not (empty? @FLEET))\n    (let [nbs (map #(neighbor % obm vis) (vals @FLEET))\n           nbs (filter some? nbs)]\n      (def ONMAP (volatile! []))\n      (doseq [[lab lat lon sog cog dis] nbs]\n        (let [nbi (foc \"NavOb\" \"label\" lab)\n              pat (fifos \"NavOb\" \"label\" \"neighbor\")]\n          (ssv nbi \"url\" (sv pat \"url\"))\n          (ssv nbi \"description\" (sv pat \"description\"))\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (if (number? sog)\n              (.setSpeed nbm (double sog))))\n          (vswap! ONMAP conj lab))))))")
+	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (not (empty? @FLEET))\n    (let [nbs (map #(neighbor % obm vis) (vals @FLEET))\n           nbs (filter some? nbs)]\n      (def ONMAP (volatile! []))\n      (doseq [[lab lat lon sog cog dis] nbs]\n        ;;(println :NEIGHBOR lab (= lab \"FRIGATE\"))\n        (let [nbi (foc \"VRFleet\" \"label\" lab)\n               pat (fifos \"NavOb\" \"label\" \"neighbor\")\n               frg (fifos \"NavOb\" \"label\" \"frigate0\")]\n           (if (= lab \"FRIGATE\")\n             (do (ssv nbi \"url\" (sv frg \"url\"))\n               (ssv nbi \"description\" (sv frg \"description\")))\n             (do (ssv nbi \"url\" (sv pat \"url\"))\n               (ssv nbi \"description\" (sv pat \"description\"))))\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (if (number? sog)\n              (.setSpeed nbm (double sog))))\n          (vswap! ONMAP conj lab))))))")
 	(title "show-neighbors [onb vis]"))
 
 ([VRDashboardClient_Class100115] of  NavOb
 
-	(altitude 2)
+	(altitude 4)
 	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6\n  :label-height-reference \"RELATIVE_TO_GROUND\"\n  :model-height-reference \"RELATIVE_TO_GROUND\"\n  :billboard-height-reference \"RELATIVE_TO_GROUND\"\n  :label-scale 0.3\n  :label-offset [0.0 -100.0]}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -334,12 +334,14 @@
 	(source "nil")
 	(title "RMMA"))
 
-([VRDashboardClient_Class220004] of  NavOb
+([VRDashboardClient_Class220000] of  NavOb
 
-	(altitude 0)
+	(altitude 4)
 	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
-	(label "PABLOBS")
+	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6\n  :label-height-reference \"RELATIVE_TO_GROUND\"\n  :model-height-reference \"RELATIVE_TO_GROUND\"\n  :billboard-height-reference \"RELATIVE_TO_GROUND\"\n  :label-scale 0.3\n  :label-offset [0.0 -100.0]}")
+	(label "neighbor")
+	(latitude "60 0")
+	(longitude "30 0")
 	(playground-index 0)
 	(speed 0.0)
 	(url "file:resources/public/img/yachtg.png")
@@ -347,8 +349,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 60.0)
-	(lng 30.0)
+	(lat 46.40442)
+	(lng -9.0355835)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -395,6 +397,10 @@
 
 	(source "{\"default\" \"{:gltf-url \\\"models/piramida/scene.gltf\\\"}\"}")
 	(title "DESC-MAP"))
+
+([VRDashboardClient_Class260000] of  CloFuncall
+
+	(source "(ru.rules/pp 'Clock0))"))
 
 ([VRDashboardClient_Class280001] of  NMEAData
 
@@ -556,15 +562,15 @@
 
 ([VRDashboardClient_Class30075] of  NavOb
 
-	(altitude 2)
+	(altitude 4)
 	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
-	(label "neighbor")
+	(description "{:gltf-url \"models/frigate/scene.gltf\", \n  :draft 2\n  :label-height-reference \"RELATIVE_TO_GROUND\"\n  :model-height-reference \"RELATIVE_TO_GROUND\"\n  :billboard-height-reference \"RELATIVE_TO_GROUND\"\n  :label-scale 0.3\n  :label-offset [0.0 -40.0]}")
+	(label "frigate0")
 	(latitude "60 0")
 	(longitude "30 0")
 	(playground-index 0)
 	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
+	(url "file:resources/public/img/tanker.gif")
 	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class30076] of  Rule
@@ -623,7 +629,7 @@
 		"477.5"
 		"470.9"
 		"503.1")
-	(selected-race "470.9")
+	(selected-race "481.1")
 	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))

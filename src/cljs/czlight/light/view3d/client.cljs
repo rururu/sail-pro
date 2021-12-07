@@ -98,7 +98,7 @@
 
 (defn zoom-format [m]
   (if (>= m 1000) 
-  (format "%.0f км" (/ m 1000.0)) 
+  (format "%.0f nm" (/ (/ m 1000.0) 1.852)) 
   (format "%.0f м" (/ m 1.0))))
 
 (defn zoom [mode]

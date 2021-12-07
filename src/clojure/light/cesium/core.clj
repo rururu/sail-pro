@@ -81,14 +81,14 @@
     (send-doc-curt))
   (send-event "czml" (json/write-str p))))
 
-(defn billboard-leg [label lab-scl lab-off img-url bil-scl bil-rot [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]
+(defn billboard-leg [label lab-scl lab-hre lab-off img-url bil-scl bil-hre bil-rot [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]
   (let [p {:id label
            :label {:scale lab-scl
                      :pixelOffset {:cartesian2 lab-off}
-                     :heightReference "RELATIVE_TO_GROUND"
+                     :heightReference lab-hre
                      :text label}
            :billboard {:scale bil-scl
-                            :heightReference "RELATIVE_TO_GROUND"
+                            :heightReference bil-hre
                             :verticalOrigin "BOTTOM"
                             :rotation bil-rot
                             :image img-url}
@@ -149,13 +149,14 @@
       :LE 1.57
       :RI 4.71)))))
 
-(defn model-leg [label lab-scl lab-off gltf-url mod-scl [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]
+(defn model-leg [label lab-scl lab-hre lab-off gltf-url mod-scl mod-hre [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]
   (let [p {:id label
            :label {:text label
                      :scale lab-scl
+                     :heightReference lab-hre
                      :pixelOffset {:cartesian2 lab-off}}
            :model {:gltf gltf-url
-                       :heightReference "RELATIVE_TO_GROUND"
+                       :heightReference mod-hre
                        :scale mod-scl}
            :orientation {:velocityReference "#position"}
            :position {:interpolationAlgorithm "LINEAR"
@@ -189,19 +190,22 @@
          gltf-url (ops :gltf-url)
          mod-scl (or (ops :model-scale) 1.0)
          lab-scl (or (ops :label-scale) 0.5)
+         lab-hre (or (ops :label-height-reference) "NONE")
+         mod-hre (or (ops :model-height-reference) "NONE")
          lab-off (or (ops :label-offset) [0.0 -40.0])]
     (if gltf-url 
-      (model-leg lab lab-scl lab-off gltf-url mod-scl c4d1 c4d2)
+      (model-leg lab lab-scl lab-hre lab-off gltf-url mod-scl mod-hre c4d1 c4d2)
       (let [url (.getURL no)
              bil (or (ops :billboard) (icon-file url) "no.png")
              bil (str BASE-URL IMG-PATH bil)
              bil-scl (or (ops :billboard-scale) 1.0)
+             bil-hre (or (ops :billboard-height-reference) "NONE")
              vis (or (ops :visibility) 4.0)
              bil-scl (if (> dis 0) 
                           (min (* 2 bil-scl) (* bil-scl 0.1 (/ vis dis)))
                           bil-scl)
              bil-rot (or (ops :billboarg-rotation) 0)]
-        (billboard-leg lab lab-scl lab-off bil bil-scl bil-rot c4d1 c4d2))))))
+        (billboard-leg lab lab-scl lab-hre lab-off bil bil-scl bil-hre bil-rot c4d1 c4d2))))))
 
 (defn llp-czcoords [llp alt pts?]
   (if pts?

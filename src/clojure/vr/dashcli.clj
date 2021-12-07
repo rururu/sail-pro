@@ -311,10 +311,15 @@
            nbs (filter some? nbs)]
       (def ONMAP (volatile! []))
       (doseq [[lab lat lon sog cog dis] nbs]
-        (let [nbi (foc "NavOb" "label" lab)
-              pat (fifos "NavOb" "label" "neighbor")]
-          (ssv nbi "url" (sv pat "url"))
-          (ssv nbi "description" (sv pat "description"))
+        ;;(println :NEIGHBOR lab (= lab "FRIGATE"))
+        (let [nbi (foc "VRFleet" "label" lab)
+               pat (fifos "NavOb" "label" "neighbor")
+               frg (fifos "NavOb" "label" "frigate0")]
+           (if (= lab "FRIGATE")
+             (do (ssv nbi "url" (sv frg "url"))
+               (ssv nbi "description" (sv frg "description")))
+             (do (ssv nbi "url" (sv pat "url"))
+               (ssv nbi "description" (sv pat "description"))))
           (let [nbm (OMT/getOrAdd nbi)]
             (.setLatitude nbm lat)
             (.setLongitude nbm lon)
