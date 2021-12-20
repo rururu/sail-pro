@@ -163,7 +163,7 @@
   (set-html! "altitude-fld" czm/ALT)
   (set-html! "view-dir" (geo/rumb head))
   (if (empty? czm/ZOOM)
-    (czm/fly-to lat lon (+ alt vev) crs 1.2))))
+    (czm/fly-to lat lon (+ alt vev) crs 5))))
 
 (defn vehicle-hr [response]
   (let [resp (read-transit response)]
@@ -241,7 +241,7 @@
 
 (defn on-load []
   (czm/init-3D-view (str "http://0.0.0.0:" PORT))
-(repeater receive-vehicle 1000)
+(repeater receive-vehicle 4000)
 (show-controls))
 
 (defn run-repl []
@@ -284,5 +284,3 @@
 
 (enable-console-print!)
 (set! (.-onload js/window) (on-load))
-(run-repl)
-(tst)

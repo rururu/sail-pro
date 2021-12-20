@@ -1,4 +1,4 @@
-; Tue Dec 07 11:48:48 MSK 2021
+; Mon Dec 20 21:33:48 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -127,7 +127,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6\n  :label-height-reference \"RELATIVE_TO_GROUND\"\n  :model-height-reference \"RELATIVE_TO_GROUND\"\n  :billboard-height-reference \"RELATIVE_TO_GROUND\"\n  :label-scale 0.3\n  :label-offset [0.0 -100.0]}")
+	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 0.0]}\n     :heightReference \"CLAMP_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -140,7 +140,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6}")
+	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 0.0]}\n     :heightReference \"CLAMP_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "Bylina")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -338,7 +338,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:gltf-url \"models/sailboat/1368 Sailboat.gltf\", \n  :draft 6\n  :label-height-reference \"RELATIVE_TO_GROUND\"\n  :model-height-reference \"RELATIVE_TO_GROUND\"\n  :billboard-height-reference \"RELATIVE_TO_GROUND\"\n  :label-scale 0.3\n  :label-offset [0.0 -100.0]}")
+	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 0.0]}\n     :heightReference \"CLAMP_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "neighbor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -349,8 +349,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 46.40442)
-	(lng -9.0355835)
+	(lat 63.569637)
+	(lng 9.8)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -389,6 +389,14 @@
 	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (let [wc (first (cls-instances \"WikipediaControl\"))\n                                      lat (sv wc \"lat\")\n                                      lon (sv wc \"lng\")\n                                      vic (sv wc \"vicinity\")]\n                                  (pum-out-place art lat lon vic)\n                                  (.show *prj* art))))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
 	(title "set-mouse-adapter2 []"))
 
+([VRDashboardClient_Class250000] of  CloFuncall
+
+	(source "(OMT/getMapOb \"Bylina\")"))
+
+([VRDashboardClient_Class250001] of  CloFuncall
+
+	(source "(.getDescription (OMT/getMapOb \"Bylina\"))"))
+
 ([VRDashboardClient_Class250002] of  CloFuncall
 
 	(source "(ru.rules/dr)"))
@@ -401,6 +409,26 @@
 ([VRDashboardClient_Class260000] of  CloFuncall
 
 	(source "(ru.rules/pp 'Clock0))"))
+
+([VRDashboardClient_Class260002] of  CloFuncall
+
+	(source "(ru.rules/sp 'Clock0)"))
+
+([VRDashboardClient_Class260003] of  CloFuncall
+
+	(source "(ru.rules/sp 'CZMLSpan)"))
+
+([VRDashboardClient_Class260004] of  CloFuncall
+
+	(source "(ru.rules/pp 'CZMLSpan)"))
+
+([VRDashboardClient_Class260005] of  CloFuncall
+
+	(source "(.getDescription (OMT/getMapOb \"russor\"))"))
+
+([VRDashboardClient_Class270000] of  CloFuncall
+
+	(source "(.getAltitude (OMT/getMapOb \"Bylina\"))"))
 
 ([VRDashboardClient_Class280001] of  NMEAData
 
@@ -425,7 +453,7 @@
 ([VRDashboardClient_Class30000] of  Rule
 
 	(lhs "(CZMLGenerator delay ?del\n	visibility ?vis)\n(Onboard label ?onb)\n?cs (CZMLSpan time ?tim\n	object ?obj\n	options ?ops)\n(Clock0 time ?t ((not= ?obj ?onb)\n                       (> ?t ?tim)))")
-	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/navob-leg \n	nmo\n	dis\n	(+ ?del 2)\n	?ops))\n      (modify ?cs time (+ ?t ?del)))))")
+	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/model-leg \n	nmo\n	(+ ?del 2)\n	(read-string (.getDescription nmo))))\n      (modify ?cs time (+ ?t ?del)))))")
 	(salience 1)
 	(title "czm0:CZML Navob Leg Generation2"))
 
@@ -539,8 +567,7 @@
 	(mode run)
 	(rule-sets
 		[VRDashboardClient_Class30074]
-		[VRDashboardClient_Class40001]
-		[CeziumEngineLight_Class40008])
+		[VRDashboardClient_Class40001])
 	(steps 1)
 	(title "VRRun"))
 
@@ -596,13 +623,16 @@
 
 	(rules
 		[CeziumEngineLight_Class40022]
-		[CeziumEngineLight_Class30003]
-		[VRDashboardClient_Class30000])
+		[VRDashboardClient_Class30000]
+		[CeziumEngineLight_Class40005]
+		[CeziumEngineLight_Class40006]
+		[CeziumEngineLight_Class40007])
 	(templates
 		[Clock0]
 		[CZMLGenerator]
 		[CZMLSpan]
-		[Onboard])
+		[Onboard]
+		[MapObEvent0])
 	(title "CZML Generation Set2"))
 
 ([VRDashboardClient_Class50000] of  CloProgram
@@ -620,16 +650,14 @@
 	(onboard "russor")
 	(port "8448")
 	(races
+		"507.1"
 		"481.1"
-		"488.1"
-		"489.1"
-		"490.1"
-		"491.1"
-		"480.2"
+		"514.1"
 		"477.5"
 		"470.9"
-		"503.1")
-	(selected-race "481.1")
+		"503.1"
+		"515.1")
+	(selected-race "514.1")
 	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
@@ -749,7 +777,7 @@
 ([VRDashboardClient_Class80000] of  Rule
 
 	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"ADDED\"\n	object ?obj\n	label ?lab\n                      (= (.getName (class ?obj)) \"ru.igis.omtab.NavOb\"))\n(Clock0 time ?t)\n(not CZMLSpan object ?lab)")
-	(rhs "(asser CZMLSpan object ?lab\n	options (read-string (.getDescription ?obj))\n	time ?t)\n(println \"NavOb on map:\" ?lab)")
+	(rhs "(asser CZMLSpan object ?lab\n	time ?t)\n(println \"NavOb on map:\" ?lab)")
 	(salience 0)
 	(title "vr:NavOb on Map"))
 

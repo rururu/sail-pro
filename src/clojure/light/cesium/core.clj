@@ -5,7 +5,6 @@
     [clojure.data.json :as json])
 (:import java.util.Calendar))
 (def defo-CZ-CHAN (defonce CZ-CHAN (asp/mk-chan)))
-(def DOC-SENT false)
 (def BASE-URL "")
 (def IMG-PATH "img/")
 (defn icon-file [url]
@@ -58,11 +57,9 @@
   ([]
   (send-doc (doc)))
 ([doc]
-  (send-event "czml" doc)
-  (def DOC-SENT true))
+  (send-event "czml" doc))
 ([_ iso]
-  (send-event "czml" (doc iso))
-  (def DOC-SENT true)))
+  (send-event "czml" (doc iso))))
 
 (defn send-doc-curt []
   (send-doc (doc (iso8601curt))))
@@ -77,8 +74,7 @@
            :billboard {:scale scale
                             :image img-url}
            :position {:cartographicDegrees [lon lat alt]}}]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
 
 (defn billboard-leg [label lab-scl lab-hre lab-off img-url bil-scl bil-hre bil-rot [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]
@@ -93,8 +89,7 @@
                             :rotation bil-rot
                             :image img-url}
            :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
 
 (defn point-out [txt [lat lon] dist max-dist]
@@ -124,9 +119,23 @@
                                                     :lineCount {:cartesian2 [16, 16]}
                                                     :cellAlpha transp}}}
            :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
+
+(defn trace4d [no sec ops]
+  (let [drf (or (ops :draft) 0)
+       lat1 (.getLatitude no)
+       lon1 (.getLongitude no)
+       alt1 (- (.getAltitude no) drf)
+       crs (.getCourse no)
+       spd (.getSpeed no)
+       vsd (.getVerticalSpeed no)
+       dis (double (/ (* spd sec) 3600))
+       [lat2 lon2] (seq (.position no (double crs) dis))
+       alt2 (+ alt1 (* vsd sec))
+       tim1 (iso8601curt)
+       tim2 (iso8601futt sec)]
+  [[tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]))
 
 (defn billboard-rotation [nmo omo]
   (let [ncrs (.getCourse nmo)]
@@ -149,63 +158,22 @@
       :LE 1.57
       :RI 4.71)))))
 
-(defn model-leg [label lab-scl lab-hre lab-off gltf-url mod-scl mod-hre [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]
-  (let [p {:id label
-           :label {:text label
-                     :scale lab-scl
-                     :heightReference lab-hre
-                     :pixelOffset {:cartesian2 lab-off}}
-           :model {:gltf gltf-url
-                       :heightReference mod-hre
-                       :scale mod-scl}
-           :orientation {:velocityReference "#position"}
-           :position {:interpolationAlgorithm "LINEAR"
+(defn model-leg
+  ([no sec ops]
+  (let [[c4d1 c4d2] (trace4d no sec ops)
+        lab (.getName no)
+        lab-ops (assoc (ops :label) :text lab)]
+    (model-leg lab lab-ops  (ops :model) c4d1 c4d2)))
+([id label model [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]
+  (let [p {:id id
+             :label label
+             :model model
+             :orientation {:velocityReference "#position"}
+             :position {:interpolationAlgorithm "LINEAR"
                            :forwardExtrapolationType "HOLD"
                            :cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]
-  (if (not DOC-SENT)
-    (send-doc-curt))
-  (send-event "czml" (json/write-str p))))
-
-(defn trace4d [no sec ops]
-  (let [drf (or (ops :draft) 0)
-       lat1 (.getLatitude no)
-       lon1 (.getLongitude no)
-       alt1 (- (.getAltitude no) drf)
-       crs (.getCourse no)
-       spd (.getSpeed no)
-       vsd (.getVerticalSpeed no)
-       dis (double (/ (* spd sec) 3600))
-       [lat2 lon2] (seq (.position no (double crs) dis))
-       alt2 (+ alt1 (* vsd sec))
-       tim1 (iso8601curt)
-       tim2 (iso8601futt sec)]
-  [[tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]))
-
-(defn navob-leg
-  ([no dis sec ops]
-  (let [[c4d1 c4d2] (trace4d no sec ops)]
-    (navob-leg no dis c4d1 c4d2 ops)))
-([no dis c4d1 c4d2 ops]
-  (let [lab (.getName no)
-         gltf-url (ops :gltf-url)
-         mod-scl (or (ops :model-scale) 1.0)
-         lab-scl (or (ops :label-scale) 0.5)
-         lab-hre (or (ops :label-height-reference) "NONE")
-         mod-hre (or (ops :model-height-reference) "NONE")
-         lab-off (or (ops :label-offset) [0.0 -40.0])]
-    (if gltf-url 
-      (model-leg lab lab-scl lab-hre lab-off gltf-url mod-scl mod-hre c4d1 c4d2)
-      (let [url (.getURL no)
-             bil (or (ops :billboard) (icon-file url) "no.png")
-             bil (str BASE-URL IMG-PATH bil)
-             bil-scl (or (ops :billboard-scale) 1.0)
-             bil-hre (or (ops :billboard-height-reference) "NONE")
-             vis (or (ops :visibility) 4.0)
-             bil-scl (if (> dis 0) 
-                          (min (* 2 bil-scl) (* bil-scl 0.1 (/ vis dis)))
-                          bil-scl)
-             bil-rot (or (ops :billboarg-rotation) 0)]
-        (billboard-leg lab lab-scl lab-hre lab-off bil bil-scl bil-hre bil-rot c4d1 c4d2))))))
+    (send-doc-curt)
+    (send-event "czml" (json/write-str p)))))
 
 (defn llp-czcoords [llp alt pts?]
   (if pts?
@@ -232,8 +200,7 @@
             :position {:interpolationAlgorithm "LINEAR"
                             :epoch fiso
                             :cartographicDegrees pts}}]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
 
 (defn polyline [id from-to llp alt wid color name pts?]
@@ -249,8 +216,7 @@
         p (if-let [[from to] from-to]
              (assoc p :availability (str (iso8601futt from) "/" (iso8601futt to)))
              p)]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
 
 (defn polygon [id from-to llp alt wid color fill name pts?]
@@ -269,8 +235,7 @@
         p (if-let [[from to] from-to]
              (assoc p :availability (str (iso8601futt from) "/" (iso8601futt to)))
              p)]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
 
 (defn circle [id from-to [cla clo] radm alt wid color fill name]
@@ -290,14 +255,12 @@
         p (if-let [[from to] from-to]
              (assoc p :availability (str (iso8601futt from) "/" (iso8601futt to)))
              p)]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
 
 (defn delete [id]
   (let [p {:id id
            :delete true}]
-  (if (not DOC-SENT)
-    (send-doc-curt))
+  (send-doc-curt)
   (send-event "czml" (json/write-str p))))
 

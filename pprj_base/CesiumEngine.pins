@@ -1,4 +1,4 @@
-; Mon Dec 06 20:24:34 MSK 2021
+; Mon Dec 20 20:21:41 MSK 2021
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -163,8 +163,8 @@
 
 ([Cezium_Class100000] of  CloFunction
 
-	(source "(let [p {:id label\n           :label {:text label\n                     :scale lab-scl\n                     :heightReference lab-hre\n                     :pixelOffset {:cartesian2 lab-off}}\n           :model {:gltf gltf-url\n                       :heightReference mod-hre\n                       :scale mod-scl}\n           :orientation {:velocityReference \"#position\"}\n           :position {:interpolationAlgorithm \"LINEAR\"\n                           :forwardExtrapolationType \"HOLD\"\n                           :cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
-	(title "model-leg [label lab-scl lab-hre lab-off gltf-url mod-scl mod-hre [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
+	(source "([no sec ops]\n  (let [[c4d1 c4d2] (trace4d no sec ops)\n        lab (.getName no)\n        lab-ops (assoc (ops :label) :text lab)]\n    (model-leg lab lab-ops  (ops :model) c4d1 c4d2)))\n([id label model [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]\n  (let [p {:id id\n             :label label\n             :model model\n             :orientation {:velocityReference \"#position\"}\n             :position {:interpolationAlgorithm \"LINEAR\"\n                           :forwardExtrapolationType \"HOLD\"\n                           :cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n    (send-doc-curt)\n    (send-event \"czml\" (json/write-str p))))")
+	(title "model-leg"))
 
 ([Cezium_Class100005] of  CloVar
 
@@ -173,7 +173,7 @@
 
 ([Cezium_Class10001] of  CloFunction
 
-	(source "(czm/init-3D-view (str \"http://0.0.0.0:\" PORT))\n(repeater receive-vehicle 1000)\n(show-controls)")
+	(source "(czm/init-3D-view (str \"http://0.0.0.0:\" PORT))\n(repeater receive-vehicle 4000)\n(show-controls)")
 	(title "on-load []"))
 
 ([Cezium_Class10002] of  CloFunction
@@ -203,7 +203,7 @@
 
 ([Cezium_Class10010] of  CloFunction
 
-	(source "(let [[lat lon] (:coord vehicle)\n       alt (:altitude vehicle)\n       vev (:view-elevation @VEHICLE)\n       crs (:course vehicle)\n       head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]\n  (vswap! VEHICLE merge vehicle)\n  (set-html! \"onboard-fld\" (:name vehicle))\n  (set-html! \"name-fld\" (:name vehicle))\n  (set-html! \"course-fld\" (:course vehicle))\n  (set-html! \"speed-fld\" (:speed vehicle))\n  (set-html! \"altitude-fld\" czm/ALT)\n  (set-html! \"view-dir\" (geo/rumb head))\n  (if (empty? czm/ZOOM)\n    (czm/fly-to lat lon (+ alt vev) crs 1.2)))")
+	(source "(let [[lat lon] (:coord vehicle)\n       alt (:altitude vehicle)\n       vev (:view-elevation @VEHICLE)\n       crs (:course vehicle)\n       head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]\n  (vswap! VEHICLE merge vehicle)\n  (set-html! \"onboard-fld\" (:name vehicle))\n  (set-html! \"name-fld\" (:name vehicle))\n  (set-html! \"course-fld\" (:course vehicle))\n  (set-html! \"speed-fld\" (:speed vehicle))\n  (set-html! \"altitude-fld\" czm/ALT)\n  (set-html! \"view-dir\" (geo/rumb head))\n  (if (empty? czm/ZOOM)\n    (czm/fly-to lat lon (+ alt vev) crs 5)))")
 	(title "handle-vehicle [vehicle]"))
 
 ([Cezium_Class110051] of  CloFunction
@@ -267,7 +267,7 @@
 		[Cezium_Class30029])
 	(compiler-options "{:verbose false}")
 	(css [Cezium_Class20002])
-	(epilogue "(enable-console-print!)\n(set! (.-onload js/window) (on-load))\n(run-repl)\n(tst)")
+	(epilogue "(enable-console-print!)\n(set! (.-onload js/window) (on-load))")
 	(html [Cezium_Class20000])
 	(output-dir "resources/public/js/czlight")
 	(output-to "resources/public/js/cesium_light.js")
@@ -279,7 +279,7 @@
 
 ([Cezium_Class150000] of  CloFunction
 
-	(source "([]\n  (send-doc (doc)))\n([doc]\n  (send-event \"czml\" doc)\n  (def DOC-SENT true))\n([_ iso]\n  (send-event \"czml\" (doc iso))\n  (def DOC-SENT true))")
+	(source "([]\n  (send-doc (doc)))\n([doc]\n  (send-event \"czml\" doc))\n([_ iso]\n  (send-event \"czml\" (doc iso)))")
 	(title "send-doc"))
 
 ([Cezium_Class16] of  CloNamespace
@@ -299,13 +299,8 @@
 
 ([Cezium_Class180000] of  CloFunction
 
-	(source "(let [p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :heightReference lab-hre\n                     :text label}\n           :billboard {:scale bil-scl\n                            :heightReference bil-hre\n                            :verticalOrigin \"BOTTOM\"\n                            :rotation bil-rot\n                            :image img-url}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source "(let [p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :heightReference lab-hre\n                     :text label}\n           :billboard {:scale bil-scl\n                            :heightReference bil-hre\n                            :verticalOrigin \"BOTTOM\"\n                            :rotation bil-rot\n                            :image img-url}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "billboard-leg [label lab-scl lab-hre lab-off img-url bil-scl bil-hre bil-rot [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
-
-([Cezium_Class190001] of  CloVar
-
-	(source "false")
-	(title "DOC-SENT"))
 
 ([Cezium_Class20000] of  HTML
 
@@ -325,7 +320,7 @@
 
 ([Cezium_Class200002] of  CloFunction
 
-	(source "(let [[a r g b] (dec16 lin-color)\n       p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :text label}\n           :ellipsoid {:show  true\n                           :radii {:cartesian [x y z]}\n                           :material {:grid {:color {:rgba [r g b a]}\n                                                    :lineCount {:cartesian2 [16, 16]}\n                                                    :cellAlpha transp}}}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source "(let [[a r g b] (dec16 lin-color)\n       p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :text label}\n           :ellipsoid {:show  true\n                           :radii {:cartesian [x y z]}\n                           :material {:grid {:color {:rgba [r g b a]}\n                                                    :lineCount {:cartesian2 [16, 16]}\n                                                    :cellAlpha transp}}}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "dome [label lab-scl lab-off [x y z] lin-color transp [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
 
 ([Cezium_Class200012] of  CloFunction
@@ -356,22 +351,22 @@
 
 ([Cezium_Class240000] of  CloFunction
 
-	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        fiso (iso8601futt from)\n        tiso (iso8601futt to)\n        N (count points)\n        step (/ (- to from) N)\n        reso (inc (max step 1))\n        pts (vec (flatten (map #(cons %1 %2) (range N) points)))\n        p {:id id\n            :availability (str fiso \"/\" tiso)\n            :path {:width wid\n                      :material {:solidColor {:color {:rgba [r g b a]}}}\n                      :resolution reso}\n            :position {:interpolationAlgorithm \"LINEAR\"\n                            :epoch fiso\n                            :cartographicDegrees pts}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        fiso (iso8601futt from)\n        tiso (iso8601futt to)\n        N (count points)\n        step (/ (- to from) N)\n        reso (inc (max step 1))\n        pts (vec (flatten (map #(cons %1 %2) (range N) points)))\n        p {:id id\n            :availability (str fiso \"/\" tiso)\n            :path {:width wid\n                      :material {:solidColor {:color {:rgba [r g b a]}}}\n                      :resolution reso}\n            :position {:interpolationAlgorithm \"LINEAR\"\n                            :epoch fiso\n                            :cartographicDegrees pts}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "path [id [from to] wid color points]"))
 
 ([Cezium_Class250000] of  CloFunction
 
-	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        pts (llp-czcoords llp alt pts?)\n        p {:id id\n            :name name\n            :polyline {:width wid\n                           :material {:solidColor {:color {:rgba [r g b a]}}}\n                           :clampToGround (= alt 0)\n                           :positions {:cartographicDegrees pts}}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        pts (llp-czcoords llp alt pts?)\n        p {:id id\n            :name name\n            :polyline {:width wid\n                           :material {:solidColor {:color {:rgba [r g b a]}}}\n                           :clampToGround (= alt 0)\n                           :positions {:cartographicDegrees pts}}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "polyline [id from-to llp alt wid color name pts?]"))
 
 ([Cezium_Class270000] of  CloFunction
 
-	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        pts (llp-czcoords llp alt pts?)\n        p {:id id\n            :name name\n            :polygon {:outline true\n                           :outlineWidth wid\n                           :outlineColor {:rgba [r g b a]}\n                           :material {:solidColor {:color {:rgba\n                             (let [[a r g b] (or (if fill (dec16 fill)) (dec16 \"00000000\"))]	                               [r g b a])}}}\n                           :perPositionHeight true\n                           :positions {:cartographicDegrees pts}}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        pts (llp-czcoords llp alt pts?)\n        p {:id id\n            :name name\n            :polygon {:outline true\n                           :outlineWidth wid\n                           :outlineColor {:rgba [r g b a]}\n                           :material {:solidColor {:color {:rgba\n                             (let [[a r g b] (or (if fill (dec16 fill)) (dec16 \"00000000\"))]	                               [r g b a])}}}\n                           :perPositionHeight true\n                           :positions {:cartographicDegrees pts}}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "polygon [id from-to llp alt wid color fill name pts?]"))
 
 ([Cezium_Class280000] of  CloFunction
 
-	(source ";; radius, height - meters\n(let [[a r g b] (dec16 color)\n        p {:id id\n            :name name\n            :ellipse {:semiMinorAxis radm\n                         :semiMajorAxis radm\n                         :height alt\n                         :material {:solidColor {:color {:rgba\n                           (let [[a r g b] (or (if fill (dec16 fill)) (dec16 \"00000000\"))]	                             [r g b a])}}}\n                         :outline true\n                         :outlineWidth wid\n                         :outlineColor {:rgba [r g b a]}}\n            :position {:cartographicDegrees [clo cla alt]}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source ";; radius, height - meters\n(let [[a r g b] (dec16 color)\n        p {:id id\n            :name name\n            :ellipse {:semiMinorAxis radm\n                         :semiMajorAxis radm\n                         :height alt\n                         :material {:solidColor {:color {:rgba\n                           (let [[a r g b] (or (if fill (dec16 fill)) (dec16 \"00000000\"))]	                             [r g b a])}}}\n                         :outline true\n                         :outlineWidth wid\n                         :outlineColor {:rgba [r g b a]}}\n            :position {:cartographicDegrees [clo cla alt]}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "circle [id from-to [cla clo] radm alt wid color fill name]"))
 
 ([Cezium_Class290002] of  CloVar
@@ -523,10 +518,9 @@
 		[Cezium_Class210000]
 		[Cezium_Class200001]
 		[Cezium_Class200002]
+		[Cezium_Class110051]
 		[Cezium_Class70000]
 		[Cezium_Class100000]
-		[Cezium_Class110051]
-		[Cezium_Class200012]
 		[Cezium_Class330000]
 		[Cezium_Class240000]
 		[Cezium_Class250000]
@@ -536,7 +530,6 @@
 	(cloNamespace [Cezium_Class30044])
 	(cloVars
 		[Cezium_Class30045]
-		[Cezium_Class190001]
 		[Cezium_Class210001]
 		[Cezium_Class210002])
 	(title "Cesium Server Light"))
@@ -578,7 +571,7 @@
 
 ([Cezium_Class30052] of  CloFunction
 
-	(source "(let [p {:id label\n           :availability (str (iso8601curt) \"/\" (iso8601futt span-sec))\n           :label {:scale scale\n                     :pixelOffset {:cartesian2 [8, -24]}\n                     :heightReference \"RELATIVE_TO_GROUND\"\n                     :text label}\n           :billboard {:scale scale\n                            :image img-url}\n           :position {:cartographicDegrees [lon lat alt]}}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source "(let [p {:id label\n           :availability (str (iso8601curt) \"/\" (iso8601futt span-sec))\n           :label {:scale scale\n                     :pixelOffset {:cartesian2 [8, -24]}\n                     :heightReference \"RELATIVE_TO_GROUND\"\n                     :text label}\n           :billboard {:scale scale\n                            :image img-url}\n           :position {:cartographicDegrees [lon lat alt]}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "location [label scale img-url lat lon alt span-sec]"))
 
 ([Cezium_Class30054] of  CloFunction
@@ -603,7 +596,7 @@
 
 ([Cezium_Class340000] of  CloFunction
 
-	(source "(let [p {:id id\n           :delete true}]\n  (if (not DOC-SENT)\n    (send-doc-curt))\n  (send-event \"czml\" (json/write-str p)))")
+	(source "(let [p {:id id\n           :delete true}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
 	(title "delete [id]"))
 
 ([Cezium_Class350000] of  CloFunction

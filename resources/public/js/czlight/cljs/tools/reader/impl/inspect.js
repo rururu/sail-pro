@@ -126,8 +126,8 @@ return cljs.core.pr_str.call(null,cljs.core.type.call(null,x));
  * the inspection.
  */
 cljs.tools.reader.impl.inspect.inspect = (function cljs$tools$reader$impl$inspect$inspect(var_args){
-var G__1326 = arguments.length;
-switch (G__1326) {
+var G__999 = arguments.length;
+switch (G__999) {
 case 1:
 return cljs.tools.reader.impl.inspect.inspect.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
