@@ -32,6 +32,10 @@
 2. [Using binocular](https://youtu.be/1KAI8eP-DxM)
 3. [Finish](https://youtu.be/4T41q49LNPc)
 
+## From Boston to North Cape
+
+1. [Finish on North Cape](https://www.youtube.com/watch?v=Hohehv8Fp34)
+
 ## Others
 
 1. [Meaipe](https://youtu.be/E8kdpT2fQfU)
