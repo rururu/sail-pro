@@ -34,6 +34,7 @@
 
 ## From Boston to North Cape
 
+1. [Start near Boston](https://www.youtube.com/watch?v=KopPdtErNec)
 1. [Finish on North Cape](https://www.youtube.com/watch?v=Hohehv8Fp34)
 
 ## Others
