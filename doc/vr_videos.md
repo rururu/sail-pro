@@ -35,7 +35,8 @@
 ## From Boston to North Cape
 
 1. [Start near Boston](https://www.youtube.com/watch?v=KopPdtErNec)
-1. [Finish on North Cape](https://www.youtube.com/watch?v=Hohehv8Fp34)
+2. [Green Mountines near Hovden, Nordland](https://youtu.be/I6IWEMnR7uc)
+3. [Finish on North Cape](https://www.youtube.com/watch?v=Hohehv8Fp34)
 
 ## Others
 
