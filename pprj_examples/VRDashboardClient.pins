@@ -1,4 +1,4 @@
-; Mon Dec 20 21:33:48 MSK 2021
+; Thu Jan 27 22:47:30 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -22,7 +22,8 @@
 	(cloFunctions
 		[VRDashboardClient_Class60003]
 		[VRDashboardClient_Class30019]
-		[VRDashboardClient_Class80002]
+		[VRDashboardClient_Class290001]
+		[VRDashboardClient_Class280000]
 		[VRDashboardClient_Class30006]
 		[VRDashboardClient_Class30003]
 		[VRDashboardClient_Class170002]
@@ -47,7 +48,8 @@
 		[VRDashboardClient_Class100083]
 		[VRDashboardClient_Class100098]
 		[VRDashboardClient_Class80001]
-		[VRDashboardClient_Class240001])
+		[VRDashboardClient_Class240001]
+		[VRDashboardClient_Class290002])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20003]
@@ -222,7 +224,15 @@
 	(button-bbx "submit/wiki.gis/submit-bbx")
 	(button-clear-articles "Clear Articles/wiki.gis/clear-articles")
 	(language English-en)
-	(max-responses 40))
+	(max-responses 40)
+	(responses
+		[VRDashboardClient_Class300014]
+		[VRDashboardClient_Class300015]
+		[VRDashboardClient_Class300016]
+		[VRDashboardClient_Class300017]
+		[VRDashboardClient_Class300018]
+		[VRDashboardClient_Class300019]
+		[VRDashboardClient_Class300020]))
 
 ([VRDashboardClient_Class160001] of  CloFunction
 
@@ -237,7 +247,7 @@
 ([VRDashboardClient_Class170001] of  BBX
 
 	(title "Current")
-	(wsen -67.9808 17.994673 -67.64747 18.328005))
+	(wsen -59.750114 -51.427593 -59.41678 -51.094257))
 
 ([VRDashboardClient_Class170002] of  CloFunction
 
@@ -284,7 +294,7 @@
 
 ([VRDashboardClient_Class2] of  CloNamespace
 
-	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps]\n  [clj-json.core :as json]\n  [wiki.gis :as wig]\n  [light.cesium.core :as cz])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever\n  ru.igis.omtab.gui.RuMapMouseAdapter\n  dk.dma.ais.sentence.Vdm\n  dk.dma.ais.message.AisMessage\n  ru.igis.ais.AIVDMProcessor)")
+	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps]\n  [clj-json.core :as json]\n  [wiki.gis :as wig]\n  [light.cesium.core :as cz]\n  [clojure.java.shell :as shell])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever\n  ru.igis.omtab.gui.RuMapMouseAdapter\n  dk.dma.ais.sentence.Vdm\n  dk.dma.ais.message.AisMessage\n  ru.igis.ais.AIVDMProcessor)")
 	(title "vr.dashcli"))
 
 ([VRDashboardClient_Class20000] of  CloVar
@@ -349,8 +359,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 63.569637)
-	(lng 9.8)
+	(lat -51.257336)
+	(lng -59.63903)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -430,6 +440,11 @@
 
 	(source "(.getAltitude (OMT/getMapOb \"Bylina\"))"))
 
+([VRDashboardClient_Class280000] of  CloFunction
+
+	(source ";;(println :NMEA-CACHE path)\n(let [buf (slurp path)]\n  (if (not (empty? buf))\n    (reset! NMEA (.split buf END-TOKEN))))")
+	(title "get-external-data [path]"))
+
 ([VRDashboardClient_Class280001] of  NMEAData
 
 	(object [VRDashboardClient_Class100115])
@@ -439,6 +454,20 @@
 
 	(source "(letfn [(to-map [s]\n             (let [s (.substring s 1 (dec (count s)))\n                    s (.split s \" \")\n                    s (remove #(.startsWith % \"pos\") s)\n                    s (remove #(.startsWith % \"=\") s)\n                    s (remove #(.startsWith % \"(\") s)\n                    s (apply str s)\n                    s (.replaceAll s \"=\" \" \")\n                    s (str \"{\" s \"}\")]   \n               (read-string s)))]\n  (if (.startsWith aivdm \"!AIVDM\")\n    (try\n      (let [vdm (Vdm.)\n             _ (.parse vdm aivdm)\n             mes (AisMessage/getInstance vdm)\n             pos (.getValidPosition mes)\n             tos (.toString mes)\n             mp (to-map tos)\n             mp (assoc mp 'pos [(.getLatitude pos) (.getLongitude pos)])\n             imo (mp 'userId)]\n        (vswap! FLEET assoc imo (merge mp (@FLEET imo))))\n      (catch Exception e\n        (let [lio (.lastIndexOf aivdm \"*\")]\n          (when (= (.substring aivdm (dec lio) lio) \"4\")\n            (AIVDMProcessor/process aivdm)\n            (let [imo (AIVDMProcessor/getIMO)\n                   snm (AIVDMProcessor/getShipName)]\n              (vswap! FLEET assoc imo (assoc (@FLEET imo) 'name snm))) ))) )))")
 	(title "parse-AIVDM [aivdm]"))
+
+([VRDashboardClient_Class290000] of  CloFuncall
+
+	(source "(empty? \"\")"))
+
+([VRDashboardClient_Class290001] of  CloFunction
+
+	(source "(spit path \"\")")
+	(title "clear-external-data [path]"))
+
+([VRDashboardClient_Class290002] of  CloFunction
+
+	(source "(let [cmd (str \"php -S \" uri \" \" path)\n      proc (Runtime/getRuntime)]\n (println :CMD cmd)\n (println (future (.exec proc cmd)))\n (println \",,\"))")
+	(title "start-router-slava [uri path]"))
 
 ([VRDashboardClient_Class290010] of  CloFunction
 
@@ -457,10 +486,195 @@
 	(salience 1)
 	(title "czm0:CZML Navob Leg Generation2"))
 
+([VRDashboardClient_Class300000] of  CloFuncall
+
+	(source "(start-router-slava \"\""))
+
+([VRDashboardClient_Class300001] of  CloFuncall
+
+	(source "(start-router-slava \"NMEA-CACHE/router.php\")"))
+
+([VRDashboardClient_Class300002] of  CloFuncall
+
+	(source "(start-router-slava \"localhost:8081\" \"NMEA-CACHE/router.php\")"))
+
 ([VRDashboardClient_Class30001] of  CloVar
 
 	(source "\"\\r\\n\"")
 	(title "END-TOKEN"))
+
+([VRDashboardClient_Class300014] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "AR")
+	(elevation 48)
+	(feature "isle")
+	(lang "en")
+	(lat -51.2892)
+	(lng -59.6224)
+	(rank 91)
+	(reference [VRDashboardClient_Class300021])
+	(summary "Pebble Island is one of the Falkland Islands, lying north of West Falkland. It is probably named after the peculiarly spherical pebbles found at its western tip.  (...)")
+	(thumbnailImg "http://www.geonames.org/img/wikipedia/71000/thumb-70738-100.png")
+	(title "Pebble Island")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Pebble_Island"))
+
+([VRDashboardClient_Class300015] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(elevation 31)
+	(lang "en")
+	(lat -51.3089)
+	(lng -59.6103)
+	(rank 88)
+	(reference [VRDashboardClient_Class300022])
+	(summary "The Raid on Pebble Island was a raid by British Special Forces on Pebble Island's airfield during the Falklands War, and took place on the night of 14–15 May 1982. Pebble Island is one of the smaller Falkland Islands, lying north of West Falkland (...)")
+	(title "Raid on Pebble Island")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Raid_on_Pebble_Island"))
+
+([VRDashboardClient_Class300016] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "AR")
+	(elevation 17)
+	(feature "isle")
+	(lang "en")
+	(lat -51.3755)
+	(lng -59.632)
+	(rank 72)
+	(reference [VRDashboardClient_Class300023])
+	(summary "East Island is one of the Falkland Islands off Pebble Island and Broken Island in Byron Sound.  (...)")
+	(title "East Island, Falkland Islands")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/East_Island%2C_Falkland_Islands"))
+
+([VRDashboardClient_Class300017] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "AR")
+	(elevation 31)
+	(lang "en")
+	(lat -51.3089)
+	(lng -59.6103)
+	(rank 61)
+	(reference [VRDashboardClient_Class300024])
+	(summary "Pebble Island Settlement (Spanish/Argentine name: Puerto Calderón) is on Pebble Island in the northwest Falkland Islands, United Kingdom. It is the headquarters of the Pebble Island farm, and is located on the island's isthmus (...)")
+	(title "Pebble Island Settlement")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Pebble_Island_Settlement"))
+
+([VRDashboardClient_Class300018] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "AR")
+	(elevation 13)
+	(feature "isle")
+	(lang "en")
+	(lat -51.3444)
+	(lng -59.6751)
+	(rank 61)
+	(reference [VRDashboardClient_Class300025])
+	(summary "Broken Island is one of the Falkland Islands, in Byron Sound, due north of West Falkland.  (...)")
+	(title "Broken Island")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Broken_Island"))
+
+([VRDashboardClient_Class300019] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "AR")
+	(elevation 9)
+	(feature "isle")
+	(lang "en")
+	(lat -51.383)
+	(lng -59.7109)
+	(rank 52)
+	(reference [VRDashboardClient_Class300026])
+	(summary "Narrow Island is one of the Falkland Islands, in Byron Sound. It is between Golding Island and Middle Island, and to the west of East Island. As its name implies, it is slender, and extends for several miles east-west, while only being about 500 yards in width at is widest point.  (...)")
+	(title "Narrow Island, Falkland Islands")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/Narrow_Island%2C_Falkland_Islands"))
+
+([VRDashboardClient_Class300020] of  WikiArticle
+
+	(button-open-site "Open Site/wiki.gis/open-site")
+	(countryCode "AR")
+	(elevation 17)
+	(feature "isle")
+	(lang "en")
+	(lat -51.4139)
+	(lng -59.6168)
+	(rank 46)
+	(reference [VRDashboardClient_Class300027])
+	(summary "River Island is one of the Falkland Islands. It is located in Byron Sound to the south of East Island and Pebble Island. There is a tidal island to its west, separated by a shallow lagoon. Despite its name, River Island is actually a salt water island.  (...)")
+	(title "River Island, Falkland Islands")
+	(wikipediaUrl "https://en.wikipedia.org/wiki/River_Island%2C_Falkland_Islands"))
+
+([VRDashboardClient_Class300021] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Pebble Island")
+	(latitude "-51 17.35")
+	(longitude "-59 37.34")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class300014])
+	(url "file:resources/public/img/placemark/isle.png"))
+
+([VRDashboardClient_Class300022] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Raid on Pebble Island")
+	(latitude "-51 18.53")
+	(longitude "-59 36.62")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class300015])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class300023] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "East Island, Falkland Islands")
+	(latitude "-51 22.53")
+	(longitude "-59 37.92")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class300016])
+	(url "file:resources/public/img/placemark/isle.png"))
+
+([VRDashboardClient_Class300024] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Pebble Island Settlement")
+	(latitude "-51 18.53")
+	(longitude "-59 36.62")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class300017])
+	(url "file:resources/public/img/placemark/info.png"))
+
+([VRDashboardClient_Class300025] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Broken Island")
+	(latitude "-51 20.66")
+	(longitude "-59 40.51")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class300018])
+	(url "file:resources/public/img/placemark/isle.png"))
+
+([VRDashboardClient_Class300026] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "Narrow Island, Falkland Islands")
+	(latitude "-51 22.98")
+	(longitude "-59 42.65")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class300019])
+	(url "file:resources/public/img/placemark/isle.png"))
+
+([VRDashboardClient_Class300027] of  Placemark
+
+	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
+	(label "River Island, Falkland Islands")
+	(latitude "-51 24.83")
+	(longitude "-59 37.01")
+	(playground-index 0)
+	(reference [VRDashboardClient_Class300020])
+	(url "file:resources/public/img/placemark/isle.png"))
 
 ([VRDashboardClient_Class30003] of  CloFunction
 
@@ -603,14 +817,14 @@
 ([VRDashboardClient_Class30076] of  Rule
 
 	(lhs "(VRDashboardControl nmea-port ?nmp selected-race ?ser)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/load-races)\n(future (vr.dashcli/get-external-data (read-string ?nmp) (str \"/nmea/\" ?ser)))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n	(.getLatitude mo)\n	(.getLongitude mo)\n	(.getCourse mo)\n	(.getSpeed mo)\n	\"\"]\n	time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(let [data-path (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\")\n      router-path (str \"NMEA_CACHE/router.php\")\n      uri (str \"localhost:\" ?nmp)]\n  (vr.dashcli/load-races)\n  (vr.dashcli/clear-external-data data-path)\n  (vr.dashcli/start-router-slava uri router-path)\n  (future (vr.dashcli/get-external-data data-path))\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (modify ?d data [\"\"\n	      (.getLatitude mo)\n      	(.getLongitude mo)\n      	(.getCourse mo)\n	      (.getSpeed mo)\n      	\"\"]\n	time ?t)\n    (modify ?c status \"RUN\")\n    (if (nil? light.sim/ES-TIMER)\n      (light.sim/start-sim))))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
 ([VRDashboardClient_Class30077] of  Rule
 
-	(lhs "(VRDashboardControl onboard ?onb visibility ?vis)\n(NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
-	(rhs "(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis)\n  (vr.dashcli/unvisible-offmap ?onb))\n(modify ?d time (+ ?t1 ?del))")
+	(lhs "(VRDashboardControl onboard ?onb visibility ?vis selected-race ?ser)\n(NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
+	(rhs "(future (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\")))\n(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis)\n  (vr.dashcli/unvisible-offmap ?onb))\n(modify ?d time (+ ?t1 ?del))")
 	(salience 0)
 	(title "vr:NMEA Run"))
 
@@ -650,14 +864,14 @@
 	(onboard "russor")
 	(port "8448")
 	(races
-		"507.1"
-		"481.1"
-		"514.1"
-		"477.5"
-		"470.9"
+		"499.2"
+		"508.1"
+		"518.1"
+		"477.6"
+		"470.10"
 		"503.1"
 		"515.1")
-	(selected-race "514.1")
+	(selected-race "470.10")
 	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))

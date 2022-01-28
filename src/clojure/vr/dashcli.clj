@@ -5,7 +5,8 @@
   [light.pro.server :as lps]
   [clj-json.core :as json]
   [wiki.gis :as wig]
-  [light.cesium.core :as cz])
+  [light.cesium.core :as cz]
+  [clojure.java.shell :as shell])
 (:import
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
@@ -42,16 +43,14 @@
       d (if (or (= c2 "S") (= c2 "W")) (str "-" d) d)]
   (MapOb/getDeg (str d " " m))))
 
-(defn get-external-data [port path]
-  (VRdNMEAReciever/startServer port path) 
-(Thread/sleep 30000)
-(let [buf (VRdNMEAReciever/getBuffer)]
-  (when (> (.capacity buf) 16)
-    (reset! NMEA (.split (.toString buf) END-TOKEN))
-    (VRdNMEAReciever/clearBuffer)))
-(VRdNMEAReciever/stopServer 10)
-(if NMEA-FLAG
-  (get-external-data port path)))
+(defn clear-external-data [path]
+  (spit path ""))
+
+(defn get-external-data [path]
+  ;;(println :NMEA-CACHE path)
+(let [buf (slurp path)]
+  (if (not (empty? buf))
+    (reset! NMEA (.split buf END-TOKEN)))))
 
 (defn parse-gprmc-data [data]
   (try
@@ -343,4 +342,11 @@
       (ssv inst "selected-race" rce)
       (ru.rules/assert-instances [inst]))
     (println "Select race before!"))))
+
+(defn start-router-slava [uri path]
+  (let [cmd (str "php -S " uri " " path)
+      proc (Runtime/getRuntime)]
+ (println :CMD cmd)
+ (println (future (.exec proc cmd)))
+ (println ",,")))
 

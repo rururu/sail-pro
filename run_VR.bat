@@ -11,4 +11,9 @@ rem echo %JARS%
 
 rem java must be on your PATH variable or edit this to point on your JVM installation
 
+taskkill /f /IM php.exe
+start e:\php\php -S localhost:8081 e:\test\router.php
+
 java %OPTIONS% %ENCODING% -cp .;classes;%JARS%;src %MAIN_CLASS% pprj_examples/VRDashboardClient.pprj
+
+taskkill /f /IM php.exe

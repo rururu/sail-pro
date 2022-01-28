@@ -1,4 +1,4 @@
-; Mon Dec 20 21:33:49 MSK 2021
+; Thu Jan 27 22:47:30 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -72,48 +72,48 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_295571_Class2145] of  Map
+([KB_431504_Class2145] of  Map
 
 	(entries
-		[KB_295571_Class2146]
-		[KB_295571_Class2149]
-		[KB_295571_Class2150]
-		[KB_295571_Class2151])
-	(referenced_maps [KB_295571_Class2147]))
+		[KB_431504_Class2146]
+		[KB_431504_Class2149]
+		[KB_431504_Class2150]
+		[KB_431504_Class2151])
+	(referenced_maps [KB_431504_Class2147]))
 
-([KB_295571_Class2146] of  Map_Entry
+([KB_431504_Class2146] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_295571_Class2147] of  Map
+([KB_431504_Class2147] of  Map
 
-	(entries [KB_295571_Class2148]))
+	(entries [KB_431504_Class2148]))
 
-([KB_295571_Class2148] of  Map_Entry
+([KB_431504_Class2148] of  Map_Entry
 
 	(key "WikipediaGIS_Class2")
 	(key_class "edu.stanford.smi.protege.model.Frame")
 	(value "12 479 212 124")
 	(value_class "java.awt.Rectangle"))
 
-([KB_295571_Class2149] of  Map_Entry
+([KB_431504_Class2149] of  Map_Entry
 
 	(key "InstanceDisplay.yellow_stickies")
 	(key_class "java.lang.String")
-	(value "KB_295571_Class2147")
+	(value "KB_431504_Class2147")
 	(value_class "java.util.Map"))
 
-([KB_295571_Class2150] of  Map_Entry
+([KB_431504_Class2150] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_295571_Class2151] of  Map_Entry
+([KB_431504_Class2151] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
