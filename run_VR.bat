@@ -11,9 +11,13 @@ rem echo %JARS%
 
 rem java must be on your PATH variable or edit this to point on your JVM installation
 
-taskkill /f /IM c:\php\php.exe
-start c:\php\php -S localhost:8081 C:\Users\russor\clojure\sail-pro\NMEA_CACHE\router.php
+taskkill /f /IM python.exe
+cd NMEA_CACHE
+rem python must be on your PATH variable or edit this to point on your Python3 installation
+start /min python ..\nmea_cashe.py --port 8081
+cd ..
 
 java %OPTIONS% %ENCODING% -cp .;classes;%JARS%;src %MAIN_CLASS% pprj_examples/VRDashboardClient.pprj
 
-taskkill /f /IM c:\php\php.exe
+taskkill /f /IM python.exe
+

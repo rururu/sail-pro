@@ -14,6 +14,11 @@ You need to be installed on your machine:
 
 4. [VR Dashboard](https://martinez58400.wixsite.com/navigationvirtuelle/vr-dashboard?lang=en)
 
+5. Python3
+    For Windows please check the Microsoft App store or download the installer [here](https://www.python.org/downloads/windows/)
+        The location of python.exe will be determined using PATH variable.
+    For others platforms please follow the instructions for your OS or download the tarball [here](https://www.python.org/downloads/)
+
 
 ## Installation
 
@@ -29,7 +34,7 @@ $ cd sail-pro
 ### 1. Project VR Dashboard Client
 
 1. Open "Virual Regatta" page in a browser.
-2. Activate "VR Dashboard" plugin.
+2. Activate "VR Dashboard" plugin. If you encounter problems with starting this plugin go first to VR Club House page (https://forum.virtualregatta.com/), activate the plugin.
 3. Select an active race. Check the race identificator on "Z VR Dashboard" tab and click a checkbox NMEA.
 4. Start "sail-pro":
 
@@ -43,13 +48,8 @@ $ .\run_VR.bat 	    	# Windows
 
 ![screenshot](2.png)
 
-6. Wait while a panel popup.
-7. Only first time change a boat from "russor" to yours.
-   - For this go to "Instances" tab. Open "NavOb" class: 
-       IGIS -> MapOb -> OMGraphic -> OMTRaster -> NavOb. 
-   - Select "russor" instance. Update a "label" slot.
-   - Also update a slot "onboard" in "VRDashboardControl" instance. 
-   - Save the project and restart.
+6. Enter your boat name.
+7. Wait while a panel popup 
 8. Select a race on the popup panel, if needed (race number is on "Z VR Dashboard" tab).
 9. Click "Start" on popup and wait while the boat jumps into current position.
 10. Start a "Cesium server" on the popup panel.
@@ -122,6 +122,9 @@ See: [Sailing Expert](https://youtu.be/VG87r7_gVz8)
    
    Set a new "Fleet visibility" value and click "Modify Instance" button.
    
+## Acknowledgement
+
+Gratitude to Slava (a skipper of Viacheslavk) for the contribution of the data transfer program from VR Dashboard plugin and to VR Dashbord team.
 
 ## License
 

@@ -1,4 +1,4 @@
-; Fri Jan 28 08:34:06 MSK 2022
+; Sun Jan 30 22:58:28 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -25,7 +25,6 @@
 		[VRDashboardClient_Class290001]
 		[VRDashboardClient_Class280000]
 		[VRDashboardClient_Class30006]
-		[VRDashboardClient_Class30003]
 		[VRDashboardClient_Class170002]
 		[VRDashboardClient_Class90001]
 		[VRDashboardClient_Class120007]
@@ -49,25 +48,20 @@
 		[VRDashboardClient_Class100098]
 		[VRDashboardClient_Class80001]
 		[VRDashboardClient_Class240001]
-		[VRDashboardClient_Class290002])
+		[VRDashboardClient_Class290002]
+		[VRDashboardClient_Class170000])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
-		[VRDashboardClient_Class20003]
 		[VRDashboardClient_Class20000]
+		[VRDashboardClient_Class290011]
 		[VRDashboardClient_Class30001]
 		[VRDashboardClient_Class30059]
 		[VRDashboardClient_Class90000]
 		[VRDashboardClient_Class210000]
 		[VRDashboardClient_Class250016]
-		[VRDashboardClient_Class290011]
-		[VRDashboardClient_Class170000]
 		[VRDashboardClient_Class20001]
 		[VRDashboardClient_Class40000])
 	(title "VR Dashboard Client"))
-
-([VRDashboardClient_Class10000] of  CloFuncall
-
-	(source "(assoc {:a 1} :b 2)"))
 
 ([VRDashboardClient_Class100000] of  Rule
 
@@ -75,14 +69,6 @@
 	(rhs "(retract ?czs)\n(println \"NavOb off map:\" ?lab)")
 	(salience 0)
 	(title "vr:NavOb off Map"))
-
-([VRDashboardClient_Class100001] of  CloFuncall
-
-	(source "(merge {:a 1} {:b 2})"))
-
-([VRDashboardClient_Class100002] of  CloFuncall
-
-	(source "(merge {:a 1} nil)"))
 
 ([VRDashboardClient_Class100004] of  CloFuncall
 
@@ -151,10 +137,6 @@
 	(url "file:resources/public/img/yachtp.png")
 	(verticalSpeed 0.0))
 
-([VRDashboardClient_Class110053] of  CloFuncall
-
-	(source "(ru.rules/pp 'Onboard)"))
-
 ([VRDashboardClient_Class120000] of  CloFunction
 
 	(source ";; Send the given string message out over the given socket\n(let [writer (io/writer socket)]\n      (.write writer msg)\n      (.flush writer))")
@@ -206,7 +188,7 @@
 
 ([VRDashboardClient_Class150001] of  CloFuncall
 
-	(source "FLEET"))
+	(source "(seq @FLEET)"))
 
 ([VRDashboardClient_Class150002] of  CloFunction
 
@@ -239,10 +221,10 @@
 	(source "(.show *prj* (first (cls-instances \"VRDashboardControl\")))")
 	(title "show-controls []"))
 
-([VRDashboardClient_Class170000] of  CloVar
+([VRDashboardClient_Class170000] of  CloFunction
 
-	(source "true")
-	(title "NMEA-FLAG"))
+	(source "(if-let [ins (first (cls-instances \"VRDashboardControl\"))]\n  (if-let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv ins \"onboard\") nil)]\n    (ssv ins \"onboard\" ans)))")
+	(title "ask-boat-name []"))
 
 ([VRDashboardClient_Class170001] of  BBX
 
@@ -253,10 +235,6 @@
 
 	(source "(let [[tim1 & _] ndata\n       [tim2 & _] odata]\n  (not= tim1 tim2))")
 	(title "diff-time? [ndata odata]"))
-
-([VRDashboardClient_Class180000] of  CloFuncall
-
-	(source "(seq @NMEA)"))
 
 ([VRDashboardClient_Class180004] of  NavOb
 
@@ -271,22 +249,6 @@
 	(url "file:resources/public/img/yachtp.png")
 	(verticalSpeed 0.0))
 
-([VRDashboardClient_Class190000] of  CloFuncall
-
-	(source "(.lastIndexOf "))
-
-([VRDashboardClient_Class190001] of  CloFuncall
-
-	(source "(.lastIndexOf \"!AIVDM,1,1,,B,57o9I51ujFA@00000010KSF2222222222222220T0000000000000000000000000000008,4*51\" \"*\")"))
-
-([VRDashboardClient_Class190002] of  CloFuncall
-
-	(source "(.substring  \"!AIVDM,1,1,,B,57o9I51ujFA@00000010KSF2222222222222220T0000000000000000000000000000008,4*51\" 86 87)"))
-
-([VRDashboardClient_Class190003] of  CloFuncall
-
-	(source "(= (.substring  \"!AIVDM,1,1,,B,57o9I51ujFA@00000010KSF2222222222222220T0000000000000000000000000000008,4*51\" 86 87) \"4\")"))
-
 ([VRDashboardClient_Class190005] of  CloFunction
 
 	(source "(let [s (str sog)\n      s (str (.substring s 0 (dec (count s))) \".\" (last s))]\n  (read-string s))")
@@ -294,13 +256,13 @@
 
 ([VRDashboardClient_Class2] of  CloNamespace
 
-	(source "(:use protege.core)\n(:require\n  [clj-telnet.core :as tn]\n  [light.pro.server :as lps]\n  [clj-json.core :as json]\n  [wiki.gis :as wig]\n  [light.cesium.core :as cz]\n  [clojure.java.shell :as shell])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever\n  ru.igis.omtab.gui.RuMapMouseAdapter\n  dk.dma.ais.sentence.Vdm\n  dk.dma.ais.message.AisMessage\n  ru.igis.ais.AIVDMProcessor)")
+	(source "(:use protege.core)\n(:require\n  [light.pro.server :as lps]\n  [clj-json.core :as json]\n  [wiki.gis :as wig]\n  [light.cesium.core :as cz]\n  [clojure.java.shell :as shell]\n  [clojure.java.io :as io])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  ru.vrd.nmea.VRdNMEAReciever\n  ru.igis.omtab.gui.RuMapMouseAdapter\n  dk.dma.ais.sentence.Vdm\n  dk.dma.ais.message.AisMessage\n  ru.igis.ais.AIVDMProcessor)")
 	(title "vr.dashcli"))
 
 ([VRDashboardClient_Class20000] of  CloVar
 
-	(source "\"$GPRMC\"")
-	(title "GPRMC-TOKEN"))
+	(source "(atom nil)")
+	(title "GPRMC"))
 
 ([VRDashboardClient_Class200000] of  %3AINSTANCE-ANNOTATION
 
@@ -334,11 +296,6 @@
 	(source "(volatile! {})")
 	(title "FLEET"))
 
-([VRDashboardClient_Class20003] of  CloVar
-
-	(source "(defonce TELNET nil)")
-	(title "defTELNET"))
-
 ([VRDashboardClient_Class210000] of  CloVar
 
 	(source "nil")
@@ -348,7 +305,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 0.0]}\n     :heightReference \"CLAMP_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"CLAMP_TO_GROUND\"}}")
 	(label "neighbor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -359,8 +316,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat -51.257336)
-	(lng -59.63903)
+	(lat 15.665359)
+	(lng 113.83801)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -375,10 +332,6 @@
 	(salience 1)
 	(title "vr:Set Wikipedia Coordinates"))
 
-([VRDashboardClient_Class240000] of  CloFuncall
-
-	(source "(ru.rules/f 10)"))
-
 ([VRDashboardClient_Class240001] of  CloFunction
 
 	(source "(let [mp (into {} hm)]\n  (if-let [rce (mp \"selected-race\")]\n    (let [tpt (first (.split rce \"\\\\.\"))\n          tpt (+ 10000 (read-string tpt))]\n      (ssv inst \"selected-race\" rce)\n      (ru.rules/assert-instances [inst]))\n    (println \"Select race before!\")))")
@@ -386,7 +339,7 @@
 
 ([VRDashboardClient_Class240060] of  CloFunction
 
-	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Start Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"3. Start Time.\")\n(OMT/setTimerRunning true)\n(println \"EXPERT SYSTEM INITIALIZED\")\n(ClojureTab/invoke \"vr.dashcli\" \"show-controls\")")
+	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Start Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"3. Start Time.\")\n(OMT/setTimerRunning true)\n(println \"EXPERT SYSTEM INITIALIZED\")\n(ClojureTab/invoke \"vr.dashcli\" \"ask-boat-name\")\n(ClojureTab/invoke \"vr.dashcli\" \"show-controls\")")
 	(title "clojure-work []"))
 
 ([VRDashboardClient_Class240061] of  CloNamespace
@@ -403,10 +356,6 @@
 
 	(source "(OMT/getMapOb \"Bylina\")"))
 
-([VRDashboardClient_Class250001] of  CloFuncall
-
-	(source "(.getDescription (OMT/getMapOb \"Bylina\"))"))
-
 ([VRDashboardClient_Class250002] of  CloFuncall
 
 	(source "(ru.rules/dr)"))
@@ -416,34 +365,10 @@
 	(source "{\"default\" \"{:gltf-url \\\"models/piramida/scene.gltf\\\"}\"}")
 	(title "DESC-MAP"))
 
-([VRDashboardClient_Class260000] of  CloFuncall
-
-	(source "(ru.rules/pp 'Clock0))"))
-
-([VRDashboardClient_Class260002] of  CloFuncall
-
-	(source "(ru.rules/sp 'Clock0)"))
-
-([VRDashboardClient_Class260003] of  CloFuncall
-
-	(source "(ru.rules/sp 'CZMLSpan)"))
-
-([VRDashboardClient_Class260004] of  CloFuncall
-
-	(source "(ru.rules/pp 'CZMLSpan)"))
-
-([VRDashboardClient_Class260005] of  CloFuncall
-
-	(source "(.getDescription (OMT/getMapOb \"russor\"))"))
-
-([VRDashboardClient_Class270000] of  CloFuncall
-
-	(source "(.getAltitude (OMT/getMapOb \"Bylina\"))"))
-
 ([VRDashboardClient_Class280000] of  CloFunction
 
-	(source ";;(println :NMEA-CACHE path)\n(let [buf (slurp path)]\n  (if (not (empty? buf))\n    (reset! NMEA (.split buf END-TOKEN))))")
-	(title "get-external-data [path]"))
+	(source "(if (.exists (io/file path))\n  (let [buf (slurp path)]\n    (if (not (empty? buf))\n      (reset! atm (.split buf END-TOKEN)))))")
+	(title "get-external-data [path atm]"))
 
 ([VRDashboardClient_Class280001] of  NMEAData
 
@@ -455,13 +380,9 @@
 	(source "(letfn [(to-map [s]\n             (let [s (.substring s 1 (dec (count s)))\n                    s (.split s \" \")\n                    s (remove #(.startsWith % \"pos\") s)\n                    s (remove #(.startsWith % \"=\") s)\n                    s (remove #(.startsWith % \"(\") s)\n                    s (apply str s)\n                    s (.replaceAll s \"=\" \" \")\n                    s (str \"{\" s \"}\")]   \n               (read-string s)))]\n  (if (.startsWith aivdm \"!AIVDM\")\n    (try\n      (let [vdm (Vdm.)\n             _ (.parse vdm aivdm)\n             mes (AisMessage/getInstance vdm)\n             pos (.getValidPosition mes)\n             tos (.toString mes)\n             mp (to-map tos)\n             mp (assoc mp 'pos [(.getLatitude pos) (.getLongitude pos)])\n             imo (mp 'userId)]\n        (vswap! FLEET assoc imo (merge mp (@FLEET imo))))\n      (catch Exception e\n        (let [lio (.lastIndexOf aivdm \"*\")]\n          (when (= (.substring aivdm (dec lio) lio) \"4\")\n            (AIVDMProcessor/process aivdm)\n            (let [imo (AIVDMProcessor/getIMO)\n                   snm (AIVDMProcessor/getShipName)]\n              (vswap! FLEET assoc imo (assoc (@FLEET imo) 'name snm))) ))) )))")
 	(title "parse-AIVDM [aivdm]"))
 
-([VRDashboardClient_Class290000] of  CloFuncall
-
-	(source "(empty? \"\")"))
-
 ([VRDashboardClient_Class290001] of  CloFunction
 
-	(source "(spit path \"\")")
+	(source "(if (.exists (io/file path))\n  (spit path \"\"))")
 	(title "clear-external-data [path]"))
 
 ([VRDashboardClient_Class290002] of  CloFunction
@@ -471,13 +392,13 @@
 
 ([VRDashboardClient_Class290010] of  CloFunction
 
-	(source "(doseq [nmea @NMEA]\n  (parse-AIVDM nmea))")
+	(source "(doseq [nmea @AIVDM]\n  (parse-AIVDM nmea))")
 	(title "get-fleet-data []"))
 
 ([VRDashboardClient_Class290011] of  CloVar
 
 	(source "(atom nil)")
-	(title "NMEA"))
+	(title "AIVDM"))
 
 ([VRDashboardClient_Class30000] of  Rule
 
@@ -485,18 +406,6 @@
 	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/model-leg \n	nmo\n	(+ ?del 2)\n	(read-string (.getDescription nmo))))\n      (modify ?cs time (+ ?t ?del)))))")
 	(salience 1)
 	(title "czm0:CZML Navob Leg Generation2"))
-
-([VRDashboardClient_Class300000] of  CloFuncall
-
-	(source "(start-router-slava \"\""))
-
-([VRDashboardClient_Class300001] of  CloFuncall
-
-	(source "(start-router-slava \"NMEA-CACHE/router.php\")"))
-
-([VRDashboardClient_Class300002] of  CloFuncall
-
-	(source "(start-router-slava \"localhost:8081\" \"NMEA-CACHE/router.php\")"))
 
 ([VRDashboardClient_Class30001] of  CloVar
 
@@ -676,14 +585,9 @@
 	(reference [VRDashboardClient_Class300020])
 	(url "file:resources/public/img/placemark/isle.png"))
 
-([VRDashboardClient_Class30003] of  CloFunction
-
-	(source "(when (some? TELNET)\n  (tn/kill-telnet TELNET)\n  (def TELNET nil))")
-	(title "close-telnet []"))
-
 ([VRDashboardClient_Class30006] of  CloFunction
 
-	(source "(try\n(let [d (.split data \",\")]\n  (if (>= (count d) 10)\n    (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]\n      [time\n       (parse-coord lat1 lat2)\n       (parse-coord lon1 lon2)\n       (round-speed (read-string spd))\n       (read-string crs)\n       date])))\n(catch Exception e\n  (println :gprmc-data :FAILURE)\n  nil))")
+	(source "(if (some? data)\n  (try\n    (let [d (.split data \",\")]\n      (if (>= (count d) 10)\n        (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]\n          [time\n           (parse-coord lat1 lat2)\n           (parse-coord lon1 lon2)\n           (round-speed (read-string spd))\n           (read-string crs)\n           date])))\n  (catch Exception e\n    (println :gprmc-data :FAILURE)\n    nil)))")
 	(title "parse-gprmc-data [data]"))
 
 ([VRDashboardClient_Class30019] of  CloFunction
@@ -817,16 +721,24 @@
 ([VRDashboardClient_Class30076] of  Rule
 
 	(lhs "(VRDashboardControl nmea-port ?nmp selected-race ?ser)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(let [data-path (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\")\n      router-path (str \"NMEA_CACHE/router.php\")\n      uri (str \"localhost:\" ?nmp)]\n  (vr.dashcli/load-races)\n  (vr.dashcli/clear-external-data data-path)\n  ;; (vr.dashcli/start-router-slava uri router-path)\n  (future (vr.dashcli/get-external-data data-path))\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (modify ?d data [\"\"\n	      (.getLatitude mo)\n      	(.getLongitude mo)\n      	(.getCourse mo)\n	      (.getSpeed mo)\n      	\"\"]\n	time ?t)\n    (modify ?c status \"RUN\")\n    (if (nil? light.sim/ES-TIMER)\n      (light.sim/start-sim))))")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/load-races)\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?ser \"/AIVDM.txt\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n                          (.getLatitude mo)\n                          (.getLongitude mo)\n                          (.getCourse mo)\n                          (.getSpeed mo)\n                          \"\"]\n                  time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
 ([VRDashboardClient_Class30077] of  Rule
 
 	(lhs "(VRDashboardControl onboard ?onb visibility ?vis selected-race ?ser)\n(NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	time ?t0)\n(Clock0 time ?t1 (> ?t1 ?t0))")
-	(rhs "(future (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\")))\n(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis)\n  (vr.dashcli/unvisible-offmap ?onb))\n(modify ?d time (+ ?t1 ?del))")
+	(rhs "(future (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\") vr.dashcli/GPRMC))\n(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?ser \"/AIVDM.txt\") vr.dashcli/AIVDM))\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis)\n  (vr.dashcli/unvisible-offmap ?onb))\n(modify ?d time (+ ?t1 ?del))")
 	(salience 0)
 	(title "vr:NMEA Run"))
+
+([VRDashboardClient_Class310001] of  CloFuncall
+
+	(source "(seq @AIDVM)"))
+
+([VRDashboardClient_Class310002] of  CloFuncall
+
+	(source "(seq @GPRMC)"))
 
 ([VRDashboardClient_Class40000] of  CloVar
 
@@ -861,7 +773,7 @@
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
 	(nmea-port "8081")
-	(onboard "russor")
+	(onboard "LARS DE HAVILLAND")
 	(port "8448")
 	(races
 		"499.2"
@@ -871,9 +783,9 @@
 		"470.10"
 		"503.1"
 		"515.1")
-	(selected-race "470.10")
+	(selected-race "518.1")
 	(telnet-port "10470")
-	(visibility 40.0)
+	(visibility 140.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
 ([VRDashboardClient_Class60000] of  NavOb
@@ -1017,7 +929,7 @@
 
 ([VRDashboardClient_Class90001] of  CloFunction
 
-	(source "(let [bdata (if (> (count @NMEA) 0)\n                    (let [bd (filter #(.startsWith % GPRMC-TOKEN) @NMEA)\n                           bd (parse-gprmc-data (first bd))]            \n                     (when (diff-time? bd BOAT-DATA)\n                       (def BOAT-DATA bd)\n                       bd)))]\n  bdata)")
+	(source "(if-let [bd  (parse-gprmc-data (first @GPRMC))]            \n  (when (diff-time? bd BOAT-DATA)\n    (def BOAT-DATA bd)\n    bd))")
 	(title "get-boat-data []"))
 
 ([VRDashboardClient_Class90005] of  CloFunction

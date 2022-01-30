@@ -19,5 +19,6 @@
 (println "3. Start Time.")
 (OMT/setTimerRunning true)
 (println "EXPERT SYSTEM INITIALIZED")
+(ClojureTab/invoke "vr.dashcli" "ask-boat-name")
 (ClojureTab/invoke "vr.dashcli" "show-controls"))
 

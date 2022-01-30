@@ -1,12 +1,12 @@
 (ns vr.dashcli
 (:use protege.core)
 (:require
-  [clj-telnet.core :as tn]
   [light.pro.server :as lps]
   [clj-json.core :as json]
   [wiki.gis :as wig]
   [light.cesium.core :as cz]
-  [clojure.java.shell :as shell])
+  [clojure.java.shell :as shell]
+  [clojure.java.io :as io])
 (:import
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
@@ -17,15 +17,13 @@
   dk.dma.ais.sentence.Vdm
   dk.dma.ais.message.AisMessage
   ru.igis.ais.AIVDMProcessor))
-(def defTELNET (defonce TELNET nil))
-(def GPRMC-TOKEN "$GPRMC")
+(def GPRMC (atom nil))
+(def AIVDM (atom nil))
 (def END-TOKEN "\r\n")
 (def defBOAT-DATA (def BOAT-DATA [0 0 0 0 0 0]))
 (def RACES-URL "http://zezo.org/races2.json")
 (def RMMA nil)
 (def DESC-MAP {"default" "{:gltf-url \"models/piramida/scene.gltf\"}"})
-(def NMEA (atom nil))
-(def NMEA-FLAG true)
 (def FLEET (volatile! {}))
 (def ONMAP (volatile! []))
 (defn round-speed [s]
@@ -44,33 +42,30 @@
   (MapOb/getDeg (str d " " m))))
 
 (defn clear-external-data [path]
-  (spit path ""))
+  (if (.exists (io/file path))
+  (spit path "")))
 
-(defn get-external-data [path]
-  ;;(println :NMEA-CACHE path)
-(let [buf (slurp path)]
-  (if (not (empty? buf))
-    (reset! NMEA (.split buf END-TOKEN)))))
+(defn get-external-data [path atm]
+  (if (.exists (io/file path))
+  (let [buf (slurp path)]
+    (if (not (empty? buf))
+      (reset! atm (.split buf END-TOKEN))))))
 
 (defn parse-gprmc-data [data]
+  (if (some? data)
   (try
-(let [d (.split data ",")]
-  (if (>= (count d) 10)
-    (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]
-      [time
-       (parse-coord lat1 lat2)
-       (parse-coord lon1 lon2)
-       (round-speed (read-string spd))
-       (read-string crs)
-       date])))
-(catch Exception e
-  (println :gprmc-data :FAILURE)
-  nil)))
-
-(defn close-telnet []
-  (when (some? TELNET)
-  (tn/kill-telnet TELNET)
-  (def TELNET nil)))
+    (let [d (.split data ",")]
+      (if (>= (count d) 10)
+        (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]
+          [time
+           (parse-coord lat1 lat2)
+           (parse-coord lon1 lon2)
+           (round-speed (read-string spd))
+           (read-string crs)
+           date])))
+  (catch Exception e
+    (println :gprmc-data :FAILURE)
+    nil))))
 
 (defn diff-time? [ndata odata]
   (let [[tim1 & _] ndata
@@ -78,13 +73,10 @@
   (not= tim1 tim2)))
 
 (defn get-boat-data []
-  (let [bdata (if (> (count @NMEA) 0)
-                    (let [bd (filter #(.startsWith % GPRMC-TOKEN) @NMEA)
-                           bd (parse-gprmc-data (first bd))]            
-                     (when (diff-time? bd BOAT-DATA)
-                       (def BOAT-DATA bd)
-                       bd)))]
-  bdata))
+  (if-let [bd  (parse-gprmc-data (first @GPRMC))]            
+  (when (diff-time? bd BOAT-DATA)
+    (def BOAT-DATA bd)
+    bd)))
 
 (defn srand [d]
   (- (rand (* d 2)) d))
@@ -282,7 +274,7 @@
               (vswap! FLEET assoc imo (assoc (@FLEET imo) 'name snm))) ))) ))))
 
 (defn get-fleet-data []
-  (doseq [nmea @NMEA]
+  (doseq [nmea @AIVDM]
   (parse-AIVDM nmea)))
 
 (defn round-sog [sog]
@@ -349,4 +341,9 @@
  (println :CMD cmd)
  (println (future (.exec proc cmd)))
  (println ",,")))
+
+(defn ask-boat-name []
+  (if-let [ins (first (cls-instances "VRDashboardControl"))]
+  (if-let [ans (DisplayUtilities/editString nil "Input your boat name" (sv ins "onboard") nil)]
+    (ssv ins "onboard" ans))))
 

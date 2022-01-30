@@ -79,7 +79,9 @@
 (defn viewB [deg]
   (let [deg (num-val deg)]
   (if (<= -90 deg 90)
-    (let [val (if (< deg 0) (+ deg 180) (- deg 180))]
+    (let [val (if (< deg 0)
+                 (- -90 (+ 90 deg))
+                 (- 180 deg))]
       (vswap! czm/CAMERA assoc :view val)
       (set-html! "viewF-fld" "")
       (set-html! "viewB-fld" val)))))
@@ -98,7 +100,7 @@
 
 (defn zoom-format [m]
   (if (>= m 1000) 
-  (format "%.0f nm" (/ (/ m 1000.0) 1.852)) 
+  (format "%.0f km" (/ m 1000.0)) 
   (format "%.0f м" (/ m 1.0))))
 
 (defn zoom [mode]
@@ -158,6 +160,8 @@
   (vswap! VEHICLE merge vehicle)
   (set-html! "onboard-fld" (:name vehicle))
   (set-html! "name-fld" (:name vehicle))
+  (set-html! "latitude-fld" (format "%.3f" (first (:coord vehicle))))
+  (set-html! "longitude-fld" (format "%.3f" (second (:coord vehicle))))
   (set-html! "course-fld" (:course vehicle))
   (set-html! "speed-fld" (:speed vehicle))
   (set-html! "altitude-fld" czm/ALT)
@@ -218,6 +222,10 @@
   (set-html! "vehicle" "<h4>Vehicle</h4>")
 (set-html! "name" "Name:")
 (set-html! "name-fld" "")
+(set-html! "latitude" "Latitude:")
+(set-html! "latitude-fld" "")
+(set-html! "longitude" "Longitude:")
+(set-html! "longitude-fld" "")
 (set-html! "course" "Course:")
 (set-html! "course-fld" "")
 (set-html! "speed" "Speed:")
@@ -226,7 +234,14 @@
 (set-html! "altitude-fld" ""))
 
 (defn middle-controls []
-  (set-html! "zoom-up" 
+  (set-html! "binocular" "<h4>Binocular</h4>")
+(set-html! "zoostep" "zoom step")
+(set-html! "zoomin" "10 m")
+(set-html! "zoomax" "10 km")
+(set-html! "zooup" "zoom up")
+(set-html! "zoodn" "zoom dn")
+(set-html! "zoono" "zoom no")
+(set-html! "zoom-up" 
   "<img src='img/binB.png' width='24' height='24' id='zup' 
     onclick='javascript:light.view3d.client.zoom(1);'>")
 (set-html! "zoom-amount" 
