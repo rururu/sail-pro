@@ -34,7 +34,8 @@ $ cd sail-pro
 ### 1. Project VR Dashboard Client
 
 1. Open "Virual Regatta" page in a browser.
-2. Activate "VR Dashboard" plugin. If you encounter problems with starting this plugin go first to VR Club House page (https://forum.virtualregatta.com/), activate the plugin.
+2. Activate "VR Dashboard" plugin. 
+- If you encounter problems starting this plugin go first to VR Club House page (https://forum.virtualregatta.com/), activate the plugin and then enter the game address (Ex. https://www.virtualregatta.com/en/offshore-game/) into addess string of the browser.
 3. Select an active race. Check the race identificator on "Z VR Dashboard" tab and click a checkbox NMEA.
 4. Start "sail-pro":
 

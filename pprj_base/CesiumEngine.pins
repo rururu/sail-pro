@@ -1,4 +1,4 @@
-; Sun Jan 30 22:36:21 MSK 2022
+; Mon Jan 31 09:54:49 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -64,7 +64,7 @@
 
 ([CesiumEngine_Class30000] of  CloFunction
 
-	(source "(let [deg (num-val deg)]\n  (if (<= -90 deg 90)\n    (let [val (if (< deg 0)\n                 (- -90 (+ 90 deg))\n                 (- 180 deg))]\n      (vswap! czm/CAMERA assoc :view val)\n      (set-html! \"viewF-fld\" \"\")\n      (set-html! \"viewB-fld\" val))))")
+	(source "(let [deg (num-val deg)]\n  (if (<= -90 deg 90)\n    (let [val (if (< deg 0)\n                 (+ deg 180)\n                 (- deg 180))]\n      (vswap! czm/CAMERA assoc :view val)\n      (set-html! \"viewF-fld\" \"\")\n      (set-html! \"viewB-fld\" val))))")
 	(title "viewB [deg]"))
 
 ([CesiumEngine_Class30001] of  CloFunction

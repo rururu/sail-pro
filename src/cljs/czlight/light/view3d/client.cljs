@@ -80,8 +80,8 @@
   (let [deg (num-val deg)]
   (if (<= -90 deg 90)
     (let [val (if (< deg 0)
-                 (- -90 (+ 90 deg))
-                 (- 180 deg))]
+                 (+ deg 180)
+                 (- deg 180))]
       (vswap! czm/CAMERA assoc :view val)
       (set-html! "viewF-fld" "")
       (set-html! "viewB-fld" val)))))
