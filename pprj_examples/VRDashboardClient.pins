@@ -1,4 +1,4 @@
-; Mon Jan 31 12:34:56 MSK 2022
+; Mon Jan 31 22:31:17 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -63,34 +63,12 @@
 		[VRDashboardClient_Class40000])
 	(title "VR Dashboard Client"))
 
-([VRDashboardClient_Class10000] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "HELLO_KITTY_78")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
 ([VRDashboardClient_Class100000] of  Rule
 
 	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"REMOVED\"\n	label ?lab)\n?czs (CZMLSpan object ?lab)")
 	(rhs "(retract ?czs)\n(println \"NavOb off map:\" ?lab)")
 	(salience 0)
 	(title "vr:NavOb off Map"))
-
-([VRDashboardClient_Class100001] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "VIACHESLAVK")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class100003] of  CloFuncall
 
@@ -141,7 +119,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 6\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -323,7 +301,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 6\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "neighbor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -334,8 +312,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 14.171068)
-	(lng 112.04033)
+	(lat 9.386421)
+	(lng 108.8041)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -626,7 +604,7 @@
 		"515.1")
 	(selected-race "518.1")
 	(telnet-port "10470")
-	(visibility 140.0)
+	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
 ([VRDashboardClient_Class60000] of  NavOb
