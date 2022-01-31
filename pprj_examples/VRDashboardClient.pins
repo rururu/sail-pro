@@ -1,4 +1,4 @@
-; Sun Jan 30 22:58:28 MSK 2022
+; Mon Jan 31 11:24:57 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -70,6 +70,10 @@
 	(salience 0)
 	(title "vr:NavOb off Map"))
 
+([VRDashboardClient_Class100003] of  CloFuncall
+
+	(source "(invoke-later (ask-boat-name))"))
+
 ([VRDashboardClient_Class100004] of  CloFuncall
 
 	(source "(ru.rules/pp 'VRDashboardControl)"))
@@ -115,7 +119,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 0.0]}\n     :heightReference \"CLAMP_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -206,15 +210,7 @@
 	(button-bbx "submit/wiki.gis/submit-bbx")
 	(button-clear-articles "Clear Articles/wiki.gis/clear-articles")
 	(language English-en)
-	(max-responses 40)
-	(responses
-		[VRDashboardClient_Class300014]
-		[VRDashboardClient_Class300015]
-		[VRDashboardClient_Class300016]
-		[VRDashboardClient_Class300017]
-		[VRDashboardClient_Class300018]
-		[VRDashboardClient_Class300019]
-		[VRDashboardClient_Class300020]))
+	(max-responses 40))
 
 ([VRDashboardClient_Class160001] of  CloFunction
 
@@ -223,7 +219,7 @@
 
 ([VRDashboardClient_Class170000] of  CloFunction
 
-	(source "(if-let [ins (first (cls-instances \"VRDashboardControl\"))]\n  (if-let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv ins \"onboard\") nil)]\n    (ssv ins \"onboard\" ans)))")
+	(source "(let [cti (first (cls-instances \"VRDashboardControl\"))\n      nmi (first (cls-instances \"NMEAData\"))\n      obj (sv nmi \"object\")]\n  (when-let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv cti \"onboard\") nil)]\n    (ssv cti \"onboard\" ans)\n    (ssv obj \"label\" ans)))")
 	(title "ask-boat-name []"))
 
 ([VRDashboardClient_Class170001] of  BBX
@@ -305,7 +301,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"CLAMP_TO_GROUND\"}}")
+	(description "{:draft 10\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "neighbor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -316,8 +312,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 15.665359)
-	(lng 113.83801)
+	(lat 14.57782)
+	(lng 112.1785)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -412,179 +408,6 @@
 	(source "\"\\r\\n\"")
 	(title "END-TOKEN"))
 
-([VRDashboardClient_Class300014] of  WikiArticle
-
-	(button-open-site "Open Site/wiki.gis/open-site")
-	(countryCode "AR")
-	(elevation 48)
-	(feature "isle")
-	(lang "en")
-	(lat -51.2892)
-	(lng -59.6224)
-	(rank 91)
-	(reference [VRDashboardClient_Class300021])
-	(summary "Pebble Island is one of the Falkland Islands, lying north of West Falkland. It is probably named after the peculiarly spherical pebbles found at its western tip.  (...)")
-	(thumbnailImg "http://www.geonames.org/img/wikipedia/71000/thumb-70738-100.png")
-	(title "Pebble Island")
-	(wikipediaUrl "https://en.wikipedia.org/wiki/Pebble_Island"))
-
-([VRDashboardClient_Class300015] of  WikiArticle
-
-	(button-open-site "Open Site/wiki.gis/open-site")
-	(elevation 31)
-	(lang "en")
-	(lat -51.3089)
-	(lng -59.6103)
-	(rank 88)
-	(reference [VRDashboardClient_Class300022])
-	(summary "The Raid on Pebble Island was a raid by British Special Forces on Pebble Island's airfield during the Falklands War, and took place on the night of 14–15 May 1982. Pebble Island is one of the smaller Falkland Islands, lying north of West Falkland (...)")
-	(title "Raid on Pebble Island")
-	(wikipediaUrl "https://en.wikipedia.org/wiki/Raid_on_Pebble_Island"))
-
-([VRDashboardClient_Class300016] of  WikiArticle
-
-	(button-open-site "Open Site/wiki.gis/open-site")
-	(countryCode "AR")
-	(elevation 17)
-	(feature "isle")
-	(lang "en")
-	(lat -51.3755)
-	(lng -59.632)
-	(rank 72)
-	(reference [VRDashboardClient_Class300023])
-	(summary "East Island is one of the Falkland Islands off Pebble Island and Broken Island in Byron Sound.  (...)")
-	(title "East Island, Falkland Islands")
-	(wikipediaUrl "https://en.wikipedia.org/wiki/East_Island%2C_Falkland_Islands"))
-
-([VRDashboardClient_Class300017] of  WikiArticle
-
-	(button-open-site "Open Site/wiki.gis/open-site")
-	(countryCode "AR")
-	(elevation 31)
-	(lang "en")
-	(lat -51.3089)
-	(lng -59.6103)
-	(rank 61)
-	(reference [VRDashboardClient_Class300024])
-	(summary "Pebble Island Settlement (Spanish/Argentine name: Puerto Calderón) is on Pebble Island in the northwest Falkland Islands, United Kingdom. It is the headquarters of the Pebble Island farm, and is located on the island's isthmus (...)")
-	(title "Pebble Island Settlement")
-	(wikipediaUrl "https://en.wikipedia.org/wiki/Pebble_Island_Settlement"))
-
-([VRDashboardClient_Class300018] of  WikiArticle
-
-	(button-open-site "Open Site/wiki.gis/open-site")
-	(countryCode "AR")
-	(elevation 13)
-	(feature "isle")
-	(lang "en")
-	(lat -51.3444)
-	(lng -59.6751)
-	(rank 61)
-	(reference [VRDashboardClient_Class300025])
-	(summary "Broken Island is one of the Falkland Islands, in Byron Sound, due north of West Falkland.  (...)")
-	(title "Broken Island")
-	(wikipediaUrl "https://en.wikipedia.org/wiki/Broken_Island"))
-
-([VRDashboardClient_Class300019] of  WikiArticle
-
-	(button-open-site "Open Site/wiki.gis/open-site")
-	(countryCode "AR")
-	(elevation 9)
-	(feature "isle")
-	(lang "en")
-	(lat -51.383)
-	(lng -59.7109)
-	(rank 52)
-	(reference [VRDashboardClient_Class300026])
-	(summary "Narrow Island is one of the Falkland Islands, in Byron Sound. It is between Golding Island and Middle Island, and to the west of East Island. As its name implies, it is slender, and extends for several miles east-west, while only being about 500 yards in width at is widest point.  (...)")
-	(title "Narrow Island, Falkland Islands")
-	(wikipediaUrl "https://en.wikipedia.org/wiki/Narrow_Island%2C_Falkland_Islands"))
-
-([VRDashboardClient_Class300020] of  WikiArticle
-
-	(button-open-site "Open Site/wiki.gis/open-site")
-	(countryCode "AR")
-	(elevation 17)
-	(feature "isle")
-	(lang "en")
-	(lat -51.4139)
-	(lng -59.6168)
-	(rank 46)
-	(reference [VRDashboardClient_Class300027])
-	(summary "River Island is one of the Falkland Islands. It is located in Byron Sound to the south of East Island and Pebble Island. There is a tidal island to its west, separated by a shallow lagoon. Despite its name, River Island is actually a salt water island.  (...)")
-	(title "River Island, Falkland Islands")
-	(wikipediaUrl "https://en.wikipedia.org/wiki/River_Island%2C_Falkland_Islands"))
-
-([VRDashboardClient_Class300021] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Pebble Island")
-	(latitude "-51 17.35")
-	(longitude "-59 37.34")
-	(playground-index 0)
-	(reference [VRDashboardClient_Class300014])
-	(url "file:resources/public/img/placemark/isle.png"))
-
-([VRDashboardClient_Class300022] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Raid on Pebble Island")
-	(latitude "-51 18.53")
-	(longitude "-59 36.62")
-	(playground-index 0)
-	(reference [VRDashboardClient_Class300015])
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class300023] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "East Island, Falkland Islands")
-	(latitude "-51 22.53")
-	(longitude "-59 37.92")
-	(playground-index 0)
-	(reference [VRDashboardClient_Class300016])
-	(url "file:resources/public/img/placemark/isle.png"))
-
-([VRDashboardClient_Class300024] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Pebble Island Settlement")
-	(latitude "-51 18.53")
-	(longitude "-59 36.62")
-	(playground-index 0)
-	(reference [VRDashboardClient_Class300017])
-	(url "file:resources/public/img/placemark/info.png"))
-
-([VRDashboardClient_Class300025] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Broken Island")
-	(latitude "-51 20.66")
-	(longitude "-59 40.51")
-	(playground-index 0)
-	(reference [VRDashboardClient_Class300018])
-	(url "file:resources/public/img/placemark/isle.png"))
-
-([VRDashboardClient_Class300026] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "Narrow Island, Falkland Islands")
-	(latitude "-51 22.98")
-	(longitude "-59 42.65")
-	(playground-index 0)
-	(reference [VRDashboardClient_Class300019])
-	(url "file:resources/public/img/placemark/isle.png"))
-
-([VRDashboardClient_Class300027] of  Placemark
-
-	(description "{:gltf-url \"models/piramida/scene.gltf\"}")
-	(label "River Island, Falkland Islands")
-	(latitude "-51 24.83")
-	(longitude "-59 37.01")
-	(playground-index 0)
-	(reference [VRDashboardClient_Class300020])
-	(url "file:resources/public/img/placemark/isle.png"))
-
 ([VRDashboardClient_Class30006] of  CloFunction
 
 	(source "(if (some? data)\n  (try\n    (let [d (.split data \",\")]\n      (if (>= (count d) 10)\n        (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]\n          [time\n           (parse-coord lat1 lat2)\n           (parse-coord lon1 lon2)\n           (round-speed (read-string spd))\n           (read-string crs)\n           date])))\n  (catch Exception e\n    (println :gprmc-data :FAILURE)\n    nil)))")
@@ -664,10 +487,6 @@
 
 	(delay 60)
 	(status "START"))
-
-([VRDashboardClient_Class30070] of  NMEAData
-
-	(time 0))
 
 ([VRDashboardClient_Class30073] of  Run
 
@@ -773,7 +592,7 @@
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
 	(nmea-port "8081")
-	(onboard "LARS DE HAVILLAND")
+	(onboard "russor")
 	(port "8448")
 	(races
 		"499.2"

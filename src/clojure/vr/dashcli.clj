@@ -343,7 +343,10 @@
  (println ",,")))
 
 (defn ask-boat-name []
-  (if-let [ins (first (cls-instances "VRDashboardControl"))]
-  (if-let [ans (DisplayUtilities/editString nil "Input your boat name" (sv ins "onboard") nil)]
-    (ssv ins "onboard" ans))))
+  (let [cti (first (cls-instances "VRDashboardControl"))
+      nmi (first (cls-instances "NMEAData"))
+      obj (sv nmi "object")]
+  (when-let [ans (DisplayUtilities/editString nil "Input your boat name" (sv cti "onboard") nil)]
+    (ssv cti "onboard" ans)
+    (ssv obj "label" ans))))
 
