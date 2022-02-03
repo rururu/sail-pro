@@ -1,4 +1,4 @@
-; Mon Jan 31 22:31:17 MSK 2022
+; Thu Feb 03 12:39:47 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -63,6 +63,17 @@
 		[VRDashboardClient_Class40000])
 	(title "VR Dashboard Client"))
 
+([VRDashboardClient_Class10000] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "EUREKA11")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
 ([VRDashboardClient_Class100000] of  Rule
 
 	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"REMOVED\"\n	label ?lab)\n?czs (CZMLSpan object ?lab)")
@@ -119,7 +130,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 6\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 6\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -301,7 +312,7 @@
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 6\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -20.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 6\n  :label\n    {:scale 0.5\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "neighbor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -312,8 +323,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 9.386421)
-	(lng 108.8041)
+	(lat 2.84915)
+	(lng 106.40904)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
