@@ -44,3 +44,4 @@
 2. [Going along the Strait Of Magellan](https://youtu.be/0VbBxUmGszg)
 3. [Rounding the Cape Horn](https://youtu.be/eRwe14Fn5Ac)
 4. [Finish in San Francisco](https://www.youtube.com/watch?v=wzTJfI7dEAU)
+5. [Falkland Islands](https://youtu.be/ORM2IVUksrQ)
