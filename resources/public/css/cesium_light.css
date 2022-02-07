@@ -256,71 +256,50 @@
   z-index:100;
   color:yellow
 }
-#zooup {
+#zoom {
   position: absolute;
   bottom: 10%;
-  right:21%;
+  right:18%;
   z-index:100;
   color:yellow
 }
-#zoodn {
-  position: absolute;
-  bottom: 10%;
-  right:17%;
-  z-index:100;
-  color:yellow
-}
-#zoono {
-  position: absolute;
-  bottom: 10%;
-  right:11%;
-  z-index:100;
-  color:yellow
-}
-
-#zoomin {
+#zoostepmin {
   position: absolute;
   bottom: 7%;
   right:35%;
   z-index:100;
   color:yellow
 }
-#zoom-amount {
+#zoom-step {
   position: absolute;
   bottom: 7%;
   right:27%;
   z-index:100;
 }
-#zoomax {
+#zoostepmax {
   position: absolute;
   bottom: 7%;
   right:25%;
   z-index:100;
   color:yellow
 }
-#zoom-up {
-  position: absolute;
-  bottom: 7%;
-  right:22%;
-  z-index:100;
-}
-#zoom-dn {
-  position: absolute;
-  bottom: 7%;
-  right:18%;
-  z-index:100;
-}
-#zoom-val {
-  position: absolute;
-  right: 14.5%;
-  bottom: 7%;
-  width: 100%;
-  text-align: right;
-  color:yellow
-}
-#zoom-no {
+#zoom-amount {
   position: absolute;
   bottom: 7%;
   right:12%;
   z-index:100;
+}
+#zoostepval {
+  position: absolute;
+  bottom: 5%;
+  right:29%;
+  z-index:100;
+  color:yellow
+}
+#zooval {
+  position: absolute;
+  bottom: 5%;
+  right:18%;
+  z-index:100;
+  color:yellow
 }

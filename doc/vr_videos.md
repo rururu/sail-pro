@@ -29,8 +29,7 @@
 ## From Salvador de Bahia to Rio de Janeiro. November 2021
 
 1. [Start](https://youtu.be/xm6EzumcY7Y)
-2. [Using binocular](https://youtu.be/1KAI8eP-DxM)
-3. [Finish](https://youtu.be/4T41q49LNPc)
+2. [Finish](https://youtu.be/4T41q49LNPc)
 
 ## From Boston to North Cape
 
@@ -40,8 +39,10 @@
 
 ## Others
 
-1. [Meaipe](https://youtu.be/E8kdpT2fQfU)
-2. [Going along the Strait Of Magellan](https://youtu.be/0VbBxUmGszg)
-3. [Rounding the Cape Horn](https://youtu.be/eRwe14Fn5Ac)
-4. [Finish in San Francisco](https://www.youtube.com/watch?v=wzTJfI7dEAU)
-5. [Falkland Islands](https://youtu.be/ORM2IVUksrQ)
+1. [Using binocular](https://www.youtube.com/watch?v=R0lmg-AfYIs)
+2. [Meaipe](https://youtu.be/E8kdpT2fQfU)
+3. [Going along the Strait Of Magellan](https://youtu.be/0VbBxUmGszg)
+4. [Rounding the Cape Horn](https://youtu.be/eRwe14Fn5Ac)
+5. [Finish in San Francisco](https://www.youtube.com/watch?v=wzTJfI7dEAU)
+6. [Falkland Islands](https://youtu.be/ORM2IVUksrQ)
+

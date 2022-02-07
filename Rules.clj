@@ -43,7 +43,7 @@
 			(read-string (protege.core/sv % "argument"))) ?ops))))
 
 (sim0:RetractMapObEvent0 -10
-?moe (MapObEvent0 object ?obj label ?lab)
+?moe (MapObEvent0)
 =>
 (retract ?moe))
 
@@ -123,11 +123,10 @@
   (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]
     (let [dis (.distanceNM omo nmo)]
       (if (< dis ?vis)
-        (light.cesium.core/navob-leg 
+        (light.cesium.core/model-leg 
 	nmo
-	dis
 	(+ ?del 2)
-	?ops))
+	(read-string (.getDescription nmo))))
       (modify ?cs time (+ ?t ?del))))))
 
 (vr:NMEA Start 0
@@ -139,29 +138,30 @@
 =>
 (println "NMEA Start boat" (protege.core/sv ?obj "label"))
 (vr.dashcli/load-races)
-(vr.dashcli/select-race)
-(vr.dashcli/show-controls)
-(future (vr.dashcli/get-external-data (read-string ?nmp) (str "/nmea/" ?ser)))
+(vr.dashcli/clear-external-data (str "NMEA_CACHE/" ?ser "/GPRMC.txt"))
+(vr.dashcli/clear-external-data (str "NMEA_CACHE/" ?ser "/AIVDM.txt"))
 (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]
   (modify ?d data [""
-	(.getLatitude mo)
-	(.getLongitude mo)
-	(.getCourse mo)
-	(.getSpeed mo)
-	""]
-	time ?t)
+                          (.getLatitude mo)
+                          (.getLongitude mo)
+                          (.getCourse mo)
+                          (.getSpeed mo)
+                          ""]
+                  time ?t)
   (modify ?c status "RUN")
   (if (nil? light.sim/ES-TIMER)
     (light.sim/start-sim))))
 
 (vr:NMEA Run 0
-(VRDashboardControl onboard ?onb visibility ?vis)
+(VRDashboardControl onboard ?onb visibility ?vis selected-race ?ser)
 (NMEAControl status "RUN"
 	delay ?del)
 ?d (NMEAData object ?obj
 	time ?t0)
 (Clock0 time ?t1 (> ?t1 ?t0))
 =>
+(println :TEST ?t0)
+(future (vr.dashcli/get-external-data (str "NMEA_CACHE/" ?ser "/GPRMC.txt") vr.dashcli/GPRMC))
 (when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]
   (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]
     (.setLatitude mo lat)
@@ -169,9 +169,11 @@
     (.setCourse mo (int crs))
     (.setSpeed mo spd)
     (println "boat:" (protege.core/sv ?obj "label") bdata))
+  (vr.dashcli/get-external-data (str "NMEA_CACHE/" ?ser "/AIVDM.txt") vr.dashcli/AIVDM))
   (vr.dashcli/get-fleet-data)
   (vr.dashcli/show-neighbors ?onb ?vis)
   (vr.dashcli/unvisible-offmap ?onb))
+(println :TEST2 ?t1 ?del)
 (modify ?d time (+ ?t1 ?del)))
 
 (vr:NavOb on Map 0
@@ -184,7 +186,6 @@
 (not CZMLSpan object ?lab)
 =>
 (asser CZMLSpan object ?lab
-	options (read-string (.getDescription ?obj))
 	time ?t)
 (println "NavOb on map:" ?lab))
 

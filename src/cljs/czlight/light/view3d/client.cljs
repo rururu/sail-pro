@@ -24,6 +24,7 @@
    :value nil}))
 (def RESPONSE (volatile! {}))
 (def PORT 8448)
+(def ZOOM-STEP 200)
 (defn format [fmt & args]
   (apply gstring/format fmt args))
 
@@ -103,29 +104,14 @@
   (format "%.0f km" (/ m 1000.0)) 
   (format "%.0f м" (/ m 1.0))))
 
-(defn zoom [mode]
-  (let[zoom-on (fn[]
-       (set-html! "zoom-dn" 
-         "<img src='img/binS.png' width='24' height='24' id='zdn'
-           onclick='javascript:light.view3d.client.zoom(-1);'>")
-       (set-html! "zoom-no" 
-         "<img src='img/binN.png' width='24' height='24' id='zno'
-           onclick='javascript:light.view3d.client.zoom(0);'>"))
-     zoom-off (fn[]
-       (set-html! "zoom-dn" "")
-       (set-html! "zoom-no" ""))]
-  (condp = mode
-    1 (do (czm/zoom-in) 
-         (zoom-on))
-    -1 (do (czm/zoom-out)
-         (if (empty? czm/ZOOM)
-           (zoom-off)))
-    0 (do (czm/zoom-no)
-         (zoom-off)))
-  (set-html! "zoom-val" (zoom-format (apply + czm/ZOOM)))))
+(defn zoom_step [s]
+  (def ZOOM-STEP (num-val s))
+(set-html! "zoostepval" (zoom-format ZOOM-STEP)))
 
 (defn zoom_amount [amount]
-  (czm/zoom-amount (num-val amount)))
+  (let [v (* (num-val amount) ZOOM-STEP)]
+  (czm/zoom v)
+  (set-html! "zooval" (zoom-format v))))
 
 (defn response-request []
   (let [resp @RESPONSE]
@@ -166,7 +152,7 @@
   (set-html! "speed-fld" (:speed vehicle))
   (set-html! "altitude-fld" czm/ALT)
   (set-html! "view-dir" (geo/rumb head))
-  (if (empty? czm/ZOOM)
+  (if (= czm/ZOOM 0)
     (czm/fly-to lat lon (+ alt vev) crs 5))))
 
 (defn vehicle-hr [response]
@@ -236,18 +222,19 @@
 (defn middle-controls []
   (set-html! "binocular" "<h4>Binocular</h4>")
 (set-html! "zoostep" "zoom step")
-(set-html! "zoomin" "10 m")
-(set-html! "zoomax" "10 km")
-(set-html! "zooup" "zoom up")
-(set-html! "zoodn" "zoom dn")
-(set-html! "zoono" "zoom no")
-(set-html! "zoom-up" 
-  "<img src='img/binB.png' width='24' height='24' id='zup' 
-    onclick='javascript:light.view3d.client.zoom(1);'>")
+(set-html! "zoom" "zoom")
+(set-html! "zoostepmin" "1 m")
+(set-html! "zoom-step" 
+  "<input type='range' style='width:150px' id='zst'
+               min='1' value='100' max='10000'
+               oninput='javascript:light.view3d.client.zoom_step(this.value)'>")
+(set-html! "zoostepmax" "10 km")
 (set-html! "zoom-amount" 
-  "<input type='range' style='width:150px' id='zfa'
-               min='10' value='200' max='10000'
-               oninput='javascript:light.view3d.client.zoom_amount(this.value)'>"))
+  "<input type='range' style='width:220px' id='zam'
+               min='0' value='0' max='100'
+               oninput='javascript:light.view3d.client.zoom_amount(this.value)'>")
+(set-html! "zoostepval" "100 m")
+(set-html! "zooval" "0 m"))
 
 (defn show-controls []
   (right-controls)

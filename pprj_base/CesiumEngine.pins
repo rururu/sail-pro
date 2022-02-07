@@ -1,11 +1,11 @@
-; Mon Jan 31 09:54:49 MSK 2022
+; Mon Feb 07 13:02:25 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
 ([CesiumEngine_Class0] of  CloFunction
 
-	(source "(set-html! \"binocular\" \"<h4>Binocular</h4>\")\n(set-html! \"zoostep\" \"zoom step\")\n(set-html! \"zoomin\" \"10 m\")\n(set-html! \"zoomax\" \"10 km\")\n(set-html! \"zooup\" \"zoom up\")\n(set-html! \"zoodn\" \"zoom dn\")\n(set-html! \"zoono\" \"zoom no\")\n(set-html! \"zoom-up\" \n  \"<img src='img/binB.png' width='24' height='24' id='zup' \n    onclick='javascript:light.view3d.client.zoom(1);'>\")\n(set-html! \"zoom-amount\" \n  \"<input type='range' style='width:150px' id='zfa'\n               min='10' value='200' max='10000'\n               oninput='javascript:light.view3d.client.zoom_amount(this.value)'>\")")
+	(source "(set-html! \"binocular\" \"<h4>Binocular</h4>\")\n(set-html! \"zoostep\" \"zoom step\")\n(set-html! \"zoom\" \"zoom\")\n(set-html! \"zoostepmin\" \"1 m\")\n(set-html! \"zoom-step\" \n  \"<input type='range' style='width:150px' id='zst'\n               min='1' value='100' max='10000'\n               oninput='javascript:light.view3d.client.zoom_step(this.value)'>\")\n(set-html! \"zoostepmax\" \"10 km\")\n(set-html! \"zoom-amount\" \n  \"<input type='range' style='width:220px' id='zam'\n               min='0' value='0' max='100'\n               oninput='javascript:light.view3d.client.zoom_amount(this.value)'>\")\n(set-html! \"zoostepval\" \"100 m\")\n(set-html! \"zooval\" \"0 m\")")
 	(title "middle-controls []"))
 
 ([CesiumEngine_Class1] of  CeziumControl
@@ -14,7 +14,7 @@
 ([CesiumEngine_Class10] of  CloVar
 
 	(source "200")
-	(title "ZOOM-AMOUNT"))
+	(title "ZOOM-STEP"))
 
 ([CesiumEngine_Class10000] of  CloFuncall
 
@@ -24,25 +24,15 @@
 
 	(source "(load-file \"src/clojure/cljs/compile.clj\")"))
 
-([CesiumEngine_Class11] of  CloFunction
-
-	(source "(def ZOOM-AMOUNT amount)")
-	(title "zoom-amount [amount]"))
-
 ([CesiumEngine_Class12] of  CloFunction
 
-	(source "(czm/zoom-amount (num-val amount))")
+	(source "(let [v (* (num-val amount) ZOOM-STEP)]\n  (czm/zoom v)\n  (set-html! \"zooval\" (zoom-format v)))")
 	(title "zoom_amount [amount]"))
 
 ([CesiumEngine_Class13] of  CloFunction
 
 	(source "(vswap! VEHICLE assoc :view-elevation (num-val vev))")
 	(title "elev [vev]"))
-
-([CesiumEngine_Class2] of  CloVar
-
-	(source "()")
-	(title "ZOOM"))
 
 ([CesiumEngine_Class20000] of  CloFunction
 
@@ -56,11 +46,6 @@
 ([CesiumEngine_Class20006] of  CloFuncall
 
 	(source "(build (p/itm cli 0) cli)"))
-
-([CesiumEngine_Class3] of  CloFunction
-
-	(source "(.zoomIn (.-camera VIEWER) ZOOM-AMOUNT)\n(def ZOOM (conj ZOOM ZOOM-AMOUNT))")
-	(title "zoom-in []"))
 
 ([CesiumEngine_Class30000] of  CloFunction
 
@@ -77,24 +62,20 @@
 	(source "(if (>= m 1000) \n  (format \"%.0f km\" (/ m 1000.0)) \n  (format \"%.0f м\" (/ m 1.0)))")
 	(title "zoom-format [m]"))
 
-([CesiumEngine_Class4] of  CloFunction
+([CesiumEngine_Class50000] of  CloFunction
 
-	(source "(when (seq ZOOM)\n  (.zoomOut (.-camera VIEWER) (first ZOOM))\n  (def ZOOM (rest ZOOM)))")
-	(title "zoom-out []"))
+	(source "(cond\n  (< z ZOOM)\n  (.zoomOut (.-camera VIEWER) (- ZOOM z))\n  (> z ZOOM)\n  (.zoomIn (.-camera VIEWER) (- z ZOOM)))\n(def ZOOM (if (< z 0) 0 z))")
+	(title "zoom [z]"))
 
-([CesiumEngine_Class40000] of  CloFuncall
+([CesiumEngine_Class50001] of  CloVar
 
-	(source "(clojure.core/load-file \"src/clojure/cljs/compile.clj\")"))
-
-([CesiumEngine_Class5] of  CloFunction
-
-	(source "(while (seq ZOOM)\n  (zoom-out))")
-	(title "zoom-no []"))
+	(source "0")
+	(title "ZOOM"))
 
 ([CesiumEngine_Class9] of  CloFunction
 
-	(source "(let[zoom-on (fn[]\n       (set-html! \"zoom-dn\" \n         \"<img src='img/binS.png' width='24' height='24' id='zdn'\n           onclick='javascript:light.view3d.client.zoom(-1);'>\")\n       (set-html! \"zoom-no\" \n         \"<img src='img/binN.png' width='24' height='24' id='zno'\n           onclick='javascript:light.view3d.client.zoom(0);'>\"))\n     zoom-off (fn[]\n       (set-html! \"zoom-dn\" \"\")\n       (set-html! \"zoom-no\" \"\"))]\n  (condp = mode\n    1 (do (czm/zoom-in) \n         (zoom-on))\n    -1 (do (czm/zoom-out)\n         (if (empty? czm/ZOOM)\n           (zoom-off)))\n    0 (do (czm/zoom-no)\n         (zoom-off)))\n  (set-html! \"zoom-val\" (zoom-format (apply + czm/ZOOM))))")
-	(title "zoom [mode]"))
+	(source "(def ZOOM-STEP (num-val s))\n(set-html! \"zoostepval\" (zoom-format ZOOM-STEP))")
+	(title "zoom_step [s]"))
 
 ([Cezium_Class0] of  ClsRequired
 
@@ -109,10 +90,7 @@
 		[Cezium_Class370000]
 		[Cezium_Class380000]
 		[Cezium_Class380001]
-		[CesiumEngine_Class3]
-		[CesiumEngine_Class4]
-		[CesiumEngine_Class5]
-		[CesiumEngine_Class11])
+		[CesiumEngine_Class50000])
 	(cloNamespace [Cezium_Class1])
 	(cloVars
 		[Cezium_Class3]
@@ -121,8 +99,7 @@
 		[Cezium_Class5]
 		[Cezium_Class90017]
 		[Cezium_Class290002]
-		[CesiumEngine_Class2]
-		[CesiumEngine_Class10])
+		[CesiumEngine_Class50001])
 	(documentation [Cezium_Class14])
 	(title "Cezium Client Light"))
 
@@ -183,7 +160,7 @@
 
 ([Cezium_Class10010] of  CloFunction
 
-	(source "(let [[lat lon] (:coord vehicle)\n       alt (:altitude vehicle)\n       vev (:view-elevation @VEHICLE)\n       crs (:course vehicle)\n       head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]\n  (vswap! VEHICLE merge vehicle)\n  (set-html! \"onboard-fld\" (:name vehicle))\n  (set-html! \"name-fld\" (:name vehicle))\n  (set-html! \"latitude-fld\" (format \"%.3f\" (first (:coord vehicle))))\n  (set-html! \"longitude-fld\" (format \"%.3f\" (second (:coord vehicle))))\n  (set-html! \"course-fld\" (:course vehicle))\n  (set-html! \"speed-fld\" (:speed vehicle))\n  (set-html! \"altitude-fld\" czm/ALT)\n  (set-html! \"view-dir\" (geo/rumb head))\n  (if (empty? czm/ZOOM)\n    (czm/fly-to lat lon (+ alt vev) crs 5)))")
+	(source "(let [[lat lon] (:coord vehicle)\n       alt (:altitude vehicle)\n       vev (:view-elevation @VEHICLE)\n       crs (:course vehicle)\n       head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]\n  (vswap! VEHICLE merge vehicle)\n  (set-html! \"onboard-fld\" (:name vehicle))\n  (set-html! \"name-fld\" (:name vehicle))\n  (set-html! \"latitude-fld\" (format \"%.3f\" (first (:coord vehicle))))\n  (set-html! \"longitude-fld\" (format \"%.3f\" (second (:coord vehicle))))\n  (set-html! \"course-fld\" (:course vehicle))\n  (set-html! \"speed-fld\" (:speed vehicle))\n  (set-html! \"altitude-fld\" czm/ALT)\n  (set-html! \"view-dir\" (geo/rumb head))\n  (if (= czm/ZOOM 0)\n    (czm/fly-to lat lon (+ alt vev) crs 5)))")
 	(title "handle-vehicle [vehicle]"))
 
 ([Cezium_Class110051] of  CloFunction
@@ -244,7 +221,8 @@
 		[Cezium_Class10007]
 		[Cezium_Class360000]
 		[Cezium_Class80004]
-		[Cezium_Class30029])
+		[Cezium_Class30029]
+		[CesiumEngine_Class10])
 	(compiler-options "{:verbose false}")
 	(css [Cezium_Class20002])
 	(epilogue "(enable-console-print!)\n(set! (.-onload js/window) (on-load))")
@@ -284,7 +262,7 @@
 
 ([Cezium_Class20000] of  HTML
 
-	(source "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Cockpit View</title>\n    <link rel=\"stylesheet\" href=\"css/cesium_light.css\" />\n    <script src=\"Cesium/Cesium.js\"></script>\n    <style>\n      @import url(Cesium/Widgets/widgets.css);\n      #cesiumContainer {\n        position: absolute;\n        top: 0;\n        left: 0;\n        height: 100%;\n        width: 100%;\n        margin: 0;\n        overflow: hidden;\n        padding: 0;\n        font-family: sans-serif;\n      }\n      html {\n        height: 100%;\n      }\n      body {\n        padding: 0;\n        margin: 0;\n        overflow: hidden;\n        height: 100%;\n      }\n    </style>\n  </head>\n  <body>\n    <div id=\"cesiumContainer\"></div>\n    <div id=\"vehicle\"></div>\n    <div id=\"name\"></div><div id=\"name-fld\"></div>\n    <div id=\"latitude\"></div><div id=\"latitude-fld\"></div>\n    <div id=\"longitude\"></div><div id=\"longitude-fld\"></div>\n    <div id=\"course\"></div><div id=\"course-fld\"></div>\n    <div id=\"speed\"></div><div id=\"speed-fld\"></div>\n    <div id=\"altitude\"></div><div id=\"altitude-fld\"></div>\n    <div id=\"camera\"></div>\n    <div id=\"onboard\"></div><div id=\"onboard-fld\"></div>\n    <div id=\"elev\"></div><div id=\"elev-fld\"></div>\n    <div id=\"roll\"></div><div id=\"roll-fld\"></div><div id=\"roll-sld\"></div>\n    <div id=\"pitch\"></div><div id=\"pitch-fld\"></div><div id=\"pitch-sld\"></div>\n    <div id=\"viewF\"></div><div id=\"viewF-fld\"></div><div id=\"viewF-sld\"></div>\n    <div id=\"viewB\"></div><div id=\"viewB-fld\"></div><div id=\"viewB-sld\"></div>\n    <div id=\"view-dir\"></div>\n    <div id=\"binocular\"></div>\n    <div id=\"zoostep\"></div><div id=\"zoomin\"></div><div id=\"zoomax\"></div>\n    <div id=\"zooup\"></div><div id=\"zoodn\"></div><div id=\"zoono\"></div>\n    <div id=\"zoom-amount\"></div><div id=\"zoom-up\"></div><div id=\"zoom-dn\"></div>\n    <div id=\"zoom-val\"></div><div id=\"zoom-no\"></div>\n    <script>\n      // Grant your CesiumJS app access to your ion assets\n      // This is your actual default access token, you can copy/paste this directly into your app code\n      Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwN2EzYzEyNS1mMmNlLTRlYjEtYjRiMS04OTliNjhkZjI4NzQiLCJpZCI6MzY0MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTUzODQxODg5OH0.E2p7oe8fLJOtyawv0uT9zBZw4oyKZ6Vt3CZsE0FKeJw';\n      function terraHeightRequest(terrProv, lat, lon, func){\n        var pos = [Cesium.Cartographic.fromDegrees(lon, lat)];\n        var pms = Cesium.sampleTerrain(terrProv, 11, pos);\n        Cesium.when(pms, func);\n      }\n      function fillPointPrimColl(prims, lla, color, size){\n        for(i = 0; i < lla.length; i++){\n          var lat = lla[i][0];\n          var lon = lla[i][1];\n            prims.add({\n              position : Cesium.Cartesian3.fromDegrees(lon, lat),\n              color : color,\n              heightReference : Cesium.HeightReference.CLAMP_TO_GROUND\n            });\n        }\n      }\n    </script>\n    <script type=\"text/javascript\" src=\"js/cesium_light.js\"></script>\n  </body>\n</html>")
+	(source "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Cockpit View</title>\n    <link rel=\"stylesheet\" href=\"css/cesium_light.css\" />\n    <script src=\"Cesium/Cesium.js\"></script>\n    <style>\n      @import url(Cesium/Widgets/widgets.css);\n      #cesiumContainer {\n        position: absolute;\n        top: 0;\n        left: 0;\n        height: 100%;\n        width: 100%;\n        margin: 0;\n        overflow: hidden;\n        padding: 0;\n        font-family: sans-serif;\n      }\n      html {\n        height: 100%;\n      }\n      body {\n        padding: 0;\n        margin: 0;\n        overflow: hidden;\n        height: 100%;\n      }\n    </style>\n  </head>\n  <body>\n    <div id=\"cesiumContainer\"></div>\n    <div id=\"vehicle\"></div>\n    <div id=\"name\"></div><div id=\"name-fld\"></div>\n    <div id=\"latitude\"></div><div id=\"latitude-fld\"></div>\n    <div id=\"longitude\"></div><div id=\"longitude-fld\"></div>\n    <div id=\"course\"></div><div id=\"course-fld\"></div>\n    <div id=\"speed\"></div><div id=\"speed-fld\"></div>\n    <div id=\"altitude\"></div><div id=\"altitude-fld\"></div>\n    <div id=\"camera\"></div>\n    <div id=\"onboard\"></div><div id=\"onboard-fld\"></div>\n    <div id=\"elev\"></div><div id=\"elev-fld\"></div>\n    <div id=\"roll\"></div><div id=\"roll-fld\"></div><div id=\"roll-sld\"></div>\n    <div id=\"pitch\"></div><div id=\"pitch-fld\"></div><div id=\"pitch-sld\"></div>\n    <div id=\"viewF\"></div><div id=\"viewF-fld\"></div><div id=\"viewF-sld\"></div>\n    <div id=\"viewB\"></div><div id=\"viewB-fld\"></div><div id=\"viewB-sld\"></div>\n    <div id=\"view-dir\"></div>\n    <div id=\"binocular\"></div>\n    <div id=\"zoostep\"></div><div id=\"zoom\"></div><div id=\"zoostepmin\"></div>\n    <div id=\"zoom-step\"></div><div id=\"zoostepmax\"></div>\n    <div id=\"zoom-amount\"></div><div id=\"zoostepval\"></div><div id=\"zooval\"></div>\n    <script>\n      // Grant your CesiumJS app access to your ion assets\n      // This is your actual default access token, you can copy/paste this directly into your app code\n      Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwN2EzYzEyNS1mMmNlLTRlYjEtYjRiMS04OTliNjhkZjI4NzQiLCJpZCI6MzY0MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTUzODQxODg5OH0.E2p7oe8fLJOtyawv0uT9zBZw4oyKZ6Vt3CZsE0FKeJw';\n      function terraHeightRequest(terrProv, lat, lon, func){\n        var pos = [Cesium.Cartographic.fromDegrees(lon, lat)];\n        var pms = Cesium.sampleTerrain(terrProv, 11, pos);\n        Cesium.when(pms, func);\n      }\n      function fillPointPrimColl(prims, lla, color, size){\n        for(i = 0; i < lla.length; i++){\n          var lat = lla[i][0];\n          var lon = lla[i][1];\n            prims.add({\n              position : Cesium.Cartesian3.fromDegrees(lon, lat),\n              color : color,\n              heightReference : Cesium.HeightReference.CLAMP_TO_GROUND\n            });\n        }\n      }\n    </script>\n    <script type=\"text/javascript\" src=\"js/cesium_light.js\"></script>\n  </body>\n</html>")
 	(store-in "resources/public")
 	(title "cezium_light"))
 
@@ -310,7 +288,7 @@
 
 ([Cezium_Class20002] of  CSS
 
-	(source "#vehicle {\n  position:fixed;\n  bottom:180px;\n  right:60px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#name {\n  position:fixed;\n  bottom:170px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#latitude {\n  position:fixed;\n  bottom:150px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#longitude {\n  position:fixed;\n  bottom:130px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#course {\n  position:fixed;\n  bottom:110px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#speed {\n  position:fixed;\n  bottom:90px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#altitude {\n  position:fixed;\n  bottom:70px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#name-fld {\n  position:fixed;\n  bottom:170px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:cyan\n}\n#latitude-fld {\n  position:fixed;\n  bottom:150px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#longitude-fld {\n  position:fixed;\n  bottom:130px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#course-fld {\n  position:fixed;\n  bottom:110px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#speed-fld {\n  position:fixed;\n  bottom:90px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#altitude-fld {\n  position:fixed;\n  bottom:70px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#camera {\n  position:fixed;\n  bottom:180px;\n  left:60px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#onboard {\n  position:fixed;\n  bottom:170px;\n  left:20px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#onboard-fld {\n  position:fixed;\n  bottom:170px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n  color:cyan\n}\n#elev {\n  position:fixed;\n  bottom:150px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#elev-fld {\n  position:fixed;\n  bottom:150px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#roll {\n  position:fixed;\n  bottom:130px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#roll-sld {\n  position:fixed;\n  bottom:130px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#roll-fld {\n  position:fixed;\n  bottom:130px;\n  left:304px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#pitch {\n  position:fixed;\n  bottom:110px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#pitch-sld {\n  position:fixed;\n  bottom:110px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#pitch-fld {\n  position:fixed;\n  bottom:110px;\n  left:504px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewF {\n  position:fixed;\n  bottom:90px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewF-sld {\n  position:fixed;\n  bottom:90px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#viewF-fld {\n  position:fixed;\n  bottom:90px;\n  left:504px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewB {\n  position:fixed;\n  bottom:70px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewB-sld {\n  position:fixed;\n  bottom:70px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#viewB-fld {\n  position:fixed;\n  bottom:70px;\n  left:504px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#view-dir {\n  position: absolute;\n  left: 0;\n  bottom: 15%;\n  width: 100%;\n  text-align: center;\n  color:yellow\n}\n\n#binocular {\n  position: absolute;\n  bottom: 12%;\n  right:21%;\n  z-index:100;\n  color:yellow\n}\n#zoostep {\n  position: absolute;\n  bottom: 10%;\n  right:29%;\n  z-index:100;\n  color:yellow\n}\n#zooup {\n  position: absolute;\n  bottom: 10%;\n  right:21%;\n  z-index:100;\n  color:yellow\n}\n#zoodn {\n  position: absolute;\n  bottom: 10%;\n  right:17%;\n  z-index:100;\n  color:yellow\n}\n#zoono {\n  position: absolute;\n  bottom: 10%;\n  right:11%;\n  z-index:100;\n  color:yellow\n}\n\n#zoomin {\n  position: absolute;\n  bottom: 7%;\n  right:35%;\n  z-index:100;\n  color:yellow\n}\n#zoom-amount {\n  position: absolute;\n  bottom: 7%;\n  right:27%;\n  z-index:100;\n}\n#zoomax {\n  position: absolute;\n  bottom: 7%;\n  right:25%;\n  z-index:100;\n  color:yellow\n}\n#zoom-up {\n  position: absolute;\n  bottom: 7%;\n  right:22%;\n  z-index:100;\n}\n#zoom-dn {\n  position: absolute;\n  bottom: 7%;\n  right:18%;\n  z-index:100;\n}\n#zoom-val {\n  position: absolute;\n  right: 14.5%;\n  bottom: 7%;\n  width: 100%;\n  text-align: right;\n  color:yellow\n}\n#zoom-no {\n  position: absolute;\n  bottom: 7%;\n  right:12%;\n  z-index:100;\n}")
+	(source "#vehicle {\n  position:fixed;\n  bottom:180px;\n  right:60px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#name {\n  position:fixed;\n  bottom:170px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#latitude {\n  position:fixed;\n  bottom:150px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#longitude {\n  position:fixed;\n  bottom:130px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#course {\n  position:fixed;\n  bottom:110px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#speed {\n  position:fixed;\n  bottom:90px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#altitude {\n  position:fixed;\n  bottom:70px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#name-fld {\n  position:fixed;\n  bottom:170px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:cyan\n}\n#latitude-fld {\n  position:fixed;\n  bottom:150px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#longitude-fld {\n  position:fixed;\n  bottom:130px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#course-fld {\n  position:fixed;\n  bottom:110px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#speed-fld {\n  position:fixed;\n  bottom:90px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#altitude-fld {\n  position:fixed;\n  bottom:70px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#camera {\n  position:fixed;\n  bottom:180px;\n  left:60px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#onboard {\n  position:fixed;\n  bottom:170px;\n  left:20px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#onboard-fld {\n  position:fixed;\n  bottom:170px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n  color:cyan\n}\n#elev {\n  position:fixed;\n  bottom:150px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#elev-fld {\n  position:fixed;\n  bottom:150px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#roll {\n  position:fixed;\n  bottom:130px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#roll-sld {\n  position:fixed;\n  bottom:130px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#roll-fld {\n  position:fixed;\n  bottom:130px;\n  left:304px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#pitch {\n  position:fixed;\n  bottom:110px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#pitch-sld {\n  position:fixed;\n  bottom:110px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#pitch-fld {\n  position:fixed;\n  bottom:110px;\n  left:504px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewF {\n  position:fixed;\n  bottom:90px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewF-sld {\n  position:fixed;\n  bottom:90px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#viewF-fld {\n  position:fixed;\n  bottom:90px;\n  left:504px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewB {\n  position:fixed;\n  bottom:70px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewB-sld {\n  position:fixed;\n  bottom:70px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#viewB-fld {\n  position:fixed;\n  bottom:70px;\n  left:504px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#view-dir {\n  position: absolute;\n  left: 0;\n  bottom: 15%;\n  width: 100%;\n  text-align: center;\n  color:yellow\n}\n\n#binocular {\n  position: absolute;\n  bottom: 12%;\n  right:21%;\n  z-index:100;\n  color:yellow\n}\n#zoostep {\n  position: absolute;\n  bottom: 10%;\n  right:29%;\n  z-index:100;\n  color:yellow\n}\n#zoom {\n  position: absolute;\n  bottom: 10%;\n  right:18%;\n  z-index:100;\n  color:yellow\n}\n#zoostepmin {\n  position: absolute;\n  bottom: 7%;\n  right:35%;\n  z-index:100;\n  color:yellow\n}\n#zoom-step {\n  position: absolute;\n  bottom: 7%;\n  right:27%;\n  z-index:100;\n}\n#zoostepmax {\n  position: absolute;\n  bottom: 7%;\n  right:25%;\n  z-index:100;\n  color:yellow\n}\n#zoom-amount {\n  position: absolute;\n  bottom: 7%;\n  right:12%;\n  z-index:100;\n}\n#zoostepval {\n  position: absolute;\n  bottom: 5%;\n  right:29%;\n  z-index:100;\n  color:yellow\n}\n#zooval {\n  position: absolute;\n  bottom: 5%;\n  right:18%;\n  z-index:100;\n  color:yellow\n}")
 	(store-in "resources/public/css")
 	(title "cesium_light"))
 
