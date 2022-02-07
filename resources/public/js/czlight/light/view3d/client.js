@@ -1032,7 +1032,7 @@ light.view3d.client.left_controls.call(null);
 return light.view3d.client.middle_controls.call(null);
 });
 light.view3d.client.on_load = (function light$view3d$client$on_load(){
-light.czm.core.init_3D_view.call(null,["http://0.0.0.0:",cljs.core.str.cljs$core$IFn$_invoke$arity$1(light.view3d.client.PORT)].join(''));
+light.czm.core.init_3D_view.call(null,["http://localhost:",cljs.core.str.cljs$core$IFn$_invoke$arity$1(light.view3d.client.PORT)].join(''));
 
 light.view3d.client.repeater.call(null,light.view3d.client.receive_vehicle,(4000));
 

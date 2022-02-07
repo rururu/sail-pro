@@ -1,4 +1,4 @@
-; Mon Feb 07 13:02:25 MSK 2022
+; Mon Feb 07 22:17:34 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -130,7 +130,7 @@
 
 ([Cezium_Class10001] of  CloFunction
 
-	(source "(czm/init-3D-view (str \"http://0.0.0.0:\" PORT))\n(repeater receive-vehicle 4000)\n(show-controls)")
+	(source "(czm/init-3D-view (str \"http://localhost:\" PORT))\n(repeater receive-vehicle 4000)\n(show-controls)")
 	(title "on-load []"))
 
 ([Cezium_Class10002] of  CloFunction

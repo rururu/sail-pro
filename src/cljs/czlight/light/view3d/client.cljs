@@ -242,7 +242,7 @@
 (middle-controls))
 
 (defn on-load []
-  (czm/init-3D-view (str "http://0.0.0.0:" PORT))
+  (czm/init-3D-view (str "http://localhost:" PORT))
 (repeater receive-vehicle 4000)
 (show-controls))
 
