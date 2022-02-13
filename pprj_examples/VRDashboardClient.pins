@@ -1,4 +1,4 @@
-; Sat Feb 12 21:03:53 MSK 2022
+; Sun Feb 13 08:56:31 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -600,7 +600,7 @@
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
 	(nmea-port "8081")
-	(onboard "TIPAPACHERI BSP")
+	(onboard "russor")
 	(port "8448")
 	(races
 		"499.2"
@@ -613,7 +613,7 @@
 		"515.1")
 	(selected-race "477.7")
 	(telnet-port "10470")
-	(visibility 440.0)
+	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
 ([VRDashboardClient_Class60000] of  NavOb
