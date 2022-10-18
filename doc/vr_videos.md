@@ -37,6 +37,10 @@
 2. [Green Mountines near Hovden, Nordland](https://youtu.be/I6IWEMnR7uc)
 3. [Finish on North Cape](https://www.youtube.com/watch?v=Hohehv8Fp34)
 
+## Troussel Cup 
+
+1. [Interceptor Control](https://youtu.be/BMLnPYs6Tf8)
+
 ## Others
 
 1. [Using binocular](https://www.youtube.com/watch?v=R0lmg-AfYIs)

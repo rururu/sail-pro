@@ -1,4 +1,4 @@
-; Mon Oct 10 21:41:31 MSK 2022
+; Tue Oct 18 23:24:55 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -60,7 +60,8 @@
 		[VRDashboardClient_Class210000]
 		[VRDashboardClient_Class250016]
 		[VRDashboardClient_Class20001]
-		[VRDashboardClient_Class40000])
+		[VRDashboardClient_Class40000]
+		[VRDashboardClient_Class260000])
 	(title "VR Dashboard Client"))
 
 ([VRDashboardClient_Class10000] of  VRFleet
@@ -197,7 +198,7 @@
 
 ([VRDashboardClient_Class130002] of  CloFunction
 
-	(source "(if-let [ac (fifos \"NavOb\" \"label\" \"CVN-69\")]\n  (let [acm (OMT/getOrAdd ac)\n        rus (OMT/getMapOb \"russor\")\n        lar (.getLatitude rus)\n        lor (.getLongitude rus)\n        lac (+ lar (srand 0.02))\n        loc (+ lor (srand 0.02))\n        crs (int (rand 360))]\n    (.setLatitude acm lac)\n    (.setLongitude acm loc)\n    (.setCourse acm crs)\n    (if-let [h (fifos \"NavOb\" \"label\" \"h1\")]\n      (let [hm (OMT/getOrAdd h)]\n        (.setLatitude hm lac)\n        (.setLongitude hm loc)))\n    (if-let [i (fifos \"NavOb\" \"label\" \"i1\")]\n      (let [im (OMT/getOrAdd i)\n             icr (+ crs 180)\n             icr (if (> icr 360) (- icr 360) icr)] \n        (.setLatitude im lac)\n        (.setLongitude im loc)\n        (.setCourse im icr)))))")
+	(source "(if-let [ac (fifos \"NavOb\" \"label\" \"CVN-69\")]\n  (let [acm (OMT/getOrAdd ac)\n        rus (OMT/getMapOb \"russor\")\n        lar (.getLatitude rus)\n        lor (.getLongitude rus)\n        lac (+ lar (srand 0.02))\n        loc (+ lor (srand 0.02))\n        crs (int (rand 360))]\n    (.setLatitude acm lac)\n    (.setLongitude acm loc)\n    (.setCourse acm crs)\n    (vswap! ART conj \"CVN-69\")\n    (if-let [h (fifos \"NavOb\" \"label\" \"h1\")]\n      (let [hm (OMT/getOrAdd h)]\n        (.setLatitude hm lac)\n        (.setLongitude hm loc)\n        (vswap! ART conj \"h1\")))\n    (if-let [i (fifos \"NavOb\" \"label\" \"i1\")]\n      (let [im (OMT/getOrAdd i)\n             icr (+ crs 180)\n             icr (if (> icr 360) (- icr 360) icr)] \n        (.setLatitude im lac)\n        (.setLongitude im loc)\n        (.setCourse im icr)\n        (vswap! ART conj \"i1\")))))")
 	(title "add-aircraft-carrier []"))
 
 ([VRDashboardClient_Class140000] of  CloFunction
@@ -220,7 +221,7 @@
 
 ([VRDashboardClient_Class150002] of  CloFunction
 
-	(source "(let [onm (or @lps/ONBOARD\n                  (DisplayUtilities/editString nil \"Exsisting Boat Name\" \"\" nil))\n       nnm (DisplayUtilities/editString nil \"New Boat Name\" \"\" nil)]\n  (if (and (some? onm) (some? nnm))\n    (let [oi (fifos \"NavOb\" \"label\" onm)\n          ni (foc \"NavOb\" \"label\" nnm)\n          _ (ssv ni \"latitude\" \"0 0\")\n          _ (ssv ni \"longitude\" \"0 0\")\n          _ (ssv ni \"url\" (sv oi \"url\"))\n          _ (ssv ni \"description\" (sv oi \"description\"))\n          omo (OMT/getOrAdd oi)\n          nmo (OMT/getOrAdd ni)\n          crs (.getCourse omo)\n          [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]\n      (.setLatitude nmo lat)\n      (.setLongitude nmo lon)\n      (.setCourse nmo crs)\n      (.setSpeed nmo (.getSpeed omo)))))")
+	(source "(let [onm (or @lps/ONBOARD\n                  (DisplayUtilities/editString nil \"Exsisting Boat Name\" \"\" nil))\n       nnm (DisplayUtilities/editString nil \"New Boat Name\" \"\" nil)]\n  (if (and (some? onm) (some? nnm))\n    (let [oi (fifos \"NavOb\" \"label\" onm)\n          ni (foc \"NavOb\" \"label\" nnm)\n          _ (ssv ni \"latitude\" \"0 0\")\n          _ (ssv ni \"longitude\" \"0 0\")\n          _ (ssv ni \"url\" (sv oi \"url\"))\n          _ (ssv ni \"description\" (sv oi \"description\"))\n          omo (OMT/getOrAdd oi)\n          nmo (OMT/getOrAdd ni)\n          crs (.getCourse omo)\n          [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]\n      (.setLatitude nmo lat)\n      (.setLongitude nmo lon)\n      (.setCourse nmo crs)\n      (.setSpeed nmo (.getSpeed omo))\n      (vswap! ONMAP conj nnm))))")
 	(title "create-nearby-boat []"))
 
 ([VRDashboardClient_Class150024] of  CloFunction
@@ -344,8 +345,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat -62.696705)
-	(lng -125.07727)
+	(lat 43.633953)
+	(lng -5.597751)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -415,6 +416,11 @@
 	(source "{\"default\" \"{:gltf-url \\\"models/piramida/scene.gltf\\\"}\"}")
 	(title "DESC-MAP"))
 
+([VRDashboardClient_Class260000] of  CloVar
+
+	(source "(volatile! [])")
+	(title "ART"))
+
 ([VRDashboardClient_Class260002] of  VRFleet
 
 	(altitude 0)
@@ -470,6 +476,61 @@
 	(url "file:resources/public/img/yachtg.png")
 	(verticalSpeed 0.0))
 
+([VRDashboardClient_Class270000] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "MELVIN10CVRL")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class270001] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "LOULOU_BOAT")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class270002] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "KICK37")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class270003] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "HUGOBOSS65_HPY")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class270004] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "CAPITAINE85")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
 ([VRDashboardClient_Class280000] of  CloFunction
 
 	(source "(if (.exists (io/file path))\n  (let [buf (slurp path)]\n    (if (not (empty? buf))\n      (reset! atm (.split buf END-TOKEN)))))")
@@ -484,6 +545,10 @@
 
 	(source "(letfn [(to-map [s]\n             (let [s (.substring s 1 (dec (count s)))\n                    s (.split s \" \")\n                    s (remove #(.startsWith % \"pos\") s)\n                    s (remove #(.startsWith % \"=\") s)\n                    s (remove #(.startsWith % \"(\") s)\n                    s (apply str s)\n                    s (.replaceAll s \"=\" \" \")\n                    s (str \"{\" s \"}\")]   \n               (read-string s)))]\n  (if (.startsWith aivdm \"!AIVDM\")\n    (try\n      (let [vdm (Vdm.)\n             _ (.parse vdm aivdm)\n             mes (AisMessage/getInstance vdm)\n             pos (.getValidPosition mes)\n             tos (.toString mes)\n             mp (to-map tos)\n             mp (assoc mp 'pos [(.getLatitude pos) (.getLongitude pos)])\n             imo (mp 'userId)]\n        (vswap! FLEET assoc imo (merge mp (@FLEET imo))))\n      (catch Exception e\n        (let [lio (.lastIndexOf aivdm \"*\")]\n          (when (= (.substring aivdm (dec lio) lio) \"4\")\n            (AIVDMProcessor/process aivdm)\n            (let [imo (AIVDMProcessor/getIMO)\n                   snm (AIVDMProcessor/getShipName)]\n              (vswap! FLEET assoc imo (assoc (@FLEET imo) 'name snm))) ))) )))")
 	(title "parse-AIVDM [aivdm]"))
+
+([VRDashboardClient_Class290000] of  CloFuncall
+
+	(source "ART"))
 
 ([VRDashboardClient_Class290001] of  CloFunction
 
@@ -512,10 +577,318 @@
 	(salience 1)
 	(title "czm0:CZML Navob Leg Generation2"))
 
+([VRDashboardClient_Class300000] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "GALERE-SPLENDIOSE TP")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300001] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "VALKYRIA")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300002] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "JEFFIRAME")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300003] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "LUXAIRFRANCE BSP")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300004] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "MIGUEL 72 TFS")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300005] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "WILL0506")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300006] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "TOUCHDOWN!")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300007] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "BUDDHA BSP")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300008] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "VINKAT")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300009] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "CHTIK36 - CRIA-PYRO")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
 ([VRDashboardClient_Class30001] of  CloVar
 
 	(source "\"\\r\\n\"")
 	(title "END-TOKEN"))
+
+([VRDashboardClient_Class300010] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "CHUI1BATO - TORC")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300011] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "ARYLLA / INC-BUREAU")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300012] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "TLALOC")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300013] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "NEPTUNEO")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300014] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "FREIZH VOLANTE TPN")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300015] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "SONNIU")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300016] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "CHEYENNE1979")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300017] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "ARNAUD2C TEAM92")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300018] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "ESRT IVO TEAMBOAT")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300019] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "TIPAPACHERI BSP")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300020] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "GEORGES V")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300021] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "JILAVOILE - TORC")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300022] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "MAJUMACO")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300023] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "JAKEZMIAOU")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300024] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "BRICOLOU-APH")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300025] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "DINIO_AVR")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300026] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "PASSTAGA")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class300027] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "DANIEL29")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class30006] of  CloFunction
 
@@ -660,6 +1033,17 @@
 	(salience 0)
 	(title "vr:NMEA Run"))
 
+([VRDashboardClient_Class310000] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "OCEANY")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
 ([VRDashboardClient_Class310001] of  CloFuncall
 
 	(source "(seq @AIDVM)"))
@@ -667,6 +1051,215 @@
 ([VRDashboardClient_Class310002] of  CloFuncall
 
 	(source "(seq @GPRMC)"))
+
+([VRDashboardClient_Class320001] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "PTISCARABIE---H2O---")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320002] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "PIERRE LE ROY")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320003] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "TRESENRETARD1")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320004] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "MISTIGRI")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320005] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "DOUDOU4949")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320006] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "JEAN-NO CAPTAIN85")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320007] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "LA_PITOLE")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320008] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "SCRAMBLER")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320009] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "SUI1173")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320010] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "PAPY JUJU")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320011] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "JOESTURAIN")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320012] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "LES FOLIES GOURMANDE")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320013] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "FICH1-FR MED")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320014] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "FAB1785")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320015] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "XEULIXEUL")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320016] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "TOF68_SOLIBAD")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320017] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "GMARON1971")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320018] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "RUDU56")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VRDashboardClient_Class320019] of  VRFleet
+
+	(altitude 0)
+	(course 0)
+	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "WAT33")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class40000] of  CloVar
 
@@ -701,17 +1294,15 @@
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
 	(nmea-port "8081")
-	(onboard "i1")
+	(onboard "russor")
 	(port "8448")
 	(races
-		"523.2"
-		"523.3"
 		"556.1"
-		"555.1"
+		"563.1"
 		"560.1"
 		"561.1"
 		"512.3")
-	(selected-race "560.1")
+	(selected-race "563.1")
 	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
@@ -837,7 +1428,7 @@
 
 ([VRDashboardClient_Class80001] of  CloFunction
 
-	(source "(doseq [no (OMT/getNavObInstances)]\n  (let [nam (sv no \"label\")]\n    (if (and (not= nam onb) \n          (not (some #{nam} @ONMAP)))\n      (OMT/removeMapOb no false))))")
+	(source "(doseq [no (OMT/getNavObInstances)]\n  (let [nam (sv no \"label\")]\n    (if (and (not= nam onb) \n          (not (some #{nam} @ART))\n          (not (some #{nam} @ONMAP)))\n      (OMT/removeMapOb no false))))")
 	(title "unvisible-offmap [onb]"))
 
 ([VRDashboardClient_Class80002] of  CloFunction

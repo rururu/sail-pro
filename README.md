@@ -83,6 +83,8 @@ See details in screencasts. Some details can be differen of earlier - these are 
 13. Use controls to create nearby boats, give them names, coordinates, speed and course. 
     You can even create an aircraft carrier and control a helicopter or a fighter. 
 
+[Interceptor Control](https://youtu.be/BMLnPYs6Tf8)
+
 [Using Controls](https://youtu.be/pK9GTSEGQYQ)
 
 [Get off a shallow in the Nord Stream Race 3](https://youtu.be/U5gG5pHpdcY)

@@ -1,4 +1,4 @@
-; Mon Feb 07 22:17:34 MSK 2022
+; Tue Oct 11 12:37:03 MSK 2022
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,21 +20,21 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CesiumEngine_ProjectKB_Class1608]
-		[CesiumEngine_ProjectKB_Class1609]
-		[CesiumEngine_ProjectKB_Class1610]))
+		[CesiumEngine_ProjectKB_Class1605]
+		[CesiumEngine_ProjectKB_Class1606]
+		[CesiumEngine_ProjectKB_Class1607]))
 
-([CesiumEngine_ProjectKB_Class1608] of  String
+([CesiumEngine_ProjectKB_Class1605] of  String
 
 	(name "CZMLGenerator")
 	(string_value "{CZMLGenerator+del+}delay{+viz+}visibility"))
 
-([CesiumEngine_ProjectKB_Class1609] of  String
+([CesiumEngine_ProjectKB_Class1606] of  String
 
 	(name "Onboard")
 	(string_value "label"))
 
-([CesiumEngine_ProjectKB_Class1610] of  String
+([CesiumEngine_ProjectKB_Class1607] of  String
 
 	(name "CZMLSpan")
 	(string_value "{CZMLSpan+}object"))
@@ -515,28 +515,28 @@
 ([KB_684256_Class1349] of  Property_List
 )
 
-([KB_832763_Class1601] of  Map
+([KB_802582_Class1601] of  Map
 
 	(entries
-		[KB_832763_Class1602]
-		[KB_832763_Class1603]
-		[KB_832763_Class1604]))
+		[KB_802582_Class1602]
+		[KB_802582_Class1603]
+		[KB_802582_Class1604]))
 
-([KB_832763_Class1602] of  Map_Entry
+([KB_802582_Class1602] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_832763_Class1603] of  Map_Entry
+([KB_802582_Class1603] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_832763_Class1604] of  Map_Entry
+([KB_802582_Class1604] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")

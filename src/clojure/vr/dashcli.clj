@@ -26,6 +26,7 @@
 (def DESC-MAP {"default" "{:gltf-url \"models/piramida/scene.gltf\"}"})
 (def FLEET (volatile! {}))
 (def ONMAP (volatile! []))
+(def ART (volatile! []))
 (defn round-speed [s]
   (let [s (* s 100)
        s (Math/round s)]
@@ -113,17 +114,20 @@
     (.setLatitude acm lac)
     (.setLongitude acm loc)
     (.setCourse acm crs)
+    (vswap! ART conj "CVN-69")
     (if-let [h (fifos "NavOb" "label" "h1")]
       (let [hm (OMT/getOrAdd h)]
         (.setLatitude hm lac)
-        (.setLongitude hm loc)))
+        (.setLongitude hm loc)
+        (vswap! ART conj "h1")))
     (if-let [i (fifos "NavOb" "label" "i1")]
       (let [im (OMT/getOrAdd i)
              icr (+ crs 180)
              icr (if (> icr 360) (- icr 360) icr)] 
         (.setLatitude im lac)
         (.setLongitude im loc)
-        (.setCourse im icr))))))
+        (.setCourse im icr)
+        (vswap! ART conj "i1"))))))
 
 (defn select-race [hm inst]
   (let [mp (into {} hm)
@@ -164,7 +168,8 @@
       (.setLatitude nmo lat)
       (.setLongitude nmo lon)
       (.setCourse nmo crs)
-      (.setSpeed nmo (.getSpeed omo))))))
+      (.setSpeed nmo (.getSpeed omo))
+      (vswap! ONMAP conj nnm)))))
 
 (defn load-races []
   (let [txt (slurp RACES-URL)
@@ -323,6 +328,7 @@
   (doseq [no (OMT/getNavObInstances)]
   (let [nam (sv no "label")]
     (if (and (not= nam onb) 
+          (not (some #{nam} @ART))
           (not (some #{nam} @ONMAP)))
       (OMT/removeMapOb no false)))))
 
