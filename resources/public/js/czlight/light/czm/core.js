@@ -38,10 +38,10 @@ light.czm.core.move_control = (function light$czm$core$move_control(lat,lon,alt,
 var dest = Cesium.Cartesian3.fromDegrees(lon,lat,alt);
 return light.czm.core.VIEWER.camera.setView(({"destination": dest, "orientation": ({"heading": Cesium.Math.toRadians(hea), "pitch": Cesium.Math.toRadians(pit), "roll": Cesium.Math.toRadians(rol)})}));
 });
-light.czm.core.sample_height = (function light$czm$core$sample_height(p__869,alt){
-var vec__870 = p__869;
-var phi = cljs.core.nth.call(null,vec__870,(0),null);
-var lam = cljs.core.nth.call(null,vec__870,(1),null);
+light.czm.core.sample_height = (function light$czm$core$sample_height(p__15804,alt){
+var vec__15805 = p__15804;
+var phi = cljs.core.nth.call(null,vec__15805,(0),null);
+var lam = cljs.core.nth.call(null,vec__15805,(1),null);
 var pos = (new Cesium.Cartographic(lam,phi,alt));
 var sh = light.czm.core.VIEWER.scene.sampleHeight(pos);
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [phi,lam,(function (){var or__4047__auto__ = sh;
@@ -59,10 +59,10 @@ var head = light.czm.core.norm_crs.call(null,(crs + new cljs.core.Keyword(null,"
 if((alt > light.czm.core.MAX_UPGROUND)){
 return light.czm.core.fly_control.call(null,lat,lon,alt,head,pitch,roll,per);
 } else {
-var vec__873 = light.czm.core.sample_height.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [light.geo.calc.radians.call(null,lat),light.geo.calc.radians.call(null,lon)], null),light.czm.core.ALT);
-var _ = cljs.core.nth.call(null,vec__873,(0),null);
-var ___$1 = cljs.core.nth.call(null,vec__873,(1),null);
-var sh = cljs.core.nth.call(null,vec__873,(2),null);
+var vec__15808 = light.czm.core.sample_height.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [light.geo.calc.radians.call(null,lat),light.geo.calc.radians.call(null,lon)], null),light.czm.core.ALT);
+var _ = cljs.core.nth.call(null,vec__15808,(0),null);
+var ___$1 = cljs.core.nth.call(null,vec__15808,(1),null);
+var sh = cljs.core.nth.call(null,vec__15808,(2),null);
 if((sh > (-7777))){
 light.czm.core.ALT = ((sh + alt) | (0));
 } else {
@@ -81,8 +81,8 @@ return cljs.core.println.call(null,new cljs.core.PersistentVector(null, 2, 5, cl
 light.czm.core.hig_ray = (function light$czm$core$hig_ray(lat,lon,bea,dis,step,alt){
 var ray = light.geo.calc.ray.call(null,lat,lon,bea,dis,step);
 return cljs.core.map.call(null,((function (ray){
-return (function (p1__876_SHARP_){
-return light.czm.core.sample_height.call(null,p1__876_SHARP_,alt);
+return (function (p1__15811_SHARP_){
+return light.czm.core.sample_height.call(null,p1__15811_SHARP_,alt);
 });})(ray))
 ,ray);
 });
@@ -96,10 +96,10 @@ var h1 = cljs.core.nth.call(null,f,(2));
 var fr = cljs.core.first.call(null,r);
 var h2 = cljs.core.nth.call(null,fr,(2));
 if((h2 <= alt)){
-var G__877 = fr;
-var G__878 = cljs.core.rest.call(null,r);
-f = G__877;
-r = G__878;
+var G__15812 = fr;
+var G__15813 = cljs.core.rest.call(null,r);
+f = G__15812;
+r = G__15813;
 continue;
 } else {
 if((((h1 > (-7777))) && ((h1 <= alt)))){
@@ -120,33 +120,33 @@ break;
 }
 });
 light.czm.core.los_sector = (function light$czm$core$los_sector(center,sector,dist,alt,dist_step,bea_step){
-var vec__879 = center;
-var lat = cljs.core.nth.call(null,vec__879,(0),null);
-var lon = cljs.core.nth.call(null,vec__879,(1),null);
-var vec__882 = sector;
-var start = cljs.core.nth.call(null,vec__882,(0),null);
-var end = cljs.core.nth.call(null,vec__882,(1),null);
-var losec = (function (){var iter__4434__auto__ = ((function (vec__879,lat,lon,vec__882,start,end){
-return (function light$czm$core$los_sector_$_iter__885(s__886){
-return (new cljs.core.LazySeq(null,((function (vec__879,lat,lon,vec__882,start,end){
+var vec__15814 = center;
+var lat = cljs.core.nth.call(null,vec__15814,(0),null);
+var lon = cljs.core.nth.call(null,vec__15814,(1),null);
+var vec__15817 = sector;
+var start = cljs.core.nth.call(null,vec__15817,(0),null);
+var end = cljs.core.nth.call(null,vec__15817,(1),null);
+var losec = (function (){var iter__4434__auto__ = ((function (vec__15814,lat,lon,vec__15817,start,end){
+return (function light$czm$core$los_sector_$_iter__15820(s__15821){
+return (new cljs.core.LazySeq(null,((function (vec__15814,lat,lon,vec__15817,start,end){
 return (function (){
-var s__886__$1 = s__886;
+var s__15821__$1 = s__15821;
 while(true){
-var temp__5735__auto__ = cljs.core.seq.call(null,s__886__$1);
+var temp__5735__auto__ = cljs.core.seq.call(null,s__15821__$1);
 if(temp__5735__auto__){
-var s__886__$2 = temp__5735__auto__;
-if(cljs.core.chunked_seq_QMARK_.call(null,s__886__$2)){
-var c__4432__auto__ = cljs.core.chunk_first.call(null,s__886__$2);
+var s__15821__$2 = temp__5735__auto__;
+if(cljs.core.chunked_seq_QMARK_.call(null,s__15821__$2)){
+var c__4432__auto__ = cljs.core.chunk_first.call(null,s__15821__$2);
 var size__4433__auto__ = cljs.core.count.call(null,c__4432__auto__);
-var b__888 = cljs.core.chunk_buffer.call(null,size__4433__auto__);
-if((function (){var i__887 = (0);
+var b__15823 = cljs.core.chunk_buffer.call(null,size__4433__auto__);
+if((function (){var i__15822 = (0);
 while(true){
-if((i__887 < size__4433__auto__)){
-var bea = cljs.core._nth.call(null,c__4432__auto__,i__887);
-cljs.core.chunk_append.call(null,b__888,light.czm.core.los_end.call(null,lat,lon,bea,dist,dist_step,alt));
+if((i__15822 < size__4433__auto__)){
+var bea = cljs.core._nth.call(null,c__4432__auto__,i__15822);
+cljs.core.chunk_append.call(null,b__15823,light.czm.core.los_end.call(null,lat,lon,bea,dist,dist_step,alt));
 
-var G__889 = (i__887 + (1));
-i__887 = G__889;
+var G__15824 = (i__15822 + (1));
+i__15822 = G__15824;
 continue;
 } else {
 return true;
@@ -154,28 +154,31 @@ return true;
 break;
 }
 })()){
-return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__888),light$czm$core$los_sector_$_iter__885.call(null,cljs.core.chunk_rest.call(null,s__886__$2)));
+return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__15823),light$czm$core$los_sector_$_iter__15820.call(null,cljs.core.chunk_rest.call(null,s__15821__$2)));
 } else {
-return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__888),null);
+return cljs.core.chunk_cons.call(null,cljs.core.chunk.call(null,b__15823),null);
 }
 } else {
-var bea = cljs.core.first.call(null,s__886__$2);
-return cljs.core.cons.call(null,light.czm.core.los_end.call(null,lat,lon,bea,dist,dist_step,alt),light$czm$core$los_sector_$_iter__885.call(null,cljs.core.rest.call(null,s__886__$2)));
+var bea = cljs.core.first.call(null,s__15821__$2);
+return cljs.core.cons.call(null,light.czm.core.los_end.call(null,lat,lon,bea,dist,dist_step,alt),light$czm$core$los_sector_$_iter__15820.call(null,cljs.core.rest.call(null,s__15821__$2)));
 }
 } else {
 return null;
 }
 break;
 }
-});})(vec__879,lat,lon,vec__882,start,end))
+});})(vec__15814,lat,lon,vec__15817,start,end))
 ,null,null));
-});})(vec__879,lat,lon,vec__882,start,end))
+});})(vec__15814,lat,lon,vec__15817,start,end))
 ;
 return iter__4434__auto__.call(null,cljs.core.range.call(null,start,end,bea_step));
 })();
 return cljs.core.cons.call(null,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [light.geo.calc.radians.call(null,lat),light.geo.calc.radians.call(null,lon),alt], null),losec);
 });
-light.czm.core.zoom = (function light$czm$core$zoom(z){
+light.czm.core.get_zoom = (function light$czm$core$get_zoom(){
+return light.czm.core.ZOOM;
+});
+light.czm.core.set_zoom = (function light$czm$core$set_zoom(z){
 if((z < light.czm.core.ZOOM)){
 light.czm.core.VIEWER.camera.zoomOut((light.czm.core.ZOOM - z));
 } else {

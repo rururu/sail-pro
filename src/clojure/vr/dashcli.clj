@@ -6,7 +6,8 @@
   [wiki.gis :as wig]
   [light.cesium.core :as cz]
   [clojure.java.shell :as shell]
-  [clojure.java.io :as io])
+  [clojure.java.io :as io]
+  [ru.rules :as rr])
 (:import
   ru.igis.omtab.OMT
   ru.igis.omtab.MapOb
@@ -175,8 +176,10 @@
   (let [txt (slurp RACES-URL)
       mp (json/parse-string txt)
       rcs (map #(get % "id") (mp "races"))
-      vrd (first (cls-instances "VRDashboardControl"))]
- (ssvs vrd "races" rcs)))
+      vrd (first (cls-instances "VRDashboardControl"))
+      sel (DisplayUtilities/pickSymbol nil "Select race" "" rcs)]
+  (ssvs vrd "races" rcs)
+  (ssv vrd "selected-race" sel)))
 
 (defn show-controls []
   (.show *prj* (first (cls-instances "VRDashboardControl"))))
@@ -348,11 +351,29 @@
  (println (future (.exec proc cmd)))
  (println ",,")))
 
-(defn ask-boat-name []
+(defn ask-race-and-boat-name []
   (let [cti (first (cls-instances "VRDashboardControl"))
       nmi (first (cls-instances "NMEAData"))
-      obj (sv nmi "object")]
-  (when-let [ans (DisplayUtilities/editString nil "Input your boat name" (sv cti "onboard") nil)]
-    (ssv cti "onboard" ans)
-    (ssv obj "label" ans))))
+      obj (sv nmi "object")
+      rce (sv cti "selected-race")]
+  (if (not (rr/confirm (str "Old race " rce " and boat \"" (sv obj "label") "\"?")))
+    (let [ans (DisplayUtilities/editString nil "Input your boat name" (sv obj "label") nil)]
+      (if-let [ins (fifos "NavOb" "label" ans)]
+        (do (ssv cti "onboard" ans)
+          (ssv nmi "object" ins))
+        (if (rr/confirm (str "Create boat \"" ans "\"?"))
+          (let [crd (DisplayUtilities/editString nil "Input boat coordinates" "60 0 30 0" nil)
+                 [lad lam lod lom] (.split crd " ")
+                 lat (str lad " " lam)
+                 lon (str lod " " lom)
+                 rus (fifos "NavOb" "label" "russor")
+                 ins (.shallowCopy rus *kb* nil)]
+             (println :NEW-BOAT ans lat lon)
+             (ssv ins "label" ans)
+             (ssv ins "latitude" lat)
+             (ssv ins "longitude" lon)
+             (ssv cti "onboard" ans)
+             (ssv nmi "object" ins))))
+      (if (rr/confirm "Select new race?")
+        (load-races))))))
 

@@ -1,4 +1,4 @@
-; Tue Oct 18 23:24:55 MSK 2022
+; Wed Jan 04 09:10:07 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -100,6 +100,14 @@
 	(single-slot butt-modify-inss
 		(type STRING)
 ;+		(value "Modify Instance/ru.rules/modify-inst")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CesiumView
+	(is-a CeziumEngine+Ontology)
+	(role concrete)
+	(single-slot status
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 

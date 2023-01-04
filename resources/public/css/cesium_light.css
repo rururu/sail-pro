@@ -182,12 +182,12 @@
 #pitch-fld {
   position:fixed;
   bottom:110px;
-  left:504px;
+  left:304px;
   padding:5px;
   z-index:100;
   color:yellow
 }
-#viewF {
+#view {
   position:fixed;
   bottom:90px;
   left:22px;
@@ -195,40 +195,33 @@
   z-index:100;
   color:yellow
 }
-#viewF-sld {
+#view-sld {
   position:fixed;
   bottom:90px;
   left:100px;
   padding:5px;
   z-index:100;
 }
-#viewF-fld {
+#view-fld {
   position:fixed;
   bottom:90px;
-  left:504px;
+  left:304px;
   padding:5px;
   z-index:100;
   color:yellow
 }
-#viewB {
+#viewM-btn {
   position:fixed;
   bottom:70px;
-  left:22px;
+  left:150px;
   padding:5px;
   z-index:100;
   color:yellow
 }
-#viewB-sld {
+#viewP-btn {
   position:fixed;
   bottom:70px;
-  left:100px;
-  padding:5px;
-  z-index:100;
-}
-#viewB-fld {
-  position:fixed;
-  bottom:70px;
-  left:504px;
+  left:210px;
   padding:5px;
   z-index:100;
   color:yellow
@@ -245,61 +238,34 @@
 #binocular {
   position: absolute;
   bottom: 12%;
-  right:21%;
-  z-index:100;
-  color:yellow
-}
-#zoostep {
-  position: absolute;
-  bottom: 10%;
-  right:29%;
-  z-index:100;
-  color:yellow
-}
-#zoom {
-  position: absolute;
-  bottom: 10%;
   right:18%;
   z-index:100;
   color:yellow
 }
-#zoostepmin {
+#zoom-sld {
   position: absolute;
-  bottom: 7%;
-  right:35%;
+  bottom: 10%;
+  right:16%;
   z-index:100;
   color:yellow
 }
-#zoom-step {
+#zoom-val {
   position: absolute;
-  bottom: 7%;
-  right:27%;
-  z-index:100;
-}
-#zoostepmax {
-  position: absolute;
-  bottom: 7%;
-  right:25%;
+  bottom: 10%;
+  right:13%;
   z-index:100;
   color:yellow
 }
-#zoom-amount {
+#zoomM {
   position: absolute;
   bottom: 7%;
-  right:12%;
-  z-index:100;
-}
-#zoostepval {
-  position: absolute;
-  bottom: 5%;
-  right:29%;
+  right:20%;
   z-index:100;
   color:yellow
 }
-#zooval {
+#zoomP {
   position: absolute;
-  bottom: 5%;
+  bottom: 7%;
   right:18%;
   z-index:100;
-  color:yellow
 }

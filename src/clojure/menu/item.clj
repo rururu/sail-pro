@@ -12,13 +12,13 @@
       (println (str " 1." i " " (sv (first pins) "title") " = " (ClojureTab/loadProgram (first pins)) ))
       (recur (inc i) (rest pins)) ) )
   (println "  Annotated instance of WorkingPrograms not found!"))
-(println "2. Start Expert System.")
+(println "2. Define Race and Boat.")
+(ClojureTab/invoke "vr.dashcli" "ask-race-and-boat-name")
+(println "3. Start Expert System.")
 (if-let [run (ClojureTab/findAnnotated (cls-instances "Run") nil)]
   (ClojureTab/invoke "ru.rules" "run-engine" run)
   (println "  Annotated instance of Run not found!"))
-(println "3. Start Time.")
+(println "4. Start Time.")
 (OMT/setTimerRunning true)
-(println "EXPERT SYSTEM INITIALIZED")
-(ClojureTab/invoke "vr.dashcli" "ask-boat-name")
-(ClojureTab/invoke "vr.dashcli" "show-controls"))
+(println "EXPERT SYSTEM INITIALIZED AND STARTED"))
 

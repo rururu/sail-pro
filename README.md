@@ -35,10 +35,6 @@ $ cd sail-pro
 
 1. Open "Virual Regatta" page in a browser.
 2. Activate "VR Dashboard" plugin. 
-```diff
-- If you encounter problems starting this plugin go first to VR Club House page (https://forum.virtualregatta.com/), 
-- activate the plugin and then enter the game address (Ex. https://www.virtualregatta.com/en/offshore-game/) into addess string of the browser.
-```
 3. Select an active race. Check the race identificator on "Z VR Dashboard" tab and click a checkbox NMEA.
 4. Start "sail-pro":
 
@@ -49,20 +45,15 @@ $ .\run_VR.bat 	    	# Windows
 ```
 
 5. Wait while programs will be loaded and expert system initialized (see a message in the terminal).
-
-![screenshot](2.png)
-
-6. Enter your boat name.
-7. Wait while a panel popup 
-8. Select a race on the popup panel, if needed (race number is on "Z VR Dashboard" tab).
-9. Click "Start" on popup and wait while the boat jumps into current position.
-10. Start a "Cesium server" on the popup panel.
-11. Start a "Cesium client" on the popup panel.
-12. Go on board of the boat.
+6. Answer the question "Old race nnn.n and boat *****?". If "Yes", then wait until you see a view from 
+   a cocpit of the boat.
+7. If "No" input a new or existing boat name and select a race on the popup panel
+   (race number is on "Z VR Dashboard" tab).
+8. Wait until you see a view from  a cocpit of the boat.
 
 See details in screencasts. Some details can be differen of earlier - these are deprecated!
 
-[Normal start](https://youtu.be/Gg3DsVKulhY)
+[Normal start](https://youtu.be/_wcmearyUjI)
 
 [Using binocular](https://www.youtube.com/watch?v=R0lmg-AfYIs)
 

@@ -24,7 +24,7 @@
    :value nil}))
 (def RESPONSE (volatile! {}))
 (def PORT 8448)
-(def ZOOM-STEP 200)
+(def ZOOM-STEP 100)
 (defn format [fmt & args]
   (apply gstring/format fmt args))
 
@@ -54,38 +54,34 @@
 (defn by-id [id]
   (.getElementById js/document id))
 
+(defn get-html! [id]
+  (.-innerHTML (.getElementById js/document id)))
+
 (defn set-html! [id msg]
   (set! (.-innerHTML (.getElementById js/document id)) msg))
 
 (defn num-val [x]
   (if (number? x) x (rdr/read-string x)))
 
+(defn viewM []
+  (let [deg (num-val (get-html! "view-fld"))
+      deg (if (= deg -180) 180 (dec deg))]
+    (vswap! czm/CAMERA assoc :view deg)
+    (set-html! "view-fld" deg)
+    (set! (. (by-id "view-vals") -value) deg)))
+
 (defn view [deg]
   (let [deg (num-val deg)]
   (when (<= -180 deg 180)
     (vswap! czm/CAMERA assoc :view deg)
-    (if (or (< deg -90) (> deg 90))
-      (do (set-html! "viewF-fld" "")
-        (set-html! "viewB-fld" val))
-      (do(set-html! "viewF-fld" deg)
-        (set-html! "view-fld" ""))))))
+    (set-html! "view-fld" deg))))
 
-(defn viewF [deg]
-  (let [deg (num-val deg)]
-  (when (<= -90 deg 90)
+(defn viewP []
+  (let [deg (num-val (get-html! "view-fld"))
+      deg (if (= deg 180) -180 (inc deg))]
     (vswap! czm/CAMERA assoc :view deg)
-    (set-html! "viewF-fld" deg)
-    (set-html! "viewB-fld" ""))))
-
-(defn viewB [deg]
-  (let [deg (num-val deg)]
-  (if (<= -90 deg 90)
-    (let [val (if (< deg 0)
-                 (+ deg 180)
-                 (- deg 180))]
-      (vswap! czm/CAMERA assoc :view val)
-      (set-html! "viewF-fld" "")
-      (set-html! "viewB-fld" val)))))
+    (set-html! "view-fld" deg)
+    (set! (. (by-id "view-vals") -value) deg)))
 
 (defn pitch [deg]
   (let [deg (num-val deg)]
@@ -100,18 +96,27 @@
     (set-html! "roll-fld" deg))))
 
 (defn zoom-format [m]
-  (if (>= m 1000) 
-  (format "%.0f km" (/ m 1000.0)) 
-  (format "%.0f м" (/ m 1.0))))
+  (format "%.1f km" (/ m 1000)))
 
-(defn zoom_step [s]
-  (def ZOOM-STEP (num-val s))
-(set-html! "zoostepval" (zoom-format ZOOM-STEP)))
+(defn zoomP []
+  (let [v (num-val (czm/get-zoom))
+      v (+ v ZOOM-STEP)]
+  (czm/set-zoom v)
+  (set-html! "zoom-val" (zoom-format v))
+  (set! (. (by-id "zoom-slv") -value) v)))
+
+(defn zoomM []
+  (let [v (num-val (czm/get-zoom))
+      v (- v ZOOM-STEP)
+      v (if (< v 0) 0 v)]
+    (czm/set-zoom v)
+    (set-html! "zoom-val" (zoom-format v))
+    (set! (. (by-id "zoom-slv") -value) v)))
 
 (defn zoom_amount [amount]
-  (let [v (* (num-val amount) ZOOM-STEP)]
-  (czm/zoom v)
-  (set-html! "zooval" (zoom-format v))))
+  (let [v (num-val amount)]
+  (czm/set-zoom v)
+  (set-html! "zoom-val" (zoom-format v))))
 
 (defn response-request []
   (let [resp @RESPONSE]
@@ -188,21 +193,19 @@
 (set-html! "pitch" "Pitch:")
 (set-html! "pitch-fld" 0)
 (set-html! "pitch-sld" 
-  "<input type='range' style='width:400px' id='pitch-vals'
+  "<input type='range' style='width:200px' id='pitch-vals'
                min='-90' value='0' max='90'
                oninput='javascript:light.view3d.client.pitch(this.value)'>")
-(set-html! "viewF" "View Fwd:")
-(set-html! "viewF-fld" 0)
-(set-html! "viewF-sld" 
-  "<input type='range' style='width:400px' id='roll-vals'
-               min='-90' value='0' max='90'
-               oninput='javascript:light.view3d.client.viewF(this.value)'>")
-(set-html! "viewB" "View Bwd:")
-(set-html! "viewB-fld" 0)
-(set-html! "viewB-sld" 
-  "<input type='range' style='width:400px' id='roll-vals'
-               min='-90' value='0' max='90'
-               oninput='javascript:light.view3d.client.viewB(this.value)'>"))
+(set-html! "view" "View:")
+(set-html! "view-fld" 0)
+(set-html! "view-sld" 
+  "<input type='range' style='width:200px' id='view-vals'
+               min='-180' value='0' max='180'
+               oninput='javascript:light.view3d.client.view(this.value)'>")
+(set-html! "viewM-btn" 
+  "<button onclick='javascript:light.view3d.client.viewM()'>view-</button>")
+(set-html! "viewP-btn" 
+  "<button onclick='javascript:light.view3d.client.viewP()'>view+</button>"))
 
 (defn right-controls []
   (set-html! "vehicle" "<h4>Vehicle</h4>")
@@ -221,20 +224,15 @@
 
 (defn middle-controls []
   (set-html! "binocular" "<h4>Binocular</h4>")
-(set-html! "zoostep" "zoom step")
-(set-html! "zoom" "zoom")
-(set-html! "zoostepmin" "1 m")
-(set-html! "zoom-step" 
-  "<input type='range' style='width:150px' id='zst'
-               min='1' value='100' max='10000'
-               oninput='javascript:light.view3d.client.zoom_step(this.value)'>")
-(set-html! "zoostepmax" "10 km")
-(set-html! "zoom-amount" 
-  "<input type='range' style='width:220px' id='zam'
-               min='0' value='0' max='100'
+(set-html! "zoom-sld" 
+  "<input type='range' style='width:200px' id='zoom-slv'
+               min='0' value='0' max='40000'
                oninput='javascript:light.view3d.client.zoom_amount(this.value)'>")
-(set-html! "zoostepval" "100 m")
-(set-html! "zooval" "0 m"))
+(set-html! "zoom-val" "0 m")
+(set-html! "zoomM" 
+  "<button onclick='javascript:light.view3d.client.zoomM()'>-</button>")
+(set-html! "zoomP" 
+  "<button onclick='javascript:light.view3d.client.zoomP()'>+</button>"))
 
 (defn show-controls []
   (right-controls)

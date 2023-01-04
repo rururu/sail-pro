@@ -90,7 +90,10 @@
                   (los-end lat lon bea dist dist-step alt))]
   (cons [(geo/radians lat) (geo/radians lon) alt] losec)))
 
-(defn zoom [z]
+(defn get-zoom []
+  ZOOM)
+
+(defn set-zoom [z]
   (cond
   (< z ZOOM)
   (.zoomOut (.-camera VIEWER) (- ZOOM z))
