@@ -49,4 +49,5 @@
 4. [Rounding the Cape Horn](https://youtu.be/eRwe14Fn5Ac)
 5. [Finish in San Francisco](https://www.youtube.com/watch?v=wzTJfI7dEAU)
 6. [Falkland Islands](https://youtu.be/ORM2IVUksrQ)
+7. [Falkland Islands 2023](https://youtu.be/tEdWtbOl-SQ)
 

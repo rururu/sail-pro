@@ -1,4 +1,4 @@
-; Wed Jan 04 09:10:07 MSK 2023
+; Tue Jan 10 10:40:03 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -342,8 +342,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 32.74252)
-	(lng -17.334467)
+	(lat -51.76243)
+	(lng -57.578995)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -357,17 +357,6 @@
 	(rhs "(vr.dashcli/set-wiki-coords ?lab)")
 	(salience 1)
 	(title "vr:Set Wikipedia Coordinates"))
-
-([VRDashboardClient_Class240000] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "M'EN FISH")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class240001] of  CloFunction
 
@@ -392,17 +381,6 @@
 ([VRDashboardClient_Class250000] of  CloFuncall
 
 	(source "(OMT/getMapOb \"Bylina\")"))
-
-([VRDashboardClient_Class250001] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 2\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/frigate/scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "FRIGATE")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/tanker.gif")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class250002] of  CloFuncall
 
@@ -478,28 +456,6 @@
 	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/model-leg \n	nmo\n	(+ ?del 2)\n	(read-string (.getDescription nmo))))\n      (modify ?cs time (+ ?t ?del)))))")
 	(salience 1)
 	(title "czm0:CZML Navob Leg Generation2"))
-
-([VRDashboardClient_Class300000] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "ABEILLE51")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class300001] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "CAPTAINSMARTY")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class300002] of  CloFuncall
 
@@ -660,17 +616,6 @@
 	(salience 0)
 	(title "vr:NMEA Run"))
 
-([VRDashboardClient_Class310000] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "TYZEFDEBRESTMEME")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
 ([VRDashboardClient_Class310001] of  CloFuncall
 
 	(source "(seq @AIDVM)"))
@@ -682,17 +627,6 @@
 ([VRDashboardClient_Class320000] of  CloFuncall
 
 	(source "(rr/pp :all)"))
-
-([VRDashboardClient_Class320001] of  VRFleet
-
-	(altitude 0)
-	(course 0)
-	(description "{:draft 6\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "TRINITY44")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class350003] of  CloFuncall
 
@@ -736,11 +670,13 @@
 	(races
 		"567.1"
 		"571.1"
-		"572.1"
+		"573.1"
+		"574.1"
+		"575.1"
 		"570.1"
 		"569.1"
-		"512.5")
-	(selected-race "567.1")
+		"512.6")
+	(selected-race "512.6")
 	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
