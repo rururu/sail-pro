@@ -50,4 +50,5 @@
 5. [Finish in San Francisco](https://www.youtube.com/watch?v=wzTJfI7dEAU)
 6. [Falkland Islands](https://youtu.be/ORM2IVUksrQ)
 7. [Falkland Islands 2023](https://youtu.be/tEdWtbOl-SQ)
+8. [GLOBE-40 (2023) finish in Recife, Brasil ](https://youtu.be/E8E56Y7rHBs)
 
