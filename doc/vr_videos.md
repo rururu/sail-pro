@@ -54,5 +54,5 @@
 
 1. [Falkland Islands 2023](https://youtu.be/tEdWtbOl-SQ)
 2. [GLOBE-40 (2023) Leg 6 finish in Recife, Brasil ](https://youtu.be/E8E56Y7rHBs)
-3. [GLOBE-40 (2023) Leg 7 finish in Granada](https://youtu.be/1KRJvx_9rpw)
+3. [GLOBE-40 (2023) Leg 7 finish on Granada](https://youtu.be/1KRJvx_9rpw)
 
