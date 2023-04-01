@@ -1,4 +1,4 @@
-; Sat Apr 01 20:32:04 MSK 2023
+; Sat Apr 01 21:55:24 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -124,7 +124,7 @@
 
 ([VRDashboardClient_Class100098] of  CloFunction
 
-	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (not (empty? @FLEET))\n    (let [nbs (map #(neighbor % obm vis) (vals @FLEET))\n           nbs (filter some? nbs)]\n      (def ONMAP (volatile! []))\n      (doseq [[lab lat lon sog cog dis] nbs]\n        ;;(println :NEIGHBOR lab (= lab \"FRIGATE\"))\n        (let [nbi (or (fifos \"NavOb\" \"label\" lab)\n                       (fifos \"VRFleet\" \"label\" lab)\n                       (let [nnbi (foc \"VRFleet\" \"label\" lab)\n                              mod (get-model3d bsk)]\n	      (ssv nnbi \"altitude\" (int 2))\n                            (ssv nnbi \"url\" \"file:resources/public/img/yachtg.png\")\n                            (ssv nnbi \"description\" (sv mod \"description\"))\n                            nnbi))]\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (if (and sog (number? sog))\n              (.setSpeed nbm (double sog))))\n          (vswap! ONMAP conj lab))))))")
+	(source "(if-let [obm (OMT/getMapOb onb)]\n  (if (not (empty? @FLEET))\n    (let [nbs (map #(neighbor % obm vis) (vals @FLEET))\n           nbs (filter some? nbs)]\n      (def ONMAP (volatile! []))\n      (doseq [[lab lat lon sog cog dis] nbs]\n        ;;(println :NEIGHBOR lab (= lab \"FRIGATE\"))\n        (let [nbi (or (fifos \"NavOb\" \"label\" lab)\n                       (fifos \"VRFleet\" \"label\" lab)\n                       (let [nnbi (foc \"VRFleet\" \"label\" lab)\n                              mod (get-model3d bsk)]\n	      (ssv nnbi \"altitude\" (int 2))\n                            (ssv nnbi \"url\"(sv mod \"url\"))\n                            (ssv nnbi \"description\" (sv mod \"description\"))\n                            nnbi))]\n          (let [nbm (OMT/getOrAdd nbi)]\n            (.setLatitude nbm lat)\n            (.setLongitude nbm lon)\n            (.setCourse nbm (int cog))\n            (if (and sog (number? sog))\n              (.setSpeed nbm (double sog))))\n          (vswap! ONMAP conj lab))))))")
 	(title "show-neighbors [onb vis bsk]"))
 
 ([VRDashboardClient_Class110000] of  NavOb
@@ -144,13 +144,13 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 3\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
 	(playground-index 0)
 	(speed 0.0)
-	(url "file:resources/public/img/yachtp.png")
+	(url "file:resources/public/img/tallp.png")
 	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class120000] of  CloFunction
@@ -231,7 +231,7 @@
 
 ([VRDashboardClient_Class170000] of  CloFunction
 
-	(source "(let [cti (first (cls-instances \"VRDashboardControl\"))\n      nmi (first (cls-instances \"NMEAData\"))\n      obj (sv nmi \"object\")\n      rce (sv cti \"selected-race\")]\n  (if (not (rr/confirm (str \"Old race \" rce \" and boat \\\"\" (sv obj \"label\") \"\\\"?\")))\n    (let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv obj \"label\") nil)]\n      (if-let [ins (fifos \"NavOb\" \"label\" ans)]\n        (do (ssv cti \"onboard\" ans)\n          (ssv nmi \"object\" ins))\n        (if (rr/confirm (str \"Create boat \\\"\" ans \"\\\"?\"))\n          (let [crd (DisplayUtilities/editString nil \"Input boat coordinates\" \"60 0 30 0\" nil)\n                 [lad lam lod lom] (.split crd \" \")\n                 lat (str lad \" \" lam)\n                 lon (str lod \" \" lom)\n                 rus (fifos \"NavOb\" \"label\" \"russor\")\n                 ins (.shallowCopy rus *kb* nil)]\n             (println :NEW-BOAT ans lat lon)\n             (ssv ins \"label\" ans)\n             (ssv ins \"latitude\" lat)\n             (ssv ins \"longitude\" lon)\n             (ssv cti \"onboard\" ans)\n             (ssv nmi \"object\" ins))))\n      (if (rr/confirm \"Select new race?\")\n        (load-races))\n      (let [bsk (DisplayUtilities/pickInstance nil [(cls \"Model3D\")] \"Select Skin Model3D\")\n            mod (get-model3d bsk)\n            obj (sv nmi \"object\")]\n        (map delin (cls-instances \"VRFleet\"))\n        (ssv cti \"boat_skin\" bsk)\n        (ssv obj \"description\" (sv mod \"description\"))\n        (set-my-boat-icon obj)))))")
+	(source "(let [cti (first (cls-instances \"VRDashboardControl\"))\n      nmi (first (cls-instances \"NMEAData\"))\n      obj (sv nmi \"object\")\n      rce (sv cti \"selected-race\")]\n  (if (not (rr/confirm (str \"Old race \" rce \" and boat \\\"\" (sv obj \"label\") \"\\\"?\")))\n    (let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv obj \"label\") nil)]\n      (if-let [ins (fifos \"NavOb\" \"label\" ans)]\n        (do (ssv cti \"onboard\" ans)\n          (ssv nmi \"object\" ins))\n        (if (rr/confirm (str \"Create boat \\\"\" ans \"\\\"?\"))\n          (let [crd (DisplayUtilities/editString nil \"Input boat coordinates\" \"60 0 30 0\" nil)\n                 [lad lam lod lom] (.split crd \" \")\n                 lat (str lad \" \" lam)\n                 lon (str lod \" \" lom)\n                 rus (fifos \"NavOb\" \"label\" \"russor\")\n                 ins (.shallowCopy rus *kb* nil)]\n             (println :NEW-BOAT ans lat lon)\n             (ssv ins \"label\" ans)\n             (ssv ins \"latitude\" lat)\n             (ssv ins \"longitude\" lon)\n             (ssv cti \"onboard\" ans)\n             (ssv nmi \"object\" ins))))\n      (if (rr/confirm \"Select new race?\")\n        (load-races))\n      (let [bsk (DisplayUtilities/pickInstance nil [(cls \"Model3D\")] \"Select Skin Model3D\")\n            mod (get-model3d bsk)\n            obj (sv nmi \"object\")]\n        (map delin (cls-instances \"VRFleet\"))\n        (ssv cti \"boat_skin\" bsk)\n        (ssv obj \"description\" (sv mod \"description\"))\n        (ssv obj \"url\" (my-boat-icon (sv mod \"url\")))))))")
 	(title "ask-race-parameters []"))
 
 ([VRDashboardClient_Class170001] of  BBX
@@ -246,8 +246,8 @@
 
 ([VRDashboardClient_Class180000] of  CloFunction
 
-	(source "(condp = (sv b \"url\")\n  \"file:resources/public/img/yachtg.png\" \"file:resources/public/img/yachtr.png\"\n  \"file:resources/public/img/tallp.png\" \"file:resources/public/img/tallr.png\"\n  \"file:resources/public/img/trir.png\")")
-	(title "set-my-boat-icon [b]"))
+	(source "(condp = url\n  \"file:resources/public/img/yachtg.png\" \"file:resources/public/img/yachtr.png\"\n  \"file:resources/public/img/tallp.png\" \"file:resources/public/img/tallr.png\"\n  \"file:resources/public/img/trir.png\")")
+	(title "my-boat-icon [url]"))
 
 ([VRDashboardClient_Class190000] of  CloFuncall
 
@@ -320,8 +320,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 59.998943)
-	(lng 29.656454)
+	(lat 38.22265)
+	(lng 25.518509)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -403,6 +403,17 @@
 ([VRDashboardClient_Class260003] of  CesiumView
 
 	(status "START"))
+
+([VRDashboardClient_Class270000] of  VRFleet
+
+	(altitude 2)
+	(course 0)
+	(description "{:draft 3\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "RICHOU-44")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/tallp.png")
+	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class280000] of  CloFunction
 
@@ -786,8 +797,9 @@
 		"579.1"
 		"599.1"
 		"602.1"
+		"580.1"
 		"598.1")
-	(selected-race "602.1")
+	(selected-race "598.1")
 	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))

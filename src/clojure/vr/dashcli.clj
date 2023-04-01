@@ -322,7 +322,7 @@
                        (let [nnbi (foc "VRFleet" "label" lab)
                               mod (get-model3d bsk)]
 	      (ssv nnbi "altitude" (int 2))
-                            (ssv nnbi "url" "file:resources/public/img/yachtg.png")
+                            (ssv nnbi "url"(sv mod "url"))
                             (ssv nnbi "description" (sv mod "description"))
                             nnbi))]
           (let [nbm (OMT/getOrAdd nbi)]
@@ -357,8 +357,8 @@
  (println (future (.exec proc cmd)))
  (println ",,")))
 
-(defn set-my-boat-icon [b]
-  (condp = (sv b "url")
+(defn my-boat-icon [url]
+  (condp = url
   "file:resources/public/img/yachtg.png" "file:resources/public/img/yachtr.png"
   "file:resources/public/img/tallp.png" "file:resources/public/img/tallr.png"
   "file:resources/public/img/trir.png"))
@@ -394,5 +394,5 @@
         (map delin (cls-instances "VRFleet"))
         (ssv cti "boat_skin" bsk)
         (ssv obj "description" (sv mod "description"))
-        (set-my-boat-icon obj))))))
+        (ssv obj "url" (my-boat-icon (sv mod "url"))))))))
 
