@@ -303,7 +303,13 @@
   (if (< dis vis)
     [lab lat lon sog cog dis])))
 
-(defn show-neighbors [onb vis]
+(defn get-model3d [boat-skin]
+  (condp = (sv boat-skin "label")
+  "RANDOM_TRIMARAN" (rand-nth (vec (cls-instances "RandomTrimaran")))
+  "MEDIEVAL_MIX" (rand-nth (vec (cls-instances "MedievalMix")))
+  boat-skin))
+
+(defn show-neighbors [onb vis bsk]
   (if-let [obm (OMT/getMapOb onb)]
   (if (not (empty? @FLEET))
     (let [nbs (map #(neighbor % obm vis) (vals @FLEET))
@@ -311,19 +317,19 @@
       (def ONMAP (volatile! []))
       (doseq [[lab lat lon sog cog dis] nbs]
         ;;(println :NEIGHBOR lab (= lab "FRIGATE"))
-        (let [nbi (foc "VRFleet" "label" lab)
-               pat (fifos "NavOb" "label" "neighbor")
-               frg (fifos "NavOb" "label" "frigate0")]
-           (if (= lab "FRIGATE")
-             (do (ssv nbi "url" (sv frg "url"))
-               (ssv nbi "description" (sv frg "description")))
-             (do (ssv nbi "url" (sv pat "url"))
-               (ssv nbi "description" (sv pat "description"))))
+        (let [nbi (or (fifos "NavOb" "label" lab)
+                       (fifos "VRFleet" "label" lab)
+                       (let [nnbi (foc "VRFleet" "label" lab)
+                              mod (get-model3d bsk)]
+	      (ssv nnbi "altitude" (int 2))
+                            (ssv nnbi "url" "file:resources/public/img/yachtg.png")
+                            (ssv nnbi "description" (sv mod "description"))
+                            nnbi))]
           (let [nbm (OMT/getOrAdd nbi)]
             (.setLatitude nbm lat)
             (.setLongitude nbm lon)
             (.setCourse nbm (int cog))
-            (if (number? sog)
+            (if (and sog (number? sog))
               (.setSpeed nbm (double sog))))
           (vswap! ONMAP conj lab)))))))
 
@@ -351,7 +357,13 @@
  (println (future (.exec proc cmd)))
  (println ",,")))
 
-(defn ask-race-and-boat-name []
+(defn set-my-boat-icon [b]
+  (condp = (sv b "url")
+  "file:resources/public/img/yachtg.png" "file:resources/public/img/yachtr.png"
+  "file:resources/public/img/tallp.png" "file:resources/public/img/tallr.png"
+  "file:resources/public/img/trir.png"))
+
+(defn ask-race-parameters []
   (let [cti (first (cls-instances "VRDashboardControl"))
       nmi (first (cls-instances "NMEAData"))
       obj (sv nmi "object")
@@ -375,5 +387,12 @@
              (ssv cti "onboard" ans)
              (ssv nmi "object" ins))))
       (if (rr/confirm "Select new race?")
-        (load-races))))))
+        (load-races))
+      (let [bsk (DisplayUtilities/pickInstance nil [(cls "Model3D")] "Select Skin Model3D")
+            mod (get-model3d bsk)
+            obj (sv nmi "object")]
+        (map delin (cls-instances "VRFleet"))
+        (ssv cti "boat_skin" bsk)
+        (ssv obj "description" (sv mod "description"))
+        (set-my-boat-icon obj))))))
 

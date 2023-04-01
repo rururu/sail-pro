@@ -13,7 +13,7 @@
       (recur (inc i) (rest pins)) ) )
   (println "  Annotated instance of WorkingPrograms not found!"))
 (println "2. Define Race and Boat.")
-(ClojureTab/invoke "vr.dashcli" "ask-race-and-boat-name")
+(ClojureTab/invoke "vr.dashcli" "ask-race-parameters")
 (println "3. Start Expert System.")
 (if-let [run (ClojureTab/findAnnotated (cls-instances "Run") nil)]
   (ClojureTab/invoke "ru.rules" "run-engine" run)

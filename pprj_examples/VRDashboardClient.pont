@@ -1,4 +1,4 @@
-; Fri Feb 17 11:27:14 EET 2023
+; Sat Apr 01 20:32:04 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -7,6 +7,11 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
+	(single-slot boat_skin
+		(type INSTANCE)
+;+		(allowed-classes Model3D)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot telnet-port
 		(type STRING)
 ;+		(cardinality 0 1)
@@ -63,6 +68,11 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot boat_skin
+		(type INSTANCE)
+;+		(allowed-classes Model3D)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot but-start
 		(type STRING)
 ;+		(value "Start/vr.dashcli/start")
@@ -113,6 +123,18 @@
 
 (defclass VRFleet
 	(is-a NavOb)
+	(role concrete))
+
+(defclass Model3D
+	(is-a NavOb)
+	(role concrete))
+
+(defclass MedievalMix
+	(is-a Model3D)
+	(role concrete))
+
+(defclass RandomTrimaran
+	(is-a Model3D)
 	(role concrete))
 
 (defclass VR+Ontology

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Baltic cutter, Snapp Opp type
+* source:	https://sketchfab.com/3d-models/baltic-cutter-snapp-opp-type-2b4afbe5ce054b2489fc11fc18e156ae
+* author:	Museovirasto Museiverket Finnish Heritage Agency (https://sketchfab.com/Museovirasto)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Baltic cutter, Snapp Opp type" (https://sketchfab.com/3d-models/baltic-cutter-snapp-opp-type-2b4afbe5ce054b2489fc11fc18e156ae) by Museovirasto Museiverket Finnish Heritage Agency (https://sketchfab.com/Museovirasto) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

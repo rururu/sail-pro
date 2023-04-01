@@ -1,0 +1,206 @@
+{
+	"accessors": [
+		{
+			"bufferView": 0,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 1167,
+			"max": [
+				12047.5859375,
+				9679.650390625,
+				22490.509765625
+			],
+			"min": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 1167,
+			"max": [
+				1.0,
+				0.9997851848602295,
+				0.999973714351654
+			],
+			"min": [
+				-1.0,
+				-0.9999075531959534,
+				-0.9999493360519409
+			],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 1167,
+			"max": [
+				0.0,
+				0.0,
+				0.0,
+				1.0
+			],
+			"min": [
+				0.0,
+				0.0,
+				0.0,
+				1.0
+			],
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 0,
+			"componentType": 5125,
+			"count": 3597,
+			"type": "SCALAR"
+		}
+	],
+	"asset": {
+		"extras": {
+			"author": "Tribe3D (https://sketchfab.com/tribe3d)",
+			"created": "Wed 29 Mar 2023 01:23:23 PM MSK",
+			"license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+			"source": "https://sketchfab.com/3d-models/trimaran-0fd7d45412ec4738a26547a9ce26ebd4",
+			"title": "Trimaran"
+		},
+		"generator": "Gestaltor 2023.1.0 Titan Community",
+		"version": "2.0"
+	},
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 14004,
+			"byteOffset": 0,
+			"byteStride": 12,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14004,
+			"byteOffset": 14004,
+			"byteStride": 12,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 18672,
+			"byteOffset": 28008,
+			"byteStride": 16,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 14388,
+			"byteOffset": 46680,
+			"target": 34963
+		}
+	],
+	"buffers": [
+		{
+			"byteLength": 61068,
+			"uri": "scene.bin"
+		}
+	],
+	"materials": [
+		{
+			"doubleSided": true,
+			"name": "Scene_-_Root",
+			"pbrMetallicRoughness": {
+				"metallicFactor": 0.0,
+				"roughnessFactor": 0.6
+			}
+		}
+	],
+	"meshes": [
+		{
+			"name": "Object_0",
+			"primitives": [
+				{
+					"attributes": {
+						"COLOR_0": 2,
+						"NORMAL": 1,
+						"POSITION": 0
+					},
+					"indices": 3,
+					"material": 0,
+					"mode": 4
+				}
+			]
+		}
+	],
+	"nodes": [
+		{
+			"children": [
+				1
+			],
+			"matrix": [
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				2.220446049250313e-16,
+				-1.0,
+				0.0,
+				0.0,
+				1.0,
+				2.220446049250313e-16,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0
+			],
+			"name": "Sketchfab_model"
+		},
+		{
+			"children": [
+				2
+			],
+			"matrix": [
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0,
+				-11983.6767578125,
+				-4840.81005859375,
+				-2699.509765625,
+				1.0
+			],
+			"name": "skfb_offset"
+		},
+		{
+			"mesh": 0,
+			"name": "Object_2",
+			"rotation": [
+				0.0,
+				-4.1096077260257683e-08,
+				-0.6894777053433846,
+				0.7243069058309601
+			]
+		}
+	],
+	"scene": 0,
+	"scenes": [
+		{
+			"name": "Sketchfab_Scene",
+			"nodes": [
+				0
+			]
+		}
+	]
+}

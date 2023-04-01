@@ -1,4 +1,4 @@
-; Tue Jan 03 17:05:25 MSK 2023
+; Sat Apr 01 12:10:52 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,21 +20,21 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CesiumEngine_ProjectKB_Class1994]
-		[CesiumEngine_ProjectKB_Class1995]
-		[CesiumEngine_ProjectKB_Class1996]))
+		[CesiumEngine_ProjectKB_Class1605]
+		[CesiumEngine_ProjectKB_Class1606]
+		[CesiumEngine_ProjectKB_Class1607]))
 
-([CesiumEngine_ProjectKB_Class1994] of  String
+([CesiumEngine_ProjectKB_Class1605] of  String
 
 	(name "CZMLGenerator")
 	(string_value "{CZMLGenerator+del+}delay{+viz+}visibility"))
 
-([CesiumEngine_ProjectKB_Class1995] of  String
+([CesiumEngine_ProjectKB_Class1606] of  String
 
 	(name "Onboard")
 	(string_value "label"))
 
-([CesiumEngine_ProjectKB_Class1996] of  String
+([CesiumEngine_ProjectKB_Class1607] of  String
 
 	(name "CZMLSpan")
 	(string_value "{CZMLSpan+}object"))
@@ -469,6 +469,34 @@
 	(name "instances_file_name")
 	(string_value "CesiumEngine.pins"))
 
+([KB_456007_Class1601] of  Map
+
+	(entries
+		[KB_456007_Class1602]
+		[KB_456007_Class1603]
+		[KB_456007_Class1604]))
+
+([KB_456007_Class1602] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_456007_Class1603] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_456007_Class1604] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
 ([KB_684256_Class1343] of  Widget
 
 	(is_hidden FALSE)
@@ -514,34 +542,6 @@
 
 ([KB_684256_Class1349] of  Property_List
 )
-
-([KB_965636_Class1990] of  Map
-
-	(entries
-		[KB_965636_Class1991]
-		[KB_965636_Class1992]
-		[KB_965636_Class1993]))
-
-([KB_965636_Class1991] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_965636_Class1992] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_965636_Class1993] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([LAYOUT_PROPERTIES] of  Property_List
 

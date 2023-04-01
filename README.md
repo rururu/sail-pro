@@ -2,7 +2,8 @@
 
 Simulation and modelling environment for virtual sailing.
 
-![screenshot](1.png)
+[![Watch the video](1.png)](https://youtu.be/sIHWZAveyIg)
+Click the screenshot to see a video!
 
 ## Prerequisites
 
@@ -47,13 +48,15 @@ $ .\run_VR.bat 	    	# Windows
 5. Wait while programs will be loaded and expert system initialized (see a message in the terminal).
 6. Answer the question "Old race nnn.n and boat *****?". If "Yes", then wait until you see a view from 
    a cocpit of the boat.
-7. If "No" input a new or existing boat name and select a race on the popup panel
-   (race number is on "Z VR Dashboard" tab).
+7. If "No" input a new or existing boat name, select a race on the popup panel
+   (race number is on "Z VR Dashboard" tab) and a skin for the boat.
 8. Wait until you see a view from  a cocpit of the boat.
 
 See details in screencasts. Some details can be differen of earlier - these are deprecated!
 
 [Normal start](https://youtu.be/_wcmearyUjI)
+
+[Additional skins for the boats](https://youtu.be/sIHWZAveyIg)
 
 [Using binocular](https://youtu.be/tEdWtbOl-SQ)
 
