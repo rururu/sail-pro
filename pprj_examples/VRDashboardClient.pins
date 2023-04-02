@@ -1,4 +1,4 @@
-; Sun Apr 02 16:17:35 MSK 2023
+; Sun Apr 02 19:56:16 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -63,7 +63,8 @@
 		[VRDashboardClient_Class250016]
 		[VRDashboardClient_Class20001]
 		[VRDashboardClient_Class40000]
-		[VRDashboardClient_Class260000])
+		[VRDashboardClient_Class260000]
+		[VRDashboardClient_Class270000])
 	(title "VR Dashboard Client"))
 
 ([VRDashboardClient_Class10000] of  CloFuncall
@@ -231,7 +232,7 @@
 
 ([VRDashboardClient_Class170000] of  CloFunction
 
-	(source "(let [cti (first (cls-instances \"VRDashboardControl\"))\n      nmi (first (cls-instances \"NMEAData\"))\n      obj (sv nmi \"object\")\n      rce (sv cti \"selected-race\")]\n  (if (not (rr/confirm (str \"Old race \" rce \" and boat \\\"\" (sv obj \"label\") \"\\\"?\")))\n    (let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv obj \"label\") nil)]\n      (if-let [ins (fifos \"NavOb\" \"label\" ans)]\n        (do (ssv cti \"onboard\" ans)\n          (ssv nmi \"object\" ins))\n        (if (rr/confirm (str \"Create boat \\\"\" ans \"\\\"?\"))\n          (let [crd (DisplayUtilities/editString nil \"Input boat coordinates\" \"60 0 30 0\" nil)\n                 [lad lam lod lom] (.split crd \" \")\n                 lat (str lad \" \" lam)\n                 lon (str lod \" \" lom)\n                 rus (fifos \"NavOb\" \"label\" \"russor\")\n                 ins (.shallowCopy rus *kb* nil)]\n             (println :NEW-BOAT ans lat lon)\n             (ssv ins \"label\" ans)\n             (ssv ins \"latitude\" lat)\n             (ssv ins \"longitude\" lon)\n             (ssv cti \"onboard\" ans)\n             (ssv nmi \"object\" ins))))\n      (if (rr/confirm \"Select new race?\")\n        (load-races))\n      (let [bsk (DisplayUtilities/pickInstance nil [(cls \"Model3D\")] \"Select Skin Model3D\")\n            mod (get-model3d bsk)\n            obj (sv nmi \"object\")]\n        (doseq [s (cls-instances \"VRFleet\")] (delin s))\n        (ssv cti \"boat_skin\" bsk)\n        (ssv obj \"description\" (sv mod \"description\"))\n        (ssv obj \"url\" (my-boat-icon (sv mod \"url\")))))))")
+	(source "(let [cti (first (cls-instances \"VRDashboardControl\"))\n      nmi (first (cls-instances \"NMEAData\"))\n      obj (sv nmi \"object\")\n      rce (sv cti \"selected-race\")]\n  (if (not (rr/confirm (str \"Old race \" rce \" and boat \\\"\" (sv obj \"label\") \"\\\"?\")))\n    (let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv obj \"label\") nil)]\n      (if-let [ins (fifos \"NavOb\" \"label\" ans)]\n        (do (ssv cti \"onboard\" ans)\n          (ssv nmi \"object\" ins))\n        (if (rr/confirm (str \"Create boat \\\"\" ans \"\\\"?\"))\n          (let [crd (DisplayUtilities/editString nil \"Input boat coordinates\" \"60 0 30 0\" nil)\n                 [lad lam lod lom] (.split crd \" \")\n                 lat (str lad \" \" lam)\n                 lon (str lod \" \" lom)\n                 rus (fifos \"NavOb\" \"label\" \"russor\")\n                 ins (.shallowCopy rus *kb* nil)]\n             (println :NEW-BOAT ans lat lon)\n             (ssv ins \"label\" ans)\n             (ssv ins \"latitude\" lat)\n             (ssv ins \"longitude\" lon)\n             (ssv cti \"onboard\" ans)\n             (ssv nmi \"object\" ins))))\n      (if (rr/confirm \"Select new race?\")\n        (load-races))\n      (let [bsk (DisplayUtilities/pickInstance nil [(cls \"Model3D\")] \"Select Skin Model3D\")\n            mod (get-model3d bsk)\n            obj (sv nmi \"object\")]\n        (doseq [s (cls-instances \"VRFleet\")] (delin s))\n        (ssv cti \"boat_skin\" bsk)\n        (ssv obj \"description\" (sv mod \"description\"))\n        (ssv obj \"url\" (my-boat-icon (sv mod \"url\"))))))\n  (.show *prj* cti)\n  (def START false))")
 	(title "ask-race-parameters []"))
 
 ([VRDashboardClient_Class170001] of  BBX
@@ -320,8 +321,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 40.811764)
-	(lng 24.619741)
+	(lat 40.517937)
+	(lng 24.440228)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -351,7 +352,7 @@
 
 ([VRDashboardClient_Class240001] of  CloFunction
 
-	(source "(let [mp (into {} hm)]\n  (if-let [rce (mp \"selected-race\")]\n    (let [tpt (first (.split rce \"\\\\.\"))\n          tpt (+ 10000 (read-string tpt))]\n      (ssv inst \"selected-race\" rce)\n      (ru.rules/assert-instances [inst]))\n    (println \"Select race before!\")))")
+	(source "(if START\n  (let [mp (into {} hm)]\n    (if-let [rce (mp \"selected-race\")]\n      (let [tpt (first (.split rce \"\\\\.\"))\n            tpt (+ 10000 (read-string tpt))]\n        (ssv inst \"selected-race\" rce)\n        (ru.rules/assert-instances [inst]))\n      (println \"Select race before!\"))))")
 	(title "start [hm inst]"))
 
 ([VRDashboardClient_Class240060] of  CloFunction
@@ -403,6 +404,11 @@
 ([VRDashboardClient_Class260003] of  CesiumView
 
 	(status "START"))
+
+([VRDashboardClient_Class270000] of  CloVar
+
+	(source "true")
+	(title "START"))
 
 ([VRDashboardClient_Class280000] of  CloFunction
 

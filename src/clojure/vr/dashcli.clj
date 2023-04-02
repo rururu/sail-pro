@@ -28,6 +28,7 @@
 (def FLEET (volatile! {}))
 (def ONMAP (volatile! []))
 (def ART (volatile! []))
+(def START true)
 (defn round-speed [s]
   (let [s (* s 100)
        s (Math/round s)]
@@ -342,13 +343,14 @@
       (OMT/removeMapOb no false)))))
 
 (defn start [hm inst]
+  (if START
   (let [mp (into {} hm)]
-  (if-let [rce (mp "selected-race")]
-    (let [tpt (first (.split rce "\\."))
-          tpt (+ 10000 (read-string tpt))]
-      (ssv inst "selected-race" rce)
-      (ru.rules/assert-instances [inst]))
-    (println "Select race before!"))))
+    (if-let [rce (mp "selected-race")]
+      (let [tpt (first (.split rce "\\."))
+            tpt (+ 10000 (read-string tpt))]
+        (ssv inst "selected-race" rce)
+        (ru.rules/assert-instances [inst]))
+      (println "Select race before!")))))
 
 (defn start-router-slava [uri path]
   (let [cmd (str "php -S " uri " " path)
@@ -394,5 +396,7 @@
         (doseq [s (cls-instances "VRFleet")] (delin s))
         (ssv cti "boat_skin" bsk)
         (ssv obj "description" (sv mod "description"))
-        (ssv obj "url" (my-boat-icon (sv mod "url"))))))))
+        (ssv obj "url" (my-boat-icon (sv mod "url"))))))
+  (.show *prj* cti)
+  (def START false)))
 
