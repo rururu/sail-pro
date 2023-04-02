@@ -391,7 +391,7 @@
       (let [bsk (DisplayUtilities/pickInstance nil [(cls "Model3D")] "Select Skin Model3D")
             mod (get-model3d bsk)
             obj (sv nmi "object")]
-        (map delin (cls-instances "VRFleet"))
+        (doseq [s (cls-instances "VRFleet")] (delin s))
         (ssv cti "boat_skin" bsk)
         (ssv obj "description" (sv mod "description"))
         (ssv obj "url" (my-boat-icon (sv mod "url"))))))))
