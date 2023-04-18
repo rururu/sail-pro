@@ -41,8 +41,11 @@
       d (int dm)
       m (int (* (- dm d) 100))
       m (+ m mf)
-      d (if (or (= c2 "S") (= c2 "W")) (str "-" d) d)]
-  (MapOb/getDeg (str d " " m))))
+      d (if (or (= c2 "S") (= c2 "W")) (str "-" d) d)
+      r (MapOb/getDeg (str d " " m))]
+  (if (and (> r 0) (or (= c2 "S") (= c2 "W"))) 
+    (- r)
+    r)))
 
 (defn clear-external-data [path]
   (if (.exists (io/file path))

@@ -1,4 +1,4 @@
-; Sun Apr 02 19:56:16 MSK 2023
+; Tue Apr 18 20:04:48 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -145,13 +145,13 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [255 0 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
 	(playground-index 0)
 	(speed 0.0)
-	(url "file:resources/public/img/trir.png")
+	(url "file:resources/public/img/yachtr.png")
 	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class120000] of  CloFunction
@@ -321,8 +321,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 40.517937)
-	(lng 24.440228)
+	(lat 38.27768)
+	(lng 123.47308)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -341,7 +341,7 @@
 
 	(altitude 0)
 	(course 270)
-	(description "{:draft 3\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 4\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "SANTA_MARIA")
 	(latitude "59 59.9")
 	(longitude "29 38.8")
@@ -456,13 +456,17 @@
 	(salience 1)
 	(title "czm0:CZML Navob Leg Generation2"))
 
+([VRDashboardClient_Class300000] of  CloFuncall
+
+	(source "BOAT-DATA"))
+
+([VRDashboardClient_Class300001] of  CloFuncall
+
+	(source "@GPRMC"))
+
 ([VRDashboardClient_Class300002] of  CloFuncall
 
 	(source "(rete/facts)"))
-
-([VRDashboardClient_Class300003] of  CloFuncall
-
-	(source "(rr/sp :all)"))
 
 ([VRDashboardClient_Class30001] of  CloVar
 
@@ -476,7 +480,7 @@
 
 ([VRDashboardClient_Class30019] of  CloFunction
 
-	(source "(let [c (read-string c1)\n      mf (- c (int c))\n      dm (/ (int c) 100)\n      d (int dm)\n      m (int (* (- dm d) 100))\n      m (+ m mf)\n      d (if (or (= c2 \"S\") (= c2 \"W\")) (str \"-\" d) d)]\n  (MapOb/getDeg (str d \" \" m)))")
+	(source "(let [c (read-string c1)\n      mf (- c (int c))\n      dm (/ (int c) 100)\n      d (int dm)\n      m (int (* (- dm d) 100))\n      m (+ m mf)\n      d (if (or (= c2 \"S\") (= c2 \"W\")) (str \"-\" d) d)\n      r (MapOb/getDeg (str d \" \" m))]\n  (if (and (> r 0) (or (= c2 \"S\") (= c2 \"W\"))) \n    (- r)\n    r))")
 	(title "parse-coord [c1 c2]"))
 
 ([VRDashboardClient_Class30059] of  CloVar
@@ -617,21 +621,81 @@
 
 ([VRDashboardClient_Class310001] of  CloFuncall
 
-	(source "(seq @AIVDM)"))
+	(source "(parse-coord \"\" \"\")"))
 
 ([VRDashboardClient_Class310002] of  CloFuncall
 
-	(source "(seq @GPRMC)"))
+	(source "(parse-coord \"00056.419231\" \"W\")"))
+
+([VRDashboardClient_Class310003] of  CloFuncall
+
+	(source "(parse-coord \"5043.281553\" \"N\")"))
+
+([VRDashboardClient_Class310053] of  CloFuncall
+
+	(source "(parse-coord \"00101.371462\" \"W\")"))
+
+([VRDashboardClient_Class310054] of  CloFuncall
+
+	(source "(parse-coord \"00201.371462\" \"W\")"))
+
+([VRDashboardClient_Class310055] of  CloFuncall
+
+	(source "(parse-coord \"01001.371462\" \"W\")"))
+
+([VRDashboardClient_Class310056] of  CloFuncall
+
+	(source " (MapOb/getDeg (str -23 \" \" 34))"))
+
+([VRDashboardClient_Class310057] of  CloFuncall
+
+	(source " (MapOb/getDeg (str -10 \" \" 34))"))
+
+([VRDashboardClient_Class310058] of  CloFuncall
+
+	(source " (MapOb/getDeg (str -2 \" \" 34))"))
+
+([VRDashboardClient_Class310059] of  CloFuncall
+
+	(source " (MapOb/getDeg (str -1 \" \" 34))"))
+
+([VRDashboardClient_Class310060] of  CloFuncall
+
+	(source "(- (parse-coord \"00101.371462\" \"W\"))"))
 
 ([VRDashboardClient_Class320000] of  CloFuncall
 
-	(source "(rr/pp :all)"))
+	(source "(parse-coord \"00104.539126\" \"W\")"))
+
+([VRDashboardClient_Class320001] of  CloFuncall
+
+	(source "(parse-coord \"00004.539126\" \"W\")"))
+
+([VRDashboardClient_Class320002] of  CloFuncall
+
+	(source "(vec @GPRMC)"))
+
+([VRDashboardClient_Class320003] of  CloFuncall
+
+	(source "(parse-coord -0.48 \"W\")"))
+
+([VRDashboardClient_Class320004] of  CloFuncall
+
+	(source "(parse-coord \"-0.48\" \"W\")"))
+
+([VRDashboardClient_Class320005] of  CloFuncall
+
+	(source "(parse-coord \"0048.\" \"W\")"))
+
+([VRDashboardClient_Class320006] of  CloFuncall
+
+	(source "(parse-coord \"00048.983790\" \"W\")"))
 
 ([VRDashboardClient_Class320007] of  Model3D
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "BERMUDA_SLOOP")
 	(latitude "60 0")
 	(longitude "29 39")
@@ -781,20 +845,21 @@
 
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
-	(boat_skin [VRDashboardClient_Class320009])
+	(boat_skin [VRDashboardClient_Class320007])
 	(nmea-port "8081")
 	(onboard "russor")
 	(port "8448")
 	(races
 		"567.1"
 		"573.3"
-		"578.1"
+		"600.1"
 		"579.1"
 		"599.1"
+		"599.2"
 		"602.1"
 		"580.1"
-		"598.1")
-	(selected-race "598.1")
+		"603.1")
+	(selected-race "603.1")
 	(telnet-port "10470")
 	(visibility 40.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
