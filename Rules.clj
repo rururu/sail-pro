@@ -125,21 +125,20 @@
       (if (< dis ?vis)
         (light.cesium.core/model-leg 
 	nmo
-	(+ ?del 2)
+	(+ ?del 4)
 	(read-string (.getDescription nmo))))
       (modify ?cs time (+ ?t ?del))))))
 
 (vr:NMEA Start 0
-(VRDashboardControl nmea-port ?nmp selected-race ?ser)
+(VRDashboardControl race ?rce)
 ?c (NMEAControl status "START"
 	delay ?del)
 ?d (NMEAData object ?obj)
 (Clock0 time ?t)
 =>
 (println "NMEA Start boat" (protege.core/sv ?obj "label"))
-(vr.dashcli/load-races)
-(vr.dashcli/clear-external-data (str "NMEA_CACHE/" ?ser "/GPRMC.txt"))
-(vr.dashcli/clear-external-data (str "NMEA_CACHE/" ?ser "/AIVDM.txt"))
+(vr.dashcli/clear-external-data (str "NMEA_CACHE/" ?rce "/GPRMC.txt"))
+(vr.dashcli/clear-external-data (str "NMEA_CACHE/" ?rce "/AIVDM.txt"))
 (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]
   (modify ?d data [""
                           (.getLatitude mo)
@@ -153,15 +152,18 @@
     (light.sim/start-sim))))
 
 (vr:NMEA Run 0
-(VRDashboardControl onboard ?onb visibility ?vis selected-race ?ser)
+(VRDashboardControl onboard ?onb 
+	visibility ?vis 
+                      boat_skin ?bsk
+	race ?rce)
 (NMEAControl status "RUN"
 	delay ?del)
 ?d (NMEAData object ?obj
 	time ?t0)
+?cv (CesiumView status ?cesium-status)
 (Clock0 time ?t1 (> ?t1 ?t0))
 =>
-(println :TEST ?t0)
-(future (vr.dashcli/get-external-data (str "NMEA_CACHE/" ?ser "/GPRMC.txt") vr.dashcli/GPRMC))
+(future (vr.dashcli/get-external-data (str "NMEA_CACHE/" ?rce "/GPRMC.txt") vr.dashcli/GPRMC))
 (when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]
   (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]
     (.setLatitude mo lat)
@@ -169,12 +171,31 @@
     (.setCourse mo (int crs))
     (.setSpeed mo spd)
     (println "boat:" (protege.core/sv ?obj "label") bdata))
-  (vr.dashcli/get-external-data (str "NMEA_CACHE/" ?ser "/AIVDM.txt") vr.dashcli/AIVDM))
+  (vr.dashcli/get-external-data (str "NMEA_CACHE/" ?rce "/AIVDM.txt") vr.dashcli/AIVDM)
   (vr.dashcli/get-fleet-data)
-  (vr.dashcli/show-neighbors ?onb ?vis)
-  (vr.dashcli/unvisible-offmap ?onb))
-(println :TEST2 ?t1 ?del)
+  (vr.dashcli/show-neighbors ?onb ?vis ?bsk)
+  (vr.dashcli/unvisible-offmap ?onb)
+  (when (= ?cesium-status "START")
+    (light.pro.server/start-server)
+    (light.pro.server/start-client) 
+    (light.pro.server/go-onboard ?onb) 
+    (modify ?cv status "ONBOARD")))
 (modify ?d time (+ ?t1 ?del)))
+
+(vr:NMEA Init 0
+?vc (VRDashboardControl race ?rce)
+?nc (NMEAControl status "INIT")
+(Clock0 time ?t)
+=>
+(let [race (slurp "NMEA_CACHE/RACE.txt")]
+  (println :RACE race)
+  (if (= race "")
+    (println ".. waiting for race data ..")
+    (do (println "Race" race)
+      (when (not= ?rce race)
+        (vr.dashcli/new-race)
+        (modify ?vc race race)
+      (modify ?nc status "START")))))
 
 (vr:NavOb on Map 0
 (CZMLGenerator)

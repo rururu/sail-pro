@@ -1,4 +1,4 @@
-; Tue Apr 18 20:04:48 MSK 2023
+; Sat Jul 22 20:12:14 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -30,11 +30,9 @@
 		[VRDashboardClient_Class120007]
 		[VRDashboardClient_Class120003]
 		[VRDashboardClient_Class130002]
-		[VRDashboardClient_Class140000]
 		[VRDashboardClient_Class150024]
 		[VRDashboardClient_Class70000]
 		[VRDashboardClient_Class150002]
-		[VRDashboardClient_Class90005]
 		[VRDashboardClient_Class160001]
 		[VRDashboardClient_Class200006]
 		[VRDashboardClient_Class200008]
@@ -189,10 +187,9 @@
 	(source "(if-let [ac (fifos \"NavOb\" \"label\" \"CVN-69\")]\n  (let [acm (OMT/getOrAdd ac)\n        rus (OMT/getMapOb \"russor\")\n        lar (.getLatitude rus)\n        lor (.getLongitude rus)\n        lac (+ lar (srand 0.02))\n        loc (+ lor (srand 0.02))\n        crs (int (rand 360))]\n    (.setLatitude acm lac)\n    (.setLongitude acm loc)\n    (.setCourse acm crs)\n    (vswap! ART conj \"CVN-69\")\n    (if-let [h (fifos \"NavOb\" \"label\" \"h1\")]\n      (let [hm (OMT/getOrAdd h)]\n        (.setLatitude hm lac)\n        (.setLongitude hm loc)\n        (vswap! ART conj \"h1\")))\n    (if-let [i (fifos \"NavOb\" \"label\" \"i1\")]\n      (let [im (OMT/getOrAdd i)\n             icr (+ crs 180)\n             icr (if (> icr 360) (- icr 360) icr)] \n        (.setLatitude im lac)\n        (.setLongitude im loc)\n        (.setCourse im icr)\n        (vswap! ART conj \"i1\")))))")
 	(title "add-aircraft-carrier []"))
 
-([VRDashboardClient_Class140000] of  CloFunction
+([VRDashboardClient_Class140000] of  CloFuncall
 
-	(source "(let [mp (into {} hm)\n       clw (mp \"clsWidget\")\n       rce (first (.getSelection (.getSlotWidget clw (slt \"races\"))))\n       tpt (first (.split rce \"\\\\.\"))\n       tpt (+ 10000 (read-string tpt))]\n  (ssv inst \"selected-race\" rce))")
-	(title "select-race [hm inst]"))
+	(source "(rr/pp :all)"))
 
 ([VRDashboardClient_Class140002] of  CloFunction
 
@@ -232,8 +229,8 @@
 
 ([VRDashboardClient_Class170000] of  CloFunction
 
-	(source "(let [cti (first (cls-instances \"VRDashboardControl\"))\n      nmi (first (cls-instances \"NMEAData\"))\n      obj (sv nmi \"object\")\n      rce (sv cti \"selected-race\")]\n  (if (not (rr/confirm (str \"Old race \" rce \" and boat \\\"\" (sv obj \"label\") \"\\\"?\")))\n    (let [ans (DisplayUtilities/editString nil \"Input your boat name\" (sv obj \"label\") nil)]\n      (if-let [ins (fifos \"NavOb\" \"label\" ans)]\n        (do (ssv cti \"onboard\" ans)\n          (ssv nmi \"object\" ins))\n        (if (rr/confirm (str \"Create boat \\\"\" ans \"\\\"?\"))\n          (let [crd (DisplayUtilities/editString nil \"Input boat coordinates\" \"60 0 30 0\" nil)\n                 [lad lam lod lom] (.split crd \" \")\n                 lat (str lad \" \" lam)\n                 lon (str lod \" \" lom)\n                 rus (fifos \"NavOb\" \"label\" \"russor\")\n                 ins (.shallowCopy rus *kb* nil)]\n             (println :NEW-BOAT ans lat lon)\n             (ssv ins \"label\" ans)\n             (ssv ins \"latitude\" lat)\n             (ssv ins \"longitude\" lon)\n             (ssv cti \"onboard\" ans)\n             (ssv nmi \"object\" ins))))\n      (if (rr/confirm \"Select new race?\")\n        (load-races))\n      (let [bsk (DisplayUtilities/pickInstance nil [(cls \"Model3D\")] \"Select Skin Model3D\")\n            mod (get-model3d bsk)\n            obj (sv nmi \"object\")]\n        (doseq [s (cls-instances \"VRFleet\")] (delin s))\n        (ssv cti \"boat_skin\" bsk)\n        (ssv obj \"description\" (sv mod \"description\"))\n        (ssv obj \"url\" (my-boat-icon (sv mod \"url\"))))))\n  (.show *prj* cti)\n  (def START false))")
-	(title "ask-race-parameters []"))
+	(source "(let [cti (first (cls-instances \"VRDashboardControl\"))\n      nmi (first (cls-instances \"NMEAData\"))\n      obj (sv nmi \"object\")\n      ans (DisplayUtilities/editString nil \"Input your boat name\" (sv obj \"label\") nil)]\n  (if-let [ins (fifos \"NavOb\" \"label\" ans)]\n    (do (ssv cti \"onboard\" ans)\n      (ssv nmi \"object\" ins))\n    (if (rr/confirm (str \"Create boat \\\"\" ans \"\\\"?\"))\n      (let [crd (DisplayUtilities/editString nil \"Input boat coordinates\" \"60 0 30 0\" nil)\n             [lad lam lod lom] (.split crd \" \")\n             lat (str lad \" \" lam)\n             lon (str lod \" \" lom)\n             rus (fifos \"NavOb\" \"label\" \"russor\")\n             ins (.shallowCopy rus *kb* nil)]\n        (println \"New boat:\" ans lat lon)\n        (ssv ins \"label\" ans)\n        (ssv ins \"latitude\" lat)\n        (ssv ins \"longitude\" lon)\n        (ssv cti \"onboard\" ans)\n        (ssv nmi \"object\" ins))))\n  (let [bsk (DisplayUtilities/pickInstance nil [(cls \"Model3D\")] \"Select Skin Model3D\")\n          mod (get-model3d bsk)\n          obj (sv nmi \"object\")]\n    (doseq [s (cls-instances \"VRFleet\")] (delin s))\n      (ssv cti \"boat_skin\" bsk)\n      (ssv obj \"description\" (sv mod \"description\"))\n      (ssv obj \"url\" (my-boat-icon (sv mod \"url\"))))\n  (ssv cti \"race\" race)\n  (.show *prj* cti)\n  (def START false))")
+	(title "new-race [race]"))
 
 ([VRDashboardClient_Class170001] of  BBX
 
@@ -321,8 +318,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 38.27768)
-	(lng 123.47308)
+	(lat 46.964283)
+	(lng -5.7096972)
 	(vicinity 10.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -357,7 +354,7 @@
 
 ([VRDashboardClient_Class240060] of  CloFunction
 
-	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Define Race and Boat.\")\n(ClojureTab/invoke \"vr.dashcli\" \"ask-race-parameters\")\n(println \"3. Start Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"4. Start Time.\")\n(OMT/setTimerRunning true)\n(println \"EXPERT SYSTEM INITIALIZED AND STARTED\")")
+	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") nil)]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated instance of WorkingPrograms not found!\"))\n(println \"2. Start Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") nil)]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated instance of Run not found!\"))\n(println \"3. Start Time.\")\n(OMT/setTimerRunning true)\n(println \"EXPERT SYSTEM INITIALIZED AND STARTED\")")
 	(title "clojure-work []"))
 
 ([VRDashboardClient_Class240061] of  CloNamespace
@@ -539,7 +536,7 @@
 	(Scale "50000000")
 	(startUpLayers
 		[igis_Class40012]
-		[NiceSPb_Class160727]
+		[igis_Class1]
 		[igis_Class40011]))
 
 ([VRDashboardClient_Class30065] of  %3AINSTANCE-ANNOTATION
@@ -551,7 +548,7 @@
 ([VRDashboardClient_Class30069] of  NMEAControl
 
 	(delay 60)
-	(status "START"))
+	(status "INIT"))
 
 ([VRDashboardClient_Class30073] of  Run
 
@@ -579,6 +576,7 @@
 
 	(rules
 		[VRDashboardClient_Class230075]
+		[VRDashboardClient_Class330024]
 		[VRDashboardClient_Class30076]
 		[VRDashboardClient_Class30077]
 		[VRDashboardClient_Class80000]
@@ -607,15 +605,15 @@
 
 ([VRDashboardClient_Class30076] of  Rule
 
-	(lhs "(VRDashboardControl nmea-port ?nmp selected-race ?ser)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?ser \"/AIVDM.txt\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n                          (.getLatitude mo)\n                          (.getLongitude mo)\n                          (.getCourse mo)\n                          (.getSpeed mo)\n                          \"\"]\n                  time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
+	(lhs "(VRDashboardControl race ?rce)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n(Clock0 time ?t)")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n                          (.getLatitude mo)\n                          (.getLongitude mo)\n                          (.getCourse mo)\n                          (.getSpeed mo)\n                          \"\"]\n                  time ?t)\n  (modify ?c status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
 ([VRDashboardClient_Class30077] of  Rule
 
-	(lhs "(VRDashboardControl onboard ?onb \n	visibility ?vis \n                      boat_skin ?bsk\n	selected-race ?ser)\n(NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	time ?t0)\n?cv (CesiumView status ?cesium-status)\n(Clock0 time ?t1 (> ?t1 ?t0))")
-	(rhs "(future (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?ser \"/GPRMC.txt\") vr.dashcli/GPRMC))\n(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?ser \"/AIVDM.txt\") vr.dashcli/AIVDM)\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis ?bsk)\n  (vr.dashcli/unvisible-offmap ?onb)\n  (when (= ?cesium-status \"START\")\n    (light.pro.server/start-server)\n    (light.pro.server/start-client) \n    (light.pro.server/go-onboard ?onb) \n    (modify ?cv status \"ONBOARD\")))\n(modify ?d time (+ ?t1 ?del))")
+	(lhs "(VRDashboardControl onboard ?onb \n	visibility ?vis \n                      boat_skin ?bsk\n	race ?rce)\n(NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	time ?t0)\n?cv (CesiumView status ?cesium-status)\n(Clock0 time ?t1 (> ?t1 ?t0))")
+	(rhs "(future (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\") vr.dashcli/GPRMC))\n(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\") vr.dashcli/AIVDM)\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis ?bsk)\n  (vr.dashcli/unvisible-offmap ?onb)\n  (when (= ?cesium-status \"START\")\n    (light.pro.server/start-server)\n    (light.pro.server/start-client) \n    (light.pro.server/go-onboard ?onb) \n    (modify ?cv status \"ONBOARD\")))\n(modify ?d time (+ ?t1 ?del))")
 	(salience 0)
 	(title "vr:NMEA Run"))
 
@@ -813,6 +811,13 @@
 	(source "(condp = (sv boat-skin \"label\")\n  \"RANDOM_TRIMARAN\" (rand-nth (vec (cls-instances \"RandomTrimaran\")))\n  \"MEDIEVAL_MIX\" (rand-nth (vec (cls-instances \"MedievalMix\")))\n  boat-skin)")
 	(title "get-model3d [boat-skin]"))
 
+([VRDashboardClient_Class330024] of  Rule
+
+	(lhs "?vc (VRDashboardControl race ?rce)\n?nc (NMEAControl status \"INIT\")\n(Clock0 time ?t)")
+	(rhs "(let [rc (slurp \"NMEA_CACHE/RACE.txt\")]\n  (if (= rc \"\")\n    (println \".. waiting for race data ..\")\n    (do (println \"Race\" rc)\n      (when (not= ?rce rc)\n        (vr.dashcli/new-race rc)\n        (modify ?vc race rc))\n      (modify ?nc status \"START\"))))")
+	(salience 0)
+	(title "vr:NMEA Init"))
+
 ([VRDashboardClient_Class40000] of  CloVar
 
 	(source "(volatile! [])")
@@ -849,19 +854,9 @@
 	(nmea-port "8081")
 	(onboard "russor")
 	(port "8448")
-	(races
-		"567.1"
-		"573.3"
-		"600.1"
-		"579.1"
-		"599.1"
-		"599.2"
-		"602.1"
-		"580.1"
-		"603.1")
-	(selected-race "603.1")
+	(race "618.2")
 	(telnet-port "10470")
-	(visibility 40.0)
+	(visibility 200.0)
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
 ([VRDashboardClient_Class60000] of  NavOb
@@ -1007,8 +1002,3 @@
 
 	(source "(if-let [bd  (parse-gprmc-data (first @GPRMC))]            \n  (when (diff-time? bd BOAT-DATA)\n    (def BOAT-DATA bd)\n    bd))")
 	(title "get-boat-data []"))
-
-([VRDashboardClient_Class90005] of  CloFunction
-
-	(source "(let [txt (slurp RACES-URL)\n      mp (json/parse-string txt)\n      rcs (map #(get % \"id\") (mp \"races\"))\n      vrd (first (cls-instances \"VRDashboardControl\"))\n      sel (DisplayUtilities/pickSymbol nil \"Select race\" \"\" rcs)]\n  (ssvs vrd \"races\" rcs)\n  (ssv vrd \"selected-race\" sel))")
-	(title "load-races []"))

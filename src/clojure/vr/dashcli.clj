@@ -134,14 +134,6 @@
         (.setCourse im icr)
         (vswap! ART conj "i1"))))))
 
-(defn select-race [hm inst]
-  (let [mp (into {} hm)
-       clw (mp "clsWidget")
-       rce (first (.getSelection (.getSlotWidget clw (slt "races"))))
-       tpt (first (.split rce "\\."))
-       tpt (+ 10000 (read-string tpt))]
-  (ssv inst "selected-race" rce)))
-
 (defn diff-view [ops vel vof vpt]
   (let [vof (keyword (clojure.string/lower-case vof))]
   (or (not= vel (ops :view-elevation))
@@ -175,15 +167,6 @@
       (.setCourse nmo crs)
       (.setSpeed nmo (.getSpeed omo))
       (vswap! ONMAP conj nnm)))))
-
-(defn load-races []
-  (let [txt (slurp RACES-URL)
-      mp (json/parse-string txt)
-      rcs (map #(get % "id") (mp "races"))
-      vrd (first (cls-instances "VRDashboardControl"))
-      sel (DisplayUtilities/pickSymbol nil "Select race" "" rcs)]
-  (ssvs vrd "races" rcs)
-  (ssv vrd "selected-race" sel)))
 
 (defn show-controls []
   (.show *prj* (first (cls-instances "VRDashboardControl"))))
@@ -368,38 +351,35 @@
   "file:resources/public/img/tallp.png" "file:resources/public/img/tallr.png"
   "file:resources/public/img/trir.png"))
 
-(defn ask-race-parameters []
+(defn new-race [race]
   (let [cti (first (cls-instances "VRDashboardControl"))
       nmi (first (cls-instances "NMEAData"))
       obj (sv nmi "object")
-      rce (sv cti "selected-race")]
-  (if (not (rr/confirm (str "Old race " rce " and boat \"" (sv obj "label") "\"?")))
-    (let [ans (DisplayUtilities/editString nil "Input your boat name" (sv obj "label") nil)]
-      (if-let [ins (fifos "NavOb" "label" ans)]
-        (do (ssv cti "onboard" ans)
-          (ssv nmi "object" ins))
-        (if (rr/confirm (str "Create boat \"" ans "\"?"))
-          (let [crd (DisplayUtilities/editString nil "Input boat coordinates" "60 0 30 0" nil)
-                 [lad lam lod lom] (.split crd " ")
-                 lat (str lad " " lam)
-                 lon (str lod " " lom)
-                 rus (fifos "NavOb" "label" "russor")
-                 ins (.shallowCopy rus *kb* nil)]
-             (println :NEW-BOAT ans lat lon)
-             (ssv ins "label" ans)
-             (ssv ins "latitude" lat)
-             (ssv ins "longitude" lon)
-             (ssv cti "onboard" ans)
-             (ssv nmi "object" ins))))
-      (if (rr/confirm "Select new race?")
-        (load-races))
-      (let [bsk (DisplayUtilities/pickInstance nil [(cls "Model3D")] "Select Skin Model3D")
-            mod (get-model3d bsk)
-            obj (sv nmi "object")]
-        (doseq [s (cls-instances "VRFleet")] (delin s))
-        (ssv cti "boat_skin" bsk)
-        (ssv obj "description" (sv mod "description"))
-        (ssv obj "url" (my-boat-icon (sv mod "url"))))))
+      ans (DisplayUtilities/editString nil "Input your boat name" (sv obj "label") nil)]
+  (if-let [ins (fifos "NavOb" "label" ans)]
+    (do (ssv cti "onboard" ans)
+      (ssv nmi "object" ins))
+    (if (rr/confirm (str "Create boat \"" ans "\"?"))
+      (let [crd (DisplayUtilities/editString nil "Input boat coordinates" "60 0 30 0" nil)
+             [lad lam lod lom] (.split crd " ")
+             lat (str lad " " lam)
+             lon (str lod " " lom)
+             rus (fifos "NavOb" "label" "russor")
+             ins (.shallowCopy rus *kb* nil)]
+        (println "New boat:" ans lat lon)
+        (ssv ins "label" ans)
+        (ssv ins "latitude" lat)
+        (ssv ins "longitude" lon)
+        (ssv cti "onboard" ans)
+        (ssv nmi "object" ins))))
+  (let [bsk (DisplayUtilities/pickInstance nil [(cls "Model3D")] "Select Skin Model3D")
+          mod (get-model3d bsk)
+          obj (sv nmi "object")]
+    (doseq [s (cls-instances "VRFleet")] (delin s))
+      (ssv cti "boat_skin" bsk)
+      (ssv obj "description" (sv mod "description"))
+      (ssv obj "url" (my-boat-icon (sv mod "url"))))
+  (ssv cti "race" race)
   (.show *prj* cti)
   (def START false)))
 

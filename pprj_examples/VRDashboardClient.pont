@@ -1,4 +1,4 @@
-; Tue Apr 18 20:04:48 MSK 2023
+; Sat Jul 22 20:12:14 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -30,7 +30,7 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot selected-race
+	(single-slot race
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -44,16 +44,8 @@
 ;+		(value "Start/vr.dashcli/start")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot races
-		(type STRING)
-		(create-accessor read-write))
 	(single-slot nmea-port
 		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot but-select-race
-		(type STRING)
-;+		(value "Select Race/vr.dashcli/select-race")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot data
@@ -64,10 +56,6 @@
 (defclass VRDashboardControl
 	(is-a CeziumControl)
 	(role concrete)
-	(single-slot selected-race
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot boat_skin
 		(type INSTANCE)
 ;+		(allowed-classes Model3D)
@@ -87,19 +75,15 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot races
-		(type STRING)
-		(create-accessor read-write))
-	(single-slot but-select-race
-		(type STRING)
-;+		(value "Select Race/vr.dashcli/select-race")
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot visibility
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot nmea-port
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot race
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))

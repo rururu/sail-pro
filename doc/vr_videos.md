@@ -43,12 +43,18 @@
 
 ## Others
 
-1. [Using binocular](https://www.youtube.com/watch?v=R0lmg-AfYIs)
+1. [Start of Summer Cup race Miami - Cancun 10 july 2021](https://www.youtube.com/watch?v=UwYsDwf3jN0)
 2. [Meaipe](https://youtu.be/E8kdpT2fQfU)
 3. [Going along the Strait Of Magellan](https://youtu.be/0VbBxUmGszg)
 4. [Rounding the Cape Horn](https://youtu.be/eRwe14Fn5Ac)
 5. [Finish in San Francisco](https://www.youtube.com/watch?v=wzTJfI7dEAU)
 6. [Falkland Islands](https://youtu.be/ORM2IVUksrQ)
+7. [Gibraltar in Vela Cup race](https://youtu.be/QsDpSx6kahg)
+8. [Nearby yachts during Vela Cup race](https://youtu.be/57WU1qmrENQ)
+9. [Skirting the western tip of Madeira in Vela Cup race](https://youtu.be/E_OxINj428U)
+10. [Finish of Tara race in Iquique bay](https://www.youtube.com/watch?v=LYRTzwEeJqw)
+11. [Sailing about Närsholmen cape on Gottland island during Nord Stream 3 race](https://www.youtube.com/watch?v=2kHoByWW9Zw)
+12. [Rounding the turning mark on the island during the race Nord Stream 3](https://youtu.be/NTzE-a0fBQs)
 
 ## 2023 Year
 
@@ -56,4 +62,5 @@
 2. [GLOBE-40 (2023) Leg 6 finish in Recife, Brasil ](https://youtu.be/E8E56Y7rHBs)
 3. [GLOBE-40 (2023) Leg 7 finish on Granada](https://youtu.be/1KRJvx_9rpw)
 4. [Gone with the wind. Finish in Iskenderum](https://www.youtube.com/watch?v=ouf8gPpRj84)
+5. [Aegean 600](https://youtu.be/SC1DJmYbC6c)
 

@@ -1,4 +1,4 @@
-; Tue Apr 18 20:04:49 MSK 2023
+; Sat Jul 22 20:12:15 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -72,54 +72,6 @@
 
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
-
-([KB_239445_Class2145] of  Map
-
-	(entries
-		[KB_239445_Class2146]
-		[KB_239445_Class2149]
-		[KB_239445_Class2150]
-		[KB_239445_Class2151])
-	(referenced_maps [KB_239445_Class2147]))
-
-([KB_239445_Class2146] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_239445_Class2147] of  Map
-
-	(entries [KB_239445_Class2148]))
-
-([KB_239445_Class2148] of  Map_Entry
-
-	(key "WikipediaGIS_Class2")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "12 479 212 124")
-	(value_class "java.awt.Rectangle"))
-
-([KB_239445_Class2149] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "KB_239445_Class2147")
-	(value_class "java.util.Map"))
-
-([KB_239445_Class2150] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_239445_Class2151] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([KB_444845_Class1538] of  Widget
 
@@ -702,6 +654,54 @@
 ([KB_748325_Class318] of  Property_List
 )
 
+([KB_953958_Class2145] of  Map
+
+	(entries
+		[KB_953958_Class2146]
+		[KB_953958_Class2149]
+		[KB_953958_Class2150]
+		[KB_953958_Class2151])
+	(referenced_maps [KB_953958_Class2147]))
+
+([KB_953958_Class2146] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_953958_Class2147] of  Map
+
+	(entries [KB_953958_Class2148]))
+
+([KB_953958_Class2148] of  Map_Entry
+
+	(key "WikipediaGIS_Class2")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "12 479 212 124")
+	(value_class "java.awt.Rectangle"))
+
+([KB_953958_Class2149] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "KB_953958_Class2147")
+	(value_class "java.util.Map"))
+
+([KB_953958_Class2150] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_953958_Class2151] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
 ([LAYOUT_PROPERTIES] of  Property_List
 
 	(name "layout properties")
@@ -1209,7 +1209,7 @@
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
 	(x 200)
-	(y 420))
+	(y 300))
 
 ([VRDashboardClient_ProjectKB_Class12153] of  Property_List
 )
@@ -1277,8 +1277,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class12166])
 	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
 	(width 200)
-	(x 0)
-	(y 420))
+	(x 200)
+	(y 240))
 
 ([VRDashboardClient_ProjectKB_Class12166] of  Property_List
 
@@ -1452,7 +1452,7 @@
 	(widget_class_name "edu.stanford.smi.protegex.widget.contains.ContainsWidget")
 	(width 400)
 	(x 0)
-	(y 480))
+	(y 360))
 
 ([VRDashboardClient_ProjectKB_Class2153] of  Property_List
 
@@ -1554,9 +1554,7 @@
 		[VRDashboardClient_ProjectKB_Class31730]
 		[VRDashboardClient_ProjectKB_Class31732]
 		[VRDashboardClient_ProjectKB_Class31734]
-		[VRDashboardClient_ProjectKB_Class41733]
 		[VRDashboardClient_ProjectKB_Class41752]
-		[VRDashboardClient_ProjectKB_Class41754]
 		[VRDashboardClient_ProjectKB_Class41792]
 		[VRDashboardClient_ProjectKB_Class2152]
 		[VRDashboardClient_ProjectKB_Class12165]
@@ -1582,7 +1580,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
 	(x 200)
-	(y 300))
+	(y 120))
 
 ([VRDashboardClient_ProjectKB_Class31727] of  Property_List
 )
@@ -1595,8 +1593,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class31729])
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
-	(x 200)
-	(y 120))
+	(x 0)
+	(y 180))
 
 ([VRDashboardClient_ProjectKB_Class31729] of  Property_List
 )
@@ -1610,7 +1608,7 @@
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
 	(x 200)
-	(y 240))
+	(y 180))
 
 ([VRDashboardClient_ProjectKB_Class31731] of  Property_List
 )
@@ -1623,8 +1621,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class31733])
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
-	(x 200)
-	(y 360))
+	(x 0)
+	(y 300))
 
 ([VRDashboardClient_ProjectKB_Class31733] of  Property_List
 )
@@ -1637,8 +1635,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class31735])
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
-	(x 200)
-	(y 180))
+	(x 0)
+	(y 240))
 
 ([VRDashboardClient_ProjectKB_Class31735] of  Property_List
 )
@@ -1657,7 +1655,7 @@
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
 	(x 200)
-	(y 640))
+	(y 520))
 
 ([VRDashboardClient_ProjectKB_Class32155] of  Property_List
 )
@@ -1730,46 +1728,18 @@
 
 	(name "tooltip_text"))
 
-([VRDashboardClient_ProjectKB_Class41733] of  Widget
-
-	(height 180)
-	(is_hidden FALSE)
-	(name "races")
-	(property_list [VRDashboardClient_ProjectKB_Class41734])
-	(widget_class_name "edu.stanford.smi.protege.widget.StringListWidget")
-	(width 200)
-	(x 0)
-	(y 120))
-
-([VRDashboardClient_ProjectKB_Class41734] of  Property_List
-)
-
 ([VRDashboardClient_ProjectKB_Class41752] of  Widget
 
 	(height 60)
 	(is_hidden FALSE)
-	(name "selected-race")
+	(name "race")
 	(property_list [VRDashboardClient_ProjectKB_Class41753])
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
-	(x 0)
-	(y 60))
+	(x 200)
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class41753] of  Property_List
-)
-
-([VRDashboardClient_ProjectKB_Class41754] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "but-select-race")
-	(property_list [VRDashboardClient_ProjectKB_Class41755])
-	(widget_class_name "clojuretab.ClojureActionButton")
-	(width 200)
-	(x 0)
-	(y 300))
-
-([VRDashboardClient_ProjectKB_Class41755] of  Property_List
 )
 
 ([VRDashboardClient_ProjectKB_Class41792] of  Widget
@@ -1782,7 +1752,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
 	(x 0)
-	(y 0))
+	(y 60))
 
 ([VRDashboardClient_ProjectKB_Class41793] of  Property_List
 
@@ -1809,7 +1779,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
 	(x 0)
-	(y 360))
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class42179] of  Property_List
 )
@@ -1822,8 +1792,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class42181])
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
-	(x 200)
-	(y 0))
+	(x 0)
+	(y 120))
 
 ([VRDashboardClient_ProjectKB_Class42181] of  Property_List
 )

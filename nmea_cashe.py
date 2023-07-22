@@ -56,15 +56,15 @@ def cashe_message(race, message):
             print ("Failed to create directory %s" % race)
         else:
             print ("The directory %s was successfully created" % race)
-	
+
     if message.find(b"AIVDM") != -1 :
         if getFlag(race) == "0":
             setFlag("1", race)
-            openf = 'wb'						
+            openf = 'wb'
         else:
             openf = 'ab'
         with open(race + "/" + "AIVDM.txt", openf) as fdFlag:
-            fdFlag.write(message)	
+            fdFlag.write(message)
     else:
         if message.find(b"GPRMC") != -1 :
             setFlag("0", race)
@@ -77,12 +77,15 @@ def cashe_message(race, message):
                     times[race] = btime
             else:
                 print(now,"Boats coordinates on", race, "voyage for time", printTime(btime) , "are obtained")
-                times[race] = btime                    
+                times[race] = btime
+                with open("RACE.txt", "w") as f:
+                    f.write(race)
+
         else:
             openf = 'ab'
         with open(race + "/" + "GPRMC.txt", openf) as fdFlag:
             fdFlag.write(message)
-	
+
 def setFlag(str, race):
     flags[race] = str
 
@@ -141,6 +144,10 @@ def accept_connection(sock):
 
 
 logging.basicConfig(level=logging.INFO)
+
+logging.info("Clearing file RACE.txt")
+with open("RACE.txt", "w") as f:
+    f.write("")
 
 logging.info("Creating Server on port " + str(PORT))
 server = None
