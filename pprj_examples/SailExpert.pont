@@ -1,4 +1,4 @@
-; Mon Apr 26 20:20:42 MSK 2021
+; Fri Oct 13 21:39:03 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -38,9 +38,8 @@
 		(allowed-values HEADER LIFT NIL)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot heel
+	(single-slot roll
 		(type INTEGER)
-		(default 0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot mark
@@ -96,7 +95,7 @@
 		(create-accessor read-write))
 	(single-slot slope
 		(type SYMBOL)
-		(allowed-values UP DOWN)
+		(allowed-values UP DOWN LEFT RIGHT)
 		(default DOWN)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -123,6 +122,10 @@
 		(type INTEGER)
 		(range 0 %3FVARIABLE)
 		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot roll-interval
+		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot epsilon
@@ -176,11 +179,6 @@
 	(single-slot sail-point
 		(type SYMBOL)
 		(allowed-values INIRONS CLOSEHAULED CLOSEREACH BEAMREACH BROADREACH RUNNING UNDEFINED)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot heel
-		(type INTEGER)
-		(default 0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
@@ -381,26 +379,38 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot roll-interval
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot status
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot roll
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot pitch-interval
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass BoatPitch
+(defclass BoatToss
 	(is-a SailExpert+Onto)
 	(role concrete)
 	(single-slot time
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot slope
-		(type SYMBOL)
-		(allowed-values UP DOWN)
-		(default DOWN)
+	(single-slot label
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot boat
-		(type STRING)
+	(single-slot slope
+		(type SYMBOL)
+		(allowed-values UP DOWN LEFT RIGHT)
+		(default DOWN)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 

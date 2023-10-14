@@ -1,4 +1,4 @@
-; Mon Apr 26 20:20:42 MSK 2021
+; Fri Oct 13 21:39:03 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -178,28 +178,28 @@
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Move up"))
 
-([KB_182384_Class1717] of  Map
+([KB_700552_Class1717] of  Map
 
 	(entries
-		[KB_182384_Class1718]
-		[KB_182384_Class1719]
-		[KB_182384_Class1720]))
+		[KB_700552_Class1718]
+		[KB_700552_Class1719]
+		[KB_700552_Class1720]))
 
-([KB_182384_Class1718] of  Map_Entry
+([KB_700552_Class1718] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_182384_Class1719] of  Map_Entry
+([KB_700552_Class1719] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_182384_Class1720] of  Map_Entry
+([KB_700552_Class1720] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
@@ -520,6 +520,7 @@
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
 		[SailExpert_ProjectKB_Class11726]
 		[PAL_FORM_WIDGET]
+		[SailExpert_ProjectKB_Class71721]
 		[SailExpert_ProjectKB_Class101778]
 		[KB_729720_Class1785]
 		[SailExpert_ProjectKB_Class71761]
@@ -559,6 +560,20 @@
 	(is_hidden TRUE)
 	(property_list [KB_094132_Class24])
 	(widget_class_name "edu.stanford.smi.protegex.queries_tab.QueriesTab"))
+
+([SailExpert_ProjectKB_Class101768] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "verticalSpeed")
+	(property_list [SailExpert_ProjectKB_Class101769])
+	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
+	(width 100)
+	(x 300)
+	(y 180))
+
+([SailExpert_ProjectKB_Class101769] of  Property_List
+)
 
 ([SailExpert_ProjectKB_Class101778] of  Widget
 
@@ -618,7 +633,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
 	(width 120)
 	(x 0)
-	(y 0))
+	(y 60))
 
 ([SailExpert_ProjectKB_Class101794] of  Property_List
 )
@@ -634,20 +649,6 @@
 	(y 0))
 
 ([SailExpert_ProjectKB_Class101857] of  Property_List
-)
-
-([SailExpert_ProjectKB_Class111785] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "heel")
-	(property_list [SailExpert_ProjectKB_Class111786])
-	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
-	(width 100)
-	(x 100)
-	(y 240))
-
-([SailExpert_ProjectKB_Class111786] of  Property_List
 )
 
 ([SailExpert_ProjectKB_Class111793] of  String
@@ -705,7 +706,6 @@
 		[SailExpert_ProjectKB_Class21739]
 		[SailExpert_ProjectKB_Class41793]
 		[SailExpert_ProjectKB_Class51731]
-		[SailExpert_ProjectKB_Class111785]
 		[SailExpert_ProjectKB_Class131913]
 		[SailExpert_ProjectKB_Class81733]))
 
@@ -1315,6 +1315,13 @@
 ([SailExpert_ProjectKB_Class61754] of  Property_List
 )
 
+([SailExpert_ProjectKB_Class71721] of  Widget
+
+	(is_hidden FALSE)
+	(name "Yacht")
+	(property_list [SailExpert_ProjectKB_Class81724])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
 ([SailExpert_ProjectKB_Class71723] of  String
 
 	(name "ShoreControl")
@@ -1328,7 +1335,7 @@
 ([SailExpert_ProjectKB_Class71725] of  String
 
 	(name "Wave")
-	(string_value "{Wave+pitch+}pitch{+pitch-interval+}pitch-interval"))
+	(string_value "{Wave+pitch+}pitch{+}pitch-interval{+roll+}roll{+}roll-interval"))
 
 ([SailExpert_ProjectKB_Class71726] of  String
 
@@ -1447,6 +1454,97 @@
 ([SailExpert_ProjectKB_Class71767] of  Property_List
 )
 
+([SailExpert_ProjectKB_Class81721] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "status")
+	(property_list [SailExpert_ProjectKB_Class81722])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 240)
+	(x 0)
+	(y 0))
+
+([SailExpert_ProjectKB_Class81722] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class81724] of  Property_List
+
+	(properties
+		[SailExpert_ProjectKB_Class81725]
+		[SailExpert_ProjectKB_Class81728]
+		[SailExpert_ProjectKB_Class81730]
+		[SailExpert_ProjectKB_Class81732]
+		[SailExpert_ProjectKB_Class91734]
+		[SailExpert_ProjectKB_Class91736]
+		[SailExpert_ProjectKB_Class91738]
+		[SailExpert_ProjectKB_Class91740]
+		[SailExpert_ProjectKB_Class91746]
+		[SailExpert_ProjectKB_Class91748]
+		[SailExpert_ProjectKB_Class91750]
+		[SailExpert_ProjectKB_Class91752]
+		[SailExpert_ProjectKB_Class91757]
+		[SailExpert_ProjectKB_Class91762]
+		[SailExpert_ProjectKB_Class91764]
+		[SailExpert_ProjectKB_Class91766]
+		[SailExpert_ProjectKB_Class101768]))
+
+([SailExpert_ProjectKB_Class81725] of  Property_List
+
+	(name "layout properties")
+	(properties
+		[SailExpert_ProjectKB_Class81726]
+		[SailExpert_ProjectKB_Class81727]))
+
+([SailExpert_ProjectKB_Class81726] of  String
+
+	(name "horizontal_stretcher")
+	(string_value "<<all>>"))
+
+([SailExpert_ProjectKB_Class81727] of  String
+
+	(name "vertical_stretcher")
+	(string_value "<<none>>"))
+
+([SailExpert_ProjectKB_Class81728] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "longitude")
+	(property_list [SailExpert_ProjectKB_Class81729])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 120))
+
+([SailExpert_ProjectKB_Class81729] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class81730] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "latitude")
+	(property_list [SailExpert_ProjectKB_Class81731])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([SailExpert_ProjectKB_Class81731] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class81732] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "url")
+	(property_list [SailExpert_ProjectKB_Class91733])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 400)
+	(x 0)
+	(y 240))
+
 ([SailExpert_ProjectKB_Class81733] of  Widget
 
 	(height 60)
@@ -1456,7 +1554,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
 	(width 100)
 	(x 100)
-	(y 300))
+	(y 240))
 
 ([SailExpert_ProjectKB_Class81734] of  Property_List
 )
@@ -1467,6 +1565,34 @@
 	(key_class "java.lang.String")
 	(value "SailExpert_ProjectKB_Class71732")
 	(value_class "java.util.Map"))
+
+([SailExpert_ProjectKB_Class81739] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "roll")
+	(property_list [SailExpert_ProjectKB_Class81740])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 120)
+	(x 0)
+	(y 120))
+
+([SailExpert_ProjectKB_Class81740] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class81743] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "roll-interval")
+	(property_list [SailExpert_ProjectKB_Class81744])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 120)
+	(x 120)
+	(y 120))
+
+([SailExpert_ProjectKB_Class81744] of  Property_List
+)
 
 ([SailExpert_ProjectKB_Class81766] of  Widget
 
@@ -1480,7 +1606,10 @@
 	(properties
 		[SailExpert_ProjectKB_Class91768]
 		[SailExpert_ProjectKB_Class91771]
-		[SailExpert_ProjectKB_Class101793]))
+		[SailExpert_ProjectKB_Class101793]
+		[SailExpert_ProjectKB_Class81739]
+		[SailExpert_ProjectKB_Class81743]
+		[SailExpert_ProjectKB_Class81721]))
 
 ([SailExpert_ProjectKB_Class81768] of  Widget
 
@@ -1611,6 +1740,237 @@
 ([SailExpert_ProjectKB_Class81837] of  Property_List
 )
 
+([SailExpert_ProjectKB_Class91733] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91734] of  Widget
+
+	(height 0)
+	(is_hidden FALSE)
+	(name "fillColor")
+	(property_list [SailExpert_ProjectKB_Class91735])
+	(width 0)
+	(x 0)
+	(y 0))
+
+([SailExpert_ProjectKB_Class91735] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91736] of  Widget
+
+	(height 0)
+	(is_hidden FALSE)
+	(name "angle")
+	(property_list [SailExpert_ProjectKB_Class91737])
+	(width 0)
+	(x 0)
+	(y 0))
+
+([SailExpert_ProjectKB_Class91737] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91738] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "course")
+	(property_list [SailExpert_ProjectKB_Class91739])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 100)
+	(x 100)
+	(y 180))
+
+([SailExpert_ProjectKB_Class91739] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91740] of  Widget
+
+	(height 180)
+	(is_hidden FALSE)
+	(name "tow")
+	(property_list [SailExpert_ProjectKB_Class91741])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 400)
+	(y 60))
+
+([SailExpert_ProjectKB_Class91741] of  Property_List
+
+	(properties
+		[SailExpert_ProjectKB_Class91742]
+		[SailExpert_ProjectKB_Class91743]
+		[SailExpert_ProjectKB_Class91744]
+		[SailExpert_ProjectKB_Class91745]))
+
+([SailExpert_ProjectKB_Class91742] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value  "))
+
+([SailExpert_ProjectKB_Class91743] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([SailExpert_ProjectKB_Class91744] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([SailExpert_ProjectKB_Class91745] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([SailExpert_ProjectKB_Class91746] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "label")
+	(property_list [SailExpert_ProjectKB_Class91747])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([SailExpert_ProjectKB_Class91747] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91748] of  Widget
+
+	(height 0)
+	(is_hidden FALSE)
+	(name "lineColor")
+	(property_list [SailExpert_ProjectKB_Class91749])
+	(width 0)
+	(x 0)
+	(y 0))
+
+([SailExpert_ProjectKB_Class91749] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91750] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "speed")
+	(property_list [SailExpert_ProjectKB_Class91751])
+	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
+	(width 100)
+	(x 200)
+	(y 180))
+
+([SailExpert_ProjectKB_Class91751] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91752] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "type")
+	(property_list [SailExpert_ProjectKB_Class91753])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 200)
+	(y 120))
+
+([SailExpert_ProjectKB_Class91753] of  Property_List
+
+	(properties
+		[SailExpert_ProjectKB_Class91754]
+		[SailExpert_ProjectKB_Class91755]
+		[SailExpert_ProjectKB_Class91756]))
+
+([SailExpert_ProjectKB_Class91754] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([SailExpert_ProjectKB_Class91755] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([SailExpert_ProjectKB_Class91756] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([SailExpert_ProjectKB_Class91757] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "iconScale")
+	(property_list [SailExpert_ProjectKB_Class91758])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 400)
+	(y 240))
+
+([SailExpert_ProjectKB_Class91758] of  Property_List
+
+	(properties
+		[SailExpert_ProjectKB_Class91759]
+		[SailExpert_ProjectKB_Class91760]
+		[SailExpert_ProjectKB_Class91761]))
+
+([SailExpert_ProjectKB_Class91759] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([SailExpert_ProjectKB_Class91760] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
+
+([SailExpert_ProjectKB_Class91761] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([SailExpert_ProjectKB_Class91762] of  Widget
+
+	(height 240)
+	(is_hidden FALSE)
+	(name "description")
+	(property_list [SailExpert_ProjectKB_Class91763])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextAreaWidget")
+	(width 400)
+	(x 0)
+	(y 300))
+
+([SailExpert_ProjectKB_Class91763] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91764] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "playground-index")
+	(property_list [SailExpert_ProjectKB_Class91765])
+	(widget_class_name "edu.stanford.smi.protege.widget.ComboBoxWidget")
+	(width 200)
+	(x 200)
+	(y 60))
+
+([SailExpert_ProjectKB_Class91765] of  Property_List
+)
+
+([SailExpert_ProjectKB_Class91766] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "altitude")
+	(property_list [SailExpert_ProjectKB_Class91767])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 100)
+	(x 0)
+	(y 180))
+
+([SailExpert_ProjectKB_Class91767] of  Property_List
+)
+
 ([SailExpert_ProjectKB_Class91768] of  Property_List
 
 	(name "layout properties")
@@ -1626,7 +1986,7 @@
 	(property_list [SailExpert_ProjectKB_Class91772])
 	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
 	(width 120)
-	(x 0)
+	(x 120)
 	(y 60))
 
 ([SailExpert_ProjectKB_Class91772] of  Property_List

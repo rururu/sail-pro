@@ -72,6 +72,10 @@ See details in screencasts. Some details can be differen of earlier - these are 
 
 [Using Wikipedia in races](https://youtu.be/GZFYdvlLbbw)
 
+10. Boat tossing effect.
+
+[Boat tossing control](https://youtu.be/27-_AhOrAg4)
+
 ### 2. Project Sail Expert
 
 1. Start sail-pro:

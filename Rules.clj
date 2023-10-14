@@ -1,3 +1,23 @@
+(czm0:CZML Navob Leg Generation2 1
+(CZMLGenerator delay ?del
+	visibility ?vis)
+(Onboard label ?onb)
+?cs (CZMLSpan time ?tim
+	object ?obj
+	options ?ops)
+(Clock0 time ?t ((not= ?obj ?onb)
+                       (> ?t ?tim)))
+=>
+(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]
+  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]
+    (let [dis (.distanceNM omo nmo)]
+      (if (< dis ?vis)
+        (light.cesium.core/model-leg 
+	nmo
+	(+ ?del 4)
+	(read-string (.getDescription nmo))))
+      (modify ?cs time (+ ?t ?del))))))
+
 (czm:Check Onboard 0
 (CZMLGenerator delay ?del)
 ?onb (Onboard label ?lab
@@ -97,9 +117,35 @@
 (MapObEvent0 status "REMOVED"
 	label ?lab)
 ?czs (CZMLSpan object ?lab)
+?bt (BoatToss label ?lab)
 =>
-(retract ?czs)
+(retract ?czs ?bt)
 (println "NavOb off map:" ?lab))
+
+(vr:Boat Tossing 0
+(Onboard label ?boat)
+(Wave pitch ?pit pitch-interval ?pin roll ?rol roll-interval ?rin)
+?bt (BoatToss label ?boat 
+	slope ?slp
+	time ?tim)
+(Clock0 time ?t (> ?t ?tim))
+=>
+(let [[ivl act amp slp] 
+         (condp = ?slp
+           'UP       [?rin :roll (+ ?rol) 'RIGHT]
+           'RIGHT  [?pin :pitch (- ?pit) 'DOWN]
+           'DOWN [?rin :roll (- ?rol) 'LEFT]
+           'LEFT    [?pin :pitch (+ ?pit) 'UP])]
+  (vr.dashcli/camera-control act amp)
+  (modify ?bt slope slp
+	time (+ ?t ivl))))
+
+(vr:Update Wave 0
+?w1 (Wave status "RUN")
+?w2 (Wave status "INIT")
+=>
+(retract ?w1)
+(modify ?w2 status "RUN"))
 
 (vr:Set Wikipedia Coordinates 1
 (CZMLGenerator)
@@ -109,31 +155,12 @@
 =>
 (vr.dashcli/set-wiki-coords ?lab))
 
-(czm0:CZML Navob Leg Generation2 1
-(CZMLGenerator delay ?del
-	visibility ?vis)
-(Onboard label ?onb)
-?cs (CZMLSpan time ?tim
-	object ?obj
-	options ?ops)
-(Clock0 time ?t ((not= ?obj ?onb)
-                       (> ?t ?tim)))
-=>
-(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]
-  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]
-    (let [dis (.distanceNM omo nmo)]
-      (if (< dis ?vis)
-        (light.cesium.core/model-leg 
-	nmo
-	(+ ?del 4)
-	(read-string (.getDescription nmo))))
-      (modify ?cs time (+ ?t ?del))))))
-
 (vr:NMEA Start 0
 (VRDashboardControl race ?rce)
 ?c (NMEAControl status "START"
 	delay ?del)
 ?d (NMEAData object ?obj)
+?w (Wave status "INIT")
 (Clock0 time ?t)
 =>
 (println "NMEA Start boat" (protege.core/sv ?obj "label"))
@@ -148,6 +175,7 @@
                           ""]
                   time ?t)
   (modify ?c status "RUN")
+  (modify ?w status "RUN")
   (if (nil? light.sim/ES-TIMER)
     (light.sim/start-sim))))
 
@@ -187,14 +215,13 @@
 ?nc (NMEAControl status "INIT")
 (Clock0 time ?t)
 =>
-(let [race (slurp "NMEA_CACHE/RACE.txt")]
-  (println :RACE race)
-  (if (= race "")
+(let [rc (slurp "NMEA_CACHE/RACE.txt")]
+  (if (= rc "")
     (println ".. waiting for race data ..")
-    (do (println "Race" race)
-      (when (not= ?rce race)
-        (vr.dashcli/new-race)
-        (modify ?vc race race)
+    (do (println "Race" rc)
+      (when (not= ?rce rc)
+        (vr.dashcli/new-race rc)
+        (modify ?vc race rc))
       (modify ?nc status "START")))))
 
 (vr:NavOb on Map 0
@@ -208,5 +235,8 @@
 =>
 (asser CZMLSpan object ?lab
 	time ?t)
+(asser BoatToss label ?lab
+	slope 'UP
+	time 0)
 (println "NavOb on map:" ?lab))
 

@@ -1,4 +1,4 @@
-; Sat Jul 22 20:12:14 MSK 2023
+; Sat Oct 14 18:00:42 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -26,17 +26,40 @@
 ;+		(value "Wikipedia Scan/vr.dashcli/wikipedia-scan")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot roll
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot vicinity
 		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot run
+		(type INSTANCE)
+;+		(allowed-classes Run)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot race
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot pitch
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot but-wiki-clear
 		(type STRING)
 ;+		(value "Wikipedia Clear/wiki.gis/clear-articles")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pitch-interval
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot slope
+		(type SYMBOL)
+		(allowed-values UP DOWN LEFT RIGHT)
+		(default UP)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot but-start
@@ -46,6 +69,10 @@
 		(create-accessor read-write))
 	(single-slot nmea-port
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot roll-interval
+		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot data
@@ -64,6 +91,11 @@
 	(single-slot but-start
 		(type STRING)
 ;+		(value "Start/vr.dashcli/start")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot run
+		(type INSTANCE)
+;+		(allowed-classes Run)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot wikipedia_control
@@ -177,5 +209,47 @@
 		(create-accessor read-write))
 	(single-slot lng
 		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass BoatToss
+	(is-a VR+Ontology)
+	(role concrete)
+	(single-slot label
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot time
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot slope
+		(type SYMBOL)
+		(allowed-values UP DOWN LEFT RIGHT)
+		(default UP)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Wave
+	(is-a VR+Ontology)
+	(role concrete)
+	(single-slot pitch
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot roll-interval
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot status
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot roll
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pitch-interval
+		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))

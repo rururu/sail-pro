@@ -1,4 +1,4 @@
-; Sat Apr 01 12:10:52 MSK 2023
+; Tue Oct 10 13:23:08 MSK 2023
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -86,6 +86,13 @@
 
 	(source "ZOOM")
 	(title "get-zoom []"))
+
+([CesiumEngine_Class80000] of  Rule
+
+	(lhs "(CZMLGenerator delay ?del\n	visibility ?vis)\n(Onboard label ?onb)\n?cs (CZMLSpan time ?tim\n	object ?obj\n	options ?ops)\n(Clock0 time ?t ((not= ?obj ?onb)\n                       (> ?t ?tim)))")
+	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/model-leg \n	nmo\n	(+ ?del 4)\n	(read-string (.getDescription nmo))))\n      (modify ?cs time (+ ?t ?del)))))")
+	(salience 1)
+	(title "czm0:CZML Navob Leg Generation2"))
 
 ([CesiumEngine_Class9] of  CloFunction
 

@@ -383,3 +383,6 @@
   (.show *prj* cti)
   (def START false)))
 
+(defn camera-control [k v]
+  (lps/request {k v} false))
+
