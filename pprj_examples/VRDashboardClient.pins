@@ -1,4 +1,4 @@
-; Sat Oct 21 12:41:25 MSK 2023
+; Thu May 16 21:26:45 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -143,13 +143,13 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [0 255 255 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
 	(playground-index 0)
 	(speed 0.0)
-	(url "file:resources/public/img/trir.png")
+	(url "file:resources/public/img/yachtr.png")
 	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class120000] of  CloFunction
@@ -333,8 +333,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 42.462563)
-	(lng -70.49413)
+	(lat 39.95017)
+	(lng 13.170154)
 	(vicinity 40.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -775,11 +775,11 @@
 
 ([VRDashboardClient_Class50001] of  VRDashboardControl
 
-	(boat_skin [VRDashboardClient_Class320009])
+	(boat_skin [VRDashboardClient_Class320007])
 	(nmea-port "8081")
 	(onboard "russor")
 	(port "8448")
-	(race "623.1")
+	(race "680.1")
 	(run [VRDashboardClient_Class30073])
 	(telnet-port "10470")
 	(visibility 200.0)

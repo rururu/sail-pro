@@ -1,3 +1,11 @@
+;;   Copyright (c) Rich Hickey and contributors. All rights reserved.
+;;   The use and distribution terms for this software are covered by the
+;;   Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
+;;   which can be found in the file epl-v10.html at the root of this distribution.
+;;   By using this software in any fashion, you are agreeing to be bound by
+;;   the terms of this license.
+;;   You must not remove this notice, or any other, from this software.
+
 (ns cljs.core.async.impl.ioc-helpers
   (:require [cljs.core.async.impl.protocols :as impl])
   (:require-macros [cljs.core.async.impl.ioc-macros :as ioc]))
@@ -61,86 +69,8 @@
 (defn return-chan [state value]
   (let [^not-native c (aget state USER-START-IDX)]
            (when-not (nil? value)
-             (impl/put! c value (fn-handler (fn [] nil))))
+             (impl/put! c value (fn-handler (fn [_] nil))))
            (impl/close! c)
            c))
 
-(defrecord ExceptionFrame [catch-block
-                           ^Class catch-exception
-                           finally-block
-                           continue-block
-                           prev])
 
-(defn add-exception-frame [state catch-block catch-exception finally-block continue-block]
-  (ioc/aset-all! state
-                 EXCEPTION-FRAMES
-                 (->ExceptionFrame catch-block
-                                   catch-exception
-                                   finally-block
-                                   continue-block
-                                   (aget-object state EXCEPTION-FRAMES))))
-
-(defn process-exception [state]
-  (let [exception-frame (aget-object state EXCEPTION-FRAMES)
-        catch-block (:catch-block exception-frame)
-        catch-exception (:catch-exception exception-frame)
-        exception (aget-object state CURRENT-EXCEPTION)]
-    (cond
-     (and exception
-          (not exception-frame))
-     (throw exception)
-
-     (and exception
-          catch-block
-          (or (= :default catch-exception)
-              (instance? catch-exception exception)))
-     (ioc/aset-all! state
-                    STATE-IDX
-                    catch-block
-                    VALUE-IDX
-                    exception
-                    CURRENT-EXCEPTION
-                    nil
-                    EXCEPTION-FRAMES
-                    (assoc exception-frame
-                      :catch-block nil
-                      :catch-exception nil))
-
-
-     (and exception
-          (not catch-block)
-          (not (:finally-block exception-frame)))
-
-     (do (ioc/aset-all! state
-                        EXCEPTION-FRAMES
-                        (:prev exception-frame))
-         (recur state))
-
-     (and exception
-          (not catch-block)
-          (:finally-block exception-frame))
-     (ioc/aset-all! state
-                    STATE-IDX
-                    (:finally-block exception-frame)
-                    EXCEPTION-FRAMES
-                    (assoc exception-frame
-                      :finally-block nil))
-
-     (and (not exception)
-          (:finally-block exception-frame))
-     (do (ioc/aset-all! state
-                        STATE-IDX
-                        (:finally-block exception-frame)
-                        EXCEPTION-FRAMES
-                        (assoc exception-frame
-                          :finally-block nil)))
-
-     (and (not exception)
-          (not (:finally-block exception-frame)))
-     (do (ioc/aset-all! state
-                   STATE-IDX
-                   (:continue-block exception-frame)
-                   EXCEPTION-FRAMES
-                   (:prev exception-frame)))
-
-     :else (throw (js/Error. "No matching clause")))))

@@ -186,8 +186,8 @@
 
 (defn- alias-map
   [compiler cljs-ns]
-  (->> (merge (get-in compiler [::ana/namespaces cljs-ns :requires])
-         (get-in compiler [::ana/namespaces cljs-ns :require-macros]))
+  (->> (env/with-compiler-env compiler
+         (ana/get-aliases cljs-ns))
     (remove (fn [[k v]] (symbol-identical? k v)))
     (into {})))
 
@@ -759,7 +759,7 @@
                           false.
       :context          - optional, sets the context for the source. Possible values
                           are `:expr`, `:statement` and `:return`. Defaults to
-                          `:expr`.
+                          `:statement`.
 
    cb (function)
      callback, will be invoked with a map. If successful the map will contain
@@ -837,9 +837,15 @@
                         (filter ana/dep-has-global-exports? (:deps ast))
                         ns-name
                         (:def-emits-var opts))
-                      (cb {:value (*eval-fn* {:source (.toString sb)})})))))
+                      (cb (try
+                            {:ns ns-name :value ((:*eval-fn* bound-vars) {:source (.toString sb)})}
+                            (catch :default cause
+                              (wrap-error (ana/error aenv "ERROR" cause)))))))))
               (let [src (with-out-str (comp/emit ast))]
-                (cb {:value (*eval-fn* {:source src})})))))))))
+                (cb (try
+                      {:value ((:*eval-fn* bound-vars) {:source src})}
+                      (catch :default cause
+                        (wrap-error (ana/error aenv "ERROR" cause)))))))))))))
 
 (defn eval
   "Evaluate a single ClojureScript form. The parameters:
@@ -875,7 +881,7 @@
                           false.
       :context          - optional, sets the context for the source. Possible values
                           are `:expr`, `:statement` and `:return`. Defaults to
-                          `:expr`.
+                          `:statement`.
 
    cb (function)
      callback, will be invoked with a map. If successful the map will contain
@@ -1002,7 +1008,7 @@
                           false.
       :context          - optional, sets the context for the source. Possible values
                           are `:expr`, `:statement` and `:return`. Defaults to
-                          `:expr`.
+                          `:statement`.
 
    cb (function)
      callback, will be invoked with a map. If successful the map will contain
@@ -1174,7 +1180,7 @@
                         false.
     :context          - optional, sets the context for the source. Possible values
                      are `:expr`, `:statement` and `:return`. Defaults to
-                      `:expr`.
+                      `:statement`.
 
   cb (function)
     callback, will be invoked with a map. If succesful the map will contain

@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.439 {}
+// Compiled by ClojureScript 1.11.132 {:optimizations :none}
 goog.provide('cljs.core.async.impl.dispatch');
 goog.require('cljs.core');
 goog.require('cljs.core.async.impl.buffers');
@@ -8,20 +8,20 @@ cljs.core.async.impl.dispatch.running_QMARK_ = false;
 cljs.core.async.impl.dispatch.queued_QMARK_ = false;
 cljs.core.async.impl.dispatch.TASK_BATCH_SIZE = (1024);
 cljs.core.async.impl.dispatch.process_messages = (function cljs$core$async$impl$dispatch$process_messages(){
-cljs.core.async.impl.dispatch.running_QMARK_ = true;
+(cljs.core.async.impl.dispatch.running_QMARK_ = true);
 
-cljs.core.async.impl.dispatch.queued_QMARK_ = false;
+(cljs.core.async.impl.dispatch.queued_QMARK_ = false);
 
-var count_7436 = (0);
+var count_10132 = (0);
 while(true){
-var m_7437 = cljs.core.async.impl.dispatch.tasks.pop();
-if((m_7437 == null)){
+var m_10133 = cljs.core.async.impl.dispatch.tasks.pop();
+if((m_10133 == null)){
 } else {
-m_7437.call(null);
+m_10133.call(null);
 
-if((count_7436 < cljs.core.async.impl.dispatch.TASK_BATCH_SIZE)){
-var G__7438 = (count_7436 + (1));
-count_7436 = G__7438;
+if((count_10132 < cljs.core.async.impl.dispatch.TASK_BATCH_SIZE)){
+var G__10134 = (count_10132 + (1));
+count_10132 = G__10134;
 continue;
 } else {
 }
@@ -29,7 +29,7 @@ continue;
 break;
 }
 
-cljs.core.async.impl.dispatch.running_QMARK_ = false;
+(cljs.core.async.impl.dispatch.running_QMARK_ = false);
 
 if((cljs.core.async.impl.dispatch.tasks.length > (0))){
 return cljs.core.async.impl.dispatch.queue_dispatcher.call(null);
@@ -41,9 +41,9 @@ cljs.core.async.impl.dispatch.queue_dispatcher = (function cljs$core$async$impl$
 if(((cljs.core.async.impl.dispatch.queued_QMARK_) && (cljs.core.async.impl.dispatch.running_QMARK_))){
 return null;
 } else {
-cljs.core.async.impl.dispatch.queued_QMARK_ = true;
+(cljs.core.async.impl.dispatch.queued_QMARK_ = true);
 
-return goog.async.nextTick.call(null,cljs.core.async.impl.dispatch.process_messages);
+return goog.async.nextTick(cljs.core.async.impl.dispatch.process_messages);
 }
 });
 cljs.core.async.impl.dispatch.run = (function cljs$core$async$impl$dispatch$run(f){

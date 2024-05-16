@@ -1,5 +1,5 @@
-var CLOSURE_UNCOMPILED_DEFINES = {};
-var CLOSURE_NO_DEPS = true;
+window.CLOSURE_UNCOMPILED_DEFINES = {};
+window.CLOSURE_NO_DEPS = true;
 if(typeof goog == "undefined") document.write('<script src="js/czlight/goog/base.js"></script>');
 document.write('<script src="js/czlight/goog/deps.js"></script>');
 document.write('<script src="js/czlight/cljs_deps.js"></script>');

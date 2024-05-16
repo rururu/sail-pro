@@ -1,0 +1,149 @@
+; Thu May 16 20:10:05 MSK 2024
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(multislot but-deep-copy
+;+		(type ANY)
+		(create-accessor read-write))
+	(multislot but-shal-copy
+;+		(type ANY)
+		(create-accessor read-write))
+	(multislot source-project
+;+		(type ANY)
+		(create-accessor read-write))
+	(multislot but-del-fil
+;+		(type ANY)
+		(create-accessor read-write))
+	(single-slot asset-path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot css
+		(type INSTANCE)
+;+		(allowed-classes CSS)
+		(create-accessor read-write))
+	(multislot but-check-scen-vars
+;+		(type ANY)
+		(create-accessor read-write))
+	(single-slot epilogue
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot but-find-unref
+;+		(type ANY)
+		(create-accessor read-write))
+	(multislot required
+		(type INSTANCE)
+;+		(allowed-classes ClsRequired)
+		(create-accessor read-write))
+	(single-slot output-to
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot html
+		(type INSTANCE)
+;+		(allowed-classes HTML)
+		(create-accessor read-write))
+	(single-slot output-dir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot but-del-unref
+;+		(type ANY)
+		(create-accessor read-write))
+	(multislot but-load-prj
+;+		(type ANY)
+		(create-accessor read-write))
+	(multislot scenario
+;+		(type ANY)
+		(create-accessor read-write)))
+
+(defclass ClsMain
+	(is-a CloProgram)
+	(role concrete)
+	(single-slot asset-path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot epilogue
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot html
+		(type INSTANCE)
+;+		(allowed-classes HTML)
+		(create-accessor read-write))
+	(multislot required
+		(type INSTANCE)
+;+		(allowed-classes ClsRequired)
+		(create-accessor read-write))
+	(single-slot butt-build
+		(type STRING)
+		(default "Build/cljs.compile/build")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot output-dir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot css
+		(type INSTANCE)
+;+		(allowed-classes CSS)
+		(create-accessor read-write))
+	(single-slot output-to
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot compiler-options
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass ClsRequired
+	(is-a ClsMain)
+	(role concrete))
+
+(defclass CSS
+	(is-a USER)
+	(role concrete)
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass HTML
+	(is-a USER)
+	(role concrete)
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))

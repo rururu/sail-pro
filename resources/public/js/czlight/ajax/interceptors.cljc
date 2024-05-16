@@ -38,11 +38,12 @@
   (-process-response [{:keys [response]} xhrio]
     (response xhrio)))
 
-(defn to-interceptor [m]
-  "Utility function. If you want to create your own interceptor
+(defn to-interceptor 
+   "Utility function. If you want to create your own interceptor
    quickly, this will do the job. Note you don't need to specify
    both methods. (Or indeed either, but it won't do much under
    those circumstances.)"
+  [m]
   (map->StandardInterceptor (merge
                              {:request identity :response identity}
                              m)))
@@ -92,14 +93,16 @@
 ;;; Note that the "response format" functions all return ResponseFormat returns.
 (defrecord ResponseFormat [read description content-type]
   Interceptor
-  (-process-request [{:keys [content-type]} request]
-    "Sets the headers on the request"
+  (-process-request
+    #_"Sets the headers on the request" 
+   [{:keys [content-type]} request]
     (update request
             :headers
             #(merge {"Accept" (content-type-to-request-header content-type)}
                     (or % {}))))
-  (-process-response [{:keys [read] :as format} xhrio]
-    "Transforms the raw response (an implementation of AjaxResponse)"
+  (-process-response
+    #_"Transforms the raw response (an implementation of AjaxResponse)"
+   [{:keys [read] :as format} xhrio]
     (try
       (let [status #? (:clj (long (-status xhrio))
                        :cljs (-status xhrio))
@@ -133,12 +136,13 @@
 ;;;
 ;;; Contrast with ResponseFormat, that has to change the request to add
 ;;; the Accept header, and then transforms the response to interpret the result.
-(defn ^:internal get-request-format [format]
+(defn ^:internal get-request-format 
   "Internal function. Takes whatever was provided as :request-format and 
    converts it to a true request format. In practice, this just means it will 
    interpret functions as formats and not change maps. Note that it throws an
    exception when passed a keyword, because they should already have been 
    transformed to maps."
+  [format]
   (cond
    (map? format) format
    (keyword? format) (u/throw-error ["keywords are not allowed as request formats in ajax calls: " format])
@@ -170,9 +174,10 @@
                    headers))))
   (-process-response [_ xhrio] xhrio))
 
-(m/defn-curried ^:internal uri-with-params [{:keys [vec-strategy params method url-params]} uri]
+(defn ^:internal uri-with-params 
   "Internal function. Takes a uri and appends the interpretation of the query string to it
    matching the behaviour of `url-request-format`."
+  [{:keys [vec-strategy params method url-params]} uri]
   (if-let [final-url-params (if (and (= method "GET") (nil? url-params))
                               params
                               url-params)]
@@ -189,9 +194,11 @@
 (defrecord ProcessUrlParameters []
   Interceptor
   (-process-request [_ {:keys [method] :as request}]
-    (let [if-get-reduce (if (= method "GET") reduced identity)]
-      (if-get-reduce (update request :uri
-                       (uri-with-params request)))))
+    (cond->
+      (update request :uri
+              (partial uri-with-params request))
+      (= method "GET")
+      reduced))
   (-process-response [_ response] response))
 
 ;;; DirectSubmission is one of the default interceptors.

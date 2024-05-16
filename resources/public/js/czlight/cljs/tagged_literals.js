@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.439 {}
+// Compiled by ClojureScript 1.11.132 {:optimizations :none}
 goog.provide('cljs.tagged_literals');
 goog.require('cljs.core');
 goog.require('cljs.reader');
@@ -17,7 +17,7 @@ throw (new Error("UUID literal expects a string as its representation."));
 }
 
 try{return cljs.core.uuid.call(null,form);
-}catch (e1783){var e = e1783;
+}catch (e3379){var e = e3379;
 throw (new Error(e.message));
 }});
 cljs.tagged_literals.read_inst = (function cljs$tagged_literals$read_inst(form){
@@ -27,7 +27,7 @@ throw (new Error("Instance literal expects a string for its timestamp."));
 }
 
 try{return new cljs.core.Var(function(){return cljs.reader.read_date;},new cljs.core.Symbol("cljs.reader","read-date","cljs.reader/read-date",1663417238,null),cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"private","private",-558947994),new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"file","file",-1269645878),new cljs.core.Keyword(null,"end-column","end-column",1425389514),new cljs.core.Keyword(null,"column","column",2078222095),new cljs.core.Keyword(null,"line","line",212345235),new cljs.core.Keyword(null,"end-line","end-line",1837326455),new cljs.core.Keyword(null,"arglists","arglists",1661989754),new cljs.core.Keyword(null,"doc","doc",1913296891),new cljs.core.Keyword(null,"test","test",577538877)],[true,new cljs.core.Symbol(null,"cljs.reader","cljs.reader",1327473948,null),new cljs.core.Symbol(null,"read-date","read-date",1874308181,null),"resources/public/js/czlight/cljs/reader.cljs",26,1,92,92,cljs.core.list(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"s","s",-948495851,null)], null)),null,(cljs.core.truth_(cljs.reader.read_date)?cljs.reader.read_date.cljs$lang$test:null)])).call(null,form);
-}catch (e1784){var e = e1784;
+}catch (e3380){var e = e3380;
 throw (new Error(e.message));
 }});
 cljs.tagged_literals.valid_js_literal_key_QMARK_ = (function cljs$tagged_literals$valid_js_literal_key_QMARK_(k){
@@ -41,17 +41,17 @@ cljs.tagged_literals.JSValue = (function (val){
 this.val = val;
 });
 
-cljs.tagged_literals.JSValue.getBasis = (function (){
+(cljs.tagged_literals.JSValue.getBasis = (function (){
 return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"val","val",1769233139,null)], null);
-});
+}));
 
-cljs.tagged_literals.JSValue.cljs$lang$type = true;
+(cljs.tagged_literals.JSValue.cljs$lang$type = true);
 
-cljs.tagged_literals.JSValue.cljs$lang$ctorStr = "cljs.tagged-literals/JSValue";
+(cljs.tagged_literals.JSValue.cljs$lang$ctorStr = "cljs.tagged-literals/JSValue");
 
-cljs.tagged_literals.JSValue.cljs$lang$ctorPrWriter = (function (this__4290__auto__,writer__4291__auto__,opt__4292__auto__){
-return cljs.core._write.call(null,writer__4291__auto__,"cljs.tagged-literals/JSValue");
-});
+(cljs.tagged_literals.JSValue.cljs$lang$ctorPrWriter = (function (this__5287__auto__,writer__5288__auto__,opt__5289__auto__){
+return cljs.core._write.call(null,writer__5288__auto__,"cljs.tagged-literals/JSValue");
+}));
 
 /**
  * Positional factory function for cljs.tagged-literals/JSValue.

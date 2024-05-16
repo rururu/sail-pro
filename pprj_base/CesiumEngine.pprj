@@ -1,4 +1,4 @@
-; Tue Oct 10 13:23:08 MSK 2023
+; Thu May 16 21:04:38 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,21 +20,21 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CesiumEngine_ProjectKB_Class1605]
-		[CesiumEngine_ProjectKB_Class1606]
-		[CesiumEngine_ProjectKB_Class1607]))
+		[CesiumEngine_ProjectKB_Class1749]
+		[CesiumEngine_ProjectKB_Class1750]
+		[CesiumEngine_ProjectKB_Class1751]))
 
-([CesiumEngine_ProjectKB_Class1605] of  String
+([CesiumEngine_ProjectKB_Class1749] of  String
 
 	(name "CZMLGenerator")
 	(string_value "{CZMLGenerator+del+}delay{+viz+}visibility"))
 
-([CesiumEngine_ProjectKB_Class1606] of  String
+([CesiumEngine_ProjectKB_Class1750] of  String
 
 	(name "Onboard")
 	(string_value "label"))
 
-([CesiumEngine_ProjectKB_Class1607] of  String
+([CesiumEngine_ProjectKB_Class1751] of  String
 
 	(name "CZMLSpan")
 	(string_value "{CZMLSpan+}object"))
@@ -369,34 +369,6 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_337564_Class1601] of  Map
-
-	(entries
-		[KB_337564_Class1602]
-		[KB_337564_Class1603]
-		[KB_337564_Class1604]))
-
-([KB_337564_Class1602] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_337564_Class1603] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_337564_Class1604] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
 ([KB_377789_Class0] of  String
 
 	(name "factory_class_name")
@@ -496,6 +468,34 @@
 
 	(name "instances_file_name")
 	(string_value "CesiumEngine.pins"))
+
+([KB_643848_Class1673] of  Map
+
+	(entries
+		[KB_643848_Class1674]
+		[KB_643848_Class1675]
+		[KB_643848_Class1676]))
+
+([KB_643848_Class1674] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_643848_Class1675] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_643848_Class1676] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([KB_684256_Class1343] of  Widget
 
@@ -641,6 +641,7 @@
 	(default_slot_metaclass ":STANDARD-SLOT")
 	(included_projects
 		"igis.pprj"
+		"ClojureScriptBuild.pprj"
 		"RuleEngine.pprj")
 	(journaling_enabled FALSE)
 	(next_frame_number 0)

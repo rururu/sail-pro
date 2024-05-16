@@ -1,3 +1,11 @@
+;;   Copyright (c) Rich Hickey and contributors. All rights reserved.
+;;   The use and distribution terms for this software are covered by the
+;;   Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
+;;   which can be found in the file epl-v10.html at the root of this distribution.
+;;   By using this software in any fashion, you are agreeing to be bound by
+;;   the terms of this license.
+;;   You must not remove this notice, or any other, from this software.
+
 (ns cljs.core.async
     (:refer-clojure :exclude [reduce transduce into merge map take partition partition-by])
     (:require [cljs.core.async.impl.protocols :as impl]
@@ -5,7 +13,8 @@
               [cljs.core.async.impl.buffers :as buffers]
               [cljs.core.async.impl.timers :as timers]
               [cljs.core.async.impl.dispatch :as dispatch]
-              [cljs.core.async.impl.ioc-helpers :as helpers])
+              [cljs.core.async.impl.ioc-helpers :as helpers]
+              [goog.array :as garray])
     (:require-macros [cljs.core.async.impl.ioc-macros :as ioc]
                      [cljs.core.async :refer [go go-loop]]))
 
@@ -140,15 +149,9 @@
   [n]
   (let [a (make-array n)]
     (dotimes [x n]
-      (aset a x 0))
-    (loop [i 1]
-      (if (= i n)
-        a
-        (do
-          (let [j (rand-int i)]
-            (aset a i (aget a j))
-            (aset a j i)
-            (recur (inc i))))))))
+      (aset a x x))
+    (garray/shuffle a)
+    a))
 
 (defn- alt-flag []
   (let [flag (atom true)]
@@ -172,7 +175,9 @@
 (defn do-alts
   "returns derefable [val port] if immediate, nil if enqueued"
   [fret ports opts]
+  (assert (pos? (count ports)) "alts must have at least one channel operation")
   (let [flag (alt-flag)
+        ports (vec ports) ;; ensure vector for indexed nth
         n (count ports)
         idxs (random-array n)
         priority (:priority opts)
@@ -307,14 +312,14 @@
   "Takes elements from the from channel and supplies them to the to
   channel, subject to the async function af, with parallelism n. af
   must be a function of two arguments, the first an input value and
-  the second a channel on which to place the result(s). af must close!
-  the channel before returning.  The presumption is that af will
-  return immediately, having launched some asynchronous operation
-  whose completion/callback will manipulate the result channel. Outputs
-  will be returned in order relative to  the inputs. By default, the to
-  channel will be closed when the from channel closes, but can be
-  determined by the close?  parameter. Will stop consuming the from
-  channel if the to channel closes."
+  the second a channel on which to place the result(s). The
+  presumption is that af will return immediately, having launched some
+  asynchronous operation whose completion/callback will put results on
+  the channel, then close! it. Outputs will be returned in order
+  relative to the inputs. By default, the to channel will be closed
+  when the from channel closes, but can be determined by the close?
+  parameter. Will stop consuming the from channel if the to channel
+  closes. See also pipeline, pipeline-blocking."
   ([n to af from] (pipeline-async n to af from true))
   ([n to af from close?] (pipeline* n to af from close? nil :async)))
 
@@ -382,14 +387,14 @@
       (let [ret (<! (reduce f init ch))]
         (f ret)))))
 
-(defn onto-chan
+(defn onto-chan!
   "Puts the contents of coll into the supplied channel.
 
   By default the channel will be closed after the items are copied,
   but can be determined by the close? parameter.
 
   Returns a channel which will close after the items are copied."
-  ([ch coll] (onto-chan ch coll true))
+  ([ch coll] (onto-chan! ch coll true))
   ([ch coll close?]
      (go-loop [vs (seq coll)]
               (if (and vs (>! ch (first vs)))
@@ -398,14 +403,25 @@
                   (close! ch))))))
 
 
-(defn to-chan
+(defn to-chan!
   "Creates and returns a channel which contains the contents of coll,
   closing when exhausted."
   [coll]
   (let [ch (chan (bounded-count 100 coll))]
-    (onto-chan ch coll)
+    (onto-chan! ch coll)
     ch))
 
+(defn onto-chan
+  "Deprecated - use onto-chan!"
+  {:deprecated "1.2"}
+  ([ch coll] (onto-chan! ch coll true))
+  ([ch coll close?] (onto-chan! ch coll close?)))
+
+(defn to-chan
+  "Deprecated - use to-chan!"
+  {:deprecated "1.2"}
+  [coll]
+  (to-chan! coll))
 
 (defprotocol Mux
   (muxch* [_]))
@@ -450,7 +466,6 @@
            (reset! dctr (count chs))
            (doseq [c chs]
                (when-not (put! c val done)
-                 (done nil)
                  (untap* m c)))
            ;;wait for all
            (when (seq chs)
@@ -517,7 +532,7 @@
         solo-modes #{:mute :pause}
         attrs (conj solo-modes :solo)
         solo-mode (atom :mute)
-        change (chan)
+        change (chan (sliding-buffer 1))
         changed #(put! change true)
         pick (fn [attr chs]
                (reduce-kv
@@ -534,7 +549,7 @@
                        {:solos solos
                         :mutes (pick :mute chs)
                         :reads (conj
-                                (if (and (= mode :pause) (not (empty? solos)))
+                                (if (and (= mode :pause) (seq solos))
                                   (vec solos)
                                   (vec (remove pauses (keys chs))))
                                 change)}))
@@ -699,18 +714,20 @@
                            (when (zero? (swap! dctr dec))
                              (put! dchan (.slice rets 0)))))
                        (range cnt))]
-       (go-loop []
-         (reset! dctr cnt)
-         (dotimes [i cnt]
-           (try
-             (take! (chs i) (done i))
-             (catch js/Object e
-               (swap! dctr dec))))
-         (let [rets (<! dchan)]
-           (if (some nil? rets)
-             (close! out)
-             (do (>! out (apply f rets))
-                 (recur)))))
+       (if (zero? cnt)
+         (close! out)
+         (go-loop []
+           (reset! dctr cnt)
+           (dotimes [i cnt]
+             (try
+               (take! (chs i) (done i))
+               (catch js/Object e
+                 (swap! dctr dec))))
+           (let [rets (<! dchan)]
+             (if (some nil? rets)
+               (close! out)
+               (do (>! out (apply f rets))
+                   (recur))))))
        out)))
 
 (defn merge

@@ -1,4 +1,4 @@
-; Tue Oct 10 13:23:08 MSK 2023
+; Thu May 16 21:04:38 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -198,7 +198,7 @@
 
 ([Cezium_Class13] of  CloFunction
 
-	(source "(.add (.-dataSources VIEWER) CZML-SRC)\n(.addEventListener (js/EventSource. (str url \"/czml\")) \"czml\" cz-processor false)\n(println [:INIT-3D-VIEW url])")
+	(source "(set! (.-enableLighting (.-globe (.-scene VIEWER))) true)\n(.add (.-dataSources VIEWER) CZML-SRC)\n(.addEventListener (js/EventSource. (str url \"/czml\")) \"czml\" cz-processor false)\n(println [:INIT-3D-VIEW url])")
 	(title "init-3D-view [url]"))
 
 ([Cezium_Class14] of  CloDocumentation

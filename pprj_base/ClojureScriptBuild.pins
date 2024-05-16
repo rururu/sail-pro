@@ -1,0 +1,50 @@
+; Thu May 16 20:10:05 MSK 2024
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([ClojureScriptBuild_Class1] of  CloProgram
+)
+
+([ClojureScriptBuild_Class10000] of  CloProgram
+)
+
+([ClojureScriptBuild_Class10001] of  CloNamespace
+
+	(source "(:require\n  [protege.core :as p]\n  [cljs.build.api :as bld])\n(:import\n  clojuretab.ProgramGenerator\n  java.io.File\n  java.io.FileWriter)"))
+
+([ClojureScriptBuild_Class10002] of  CloProgram
+
+	(cloFunctions
+		[ProClojure_Class0]
+		[ProClojure_Class10001]
+		[ClojureScriptBuild_Class10007]
+		[ClojureScriptBuild_Class10008]
+		[ClojureScriptBuild_Class10009])
+	(cloNamespace [ClojureScriptBuild_Class10003])
+	(cloVars [ProClojure_Class10002])
+	(title "ClojureScript Build"))
+
+([ClojureScriptBuild_Class10003] of  CloNamespace
+
+	(source "(:require\n  [protege.core :as p]\n  [cljs.build.api :as bld])\n(:import\n  clojuretab.ProgramGenerator\n  java.io.File\n  java.io.FileWriter)")
+	(title "cljs.compile"))
+
+([ClojureScriptBuild_Class10007] of  CloFunction
+
+	(source "(let [nsi (p/sv inst \"cloNamespace\")\n       nss (p/sv nsi \"title\")\n       [nam nsf] (ns-folder-and-name nss)\n       pgr (ProgramGenerator. inst)\n       _ (chk&mk-folder (str store-in SEP nsf))\n       fwr (FileWriter. (str store-in SEP nsf SEP nam \".cljs\"))]\n  (.generateProgram pgr fwr)\n  (if (not (empty? epilogue))\n    (.write fwr (str \"\\n\" epilogue)))\n  (.close fwr))")
+	(title "store-program [store-in inst epilogue]"))
+
+([ClojureScriptBuild_Class10008] of  CloFunction
+
+	(source "(let [tit (p/sv inst \"title\")\n       src (p/sv inst \"source\")\n       sin (p/sv inst \"store-in\")\n       _ (chk&mk-folder sin)\n       fwr (FileWriter. (str sin SEP tit ext))]\n  (.write fwr src)\n  (.close fwr))")
+	(title "store-asset [inst ext]"))
+
+([ClojureScriptBuild_Class10009] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n       sin (mp \"store-in\")\n       out (mp \"output-to\")\n       dir (mp \"output-dir\")\n       asp (mp \"asset-path\")\n       req (mp \"required\")\n       epi (mp \"epilogue\")\n       htm (mp \"html\")\n       css (mp \"css\")\n       nsi (mp \"cloNamespace\")\n       nss (p/sv nsi \"title\")\n       opt (assoc {} :output-to out\n                           :output-dir dir\n                           :asset-path asp\n                           :main nss)\n       opt (if-let [ado (mp \"compiler-options\")]\n               (merge opt (read-string ado))\n               opt)]\n  (doseq [c css]\n    (store-asset c \".css\"))\n  (doseq [h htm]\n    (store-asset h \".html\"))\n  (doseq [r req]\n    (store-program sin r \"\"))\n  (store-program sin inst epi)\n  (println [:CLJS-BUILD sin opt])\n  (bld/build sin opt))")
+	(title "build [hm inst]"))
+
+([ClojureScriptBuild_Class2] of  CloNamespace
+
+	(source "(:require\n  [protege.core :as p]\n  [cljs.build.api :as bld])\n(:import\n  clojuretab.ProgramGenerator\n  java.io.File\n  java.io.FileWriter)"))

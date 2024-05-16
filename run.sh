@@ -2,7 +2,7 @@
 
 cd $(dirname $0)
 
-JARS=lib/'*':lib_ext/'*':lib_pro/'*':lib_clo/'*'
+JARS=lib/'*':lib_cljs/'*':lib_ext/'*'
 MAIN_CLASS=edu.stanford.smi.protege.Application
 OPTIONS=-Xmx1000M
 ENCODING=-Dfile.encoding=UTF-8

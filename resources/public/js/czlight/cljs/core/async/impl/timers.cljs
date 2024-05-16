@@ -76,8 +76,14 @@
             (loop [i 0]
               (when (<= i level)
                 (let [links (.-forward (aget update i))]
-                  (aset (.-forward x) i (aget links i))
-                  (aset links i x)))))))))
+                  (if (< i (alength (.-forward x)))
+                    (aset (.-forward x) i (aget links i))
+                    (.push (.-forward x) (when (< i (alength links))
+                                           (aget links i))))
+                  (if (< i (alength links))
+                    (aset links i x)
+                    (.push links x)))
+                (recur (inc i)))))))))
 
   (remove [coll k]
     (let [update (make-array MAX_LEVEL)
@@ -104,16 +110,19 @@
         (let [nx (loop [x x]
                    (let [x' (when (< level (alength (.-forward x)))
                               (aget (.-forward x) level))]
-                     (when-not (nil? x')
-                       (if (>= (.-key x') k)
-                         x'
-                         (recur x')))))]
-          (if-not (nil? nx)
+                     (if-not (nil? x')
+                       (if (> (.-key x') k)
+                         x
+                         (recur x'))
+                       (when (zero? level)
+                         x))))]
+          (if nx
             (recur nx (dec level))
             (recur x (dec level))))
-        (when-not (identical? x header)
-          x))))
-  
+        (if (= (.-key x) k)
+          x
+          (aget (.-forward x) 0)))))
+
   (floorEntry [coll k]
     (loop [x header level level]
       (if-not (neg? level)
@@ -169,4 +178,3 @@
               (impl/close! timeout-channel))
             msecs)
           timeout-channel))))
-

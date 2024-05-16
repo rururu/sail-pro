@@ -3,11 +3,9 @@
      url, json and transit are found in their own files."
     (:require [ajax.interceptors :as i]
               [ajax.util :as u]
-              [ajax.protocols :as pr]
-              #? (:clj [ajax.macros :as m]))
+              [ajax.protocols :as pr])
     #? (:clj (:import [java.io InputStream]
-                      [java.util Scanner])
-        :cljs (:require-macros [ajax.macros :as m])))
+                      [java.util Scanner])))
 
 (defn raw-response-format
   "This will literally return whatever the underlying implementation
@@ -27,9 +25,10 @@
 #? (:clj
     ;;; http://stackoverflow.com/questions/309424/read-convert-an-inputstream-to-a-string
     (do
-      (defn response-to-string [response]
+      (defn response-to-string
         "Interprets the response as text (a string). Isn't likely 
          to give you a good outcome if the response wasn't text."
+        [response]
         (let [s (doto (Scanner. ^InputStream (pr/-body response)
                                 "UTF-8")
                   (.useDelimiter "\\A"))]
@@ -47,7 +46,7 @@
 
 ;;; Detect Response Format
 
-(m/defn-curried get-format [request format-entry]
+(defn get-format 
   "Converts one of a number of types to a response format.
    Note that it processes `[text format]` the same as `format`,
    which makes it easier to work with detection vectors such as
@@ -55,6 +54,7 @@
    
    It also supports providing formats as raw functions. I don't 
    know if anyone has ever used this."
+  [request format-entry]
   (cond
    (or (nil? format-entry) (map? format-entry))
    format-entry
@@ -65,7 +65,7 @@
    ;;; Must be a format generating function
    :else (format-entry request)))
 
-(m/defn-curried get-accept-entries [request format-entry]
+(defn get-accept-entries [request format-entry]
   (let [fe (if (vector? format-entry)
              (first format-entry)
              (:content-type (get-format request format-entry)))]
@@ -73,40 +73,44 @@
           (string? fe) [fe]
           :else fe)))
 
-(m/defn-curried content-type-matches
+(defn content-type-matches
   [^String content-type ^String accept]
   (or (= accept "*/*")
       (>= (.indexOf content-type accept) 0)))
 
-(m/defn-curried detect-content-type
+(defn detect-content-type
   [content-type request format-entry]
   (let [accept (get-accept-entries request format-entry)]
-    (some (content-type-matches content-type) accept)))
+    (some #(content-type-matches content-type %) accept)))
 
 (defn get-default-format
   [response {:keys [response-format] :as request}]
-  (let [f (detect-content-type (u/get-content-type response) request)]
-    (->> response-format
-         (filter f)
-         first
-         (get-format request))))
+  (let [content-type (u/get-content-type response)]
+    (letfn [(accepted-format?
+              [format-entry]
+              (detect-content-type content-type request format-entry))]
+      (->> response-format
+           (filter accepted-format?)
+           first
+           (get-format request)))))
 
-(m/defn-curried detect-response-format-read
-  [request response]
-  (let [format (get-default-format response request)]
-    ((:read format) response)))
+(defn detect-response-format-read
+  [request]
+  (fn detect-response-format [response]
+    (let [format (get-default-format response request)]
+      ((:read format) response))))
 
 (defn accept-header [{:keys [response-format] :as request}]
-  (if (vector? response-format)
-    (mapcat (get-accept-entries request) response-format)
-    (get-accept-entries request response-format)))
+  (let [formats (if (vector? response-format) response-format [response-format])]
+    (mapcat #(get-accept-entries request %) formats)))
 
-(defn detect-response-format [opts]
-    "NB This version of the response format doesn't have a zero
+(defn detect-response-format 
+   "NB This version of the response format doesn't have a zero
      arity version. This is because it would involve pulling
      in every dependency. Instead, core.cljc adds it in."
-     (let [accept (accept-header opts)]
-       (i/map->ResponseFormat
-        {:read (detect-response-format-read opts)
-         :format (str "(from " accept ")")
-         :content-type accept})))
+  [opts]
+    (let [accept (accept-header opts)]
+      (i/map->ResponseFormat
+      {:read (detect-response-format-read opts)
+        :format (str "(from " accept ")")
+        :content-type accept})))

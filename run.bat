@@ -1,6 +1,6 @@
 chcp 65001
 
-set JARS=lib\*;lib_ext\*;lib_pro\*;lib_clo\*
+set JARS=lib\*;lib_ext\*;lib_cljs\*
 set MAIN_CLASS=edu.stanford.smi.protege.Application
 set OPTIONS=-Xmx1000M
 set ENCODING=-Dfile.encoding=UTF-8

@@ -62,7 +62,8 @@
       (fly-control lat lon ALT head pitch roll per)))))
 
 (defn init-3D-view [url]
-  (.add (.-dataSources VIEWER) CZML-SRC)
+  (set! (.-enableLighting (.-globe (.-scene VIEWER))) true)
+(.add (.-dataSources VIEWER) CZML-SRC)
 (.addEventListener (js/EventSource. (str url "/czml")) "czml" cz-processor false)
 (println [:INIT-3D-VIEW url]))
 

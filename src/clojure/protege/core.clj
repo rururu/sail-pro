@@ -1,14 +1,16 @@
 (ns protege.core
 (:use clojure.stacktrace)
 (:import
+ java.io.File
+ java.io.FileWriter
  edu.stanford.smi.protege.ui.ProjectManager
  edu.stanford.smi.protege.model.ValueType
  edu.stanford.smi.protege.model.Instance
- edu.stanford.smi.protege.util.ComponentUtilities
- edu.stanford.smi.protege.widget.AbstractSlotWidget
- clojuretab.ClojureTab))
+ clojuretab.ClojureTab
+ clojuretab.ProgramGenerator))
 (def ^:dynamic *prj* (.getCurrentProject (ProjectManager/getProjectManager)))
 (def ^:dynamic *kb* (.getKnowledgeBase *prj*))
+(def SEP ProgramGenerator/FILE_SEPARATOR)
 (defn ins [name]
   (.getInstance *kb* name))
 
@@ -162,10 +164,10 @@ s)
          sls (.getTemplateSlots typ)
          mp (apply hash-map (mapcat #(list (.getName %)
 		(if (.getAllowsMultipleValues %)
-		  (if (= dep 0)
+		  (if (<= dep 0)
 		    (vec (.getOwnSlotValues val %))
 		    (vec (map (fn [x] (itm x (dec dep))) (.getOwnSlotValues val %))))
-		  (if (= dep 0)
+		  (if (<= dep 0)
 		    (.getOwnSlotValue val %)
 		    (itm (.getOwnSlotValue val %) (dec dep))))) sls))]
     (assoc mp :DIRTYP (.getName typ) :DEPTH dep))
@@ -189,14 +191,15 @@ s)
     (let [st (.getValueType sl)
            sc (.getAllowsMultipleValues sl)
            vmis (if (symbol? vmis) (name vmis) vmis)
-           tonum (fn [x] (if (number? x) x (read-string x)))
-           toinst (fn [x] (if (instance? Instance x) x (.getInstance *kb* x)))]
+           toint (fn [x] (and x (number? x) (int x)))
+           tofloat (fn [x] (and x (number? x) (float x)))
+           toinst (fn [x] (and x (instance? Instance x) x))]
       (cond
         (and sc (vector? vmis)) (ssvs ins sn (map #(mti % (dec dep)) vmis))
         (and sc (map? vmis)) (ssv ins sn (mti vmis (dec dep)))
         (or (= st (ValueType/STRING)) (= st (ValueType/SYMBOL))) (ssv ins sn (str vmis))
-        (= st (ValueType/INTEGER)) (ssv ins sn (int (tonum vmis)))
-        (= st (ValueType/FLOAT)) (ssv ins sn (float (tonum vmis)))
+        (= st (ValueType/INTEGER)) (ssv ins sn (toint vmis))
+        (= st (ValueType/FLOAT)) (ssv ins sn (tofloat vmis))
         (= st (ValueType/INSTANCE)) (ssv ins sn (toinst vmis))
         (= st (ValueType/BOOLEAN)) (ssv ins sn (and (not= vmis false) (not (nil? vmis)))))
       ins)
@@ -269,9 +272,10 @@ s)
   (let [ns (if (instance? Instance ins) (sv ins "title") ins)
          pth (.replace ns "." "/")]
     (try
-      (load (str "/" pth))
+      (load (str pth))
       true
       (catch Exception e
+        (println e)
         false))))
 ([hm inst]
   (let [mp (into {} hm)
@@ -290,9 +294,36 @@ s)
     (recur (mapcat #(svs % (first ss)) ii) (rest ss))
     ii)))
 
-(defn get-frame-slot-selection [frm sln]
-  (let [sws (ComponentUtilities/getDescendentsOfClass AbstractSlotWidget frm)
-       wgs (filter #(=(.getName (.getDescriptor %)) sln) sws)]
-  (if (seq wgs)
-    (.getSelection (first wgs)))))
+(defn ns-folder-and-name [nss]
+  (let [s (seq (.split nss "\\."))
+       n (last s)
+       f (apply str (interpose SEP (butlast s)))]
+ [n f]))
+
+(defn chk&mk-folder [path]
+  (let [fil (File. path)]
+  (if (not (.exists fil))
+    (.mkdirs fil))))
+
+(defn load-ns [hm inst]
+  (let [save-in "src/clojure"
+       refs (.getReferences inst)
+       frms (map #(.getFrame %) refs)
+       is-prg? #(= (.getDirectType %) (cls "CloProgram"))
+       prog (first (filter is-prg? frms))
+       nsi (sv prog "cloNamespace")
+       nss (sv nsi "title")
+       [nam nsf] (ns-folder-and-name nss)
+       pgr (ProgramGenerator. prog)
+       _ (chk&mk-folder (str save-in SEP nsf))
+       fwr (FileWriter. (str save-in SEP nsf SEP nam ".clj"))]
+  (.generateProgram pgr fwr)
+  (.close fwr)
+  (ldns nsi)))
+
+(defn load-clodoc [hm inst]
+  (ssv inst "source" (slurp (sv inst "path"))))
+
+(defn save-clodoc [hm inst]
+  (spit (sv inst "path") (sv inst "source")))
 

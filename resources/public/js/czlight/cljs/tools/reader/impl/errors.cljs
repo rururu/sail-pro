@@ -111,18 +111,12 @@
 (defn throw-eof-at-dispatch [rdr]
   (eof-error rdr "Unexpected EOF while reading dispatch character."))
 
-(defn throw-bad-dispatch [rdr ch]
-  (reader-error rdr "No dispatch macro for " ch "."))
-
 (defn throw-unmatch-delimiter [rdr ch]
   (reader-error rdr "Unmatched delimiter " ch "."))
 
 (defn throw-eof-reading [rdr kind & start]
   (let [init (case kind :regex "#\"" :string \")]
     (eof-error rdr "Unexpected EOF reading " (name kind) " starting " (apply str init start) ".")))
-
-(defn throw-no-dispatch [rdr ch]
-  (throw-bad-dispatch rdr ch))
 
 (defn throw-invalid-unicode-char[rdr token]
   (reader-error
@@ -152,10 +146,10 @@
    rdr
    "Invalid unicode literal. Unicode literals should be "
    expected
-   "characters long.  "
-   "value suppled is "
+   "characters long. "
+   "Value supplied is "
    actual
-   "characters long."))
+   " characters long."))
 
 (defn throw-invalid-character-literal[rdr token]
   (reader-error rdr "Invalid character literal \\u" token "."))
@@ -163,7 +157,7 @@
 (defn throw-invalid-octal-len[rdr token]
   (reader-error
    rdr
-   "Invalid octal escape sequence in a character literal:"
+   "Invalid octal escape sequence in a character literal: "
    token
    ". Octal escape sequences must be 3 or fewer digits."))
 
@@ -208,7 +202,7 @@
    rdr
    "Feature cannot be "
    (i/inspect feature)
-   " Features must be keywords."))
+   ". Features must be keywords."))
 
 (defn throw-ns-map-no-map [rdr ns-name]
   (reader-error rdr "Namespaced map with namespace " ns-name " does not specify a map."))

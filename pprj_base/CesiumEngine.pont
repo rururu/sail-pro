@@ -1,4 +1,4 @@
-; Tue Oct 10 13:23:08 MSK 2023
+; Thu May 16 21:04:38 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,16 +20,10 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot but-shal-copy
-;+		(type ANY)
-		(create-accessor read-write))
 	(single-slot but-onboard
 		(type STRING)
 ;+		(value "Go on Board/light.pro.server/go-onboard")
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot source-project
-;+		(type ANY)
 		(create-accessor read-write))
 	(single-slot port
 		(type STRING)
@@ -43,19 +37,10 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot but-del-unref
-;+		(type ANY)
-		(create-accessor read-write))
-	(multislot but-load-prj
-;+		(type ANY)
-		(create-accessor read-write))
 	(single-slot view
 		(type INTEGER)
 		(default 0)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot but-del-fil
-;+		(type ANY)
 		(create-accessor read-write))
 	(single-slot but-start-serv
 		(type STRING)
@@ -67,9 +52,6 @@
 ;+		(value "Start Cesium Client/light.pro.server/start-client")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot but-deep-copy
-;+		(type ANY)
-		(create-accessor read-write))
 	(single-slot but-stop-serv
 		(type STRING)
 ;+		(value "Stop Cesium Server/light.pro.server/stop-server")
@@ -78,9 +60,6 @@
 	(single-slot onboard
 		(type STRING)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot but-find-unref
-;+		(type ANY)
 		(create-accessor read-write)))
 
 (defclass CeziumEngine+Ontology

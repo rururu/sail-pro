@@ -18,21 +18,22 @@
 (defn process-response [response interceptor]
   (pr/-process-response interceptor response))
 
-(m/defn-curried js-handler [handler interceptors response]
-  (let [processed (reduce process-response response interceptors)]
-    ;;; This requires a bit of explanation: if we return a closeable,
-    ;;; it should be wrapping the original response, so we _don't_
-    ;;; close the original response stream
-    ;;; If you're writing a weird interceptor that doesn't do this,
-    ;;; remember to close the original stream yourself
-    #? (:clj (if (and response
-                      (instance? Closeable (second processed)))
-               (.close ^Closeable (pr/-body response))))
-    (handler processed)))
+(defn make-js-handler [handler interceptors]
+  (fn js-handler [response]
+    (let [processed (reduce process-response response interceptors)]
+      ;;; This requires a bit of explanation: if we return a closeable,
+      ;;; it should be wrapping the original response, so we _don't_
+      ;;; close the original response stream
+      ;;; If you're writing a weird interceptor that doesn't do this,
+      ;;; remember to close the original stream yourself
+      #?(:clj (if (and response
+                       (instance? Closeable (second processed)))
+                (.close ^Closeable (pr/-body response))))
+      (handler processed))))
 
 (defn base-handler [interceptors {:keys [handler]}]
   (if handler
-    (js-handler handler interceptors)
+    (make-js-handler handler interceptors)
     (u/throw-error "No ajax handler provided.")))
 
 (def default-interceptors (atom []))
@@ -50,12 +51,14 @@
   #? (:clj  (a/new-api)
       :cljs (new goog.net.XhrIo)))
 
-(defn process-request [request interceptor]
+(defn process-request 
   "-process-request with the arguments flipped for use in reduce"
+  [request interceptor]
   (pr/-process-request interceptor request))
 
-(defn raw-ajax-request [{:keys [interceptors] :as request}]
+(defn raw-ajax-request 
   "The main request function."
+  [{:keys [interceptors] :as request}]
   (let [request (reduce process-request request interceptors)
         ;;; Pass the request through the interceptors
         handler (base-handler (reverse interceptors) request)
