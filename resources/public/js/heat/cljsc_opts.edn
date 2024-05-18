@@ -1,1 +1,0 @@
-{:output-to "resources/public/js/heat.js", :output-dir "resources/public/js/heat", :asset-path "js/heat", :main "cesium.heat.client", :verbose false}

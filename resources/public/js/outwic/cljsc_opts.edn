@@ -1,1 +1,0 @@
-{:output-to "resources/public/js/wic.js", :output-dir "resources/public/js/outwic", :asset-path "js/outwic", :main "wint.client", :verbose false}

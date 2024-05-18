@@ -6,7 +6,7 @@
               [compojure.handler :as handler]
               [compojure.route :as route]
               [cognitect.transit :as t]
-              [light.cesium.core :as czs]
+              [light.cesium.core :as lcc]
               [clojure.core.async :as async :refer [chan alts!! put!]])
 (:import [java.io 
                ByteArrayOutputStream
@@ -89,9 +89,9 @@
 
 (defn init-server []
   (defroutes app-routes
-  (GET "/" [] (slurp (str ROOT "cezium_light.html")))
+  (GET "/" [] (slurp (str ROOT "cesium.html")))
   (GET "/test" [] (slurp (str ROOT "test.html")))
-  (GET "/czml" [] (czs/events))
+  (GET "/czml" [] (lcc/events))
   (GET "/vehicle" [& params] (vehicle params))
   (GET "/response" [& params] (response params))
   (GET "/cli-repl" [& params] (cli-repl params))
@@ -112,26 +112,27 @@
 ([hm inst]
   (if-let [port (sv inst "port")]
     (def PORT (read-string port)))
-  (start-server)))
+  (start-server)
+  (println "Cesium server started on port" PORT)))
 
 (defn stop-server
   ([]
   (when-let [serv SERV]
     (.stop serv)
     (def SERV nil)
-    (println "Server stopped!")))
+    (println "Cesium server stopped!")))
 ([hm inst]
   (stop-server)))
 
 (defn go-onboard
   ([hm inst]
-  (czs/new-doc)
+  (lcc/new-doc)
   (if-let [sel (DisplayUtilities/pickInstanceFromCollection nil (OMT/getNavObInstances) 0 "Select NavOb")]
     (let [lab (sv sel "label")]
       (ssv inst "onboard" lab)
       (vreset! ONBOARD lab))))
 ([lab]
-  (czs/new-doc)
+  (lcc/new-doc)
   (when-let [inst (first (cls-instances "CeziumControl"))]
     (ssv inst "onboard" lab)
     (vreset! ONBOARD lab))))

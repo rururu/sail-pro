@@ -1,1 +1,0 @@
-{:output-to "resources/public/js/cesium.js", :output-dir "resources/public/js/outcz", :asset-path "js/outcz", :main "view3d.client", :verbose false}

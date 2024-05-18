@@ -1,1 +1,0 @@
-{:output-to "resources/public/js/cezium/drape.js", :output-dir "resources/public/js/cezium/drape", :asset-path "js/cezium/drape", :main "drape.client", :verbose false}

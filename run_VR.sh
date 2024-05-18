@@ -2,7 +2,7 @@
 
 cd $(dirname $0)
 
-JARS=lib/'*':lib_ext/'*':lib_cljs/'*'
+JARS=lib/'*':lib_ext/'*'
 MAIN_CLASS=ru.igis.scena.Starter
 OPTIONS=-Xmx1000M
 ENCODING=-Dfile.encoding=UTF-8
