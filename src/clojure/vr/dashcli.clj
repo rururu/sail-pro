@@ -148,25 +148,22 @@
                    :view-post vpt)))
 
 (defn create-nearby-boat []
-  (let [onm (or @lps/ONBOARD
-                  (DisplayUtilities/editString nil "Exsisting Boat Name" "" nil))
-       nnm (DisplayUtilities/editString nil "New Boat Name" "" nil)]
-  (if (and (some? onm) (some? nnm))
-    (let [oi (fifos "NavOb" "label" onm)
-          ni (foc "NavOb" "label" nnm)
-          _ (ssv ni "latitude" "0 0")
-          _ (ssv ni "longitude" "0 0")
-          _ (ssv ni "url" (sv oi "url"))
-          _ (ssv ni "description" (sv oi "description"))
-          omo (OMT/getOrAdd oi)
-          nmo (OMT/getOrAdd ni)
-          crs (.getCourse omo)
-          [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]
-      (.setLatitude nmo lat)
-      (.setLongitude nmo lon)
-      (.setCourse nmo crs)
-      (.setSpeed nmo (.getSpeed omo))
-      (vswap! ONMAP conj nnm)))))
+  (let [oi (or @lps/ONBOARD
+                  (DisplayUtilities/pickInstance nil [(cls "NavOb")]))
+       ni (.shallowCopy oi *kb* nil)
+       nn (DisplayUtilities/editString nil "New Boat Name" "" nil)]
+  (when (and (some? ni) (some? nn))
+    (ssv ni "label" nn)
+    (.setDirectType *kb* ni (cls "VRFleet"))
+    (let [omo (OMT/getOrAdd oi)
+           nmo (OMT/getOrAdd ni)
+           crs (.getCourse omo)
+           [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]
+       (.setLatitude nmo lat)
+       (.setLongitude nmo lon)
+       (.setCourse nmo crs)
+       (.setSpeed nmo (.getSpeed omo))
+       (vswap! ONMAP conj nn)))))
 
 (defn show-controls []
   (.show *prj* (first (cls-instances "VRDashboardControl"))))
@@ -328,16 +325,6 @@
           (not (some #{nam} @ONMAP)))
       (OMT/removeMapOb no false)))))
 
-(defn start [hm inst]
-  (if START
-  (let [mp (into {} hm)]
-    (if-let [rce (mp "selected-race")]
-      (let [tpt (first (.split rce "\\."))
-            tpt (+ 10000 (read-string tpt))]
-        (ssv inst "selected-race" rce)
-        (ru.rules/assert-instances [inst]))
-      (println "Select race before!")))))
-
 (defn start-router-slava [uri path]
   (let [cmd (str "php -S " uri " " path)
       proc (Runtime/getRuntime)]
@@ -385,4 +372,11 @@
 
 (defn camera-control [k v]
   (lps/request {k v} false))
+
+(defn toggle-on-off [hm inst]
+  (ssv inst "status" "TOGGLE")
+(rr/assert-instances [inst]))
+
+(defn fly-to [lat lon]
+  (.setCenter (ru.igis.omtab.OpenMapTab/getMapBean) lat lon))
 

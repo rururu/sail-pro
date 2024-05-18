@@ -124,7 +124,11 @@
 
 (vr:Boat Tossing 0
 (Onboard label ?boat)
-(Wave pitch ?pit pitch-interval ?pin roll ?rol roll-interval ?rin)
+(Wave pitch ?pit 
+           pitch-interval ?pin 
+           roll ?rol
+           roll-interval ?rin
+           status "ON")
 ?bt (BoatToss label ?boat 
 	slope ?slp
 	time ?tim)
@@ -141,11 +145,18 @@
 	time (+ ?t ivl))))
 
 (vr:Update Wave 0
-?w1 (Wave status "RUN")
-?w2 (Wave status "INIT")
+?w1 (Wave status ?current-stat)
+?w2 (Wave status "TOGGLE"
+	instance ?wins)
 =>
 (retract ?w1)
-(modify ?w2 status "RUN"))
+(condp = ?current-stat
+  "OFF" (do (protege.core/ssv ?wins "status" "ON")
+                  (modify ?w2 status "ON"))
+  "ON" (do (vr.dashcli/camera-control :pitch 0)
+                  (vr.dashcli/camera-control :roll 0)
+                  (protege.core/ssv ?wins "status" "OFF")
+                  (modify ?w2 status "OFF"))))
 
 (vr:Set Wikipedia Coordinates 1
 (CZMLGenerator)
@@ -160,7 +171,8 @@
 ?c (NMEAControl status "START"
 	delay ?del)
 ?d (NMEAData object ?obj)
-?w (Wave status "INIT")
+?w (Wave instance ?wins
+	status ?wsts)
 (Clock0 time ?t)
 =>
 (println "NMEA Start boat" (protege.core/sv ?obj "label"))
@@ -175,7 +187,9 @@
                           ""]
                   time ?t)
   (modify ?c status "RUN")
-  (modify ?w status "RUN")
+  (when (not= ?wsts "ON")
+    (modify ?w status "ON")
+    (protege.core/ssv ?wins "status" "ON"))
   (if (nil? light.sim/ES-TIMER)
     (light.sim/start-sim))))
 
@@ -198,6 +212,7 @@
     (.setLongitude mo lon)
     (.setCourse mo (int crs))
     (.setSpeed mo spd)
+    (vr.dashcli/fly-to lat lon)
     (println "boat:" (protege.core/sv ?obj "label") bdata))
   (vr.dashcli/get-external-data (str "NMEA_CACHE/" ?rce "/AIVDM.txt") vr.dashcli/AIVDM)
   (vr.dashcli/get-fleet-data)
@@ -208,6 +223,9 @@
     (light.pro.server/start-client) 
     (light.pro.server/go-onboard ?onb) 
     (modify ?cv status "ONBOARD")))
+(vreset! light.pro.server/VEHICLES 
+  (map #(rete.core/slot-value 'object %) 
+           (rete.core/fact-list 'CZMLSpan)))
 (modify ?d time (+ ?t1 ?del)))
 
 (vr:NMEA Init 0
@@ -215,9 +233,11 @@
 ?nc (NMEAControl status "INIT")
 (Clock0 time ?t)
 =>
+(vr.dashcli/show-controls)
 (let [rc (slurp "NMEA_CACHE/RACE.txt")]
   (if (= rc "")
-    (println ".. waiting for race data ..")
+    (if (= (mod ?t 5) 0)
+      (println ".. waiting for race data .." ?t))
     (do (println "Race" rc)
       (when (not= ?rce rc)
         (vr.dashcli/new-race rc)

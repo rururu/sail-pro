@@ -1,7 +1,10 @@
-; Thu May 16 21:26:45 MSK 2024
+; Sat May 18 13:31:41 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
+
+([CesiumServer_Class10000] of  %3AUNDEFINED
+)
 
 ([VRDashboardClient_Class0] of  WorkingPrograms
 
@@ -46,11 +49,12 @@
 		[VRDashboardClient_Class320017]
 		[VRDashboardClient_Class100098]
 		[VRDashboardClient_Class80001]
-		[VRDashboardClient_Class240001]
 		[VRDashboardClient_Class290002]
 		[VRDashboardClient_Class180000]
 		[VRDashboardClient_Class170000]
-		[VRDashboardClient_Class30000])
+		[VRDashboardClient_Class30000]
+		[VRDashboardClient_Class210038]
+		[VRDashboardClient_Class300010])
 	(cloNamespace [VRDashboardClient_Class2])
 	(cloVars
 		[VRDashboardClient_Class20000]
@@ -66,6 +70,10 @@
 		[VRDashboardClient_Class270000])
 	(title "VR Dashboard Client"))
 
+([VRDashboardClient_Class10000] of  CloFuncall
+
+	(source "(ru.rules/dr)"))
+
 ([VRDashboardClient_Class100000] of  Rule
 
 	(lhs "(CZMLGenerator)\n(MapObEvent0 status \"REMOVED\"\n	label ?lab)\n?czs (CZMLSpan object ?lab)\n?bt (BoatToss label ?lab)")
@@ -77,7 +85,7 @@
 
 	(altitude 0)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "Spike")
 	(latitude "0 0")
 	(longitude "0 0")
@@ -123,7 +131,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "Bylina")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -134,7 +142,7 @@
 
 ([VRDashboardClient_Class110001] of  Rule
 
-	(lhs "(Onboard label ?boat)\n(Wave pitch ?pit pitch-interval ?pin roll ?rol roll-interval ?rin)\n?bt (BoatToss label ?boat \n	slope ?slp\n	time ?tim)\n(Clock0 time ?t (> ?t ?tim))")
+	(lhs "(Onboard label ?boat)\n(Wave pitch ?pit \n           pitch-interval ?pin \n           roll ?rol\n           roll-interval ?rin\n           status \"ON\")\n?bt (BoatToss label ?boat \n	slope ?slp\n	time ?tim)\n(Clock0 time ?t (> ?t ?tim))")
 	(rhs "(let [[ivl act amp slp] \n         (condp = ?slp\n           'UP       [?rin :roll (+ ?rol) 'RIGHT]\n           'RIGHT  [?pin :pitch (- ?pit) 'DOWN]\n           'DOWN [?rin :roll (- ?rol) 'LEFT]\n           'LEFT    [?pin :pitch (+ ?pit) 'UP])]\n  (vr.dashcli/camera-control act amp)\n  (modify ?bt slope slp\n	time (+ ?t ivl)))")
 	(salience 0)
 	(title "vr:Boat Tossing"))
@@ -143,7 +151,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "russor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -192,8 +200,12 @@
 	(pitch 1)
 	(pitch-interval 4)
 	(roll 2)
-	(roll-interval 3)
-	(status "INIT"))
+	(roll-interval 2)
+	(status "ON"))
+
+([VRDashboardClient_Class140000] of  CloFuncall
+
+	(source "(ru.rules/pp 'CZMLSpan)"))
 
 ([VRDashboardClient_Class140002] of  CloFunction
 
@@ -202,18 +214,18 @@
 
 ([VRDashboardClient_Class150000] of  CloFuncall
 
-	(source "(in-ns 'vr.dashcli)"))
+	(source "(rete.core/facts-with-slot-value 'CZMLSpan "))
 
 ([VRDashboardClient_Class150001] of  Rule
 
-	(lhs "?w1 (Wave status \"RUN\")\n?w2 (Wave status \"INIT\")")
-	(rhs "(retract ?w1)\n(modify ?w2 status \"RUN\")")
+	(lhs "?w1 (Wave status ?current-stat)\n?w2 (Wave status \"TOGGLE\"\n	instance ?wins)")
+	(rhs "(retract ?w1)\n(condp = ?current-stat\n  \"OFF\" (do (protege.core/ssv ?wins \"status\" \"ON\")\n                  (modify ?w2 status \"ON\"))\n  \"ON\" (do (vr.dashcli/camera-control :pitch 0)\n                  (vr.dashcli/camera-control :roll 0)\n                  (protege.core/ssv ?wins \"status\" \"OFF\")\n                  (modify ?w2 status \"OFF\")))")
 	(salience 0)
 	(title "vr:Update Wave"))
 
 ([VRDashboardClient_Class150002] of  CloFunction
 
-	(source "(let [onm (or @lps/ONBOARD\n                  (DisplayUtilities/editString nil \"Exsisting Boat Name\" \"\" nil))\n       nnm (DisplayUtilities/editString nil \"New Boat Name\" \"\" nil)]\n  (if (and (some? onm) (some? nnm))\n    (let [oi (fifos \"NavOb\" \"label\" onm)\n          ni (foc \"NavOb\" \"label\" nnm)\n          _ (ssv ni \"latitude\" \"0 0\")\n          _ (ssv ni \"longitude\" \"0 0\")\n          _ (ssv ni \"url\" (sv oi \"url\"))\n          _ (ssv ni \"description\" (sv oi \"description\"))\n          omo (OMT/getOrAdd oi)\n          nmo (OMT/getOrAdd ni)\n          crs (.getCourse omo)\n          [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]\n      (.setLatitude nmo lat)\n      (.setLongitude nmo lon)\n      (.setCourse nmo crs)\n      (.setSpeed nmo (.getSpeed omo))\n      (vswap! ONMAP conj nnm))))")
+	(source "(let [oi (or @lps/ONBOARD\n                  (DisplayUtilities/pickInstance nil [(cls \"NavOb\")]))\n       ni (.shallowCopy oi *kb* nil)\n       nn (DisplayUtilities/editString nil \"New Boat Name\" \"\" nil)]\n  (when (and (some? ni) (some? nn))\n    (ssv ni \"label\" nn)\n    (.setDirectType *kb* ni (cls \"VRFleet\"))\n    (let [omo (OMT/getOrAdd oi)\n           nmo (OMT/getOrAdd ni)\n           crs (.getCourse omo)\n           [lat lon] (Util/relPos (.getLatitude omo) (.getLongitude omo) crs 0.1)]\n       (.setLatitude nmo lat)\n       (.setLongitude nmo lon)\n       (.setCourse nmo crs)\n       (.setSpeed nmo (.getSpeed omo))\n       (vswap! ONMAP conj nn))))")
 	(title "create-nearby-boat []"))
 
 ([VRDashboardClient_Class150024] of  CloFunction
@@ -233,10 +245,6 @@
 
 	(source "(.show *prj* (first (cls-instances \"VRDashboardControl\")))")
 	(title "show-controls []"))
-
-([VRDashboardClient_Class160020] of  CloFuncall
-
-	(source "(ru.rules/dr)"))
 
 ([VRDashboardClient_Class170000] of  CloFunction
 
@@ -258,13 +266,25 @@
 	(source "(condp = url\n  \"file:resources/public/img/yachtg.png\" \"file:resources/public/img/yachtr.png\"\n  \"file:resources/public/img/tallp.png\" \"file:resources/public/img/tallr.png\"\n  \"file:resources/public/img/trir.png\")")
 	(title "my-boat-icon [url]"))
 
-([VRDashboardClient_Class180027] of  CloFuncall
+([VRDashboardClient_Class180001] of  CloFuncall
 
-	(source "(ru.rules/pp 'Wave)"))
+	(source "light.pro.server/VEHICLES"))
 
-([VRDashboardClient_Class180030] of  CloFuncall
+([VRDashboardClient_Class190001] of  CloFuncall
 
-	(source "(println \"----------------------------------------------------------------------------------------------------------------------------\")"))
+	(source "(rete.core/facts-with-slot-value 'CZMLSpan 'object 'not= nil)"))
+
+([VRDashboardClient_Class190002] of  CloFuncall
+
+	(source "(rete.core/facts-with-slot-value 'CZMLSpan 'object '= \"LAZARE\")"))
+
+([VRDashboardClient_Class190003] of  CloFuncall
+
+	(source "(rete.core/facts-with-slot-value 'CZMLSpan 'object 'eq \"LAZARE\")"))
+
+([VRDashboardClient_Class190004] of  CloFuncall
+
+	(source "(rete.core/facts-with-slot-value 'CZMLSpan 'object '= LAZARE)"))
 
 ([VRDashboardClient_Class190005] of  CloFunction
 
@@ -287,6 +307,10 @@
 	(%3AANNOTATION-TEXT "Current BBXWiki Request")
 	(%3ACREATION-TIMESTAMP "2021.05.10 12:10:38.095 MSK")
 	(%3ACREATOR "ru"))
+
+([VRDashboardClient_Class200005] of  CloFuncall
+
+	(source "(rete.core/facts-with-slot-value 'CZMLSpan 'object '= 'LAZARE)"))
 
 ([VRDashboardClient_Class200006] of  CloFunction
 
@@ -318,11 +342,24 @@
 	(source "nil")
 	(title "RMMA"))
 
+([VRDashboardClient_Class210006] of  CloFuncall
+
+	(source "(rete.core/fact-list 'CZMLSpan)"))
+
+([VRDashboardClient_Class210007] of  CloFuncall
+
+	(source "(map #(rete.core/slot-value 'object %) (rete.core/fact-list 'CZMLSpan))"))
+
+([VRDashboardClient_Class210038] of  CloFunction
+
+	(source "(ssv inst \"status\" \"TOGGLE\")\n(rr/assert-instances [inst])")
+	(title "toggle-on-off [hm inst]"))
+
 ([VRDashboardClient_Class220000] of  NavOb
 
 	(altitude 4)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "neighbor")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -333,8 +370,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 39.95017)
-	(lng 13.170154)
+	(lat 38.537323)
+	(lng 15.113642)
 	(vicinity 40.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -348,24 +385,6 @@
 	(rhs "(vr.dashcli/set-wiki-coords ?lab)")
 	(salience 1)
 	(title "vr:Set Wikipedia Coordinates"))
-
-([VRDashboardClient_Class240000] of  MedievalMix
-
-	(altitude 0)
-	(course 270)
-	(description "{:draft 4\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
-	(label "SANTA_MARIA")
-	(latitude "59 59.9")
-	(longitude "29 38.8")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/tallp.png")
-	(verticalSpeed 0.0))
-
-([VRDashboardClient_Class240001] of  CloFunction
-
-	(source "(if START\n  (let [mp (into {} hm)]\n    (if-let [rce (mp \"selected-race\")]\n      (let [tpt (first (.split rce \"\\\\.\"))\n            tpt (+ 10000 (read-string tpt))]\n        (ssv inst \"selected-race\" rce)\n        (ru.rules/assert-instances [inst]))\n      (println \"Select race before!\"))))")
-	(title "start [hm inst]"))
 
 ([VRDashboardClient_Class240060] of  CloFunction
 
@@ -458,6 +477,11 @@
 
 	(source "\"\\r\\n\"")
 	(title "END-TOKEN"))
+
+([VRDashboardClient_Class300010] of  CloFunction
+
+	(source "(.setCenter (ru.igis.omtab.OpenMapTab/getMapBean) lat lon)")
+	(title "fly-to [lat lon]"))
 
 ([VRDashboardClient_Class30006] of  CloFunction
 
@@ -602,23 +626,36 @@
 
 ([VRDashboardClient_Class30076] of  Rule
 
-	(lhs "(VRDashboardControl race ?rce)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n?w (Wave status \"INIT\")\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n                          (.getLatitude mo)\n                          (.getLongitude mo)\n                          (.getCourse mo)\n                          (.getSpeed mo)\n                          \"\"]\n                  time ?t)\n  (modify ?c status \"RUN\")\n  (modify ?w status \"RUN\")\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
+	(lhs "(VRDashboardControl race ?rce)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n?w (Wave instance ?wins\n	status ?wsts)\n(Clock0 time ?t)")
+	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n                          (.getLatitude mo)\n                          (.getLongitude mo)\n                          (.getCourse mo)\n                          (.getSpeed mo)\n                          \"\"]\n                  time ?t)\n  (modify ?c status \"RUN\")\n  (when (not= ?wsts \"ON\")\n    (modify ?w status \"ON\")\n    (protege.core/ssv ?wins \"status\" \"ON\"))\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
 ([VRDashboardClient_Class30077] of  Rule
 
 	(lhs "(VRDashboardControl onboard ?onb \n	visibility ?vis \n                      boat_skin ?bsk\n	race ?rce)\n(NMEAControl status \"RUN\"\n	delay ?del)\n?d (NMEAData object ?obj\n	time ?t0)\n?cv (CesiumView status ?cesium-status)\n(Clock0 time ?t1 (> ?t1 ?t0))")
-	(rhs "(future (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\") vr.dashcli/GPRMC))\n(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\") vr.dashcli/AIVDM)\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis ?bsk)\n  (vr.dashcli/unvisible-offmap ?onb)\n  (when (= ?cesium-status \"START\")\n    (light.pro.server/start-server)\n    (light.pro.server/start-client) \n    (light.pro.server/go-onboard ?onb) \n    (modify ?cv status \"ONBOARD\")))\n(modify ?d time (+ ?t1 ?del))")
+	(rhs "(future (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\") vr.dashcli/GPRMC))\n(when-let [[tim lat lon spd crs dat :as bdata] (vr.dashcli/get-boat-data)]\n  (when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n    (.setLatitude mo lat)\n    (.setLongitude mo lon)\n    (.setCourse mo (int crs))\n    (.setSpeed mo spd)\n    (vr.dashcli/fly-to lat lon)\n    (println \"boat:\" (protege.core/sv ?obj \"label\") bdata))\n  (vr.dashcli/get-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\") vr.dashcli/AIVDM)\n  (vr.dashcli/get-fleet-data)\n  (vr.dashcli/show-neighbors ?onb ?vis ?bsk)\n  (vr.dashcli/unvisible-offmap ?onb)\n  (when (= ?cesium-status \"START\")\n    (light.pro.server/start-server)\n    (light.pro.server/start-client) \n    (light.pro.server/go-onboard ?onb) \n    (modify ?cv status \"ONBOARD\")))\n(modify ?d time (+ ?t1 ?del))")
 	(salience 0)
 	(title "vr:NMEA Run"))
+
+([VRDashboardClient_Class310004] of  MedievalMix
+
+	(altitude 0)
+	(course 270)
+	(description "{:draft 4\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(label "SANTA_MARIA")
+	(latitude "59 59.9")
+	(longitude "29 38.8")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/tallp.png")
+	(verticalSpeed 0.0))
 
 ([VRDashboardClient_Class320007] of  Model3D
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "BERMUDA_SLOOP")
 	(latitude "60 0")
 	(longitude "29 39")
@@ -739,7 +776,7 @@
 ([VRDashboardClient_Class330024] of  Rule
 
 	(lhs "?vc (VRDashboardControl race ?rce)\n?nc (NMEAControl status \"INIT\")\n(Clock0 time ?t)")
-	(rhs "(vr.dashcli/show-controls)\n(let [rc (slurp \"NMEA_CACHE/RACE.txt\")]\n  (if (= rc \"\")\n    (println \".. waiting for race data ..\")\n    (do (println \"Race\" rc)\n      (when (not= ?rce rc)\n        (vr.dashcli/new-race rc)\n        (modify ?vc race rc))\n      (modify ?nc status \"START\"))))")
+	(rhs "(vr.dashcli/show-controls)\n(let [rc (slurp \"NMEA_CACHE/RACE.txt\")]\n  (if (= rc \"\")\n    (if (= (mod ?t 5) 0)\n      (println \".. waiting for race data ..\" ?t))\n    (do (println \"Race\" rc)\n      (when (not= ?rce rc)\n        (vr.dashcli/new-race rc)\n        (modify ?vc race rc))\n      (modify ?nc status \"START\"))))")
 	(salience 0)
 	(title "vr:NMEA Init"))
 
@@ -751,11 +788,12 @@
 ([VRDashboardClient_Class40001] of  RuleSet
 
 	(rules
-		[CeziumEngineLight_Class40022]
-		[CesiumEngine_Class80000]
-		[CeziumEngineLight_Class40005]
 		[CeziumEngineLight_Class40006]
-		[CeziumEngineLight_Class40007])
+		[CeziumEngineLight_Class40022]
+		[CeziumEngineLight_Class40007]
+		[CeziumEngineLight_Class40005]
+		[CesiumEngine_Class80000]
+		[CesiumEngine_Class80000])
 	(templates
 		[Clock0]
 		[CZMLGenerator]
@@ -778,11 +816,11 @@
 	(boat_skin [VRDashboardClient_Class320007])
 	(nmea-port "8081")
 	(onboard "russor")
-	(port "8448")
 	(race "680.1")
 	(run [VRDashboardClient_Class30073])
 	(telnet-port "10470")
 	(visibility 200.0)
+	(wave_control [VRDashboardClient_Class130011])
 	(wikipedia_control [VRDashboardClient_Class230000]))
 
 ([VRDashboardClient_Class60000] of  NavOb
@@ -843,7 +881,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "Vela")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -856,7 +894,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "Mars")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -869,7 +907,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "Diana")
 	(latitude "60 0")
 	(longitude "30 0")
@@ -882,7 +920,7 @@
 
 	(altitude 2)
 	(course 0)
-	(description "{:draft 7\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
 	(label "Argo")
 	(latitude "60 0")
 	(longitude "30 0")

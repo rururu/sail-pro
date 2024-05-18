@@ -1,4 +1,4 @@
-; Thu May 16 21:26:45 MSK 2024
+; Sat May 18 13:31:41 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -7,6 +7,11 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
+	(single-slot wave_control
+		(type INSTANCE)
+;+		(allowed-classes Wave)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot boat_skin
 		(type INSTANCE)
 ;+		(allowed-classes Model3D)
@@ -39,6 +44,11 @@
 ;+		(allowed-classes Run)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot butt-toggle-wave
+		(type STRING)
+;+		(value "Toggle ON\\OFF/vr.dashcli/toggle-on-off")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot race
 		(type STRING)
 ;+		(cardinality 0 1)
@@ -62,11 +72,6 @@
 		(default UP)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot but-start
-		(type STRING)
-;+		(value "Start/vr.dashcli/start")
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot nmea-port
 		(type STRING)
 ;+		(cardinality 0 1)
@@ -86,11 +91,6 @@
 	(single-slot boat_skin
 		(type INSTANCE)
 ;+		(allowed-classes Model3D)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot but-start
-		(type STRING)
-;+		(value "Start/vr.dashcli/start")
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot run
@@ -115,17 +115,13 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot wave_control
+		(type INSTANCE)
+;+		(allowed-classes Wave)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot race
 		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot port
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot butt-modify-inss
-		(type STRING)
-;+		(value "Modify Instance/ru.rules/modify-inst")
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
@@ -252,4 +248,13 @@
 	(single-slot pitch-interval
 		(type INTEGER)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-toggle-wave
+		(type STRING)
+;+		(value "Toggle ON\\OFF/vr.dashcli/toggle-on-off")
+;+		(cardinality 0 1)
 		(create-accessor read-write)))
+
+(defclass %3AUNDEFINED
+	(is-a USER)
+	(role concrete))

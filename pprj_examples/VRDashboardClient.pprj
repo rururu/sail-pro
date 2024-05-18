@@ -1,4 +1,4 @@
-; Thu May 16 21:26:45 MSK 2024
+; Sat May 18 13:31:41 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -325,6 +325,54 @@
 
 	(name "instances_file_name")
 	(string_value "VRDashboardClient.pins"))
+
+([KB_747341_Class2217] of  Map
+
+	(entries
+		[KB_747341_Class2218]
+		[KB_747341_Class2221]
+		[KB_747341_Class2222]
+		[KB_747341_Class2223])
+	(referenced_maps [KB_747341_Class2219]))
+
+([KB_747341_Class2218] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_747341_Class2219] of  Map
+
+	(entries [KB_747341_Class2220]))
+
+([KB_747341_Class2220] of  Map_Entry
+
+	(key "WikipediaGIS_Class2")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "12 479 212 124")
+	(value_class "java.awt.Rectangle"))
+
+([KB_747341_Class2221] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "KB_747341_Class2219")
+	(value_class "java.util.Map"))
+
+([KB_747341_Class2222] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_747341_Class2223] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([KB_748325_Class272] of  Widget
 
@@ -654,54 +702,6 @@
 
 ([KB_748325_Class318] of  Property_List
 )
-
-([KB_941358_Class2217] of  Map
-
-	(entries
-		[KB_941358_Class2218]
-		[KB_941358_Class2221]
-		[KB_941358_Class2222]
-		[KB_941358_Class2223])
-	(referenced_maps [KB_941358_Class2219]))
-
-([KB_941358_Class2218] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_941358_Class2219] of  Map
-
-	(entries [KB_941358_Class2220]))
-
-([KB_941358_Class2220] of  Map_Entry
-
-	(key "WikipediaGIS_Class2")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "12 479 212 124")
-	(value_class "java.awt.Rectangle"))
-
-([KB_941358_Class2221] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "KB_941358_Class2219")
-	(value_class "java.util.Map"))
-
-([KB_941358_Class2222] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_941358_Class2223] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([LAYOUT_PROPERTIES] of  Property_List
 
@@ -1202,74 +1202,6 @@
 ([VRDashboardClient_ProjectKB_Class11735] of  Property_List
 )
 
-([VRDashboardClient_ProjectKB_Class12152] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "butt-modify-inss")
-	(property_list [VRDashboardClient_ProjectKB_Class12153])
-	(widget_class_name "clojuretab.ClojureActionButton")
-	(width 200)
-	(x 200)
-	(y 300))
-
-([VRDashboardClient_ProjectKB_Class12153] of  Property_List
-)
-
-([VRDashboardClient_ProjectKB_Class12154] of  String
-
-	(name "tooltip_text"))
-
-([VRDashboardClient_ProjectKB_Class12155] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Insert:At:Current:Selection"))
-
-([VRDashboardClient_ProjectKB_Class12156] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Select:New:Insertions"))
-
-([VRDashboardClient_ProjectKB_Class12157] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Create:Form:For:New:Instances"))
-
-([VRDashboardClient_ProjectKB_Class12158] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Subwidget:Selection:Enabled"))
-
-([VRDashboardClient_ProjectKB_Class12159] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Display:Summary:Panel"))
-
-([VRDashboardClient_ProjectKB_Class12160] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Display:Number:Of:Subordinates"))
-
-([VRDashboardClient_ProjectKB_Class12161] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Display:Subordinate:Browser:Keys"))
-
-([VRDashboardClient_ProjectKB_Class12162] of  Boolean
-
-	(boolean_value TRUE)
-	(name ":Use:Separators:Between:Subwidgets"))
-
-([VRDashboardClient_ProjectKB_Class12163] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Comtain:In:Vertical:Direction"))
-
-([VRDashboardClient_ProjectKB_Class12164] of  Integer
-
-	(integer_value 10)
-	(name ":Size:Of:Space:Between:Subwidgets"))
-
 ([VRDashboardClient_ProjectKB_Class12165] of  Widget
 
 	(height 60)
@@ -1279,8 +1211,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class12166])
 	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
 	(width 200)
-	(x 200)
-	(y 240))
+	(x 0)
+	(y 180))
 
 ([VRDashboardClient_ProjectKB_Class12166] of  Property_List
 
@@ -1446,7 +1378,7 @@
 
 ([VRDashboardClient_ProjectKB_Class2152] of  Widget
 
-	(height 160)
+	(height 170)
 	(is_hidden FALSE)
 	(label "Wikipedia Control")
 	(name "wikipedia_control")
@@ -1459,22 +1391,7 @@
 ([VRDashboardClient_ProjectKB_Class2153] of  Property_List
 
 	(properties
-		[VRDashboardClient_ProjectKB_Class12154]
-		[VRDashboardClient_ProjectKB_Class12155]
-		[VRDashboardClient_ProjectKB_Class12156]
-		[VRDashboardClient_ProjectKB_Class12157]
-		[VRDashboardClient_ProjectKB_Class12158]
-		[VRDashboardClient_ProjectKB_Class12159]
-		[VRDashboardClient_ProjectKB_Class12160]
-		[VRDashboardClient_ProjectKB_Class12161]
-		[VRDashboardClient_ProjectKB_Class12162]
-		[VRDashboardClient_ProjectKB_Class12163]
-		[VRDashboardClient_ProjectKB_Class12164]
-		[VRDashboardClient_ProjectKB_Class22165]
-		[VRDashboardClient_ProjectKB_Class22166]
-		[VRDashboardClient_ProjectKB_Class22167]
-		[VRDashboardClient_ProjectKB_Class22168]
-		[VRDashboardClient_ProjectKB_Class22169]
+		[VRDashboardClient_ProjectKB_Class32169]
 		[VRDashboardClient_ProjectKB_Class32170]
 		[VRDashboardClient_ProjectKB_Class32171]
 		[VRDashboardClient_ProjectKB_Class32172]
@@ -1486,7 +1403,22 @@
 		[VRDashboardClient_ProjectKB_Class32178]
 		[VRDashboardClient_ProjectKB_Class32179]
 		[VRDashboardClient_ProjectKB_Class32180]
-		[VRDashboardClient_ProjectKB_Class32181]))
+		[VRDashboardClient_ProjectKB_Class32181]
+		[VRDashboardClient_ProjectKB_Class32182]
+		[VRDashboardClient_ProjectKB_Class32183]
+		[VRDashboardClient_ProjectKB_Class32184]
+		[VRDashboardClient_ProjectKB_Class32185]
+		[VRDashboardClient_ProjectKB_Class32186]
+		[VRDashboardClient_ProjectKB_Class32187]
+		[VRDashboardClient_ProjectKB_Class32188]
+		[VRDashboardClient_ProjectKB_Class32189]
+		[VRDashboardClient_ProjectKB_Class32190]
+		[VRDashboardClient_ProjectKB_Class32191]
+		[VRDashboardClient_ProjectKB_Class32192]
+		[VRDashboardClient_ProjectKB_Class32193]
+		[VRDashboardClient_ProjectKB_Class32194]
+		[VRDashboardClient_ProjectKB_Class32195]
+		[VRDashboardClient_ProjectKB_Class32196]))
 
 ([VRDashboardClient_ProjectKB_Class21721] of  Widget
 
@@ -1530,7 +1462,8 @@
 		[VRDashboardClient_ProjectKB_Class22157]
 		[VRDashboardClient_ProjectKB_Class22159]
 		[VRDashboardClient_ProjectKB_Class22161]
-		[VRDashboardClient_ProjectKB_Class22163]))
+		[VRDashboardClient_ProjectKB_Class22163]
+		[VRDashboardClient_ProjectKB_Class52152]))
 
 ([VRDashboardClient_ProjectKB_Class22154] of  Property_List
 
@@ -1545,7 +1478,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
 	(width 100)
 	(x 0)
-	(y 60))
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class22156] of  Property_List
 )
@@ -1558,8 +1491,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class22158])
 	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
 	(width 100)
-	(x 100)
-	(y 120))
+	(x 300)
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class22158] of  Property_List
 )
@@ -1573,7 +1506,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
 	(x 0)
-	(y 0))
+	(y 60))
 
 ([VRDashboardClient_ProjectKB_Class22160] of  Property_List
 )
@@ -1586,8 +1519,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class22162])
 	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
 	(width 100)
-	(x 0)
-	(y 120))
+	(x 200)
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class22162] of  Property_List
 )
@@ -1601,35 +1534,10 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
 	(width 100)
 	(x 100)
-	(y 60))
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class22164] of  Property_List
 )
-
-([VRDashboardClient_ProjectKB_Class22165] of  Integer
-
-	(integer_value 1)
-	(name ":Prototype:Depth"))
-
-([VRDashboardClient_ProjectKB_Class22166] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Display:Create:Instance:Button"))
-
-([VRDashboardClient_ProjectKB_Class22167] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Display:Add:Instance:Button"))
-
-([VRDashboardClient_ProjectKB_Class22168] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Display:View:Instance:Button"))
-
-([VRDashboardClient_ProjectKB_Class22169] of  Boolean
-
-	(boolean_value FALSE)
-	(name ":Display:Remove:Instance:Button"))
 
 ([VRDashboardClient_ProjectKB_Class2288] of  String
 
@@ -1736,15 +1644,13 @@
 		[VRDashboardClient_ProjectKB_Class31732]
 		[VRDashboardClient_ProjectKB_Class31734]
 		[VRDashboardClient_ProjectKB_Class41752]
-		[VRDashboardClient_ProjectKB_Class41792]
 		[VRDashboardClient_ProjectKB_Class2152]
 		[VRDashboardClient_ProjectKB_Class12165]
-		[VRDashboardClient_ProjectKB_Class12152]
-		[VRDashboardClient_ProjectKB_Class32154]
 		[VRDashboardClient_ProjectKB_Class42178]
 		[VRDashboardClient_ProjectKB_Class42180]
 		[VRDashboardClient_ProjectKB_Class52180]
-		[VRDashboardClient_ProjectKB_Class42152]))
+		[VRDashboardClient_ProjectKB_Class42152]
+		[VRDashboardClient_ProjectKB_Class52171]))
 
 ([VRDashboardClient_ProjectKB_Class31725] of  Property_List
 
@@ -1762,7 +1668,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
 	(x 200)
-	(y 120))
+	(y 240))
 
 ([VRDashboardClient_ProjectKB_Class31727] of  Property_List
 )
@@ -1775,8 +1681,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class31729])
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
-	(x 0)
-	(y 180))
+	(x 200)
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class31729] of  Property_List
 )
@@ -1803,8 +1709,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class31733])
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
-	(x 0)
-	(y 300))
+	(x 200)
+	(y 120))
 
 ([VRDashboardClient_ProjectKB_Class31733] of  Property_List
 )
@@ -1817,8 +1723,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class31735])
 	(widget_class_name "clojuretab.ClojureActionButton")
 	(width 200)
-	(x 0)
-	(y 240))
+	(x 200)
+	(y 60))
 
 ([VRDashboardClient_ProjectKB_Class31735] of  Property_List
 )
@@ -1828,87 +1734,158 @@
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
 
-([VRDashboardClient_ProjectKB_Class32154] of  Widget
+([VRDashboardClient_ProjectKB_Class32169] of  String
 
-	(height 60)
-	(is_hidden FALSE)
-	(name "but-start")
-	(property_list [VRDashboardClient_ProjectKB_Class32155])
-	(widget_class_name "clojuretab.ClojureActionButton")
-	(width 200)
-	(x 200)
-	(y 520))
-
-([VRDashboardClient_ProjectKB_Class32155] of  Property_List
-)
+	(name "tooltip_text"))
 
 ([VRDashboardClient_ProjectKB_Class32170] of  Boolean
+
+	(boolean_value TRUE)
+	(name ":Insert:At:Current:Selection"))
+
+([VRDashboardClient_ProjectKB_Class32171] of  Boolean
+
+	(boolean_value TRUE)
+	(name ":Select:New:Insertions"))
+
+([VRDashboardClient_ProjectKB_Class32172] of  Boolean
+
+	(boolean_value TRUE)
+	(name ":Create:Form:For:New:Instances"))
+
+([VRDashboardClient_ProjectKB_Class32173] of  Boolean
+
+	(boolean_value TRUE)
+	(name ":Subwidget:Selection:Enabled"))
+
+([VRDashboardClient_ProjectKB_Class32174] of  Boolean
+
+	(boolean_value FALSE)
+	(name ":Display:Summary:Panel"))
+
+([VRDashboardClient_ProjectKB_Class32175] of  Boolean
+
+	(boolean_value FALSE)
+	(name ":Display:Number:Of:Subordinates"))
+
+([VRDashboardClient_ProjectKB_Class32176] of  Boolean
+
+	(boolean_value FALSE)
+	(name ":Display:Subordinate:Browser:Keys"))
+
+([VRDashboardClient_ProjectKB_Class32177] of  Boolean
+
+	(boolean_value TRUE)
+	(name ":Use:Separators:Between:Subwidgets"))
+
+([VRDashboardClient_ProjectKB_Class32178] of  Boolean
+
+	(boolean_value TRUE)
+	(name ":Comtain:In:Vertical:Direction"))
+
+([VRDashboardClient_ProjectKB_Class32179] of  Integer
+
+	(integer_value 10)
+	(name ":Size:Of:Space:Between:Subwidgets"))
+
+([VRDashboardClient_ProjectKB_Class32180] of  Integer
+
+	(integer_value 1)
+	(name ":Prototype:Depth"))
+
+([VRDashboardClient_ProjectKB_Class32181] of  Boolean
+
+	(boolean_value FALSE)
+	(name ":Display:Create:Instance:Button"))
+
+([VRDashboardClient_ProjectKB_Class32182] of  Boolean
+
+	(boolean_value FALSE)
+	(name ":Display:Add:Instance:Button"))
+
+([VRDashboardClient_ProjectKB_Class32183] of  Boolean
+
+	(boolean_value FALSE)
+	(name ":Display:View:Instance:Button"))
+
+([VRDashboardClient_ProjectKB_Class32184] of  Boolean
+
+	(boolean_value FALSE)
+	(name ":Display:Remove:Instance:Button"))
+
+([VRDashboardClient_ProjectKB_Class32185] of  Boolean
 
 	(boolean_value FALSE)
 	(name ":Display:Delete:Instance:Button"))
 
-([VRDashboardClient_ProjectKB_Class32171] of  Boolean
+([VRDashboardClient_ProjectKB_Class32186] of  Boolean
 
 	(boolean_value FALSE)
 	(name ":Display:Prototype:Button"))
 
-([VRDashboardClient_ProjectKB_Class32172] of  Boolean
+([VRDashboardClient_ProjectKB_Class32187] of  Boolean
 
 	(boolean_value FALSE)
 	(name ":Display:Move:Instance:Buttons"))
 
-([VRDashboardClient_ProjectKB_Class32173] of  String
+([VRDashboardClient_ProjectKB_Class32188] of  String
 
 	(name ":Create:Instance:Button:Tooltip")
 	(string_value "Create a new instance"))
 
-([VRDashboardClient_ProjectKB_Class32174] of  String
+([VRDashboardClient_ProjectKB_Class32189] of  String
 
 	(name ":Add:Instance:Button:Tooltip")
 	(string_value "Select an already existing instance"))
 
-([VRDashboardClient_ProjectKB_Class32175] of  String
+([VRDashboardClient_ProjectKB_Class32190] of  String
 
 	(name ":View:Instance:Button:Tooltip")
 	(string_value "View the selected instance"))
 
-([VRDashboardClient_ProjectKB_Class32176] of  String
+([VRDashboardClient_ProjectKB_Class32191] of  String
 
 	(name ":Remove:Instance:Button:Tooltip")
 	(string_value "Remove the selected instance(s)"))
 
-([VRDashboardClient_ProjectKB_Class32177] of  String
+([VRDashboardClient_ProjectKB_Class32192] of  String
 
 	(name ":Delete:Instance:Button:Tooltip")
 	(string_value "Delete the selected instance(s) from the knowledge base"))
 
-([VRDashboardClient_ProjectKB_Class32178] of  String
+([VRDashboardClient_ProjectKB_Class32193] of  String
 
 	(name ":Prototype:Button:Tooltip")
 	(string_value "Create a new instance which is a duplicate of the selected instance"))
 
-([VRDashboardClient_ProjectKB_Class32179] of  String
+([VRDashboardClient_ProjectKB_Class32194] of  String
 
 	(name ":Move:Instance:Buttons:Tooltip")
 	(string_value "Move the selected instance"))
 
-([VRDashboardClient_ProjectKB_Class32180] of  String
+([VRDashboardClient_ProjectKB_Class32195] of  String
 
 	(name ":Create:Instance:Dialog:Title")
 	(string_value "Create a new instance"))
 
-([VRDashboardClient_ProjectKB_Class32181] of  String
+([VRDashboardClient_ProjectKB_Class32196] of  String
 
 	(name ":Add:Instance:Dialog:Title")
 	(string_value "Select an already existing instance"))
 
+([VRDashboardClient_ProjectKB_Class32197] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([VRDashboardClient_ProjectKB_Class32198] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
 ([VRDashboardClient_ProjectKB_Class37] of  String
 
 	(name "SearchTab_Query"))
-
-([VRDashboardClient_ProjectKB_Class41732] of  String
-
-	(name "tooltip_text"))
 
 ([VRDashboardClient_ProjectKB_Class41752] of  Widget
 
@@ -1918,29 +1895,11 @@
 	(property_list [VRDashboardClient_ProjectKB_Class41753])
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
-	(x 200)
-	(y 0))
+	(x 0)
+	(y 120))
 
 ([VRDashboardClient_ProjectKB_Class41753] of  Property_List
 )
-
-([VRDashboardClient_ProjectKB_Class41792] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(label "Cesium-port")
-	(name "port")
-	(property_list [VRDashboardClient_ProjectKB_Class41793])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([VRDashboardClient_ProjectKB_Class41793] of  Property_List
-
-	(properties
-		[VRDashboardClient_ProjectKB_Class41732]
-		[VRDashboardClient_ProjectKB_Class51733]))
 
 ([VRDashboardClient_ProjectKB_Class41805] of  String
 
@@ -1961,7 +1920,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
 	(width 200)
 	(x 0)
-	(y 520))
+	(y 300))
 
 ([VRDashboardClient_ProjectKB_Class42153] of  Property_List
 
@@ -1988,7 +1947,7 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
 	(x 0)
-	(y 0))
+	(y 60))
 
 ([VRDashboardClient_ProjectKB_Class42179] of  Property_List
 )
@@ -2002,15 +1961,42 @@
 	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
 	(width 200)
 	(x 0)
-	(y 120))
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class42181] of  Property_List
 )
 
-([VRDashboardClient_ProjectKB_Class51733] of  Boolean
+([VRDashboardClient_ProjectKB_Class52152] of  Widget
 
-	(boolean_value FALSE)
-	(name "readOnly_configured"))
+	(height 60)
+	(is_hidden FALSE)
+	(name "butt-toggle-wave")
+	(property_list [VRDashboardClient_ProjectKB_Class52153])
+	(widget_class_name "clojuretab.ClojureActionButton")
+	(width 200)
+	(x 200)
+	(y 60))
+
+([VRDashboardClient_ProjectKB_Class52153] of  Property_List
+)
+
+([VRDashboardClient_ProjectKB_Class52171] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(label "Wave Control")
+	(name "wave_control")
+	(property_list [VRDashboardClient_ProjectKB_Class52172])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 200)
+	(y 300))
+
+([VRDashboardClient_ProjectKB_Class52172] of  Property_List
+
+	(properties
+		[VRDashboardClient_ProjectKB_Class32197]
+		[VRDashboardClient_ProjectKB_Class32198]))
 
 ([VRDashboardClient_ProjectKB_Class52180] of  Widget
 
@@ -2020,8 +2006,8 @@
 	(property_list [VRDashboardClient_ProjectKB_Class52181])
 	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
 	(width 200)
-	(x 200)
-	(y 60))
+	(x 0)
+	(y 240))
 
 ([VRDashboardClient_ProjectKB_Class52181] of  Property_List
 
