@@ -1,4 +1,4 @@
-; Sat May 18 22:44:43 MSK 2024
+; Sat May 18 23:09:14 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -370,8 +370,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 38.299072)
-	(lng 15.6285)
+	(lat 38.287357)
+	(lng 15.628687)
 	(vicinity 40.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
