@@ -1,4 +1,4 @@
-; Sat May 18 23:09:14 MSK 2024
+; Sun May 19 20:57:55 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -223,54 +223,6 @@
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Стереть Выделенный Экземпляр"))
 
-([KB_451659_Class2065] of  Map
-
-	(entries
-		[KB_451659_Class2066]
-		[KB_451659_Class2069]
-		[KB_451659_Class2070]
-		[KB_451659_Class2071])
-	(referenced_maps [KB_451659_Class2067]))
-
-([KB_451659_Class2066] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_451659_Class2067] of  Map
-
-	(entries [KB_451659_Class2068]))
-
-([KB_451659_Class2068] of  Map_Entry
-
-	(key "WikipediaGIS_Class2")
-	(key_class "edu.stanford.smi.protege.model.Frame")
-	(value "12 479 212 124")
-	(value_class "java.awt.Rectangle"))
-
-([KB_451659_Class2069] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "KB_451659_Class2067")
-	(value_class "java.util.Map"))
-
-([KB_451659_Class2070] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_451659_Class2071] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
 ([KB_651995_Class0] of  String
 
 	(name "factory_class_name")
@@ -373,6 +325,54 @@
 
 	(name "instances_file_name")
 	(string_value "VRDashboardClient.pins"))
+
+([KB_672841_Class2065] of  Map
+
+	(entries
+		[KB_672841_Class2066]
+		[KB_672841_Class2069]
+		[KB_672841_Class2070]
+		[KB_672841_Class2071])
+	(referenced_maps [KB_672841_Class2067]))
+
+([KB_672841_Class2066] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_672841_Class2067] of  Map
+
+	(entries [KB_672841_Class2068]))
+
+([KB_672841_Class2068] of  Map_Entry
+
+	(key "WikipediaGIS_Class2")
+	(key_class "edu.stanford.smi.protege.model.Frame")
+	(value "12 479 212 124")
+	(value_class "java.awt.Rectangle"))
+
+([KB_672841_Class2069] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "KB_672841_Class2067")
+	(value_class "java.util.Map"))
+
+([KB_672841_Class2070] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_672841_Class2071] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([KB_748325_Class272] of  Widget
 
@@ -1276,14 +1276,13 @@
 
 ([VRDashboardClient_ProjectKB_Class2072] of  Widget
 
-	(height 60)
+	(height 0)
 	(is_hidden FALSE)
 	(name "port")
 	(property_list [VRDashboardClient_ProjectKB_Class2073])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
+	(width 0)
 	(x 0)
-	(y 530))
+	(y 0))
 
 ([VRDashboardClient_ProjectKB_Class2073] of  Property_List
 )

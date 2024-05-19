@@ -19,5 +19,5 @@ cd ..
 
 java %OPTIONS% %ENCODING% -cp .;classes;%JARS%;src %MAIN_CLASS% pprj_examples/VRDashboardClient.pprj
 
-taskkill /f /IM python.exe
+taskkill /f /IM python3.exe
 

@@ -1,4 +1,4 @@
-; Sat May 18 21:35:52 MSK 2024
+; Sun May 19 13:46:00 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -442,7 +442,7 @@
 
 ([Cezium_Class70005] of  CloFunction
 
-	(source "([hm inst]\n  (lcc/new-doc)\n  (if-let [sel (DisplayUtilities/pickInstanceFromCollection nil (OMT/getNavObInstances) 0 \"Select NavOb\")]\n    (let [lab (sv sel \"label\")]\n      (ssv inst \"onboard\" lab)\n      (vreset! ONBOARD lab))))\n([lab]\n  (lcc/new-doc)\n  (when-let [inst (first (cls-instances \"CeziumControl\"))]\n    (ssv inst \"onboard\" lab)\n    (vreset! ONBOARD lab)))")
+	(source "([hm inst]\n  (lcc/new-doc)\n  (if-let [nobs (seq (OMT/getNavObInstances))]\n    (if-let [sel (DisplayUtilities/pickInstanceFromCollection \n                      nil \n                      (sort-by #(sv % \"label\") nobs) \n                      0 \"Select NavOb\")]\n      (let [lab (sv sel \"label\")]\n        (ssv inst \"onboard\" lab)\n        (vreset! ONBOARD lab)))))\n([lab]\n  (lcc/new-doc)\n  (when-let [inst (first (cls-instances \"CeziumControl\"))]\n    (ssv inst \"onboard\" lab)\n    (vreset! ONBOARD lab)))")
 	(title "go-onboard"))
 
 ([Cezium_Class80000] of  CloFunction

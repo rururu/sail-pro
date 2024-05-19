@@ -1,4 +1,4 @@
-; Sat May 18 23:09:14 MSK 2024
+; Sun May 19 20:57:54 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -254,7 +254,3 @@
 ;+		(value "Toggle ON\\OFF/vr.dashcli/toggle-on-off")
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
-
-(defclass %3AUNDEFINED
-	(is-a USER)
-	(role concrete))

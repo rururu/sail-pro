@@ -22,7 +22,7 @@
    true x))
 
 (defn cz-processor [e]
-  ;;(println :CZML (.-data e))
+  (println :CZML (.-data e))
 (def CZML-DATA (js/JSON.parse (.-data e)))
 (.process CZML-SRC CZML-DATA))
 

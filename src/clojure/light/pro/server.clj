@@ -127,10 +127,14 @@
 (defn go-onboard
   ([hm inst]
   (lcc/new-doc)
-  (if-let [sel (DisplayUtilities/pickInstanceFromCollection nil (OMT/getNavObInstances) 0 "Select NavOb")]
-    (let [lab (sv sel "label")]
-      (ssv inst "onboard" lab)
-      (vreset! ONBOARD lab))))
+  (if-let [nobs (seq (OMT/getNavObInstances))]
+    (if-let [sel (DisplayUtilities/pickInstanceFromCollection 
+                      nil 
+                      (sort-by #(sv % "label") nobs) 
+                      0 "Select NavOb")]
+      (let [lab (sv sel "label")]
+        (ssv inst "onboard" lab)
+        (vreset! ONBOARD lab)))))
 ([lab]
   (lcc/new-doc)
   (when-let [inst (first (cls-instances "CeziumControl"))]

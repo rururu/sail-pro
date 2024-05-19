@@ -1,10 +1,7 @@
-; Sat May 18 23:09:14 MSK 2024
+; Sun May 19 20:57:54 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
-
-([CesiumServer_Class10000] of  %3AUNDEFINED
-)
 
 ([VRDashboardClient_Class0] of  WorkingPrograms
 
@@ -370,8 +367,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 38.287357)
-	(lng 15.628687)
+	(lat 37.122246)
+	(lng 17.792276)
 	(vicinity 40.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -401,11 +398,15 @@
 	(source "(let [rmma (proxy [RuMapMouseAdapter] []\n	(mouseRightButtonClickedOn [mo llp runa]\n                            (if mo\n                              (if-let [art (sv (.getInstance mo) \"reference\")]\n                                (let [wc (first (cls-instances \"WikipediaControl\"))\n                                      lat (sv wc \"lat\")\n                                      lon (sv wc \"lng\")\n                                      vic (sv wc \"vicinity\")]\n                                  (pum-out-place art lat lon vic)\n                                  (.show *prj* art))))\n	  true))\n       pgs (seq (OMT/getPlaygrounds))]\n  (.setRuMapMouseAdapter (first pgs) rmma)\n  rmma)")
 	(title "set-mouse-adapter2 []"))
 
+([VRDashboardClient_Class250000] of  CloFuncall
+
+	(source "(ru.rules/bnf)"))
+
 ([VRDashboardClient_Class250001] of  RandomTrimaran
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [0 255 255 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.003\n      :color {:rgba [0 255 255 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"}}")
 	(label "CYAN_TRIMARAN")
 	(latitude "59 59.9")
 	(longitude "29 38.95")
@@ -424,6 +425,14 @@
 	(source "(volatile! [])")
 	(title "ART"))
 
+([VRDashboardClient_Class260001] of  CloFuncall
+
+	(source "(ru.rules/beta-net-plan)"))
+
+([VRDashboardClient_Class260002] of  CloFuncall
+
+	(source "(rete.core/beta-net-plan)"))
+
 ([VRDashboardClient_Class260003] of  CesiumView
 
 	(status "START"))
@@ -432,6 +441,18 @@
 
 	(source "true")
 	(title "START"))
+
+([VRDashboardClient_Class270003] of  CloFuncall
+
+	(source "(ru.rules/bnp)"))
+
+([VRDashboardClient_Class270004] of  CloFuncall
+
+	(source "(ru.rules/pp)"))
+
+([VRDashboardClient_Class270005] of  CloFuncall
+
+	(source "(ru.rules/pp :all)"))
 
 ([VRDashboardClient_Class280000] of  CloFunction
 
@@ -626,8 +647,8 @@
 
 ([VRDashboardClient_Class30076] of  Rule
 
-	(lhs "(VRDashboardControl race ?rce)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n?w (Wave instance ?wins\n	status ?wsts)\n(Clock0 time ?t)")
-	(rhs "(println \"NMEA Start boat\" (protege.core/sv ?obj \"label\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n                          (.getLatitude mo)\n                          (.getLongitude mo)\n                          (.getCourse mo)\n                          (.getSpeed mo)\n                          \"\"]\n                  time ?t)\n  (modify ?c status \"RUN\")\n  (when (not= ?wsts \"ON\")\n    (modify ?w status \"ON\")\n    (protege.core/ssv ?wins \"status\" \"ON\"))\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
+	(lhs "?v (VRDashboardControl\n	instance ?vi\n	onboard ?onb\n	race ?rce)\n?c (NMEAControl status \"START\"\n	delay ?del)\n?d (NMEAData object ?obj)\n?w (Wave instance ?wins\n	status ?wsts)\n(Clock0 time ?t)")
+	(rhs "(println ?onb)\n(if-let [onb (protege.core/sv ?obj \"label\")]\n  (do (println \"NMEA Start boat\" onb)\n    (when (not= ?onb onb)\n      (protege.core/ssv ?vi \"onboard\" onb)\n      (modify ?v onboard onb)))\n  (println \"NMEAData object not defined!\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/GPRMC.txt\"))\n(vr.dashcli/clear-external-data (str \"NMEA_CACHE/\" ?rce \"/AIVDM.txt\"))\n(when-let [mo (ru.igis.omtab.OMT/getOrAdd ?obj)]\n  (modify ?d data [\"\"\n                          (.getLatitude mo)\n                          (.getLongitude mo)\n                          (.getCourse mo)\n                          (.getSpeed mo)\n                          \"\"]\n                  time ?t)\n  (modify ?c status \"RUN\")\n  (when (not= ?wsts \"ON\")\n    (modify ?w status \"ON\")\n    (protege.core/ssv ?wins \"status\" \"ON\"))\n  (if (nil? light.sim/ES-TIMER)\n    (light.sim/start-sim)))")
 	(salience 0)
 	(title "vr:NMEA Start"))
 
@@ -642,7 +663,7 @@
 
 	(altitude 0)
 	(course 270)
-	(description "{:draft 4\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft -20\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.1}}")
 	(label "SANTA_MARIA")
 	(latitude "59 59.9")
 	(longitude "29 38.8")
@@ -655,7 +676,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 0.1}}")
+	(description "{:draft 2\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 1.0}}")
 	(label "BERMUDA_SLOOP")
 	(latitude "60 0")
 	(longitude "29 39")
@@ -668,7 +689,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 4\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.04\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft -20.0\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_maria/scene.gltf\"\n      :scale 0.1}}")
 	(label "MEDIEVAL_MIX")
 	(latitude "59 59.9")
 	(longitude "29 38.8")
@@ -681,7 +702,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"NONE\"}\n  :model \n    {:scale 0.0015\n      :gltf \"models/trimaran/scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"NONE\"}\n  :model \n    {:gltf \"models/trimaran/scene.gltf\"\n      :color {:rgba [0 0 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :scale 0.003}}")
 	(label "RANDOM_TRIMARAN")
 	(latitude "59 59.9")
 	(longitude "29 38.9")
@@ -694,7 +715,7 @@
 
 	(altitude 0)
 	(course 270)
-	(description "{:draft 1\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_isadora/scene.gltf\"\n      :scale 1.5\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft -30\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/santa_isadora/scene.gltf\"\n      :scale 0.1}}")
 	(label "SANTA_ISADORA")
 	(latitude "59 59.9")
 	(longitude "29 38.8")
@@ -707,7 +728,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [0 0 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.003\n      :color {:rgba [0 0 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"}}")
 	(label "BLACK_TRIMARAN")
 	(latitude "59 59.9")
 	(longitude "29 38.95")
@@ -720,7 +741,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [255 0 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.003\n      :color {:rgba [255 0 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"}}")
 	(label "RED_TRIMARAN")
 	(latitude "59 59.9")
 	(longitude "29 38.95")
@@ -733,7 +754,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [255 255 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.003\n      :color {:rgba [255 255 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"}}")
 	(label "YELLOW_TRIMARAN")
 	(latitude "59 59.9")
 	(longitude "29 38.95")
@@ -746,7 +767,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [0 255 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.003\n      :color {:rgba [0 255 0 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"}}")
 	(label "GREEN_TRIMARAN")
 	(latitude "59 59.9")
 	(longitude "29 38.95")
@@ -759,7 +780,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.0015\n      :color {:rgba [0 0 255 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 2.5\n  :label\n  {:scale 0.3\n    :pixelOffset {:cartesian2 [0.0 -40.0]}\n    :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:scale 0.003\n      :color {:rgba [0 0 255 65]}\n      :colorBlendMode \"REPLACE\"\n      :gltf \"models/trimaran/Sketchfab_Scene.gltf\"}}")
 	(label "BLUE_TRIMARAN")
 	(latitude "59 59.9")
 	(longitude "29 38.95")
@@ -815,7 +836,7 @@
 
 	(boat_skin [VRDashboardClient_Class320007])
 	(nmea-port "8081")
-	(onboard "russor")
+	(onboard "BROUTE")
 	(race "680.1")
 	(run [VRDashboardClient_Class30073])
 	(telnet-port "10470")
