@@ -5,6 +5,8 @@ Simulation and modelling environment for virtual sailing.
 [![Watch the video](1.png)](https://www.youtube.com/watch?v=uabntPNL_kc)
 Click the screenshot to see a video!
 
+_Simplified version: [https://github.com/rururu/VRShoreView](https://github.com/rururu/VRShoreView)_
+
 ## Prerequisites
 
 You need to be installed on your machine:

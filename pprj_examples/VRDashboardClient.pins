@@ -1,4 +1,4 @@
-; Sun May 19 20:57:54 MSK 2024
+; Fri May 24 22:59:00 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -195,9 +195,9 @@
 ([VRDashboardClient_Class130011] of  Wave
 
 	(pitch 1)
-	(pitch-interval 4)
-	(roll 2)
-	(roll-interval 2)
+	(pitch-interval 3)
+	(roll 1)
+	(roll-interval 3)
 	(status "ON"))
 
 ([VRDashboardClient_Class140000] of  CloFuncall
@@ -367,8 +367,8 @@
 
 ([VRDashboardClient_Class230000] of  WikipediaControl
 
-	(lat 37.122246)
-	(lng 17.792276)
+	(lat 35.69593)
+	(lng 34.61014)
 	(vicinity 40.0))
 
 ([VRDashboardClient_Class230057] of  CloFunction
@@ -676,7 +676,7 @@
 
 	(altitude 2)
 	(course 270)
-	(description "{:draft 2\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 1.0}}")
+	(description "{:draft -16\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :scale 1.0}}")
 	(label "BERMUDA_SLOOP")
 	(latitude "60 0")
 	(longitude "29 39")
@@ -836,7 +836,7 @@
 
 	(boat_skin [VRDashboardClient_Class320007])
 	(nmea-port "8081")
-	(onboard "BROUTE")
+	(onboard "russor")
 	(race "680.1")
 	(run [VRDashboardClient_Class30073])
 	(telnet-port "10470")
