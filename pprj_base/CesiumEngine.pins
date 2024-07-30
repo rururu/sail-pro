@@ -1,0 +1,1054 @@
+; Thu May 16 21:04:38 MSK 2024
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([CesiumEngine_Class0] of  CloFunction
+
+	(source "(set-html! \"binocular\" \"<h4>Binocular</h4>\")\n(set-html! \"zoom-sld\" \n  \"<input type='range' style='width:200px' id='zoom-slv'\n               min='0' value='0' max='40000'\n               oninput='javascript:light.view3d.client.zoom_amount(this.value)'>\")\n(set-html! \"zoom-val\" \"0 m\")\n(set-html! \"zoomM\" \n  \"<button onclick='javascript:light.view3d.client.zoomM()'>-</button>\")\n(set-html! \"zoomP\" \n  \"<button onclick='javascript:light.view3d.client.zoomP()'>+</button>\")")
+	(title "middle-controls []"))
+
+([CesiumEngine_Class1] of  CeziumControl
+)
+
+([CesiumEngine_Class10] of  CloVar
+
+	(source "100")
+	(title "ZOOM-STEP"))
+
+([CesiumEngine_Class10000] of  CloFuncall
+
+	(source "(in-ns 'cljs.compile)"))
+
+([CesiumEngine_Class10001] of  CloFuncall
+
+	(source "(load-file \"src/clojure/cljs/compile.clj\")"))
+
+([CesiumEngine_Class12] of  CloFunction
+
+	(source "(let [v (num-val amount)]\n  (czm/set-zoom v)\n  (set-html! \"zoom-val\" (zoom-format v)))")
+	(title "zoom_amount [amount]"))
+
+([CesiumEngine_Class13] of  CloFunction
+
+	(source "(vswap! VEHICLE assoc :view-elevation (num-val vev))")
+	(title "elev [vev]"))
+
+([CesiumEngine_Class20000] of  CloFunction
+
+	(source "(apply gstring/format fmt args)")
+	(title "format [fmt & args]"))
+
+([CesiumEngine_Class20004] of  CloFuncall
+
+	(source "(def cli (first (p/cls-instances \"ClsMain\")))"))
+
+([CesiumEngine_Class20006] of  CloFuncall
+
+	(source "(build (p/itm cli 0) cli)"))
+
+([CesiumEngine_Class30000] of  CloFunction
+
+	(source "(let [deg (num-val (get-html! \"view-fld\"))\n      deg (if (= deg 180) -180 (inc deg))]\n    (vswap! czm/CAMERA assoc :view deg)\n    (set-html! \"view-fld\" deg)\n    (set! (. (by-id \"view-vals\") -value) deg))")
+	(title "viewP []"))
+
+([CesiumEngine_Class30001] of  CloFunction
+
+	(source "(let [deg (num-val (get-html! \"view-fld\"))\n      deg (if (= deg -180) 180 (dec deg))]\n    (vswap! czm/CAMERA assoc :view deg)\n    (set-html! \"view-fld\" deg)\n    (set! (. (by-id \"view-vals\") -value) deg))")
+	(title "viewM []"))
+
+([CesiumEngine_Class30016] of  CloFunction
+
+	(source "(format \"%.1f km\" (/ m 1000))")
+	(title "zoom-format [m]"))
+
+([CesiumEngine_Class40000] of  CloFunction
+
+	(source "(.-innerHTML (.getElementById js/document id))")
+	(title "get-html! [id]"))
+
+([CesiumEngine_Class50000] of  CloFunction
+
+	(source "(cond\n  (< z ZOOM)\n  (.zoomOut (.-camera VIEWER) (- ZOOM z))\n  (> z ZOOM)\n  (.zoomIn (.-camera VIEWER) (- z ZOOM)))\n(def ZOOM (if (< z 0) 0 z))")
+	(title "set-zoom [z]"))
+
+([CesiumEngine_Class50001] of  CloVar
+
+	(source "0")
+	(title "ZOOM"))
+
+([CesiumEngine_Class60000] of  CloFunction
+
+	(source "(let [v (num-val (czm/get-zoom))\n      v (- v ZOOM-STEP)\n      v (if (< v 0) 0 v)]\n    (czm/set-zoom v)\n    (set-html! \"zoom-val\" (zoom-format v))\n    (set! (. (by-id \"zoom-slv\") -value) v))")
+	(title "zoomM []"))
+
+([CesiumEngine_Class70000] of  CloFunction
+
+	(source "ZOOM")
+	(title "get-zoom []"))
+
+([CesiumEngine_Class80000] of  Rule
+
+	(lhs "(CZMLGenerator delay ?del\n	visibility ?vis)\n(Onboard label ?onb)\n?cs (CZMLSpan time ?tim\n	object ?obj\n	options ?ops)\n(Clock0 time ?t ((not= ?obj ?onb)\n                       (> ?t ?tim)))")
+	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/model-leg \n	nmo\n	(+ ?del 4)\n	(read-string (.getDescription nmo))))\n      (modify ?cs time (+ ?t ?del)))))")
+	(salience 1)
+	(title "czm0:CZML Navob Leg Generation2"))
+
+([CesiumEngine_Class9] of  CloFunction
+
+	(source "(let [v (num-val (czm/get-zoom))\n      v (+ v ZOOM-STEP)]\n  (czm/set-zoom v)\n  (set-html! \"zoom-val\" (zoom-format v))\n  (set! (. (by-id \"zoom-slv\") -value) v))")
+	(title "zoomP []"))
+
+([Cezium_Class0] of  ClsRequired
+
+	(cloFunctions
+		[Cezium_Class6]
+		[Cezium_Class7]
+		[Cezium_Class8]
+		[Cezium_Class9]
+		[Cezium_Class350000]
+		[Cezium_Class10]
+		[Cezium_Class13]
+		[Cezium_Class370000]
+		[Cezium_Class380000]
+		[Cezium_Class380001]
+		[CesiumEngine_Class70000]
+		[CesiumEngine_Class50000])
+	(cloNamespace [Cezium_Class1])
+	(cloVars
+		[Cezium_Class3]
+		[Cezium_Class4]
+		[CeziumEngineLight_Class10000]
+		[Cezium_Class5]
+		[Cezium_Class90017]
+		[Cezium_Class290002]
+		[CesiumEngine_Class50001])
+	(documentation [Cezium_Class14])
+	(title "Cezium Client Light"))
+
+([Cezium_Class1] of  CloNamespace
+
+	(source "(:require\n  [light.geo.calc :as geo])")
+	(title "light.czm.core"))
+
+([Cezium_Class10] of  CloFunction
+
+	(source "(let [pitch (:pitch @CAMERA)\n       roll (:roll @CAMERA)\n       head (norm-crs (+ crs (:view @CAMERA)))]\n  (if (> alt MAX-UPGROUND) \n    (fly-control lat lon alt head pitch roll per)\n    (let [[_ _ sh] (sample-height [(geo/radians lat) (geo/radians lon)] ALT)]\n      (if (> sh -7777)\n        (def ALT (int (+ sh alt))))\n      (fly-control lat lon ALT head pitch roll per))))")
+	(title "fly-to [lat lon alt crs per]"))
+
+([Cezium_Class10000] of  CloFunction
+
+	(source "([func time-out]\n  (go (while true\n           (func)\n           (<! (timeout time-out)))))\n([func param time-out]\n  (go (while true\n           (func param)\n           (<! (timeout time-out)))))")
+	(title "repeater"))
+
+([Cezium_Class100000] of  CloFunction
+
+	(source "([no sec ops]\n  (let [[c4d1 c4d2] (trace4d no sec ops)\n        lab (.getName no)\n        lab-ops (assoc (ops :label) :text lab)]\n    (model-leg lab lab-ops  (ops :model) c4d1 c4d2)))\n([id label model [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]\n  (let [p {:id id\n             :label label\n             :model model\n             :orientation {:velocityReference \"#position\"}\n             :position {:interpolationAlgorithm \"LINEAR\"\n                           :forwardExtrapolationType \"HOLD\"\n                           :cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n    (send-doc-curt)\n    (send-event \"czml\" (json/write-str p))))")
+	(title "model-leg"))
+
+([Cezium_Class100005] of  CloVar
+
+	(source "(volatile! nil)")
+	(title "RESPONSE"))
+
+([Cezium_Class10001] of  CloFunction
+
+	(source "(czm/init-3D-view (str \"http://localhost:\" PORT))\n(repeater receive-vehicle 4000)\n(show-controls)")
+	(title "on-load []"))
+
+([Cezium_Class10002] of  CloFunction
+
+	(source "(GET \"/vehicle\" {:params @czm/CAMERA\n                         :handler vehicle-hr\n                         :error-handler error-handler})")
+	(title "receive-vehicle []"))
+
+([Cezium_Class100031] of  CloFunction
+
+	(source "(vreset! RESPONSE (read-transit (params :response)))\n{:status 204}")
+	(title "response [params]"))
+
+([Cezium_Class10007] of  CloVar
+
+	(source "(fn [response]\n  (let [{:keys [status status-text]} response]\n    (println (str \"AJAX ERROR: \" status \" \" status-text))))")
+	(title "error-handler"))
+
+([Cezium_Class10008] of  CloFunction
+
+	(source "(let [resp (read-transit response)]\n  ;; (println :V-RESP resp)\n  (if-let [vehicle (:vehicle resp)]\n    (handle-vehicle vehicle))\n  (if-let [request (:request resp)]\n    (handle-request request)))")
+	(title "vehicle-hr [response]"))
+
+([Cezium_Class10009] of  CloFunction
+
+	(source "(t/read (t/reader :json) x)")
+	(title "read-transit [x]"))
+
+([Cezium_Class10010] of  CloFunction
+
+	(source "(let [[lat lon] (:coord vehicle)\n       alt (:altitude vehicle)\n       vev (:view-elevation @VEHICLE)\n       crs (:course vehicle)\n       head (czm/norm-crs (+ crs (:view @czm/CAMERA)))]\n  (vswap! VEHICLE merge vehicle)\n  (set-html! \"onboard-fld\" (:name vehicle))\n  (set-html! \"name-fld\" (:name vehicle))\n  (set-html! \"latitude-fld\" (format \"%.3f\" (first (:coord vehicle))))\n  (set-html! \"longitude-fld\" (format \"%.3f\" (second (:coord vehicle))))\n  (set-html! \"course-fld\" (:course vehicle))\n  (set-html! \"speed-fld\" (:speed vehicle))\n  (set-html! \"altitude-fld\" czm/ALT)\n  (set-html! \"view-dir\" (geo/rumb head))\n  (if (= czm/ZOOM 0)\n    (czm/fly-to lat lon (+ alt vev) crs 5)))")
+	(title "handle-vehicle [vehicle]"))
+
+([Cezium_Class110051] of  CloFunction
+
+	(source "(let [drf (or (ops :draft) 0)\n       lat1 (.getLatitude no)\n       lon1 (.getLongitude no)\n       alt1 (- (.getAltitude no) drf)\n       crs (.getCourse no)\n       spd (.getSpeed no)\n       vsd (.getVerticalSpeed no)\n       dis (double (/ (* spd sec) 3600))\n       [lat2 lon2] (seq (.position no (double crs) dis))\n       alt2 (+ alt1 (* vsd sec))\n       tim1 (iso8601curt)\n       tim2 (iso8601futt sec)]\n  [[tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]])")
+	(title "trace4d [no sec ops]"))
+
+([Cezium_Class120000] of  CloFunction
+
+	(source "([func time-out]\n  (go (while true\n           (func)\n           (<! (timeout @time-out)))))\n([func param time-out]\n  (go (while true\n           (func param)\n           (<! (timeout @time-out)))))")
+	(title "repeater!"))
+
+([Cezium_Class13] of  CloFunction
+
+	(source "(set! (.-enableLighting (.-globe (.-scene VIEWER))) true)\n(.add (.-dataSources VIEWER) CZML-SRC)\n(.addEventListener (js/EventSource. (str url \"/czml\")) \"czml\" cz-processor false)\n(println [:INIT-3D-VIEW url])")
+	(title "init-3D-view [url]"))
+
+([Cezium_Class14] of  CloDocumentation
+
+	(source "<html>\n  <head>\n    <style type=\"text/css\">\n      <!--\n        body { font-family: arial; font-size: 12pt }\n        p { font-family: arial; margin-top: 2; margin-right: 2; margin-bottom: 2; margin-left: 2 }\n      -->\n    </style>\n    \n  </head>\n  <body>\n    <b>Cesium Client<br></b><br>API<br><br>1. fly-to [lat lon alt crs per]<br>2. camera [key val], keys: :view, :altitude, :pitch, :roll<br><br>CZML rendering support<br><br>Initialization: (init-3D-view)</body>\n</html>"))
+
+([Cezium_Class15] of  ClsMain
+
+	(asset-path "js/czlight")
+	(butt-build "Build/cljs.compile/build")
+	(cloFunctions
+		[CesiumEngine_Class20000]
+		[Cezium_Class10000]
+		[Cezium_Class120000]
+		[Cezium_Class10009]
+		[Cezium_Class60000]
+		[CesiumEngine_Class40000]
+		[Cezium_Class60002]
+		[Cezium_Class60006]
+		[CesiumEngine_Class30001]
+		[Cezium_Class60003]
+		[CesiumEngine_Class30000]
+		[Cezium_Class60004]
+		[Cezium_Class60005]
+		[CesiumEngine_Class30016]
+		[CesiumEngine_Class9]
+		[CesiumEngine_Class60000]
+		[CesiumEngine_Class12]
+		[Cezium_Class80003]
+		[Cezium_Class50003]
+		[Cezium_Class10010]
+		[Cezium_Class10008]
+		[Cezium_Class10002]
+		[CesiumEngine_Class13]
+		[Cezium_Class60001]
+		[Cezium_Class60007]
+		[CesiumEngine_Class0]
+		[Cezium_Class60008]
+		[Cezium_Class10001]
+		[Cezium_Class360001]
+		[CeziumEngine_Class30000])
+	(cloNamespace [Cezium_Class16])
+	(cloVars
+		[Cezium_Class17]
+		[Cezium_Class10007]
+		[Cezium_Class360000]
+		[Cezium_Class80004]
+		[Cezium_Class30029]
+		[CesiumEngine_Class10])
+	(compiler-options "{:verbose false}")
+	(css [Cezium_Class20002])
+	(epilogue "(enable-console-print!)\n(set! (.-onload js/window) (on-load))")
+	(html [Cezium_Class20000])
+	(output-dir "resources/public/js/czlight")
+	(output-to "resources/public/js/cesium_light.js")
+	(required
+		[Cezium_Class0]
+		[Cezium_Class90000])
+	(store-in "src/cljs/czlight")
+	(title "View 3D Client Light"))
+
+([Cezium_Class150000] of  CloFunction
+
+	(source "([]\n  (send-doc (doc)))\n([doc]\n  (send-event \"czml\" doc))\n([_ iso]\n  (send-event \"czml\" (doc iso)))")
+	(title "send-doc"))
+
+([Cezium_Class16] of  CloNamespace
+
+	(source "(:require\n  [cljs.js :as eva]\n  [goog.string :as gstring]\n  [goog.string.format]\n  [cljs.core.async :refer [<! timeout close!]]\n  [cognitect.transit :as t]\n  [ajax.core :refer (GET)]\n  [cljs.reader :as rdr]\n  [light.geo.calc :as geo]\n  [light.czm.core :as czm])\n(:require-macros \n  [cljs.core.async.macros :refer [go]])")
+	(title "light.view3d.client"))
+
+([Cezium_Class17] of  CloVar
+
+	(source "(volatile! {:name \"Аврора\"\n               :coord [60 30]\n               :altitude 4000\n               :speed 160\n               :course 270})")
+	(title "VEHICLE"))
+
+([Cezium_Class170001] of  CloVar
+
+	(source "(volatile! nil)")
+	(title "REQUEST"))
+
+([Cezium_Class180000] of  CloFunction
+
+	(source "(let [p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :heightReference lab-hre\n                     :text label}\n           :billboard {:scale bil-scl\n                            :heightReference bil-hre\n                            :verticalOrigin \"BOTTOM\"\n                            :rotation bil-rot\n                            :image img-url}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "billboard-leg [label lab-scl lab-hre lab-off img-url bil-scl bil-hre bil-rot [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
+
+([Cezium_Class20000] of  HTML
+
+	(source "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Cockpit View</title>\n    <link rel=\"stylesheet\" href=\"css/cesium_light.css\" />\n    <script src=\"Cesium/Cesium.js\"></script>\n    <style>\n      @import url(Cesium/Widgets/widgets.css);\n      #cesiumContainer {\n        position: absolute;\n        top: 0;\n        left: 0;\n        height: 100%;\n        width: 100%;\n        margin: 0;\n        overflow: hidden;\n        padding: 0;\n        font-family: sans-serif;\n      }\n      html {\n        height: 100%;\n      }\n      body {\n        padding: 0;\n        margin: 0;\n        overflow: hidden;\n        height: 100%;\n      }\n    </style>\n  </head>\n  <body>\n    <div id=\"cesiumContainer\"></div>\n    <div id=\"vehicle\"></div>\n    <div id=\"name\"></div><div id=\"name-fld\"></div>\n    <div id=\"latitude\"></div><div id=\"latitude-fld\"></div>\n    <div id=\"longitude\"></div><div id=\"longitude-fld\"></div>\n    <div id=\"course\"></div><div id=\"course-fld\"></div>\n    <div id=\"speed\"></div><div id=\"speed-fld\"></div>\n    <div id=\"altitude\"></div><div id=\"altitude-fld\"></div>\n    <div id=\"camera\"></div>\n    <div id=\"onboard\"></div><div id=\"onboard-fld\"></div>\n    <div id=\"elev\"></div><div id=\"elev-fld\"></div>\n    <div id=\"roll\"></div><div id=\"roll-fld\"></div><div id=\"roll-sld\"></div>\n    <div id=\"pitch\"></div><div id=\"pitch-fld\"></div><div id=\"pitch-sld\"></div>\n    <div id=\"view\"></div><div id=\"view-fld\"></div><div id=\"view-sld\"></div>\n    <div id=\"viewM-btn\"></div><div id=\"viewP-btn\"></div>\n    <div id=\"view-dir\"></div>\n    <div id=\"binocular\"></div>\n    <div id=\"zoom-sld\"></div><div id=\"zoom-val\"></div>\n    <div id=\"zoomM\"></div><div id=\"zoomP\"></div>\n    <script>\n      // Grant your CesiumJS app access to your ion assets\n      // This is your actual default access token, you can copy/paste this directly into your app code\n      Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwN2EzYzEyNS1mMmNlLTRlYjEtYjRiMS04OTliNjhkZjI4NzQiLCJpZCI6MzY0MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTUzODQxODg5OH0.E2p7oe8fLJOtyawv0uT9zBZw4oyKZ6Vt3CZsE0FKeJw';\n      function terraHeightRequest(terrProv, lat, lon, func){\n        var pos = [Cesium.Cartographic.fromDegrees(lon, lat)];\n        var pms = Cesium.sampleTerrain(terrProv, 11, pos);\n        Cesium.when(pms, func);\n      }\n      function fillPointPrimColl(prims, lla, color, size){\n        for(i = 0; i < lla.length; i++){\n          var lat = lla[i][0];\n          var lon = lla[i][1];\n            prims.add({\n              position : Cesium.Cartesian3.fromDegrees(lon, lat),\n              color : color,\n              heightReference : Cesium.HeightReference.CLAMP_TO_GROUND\n            });\n        }\n      }\n    </script>\n    <script type=\"text/javascript\" src=\"js/cesium_light.js\"></script>\n  </body>\n</html>")
+	(store-in "resources/public")
+	(title "cezium_light"))
+
+([Cezium_Class200000] of  CloFunction
+
+	(source "(send-doc (doc (iso8601curt)))")
+	(title "send-doc-curt []"))
+
+([Cezium_Class200001] of  CloFunction
+
+	(source "(vec (map (fn [[x y]] (Integer/parseInt (str x y) 16)) (partition 2 hex)))")
+	(title "dec16 [hex]"))
+
+([Cezium_Class200002] of  CloFunction
+
+	(source "(let [[a r g b] (dec16 lin-color)\n       p {:id label\n           :label {:scale lab-scl\n                     :pixelOffset {:cartesian2 lab-off}\n                     :text label}\n           :ellipsoid {:show  true\n                           :radii {:cartesian [x y z]}\n                           :material {:grid {:color {:rgba [r g b a]}\n                                                    :lineCount {:cartesian2 [16, 16]}\n                                                    :cellAlpha transp}}}\n           :position {:cartographicDegrees [tim1 lon1 lat1 alt1 tim2 lon2 lat2 alt2]}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "dome [label lab-scl lab-off [x y z] lin-color transp [tim1 lon1 lat1 alt1] [tim2 lon2 lat2 alt2]]"))
+
+([Cezium_Class200012] of  CloFunction
+
+	(source "([no dis sec ops]\n  (let [[c4d1 c4d2] (trace4d no sec ops)]\n    (navob-leg no dis c4d1 c4d2 ops)))\n([no dis c4d1 c4d2 ops]\n  (let [lab (.getName no)\n         gltf-url (ops :gltf-url)\n         mod-scl (or (ops :model-scale) 1.0)\n         lab-scl (or (ops :label-scale) 0.5)\n         lab-hre (or (ops :label-height-reference) \"NONE\")\n         mod-hre (or (ops :model-height-reference) \"NONE\")\n         lab-off (or (ops :label-offset) [0.0 -40.0])]\n    (if gltf-url \n      (model-leg lab lab-scl lab-hre lab-off gltf-url mod-scl mod-hre c4d1 c4d2)\n      (let [url (.getURL no)\n             bil (or (ops :billboard) (icon-file url) \"no.png\")\n             bil (str BASE-URL IMG-PATH bil)\n             bil-scl (or (ops :billboard-scale) 1.0)\n             bil-hre (or (ops :billboard-height-reference) \"NONE\")\n             vis (or (ops :visibility) 4.0)\n             bil-scl (if (> dis 0) \n                          (min (* 2 bil-scl) (* bil-scl 0.1 (/ vis dis)))\n                          bil-scl)\n             bil-rot (or (ops :billboarg-rotation) 0)]\n        (billboard-leg lab lab-scl lab-hre lab-off bil bil-scl bil-hre bil-rot c4d1 c4d2)))))")
+	(title "navob-leg"))
+
+([Cezium_Class20002] of  CSS
+
+	(source "#vehicle {\n  position:fixed;\n  bottom:180px;\n  right:60px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#name {\n  position:fixed;\n  bottom:170px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#latitude {\n  position:fixed;\n  bottom:150px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#longitude {\n  position:fixed;\n  bottom:130px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#course {\n  position:fixed;\n  bottom:110px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#speed {\n  position:fixed;\n  bottom:90px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#altitude {\n  position:fixed;\n  bottom:70px;\n  right:90px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#name-fld {\n  position:fixed;\n  bottom:170px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:cyan\n}\n#latitude-fld {\n  position:fixed;\n  bottom:150px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#longitude-fld {\n  position:fixed;\n  bottom:130px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#course-fld {\n  position:fixed;\n  bottom:110px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#speed-fld {\n  position:fixed;\n  bottom:90px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#altitude-fld {\n  position:fixed;\n  bottom:70px;\n  right:30px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#camera {\n  position:fixed;\n  bottom:180px;\n  left:60px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#onboard {\n  position:fixed;\n  bottom:170px;\n  left:20px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#onboard-fld {\n  position:fixed;\n  bottom:170px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n  color:cyan\n}\n#elev {\n  position:fixed;\n  bottom:150px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#elev-fld {\n  position:fixed;\n  bottom:150px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#roll {\n  position:fixed;\n  bottom:130px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#roll-sld {\n  position:fixed;\n  bottom:130px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#roll-fld {\n  position:fixed;\n  bottom:130px;\n  left:304px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#pitch {\n  position:fixed;\n  bottom:110px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#pitch-sld {\n  position:fixed;\n  bottom:110px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#pitch-fld {\n  position:fixed;\n  bottom:110px;\n  left:304px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#view {\n  position:fixed;\n  bottom:90px;\n  left:22px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#view-sld {\n  position:fixed;\n  bottom:90px;\n  left:100px;\n  padding:5px;\n  z-index:100;\n}\n#view-fld {\n  position:fixed;\n  bottom:90px;\n  left:304px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewM-btn {\n  position:fixed;\n  bottom:70px;\n  left:150px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#viewP-btn {\n  position:fixed;\n  bottom:70px;\n  left:210px;\n  padding:5px;\n  z-index:100;\n  color:yellow\n}\n#view-dir {\n  position: absolute;\n  left: 0;\n  bottom: 15%;\n  width: 100%;\n  text-align: center;\n  color:yellow\n}\n\n#binocular {\n  position: absolute;\n  bottom: 12%;\n  right:18%;\n  z-index:100;\n  color:yellow\n}\n#zoom-sld {\n  position: absolute;\n  bottom: 10%;\n  right:16%;\n  z-index:100;\n  color:yellow\n}\n#zoom-val {\n  position: absolute;\n  bottom: 10%;\n  right:13%;\n  z-index:100;\n  color:yellow\n}\n#zoomM {\n  position: absolute;\n  bottom: 7%;\n  right:20%;\n  z-index:100;\n  color:yellow\n}\n#zoomP {\n  position: absolute;\n  bottom: 7%;\n  right:18%;\n  z-index:100;\n}")
+	(store-in "resources/public/css")
+	(title "cesium_light"))
+
+([Cezium_Class210000] of  CloFunction
+
+	(source "(def BASE-URL url)")
+	(title "base-url [url]"))
+
+([Cezium_Class210001] of  CloVar
+
+	(source "\"\"")
+	(title "BASE-URL"))
+
+([Cezium_Class210002] of  CloVar
+
+	(source "\"img/\"")
+	(title "IMG-PATH"))
+
+([Cezium_Class240000] of  CloFunction
+
+	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        fiso (iso8601futt from)\n        tiso (iso8601futt to)\n        N (count points)\n        step (/ (- to from) N)\n        reso (inc (max step 1))\n        pts (vec (flatten (map #(cons %1 %2) (range N) points)))\n        p {:id id\n            :availability (str fiso \"/\" tiso)\n            :path {:width wid\n                      :material {:solidColor {:color {:rgba [r g b a]}}}\n                      :resolution reso}\n            :position {:interpolationAlgorithm \"LINEAR\"\n                            :epoch fiso\n                            :cartographicDegrees pts}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "path [id [from to] wid color points]"))
+
+([Cezium_Class250000] of  CloFunction
+
+	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        pts (llp-czcoords llp alt pts?)\n        p {:id id\n            :name name\n            :polyline {:width wid\n                           :material {:solidColor {:color {:rgba [r g b a]}}}\n                           :clampToGround (= alt 0)\n                           :positions {:cartographicDegrees pts}}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "polyline [id from-to llp alt wid color name pts?]"))
+
+([Cezium_Class270000] of  CloFunction
+
+	(source ";; from, to - sec after (before, if negative) current time\n(let [[a r g b] (dec16 color)\n        pts (llp-czcoords llp alt pts?)\n        p {:id id\n            :name name\n            :polygon {:outline true\n                           :outlineWidth wid\n                           :outlineColor {:rgba [r g b a]}\n                           :material {:solidColor {:color {:rgba\n                             (let [[a r g b] (or (if fill (dec16 fill)) (dec16 \"00000000\"))]	                               [r g b a])}}}\n                           :perPositionHeight true\n                           :positions {:cartographicDegrees pts}}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "polygon [id from-to llp alt wid color fill name pts?]"))
+
+([Cezium_Class280000] of  CloFunction
+
+	(source ";; radius, height - meters\n(let [[a r g b] (dec16 color)\n        p {:id id\n            :name name\n            :ellipse {:semiMinorAxis radm\n                         :semiMajorAxis radm\n                         :height alt\n                         :material {:solidColor {:color {:rgba\n                           (let [[a r g b] (or (if fill (dec16 fill)) (dec16 \"00000000\"))]	                             [r g b a])}}}\n                         :outline true\n                         :outlineWidth wid\n                         :outlineColor {:rgba [r g b a]}}\n            :position {:cartographicDegrees [clo cla alt]}}\n        p (if-let [[from to] from-to]\n             (assoc p :availability (str (iso8601futt from) \"/\" (iso8601futt to)))\n             p)]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "circle [id from-to [cla clo] radm alt wid color fill name]"))
+
+([Cezium_Class290002] of  CloVar
+
+	(source "0")
+	(title "ALT"))
+
+([Cezium_Class3] of  CloVar
+
+	(source "(js/Cesium.Viewer. \n  \"cesiumContainer\" \n  #js{:imageryProvider (js/Cesium.createWorldImagery)\n        :terrainProvider (js/Cesium.createWorldTerrain)\n        :animation false\n        :shouldAnimate true})")
+	(title "VIEWER"))
+
+([Cezium_Class300000] of  CloProgram
+
+	(cloFunctions
+		[Cezium_Class300002]
+		[Cezium_Class300003]
+		[Cezium_Class300004])
+	(cloNamespace [Cezium_Class300001])
+	(title "3D Bodies Light"))
+
+([Cezium_Class300001] of  CloNamespace
+
+	(source "(:require\n  [light.cesium.core :as cs])\n(:import ru.igis.omtab.NavOb)")
+	(title "light.d3.bodies"))
+
+([Cezium_Class300002] of  CloFunction
+
+	(source ";; points-ring [center radius altitude points-number]\n(let [s (double (/ 360 N))\n       degs (range 0 (* N s) s)]\n  (vec (map #(concat (reverse (NavOb/position cla clo % rad)) [alt]) degs)))")
+	(title "points-ring [[cla clo] rad alt N]"))
+
+([Cezium_Class300003] of  CloFunction
+
+	(source "(if (empty? (first y))\n ()\n (cons (map first y) (slices (map rest y))))")
+	(title "slices [y]"))
+
+([Cezium_Class300004] of  CloFunction
+
+	(source ";; sec = [[rad1 alt1] [rad2 alt2] [rad3 alt3]...]\n(let [rings (map #(points-ring [cla clo] (first %) (second %) N) sec)]\n  (slices rings))")
+	(title "rot-body-secs [[cla clo] sec N]"))
+
+([Cezium_Class30026] of  CloProgram
+
+	(cloFunctions
+		[Cezium_Class370001]
+		[Cezium_Class30033]
+		[Cezium_Class30041]
+		[Cezium_Class30034]
+		[Cezium_Class30036]
+		[Cezium_Class100031]
+		[Cezium_Class360002]
+		[Cezium_Class30037]
+		[Cezium_Class30038]
+		[Cezium_Class30039]
+		[Cezium_Class70005]
+		[Cezium_Class80000]
+		[Cezium_Class80001]
+		[Cezium_Class370002]
+		[Cezium_Class360005]
+		[CeziumEngineLight_Class1])
+	(cloNamespace [Cezium_Class30027])
+	(cloVars
+		[Cezium_Class30029]
+		[Cezium_Class30030]
+		[Cezium_Class30032]
+		[Cezium_Class30042]
+		[Cezium_Class50000]
+		[Cezium_Class170001]
+		[Cezium_Class100005]
+		[Cezium_Class360003]
+		[Cezium_Class360004])
+	(title "Pro Server Light"))
+
+([Cezium_Class30027] of  CloNamespace
+
+	(source "(:use protege.core)\n(:require [ring.adapter.jetty :as jetty]\n              [ring.util.response :as r]\n              [compojure.core :refer [defroutes GET]]\n              [compojure.handler :as handler]\n              [compojure.route :as route]\n              [cognitect.transit :as t]\n              [light.cesium.core :as czs]\n              [clojure.core.async :as async :refer [chan alts!! put!]])\n(:import [java.io \n               ByteArrayOutputStream\n               ByteArrayInputStream]\n             ru.igis.omtab.OMT\n             edu.stanford.smi.protege.ui.DisplayUtilities\n             java.awt.Desktop\n             java.net.URI)")
+	(title "light.pro.server"))
+
+([Cezium_Class30029] of  CloVar
+
+	(source "8448")
+	(title "PORT"))
+
+([Cezium_Class30030] of  CloVar
+
+	(source "(str (System/getProperty \"user.dir\") \"/resources/public/\")")
+	(title "ROOT"))
+
+([Cezium_Class30032] of  CloVar
+
+	(source "nil")
+	(title "SERV"))
+
+([Cezium_Class30033] of  CloFunction
+
+	(source "(let [baos (ByteArrayOutputStream.)\n        w    (t/writer baos :json)\n        _    (t/write w x)\n        ret  (.toString baos)]\n    (.reset baos)\n    ret)")
+	(title "write-transit [x]"))
+
+([Cezium_Class30034] of  CloFunction
+
+	(source "(vreset! CAMERA params)\n(-> (r/response (write-transit (deref (future-call mp-vehicle-request))))\n       (r/header \"Access-Control-Allow-Origin\" \"*\")\n       (r/charset \"UTF-8\"))")
+	(title "vehicle [params]"))
+
+([Cezium_Class30036] of  CloFunction
+
+	(source "(let [address (str \"http://localhost:\" PORT)]\n  (println \"Location:\" address)\n  (when (java.awt.Desktop/isDesktopSupported)\n    (.browse (java.awt.Desktop/getDesktop) (java.net.URI. address))))")
+	(title "view3D-in-browser []"))
+
+([Cezium_Class30037] of  CloFunction
+
+	(source "(defroutes app-routes\n  (GET \"/\" [] (slurp (str ROOT \"cezium_light.html\")))\n  (GET \"/test\" [] (slurp (str ROOT \"test.html\")))\n  (GET \"/czml\" [] (czs/events))\n  (GET \"/vehicle\" [& params] (vehicle params))\n  (GET \"/response\" [& params] (response params))\n  (GET \"/cli-repl\" [& params] (cli-repl params))\n  (route/files \"/\" (do (println [:ROOT-FILES ROOT]) {:root ROOT}))\n  (route/resources \"/\")\n  (route/not-found \"Pro Server: Not Found!\"))\n\n(defonce APP\n  (handler/site app-routes))")
+	(title "init-server []"))
+
+([Cezium_Class30038] of  CloFunction
+
+	(source "([]\n    (start-server PORT))\n([port]\n  (if (nil? SERV)\n    (init-server))\n  (def SERV (jetty/run-jetty APP {:port port :join? false})))\n([hm inst]\n  (if-let [port (sv inst \"port\")]\n    (def PORT (read-string port)))\n  (start-server))")
+	(title "start-server"))
+
+([Cezium_Class30039] of  CloFunction
+
+	(source "([]\n  (when-let [serv SERV]\n    (.stop serv)\n    (def SERV nil)\n    (println \"Server stopped!\")))\n([hm inst]\n  (stop-server))")
+	(title "stop-server"))
+
+([Cezium_Class30041] of  CloFunction
+
+	(source "(if-let [onb @ONBOARD]\n  (if-let [mo (OMT/getMapOb onb)]\n    (let [desc (.getDescription mo)\n          ops (if desc \n                  (read-string desc) \n                  {})\n          p {:vehicle\n               (merge ops\n                 {:name onb\n                  :coord [(.getLatitude mo) (.getLongitude mo)]\n                  :altitude (.getAltitude mo)\n                  :speed (.getSpeed mo)\n                  :course (.getCourse mo)})}]\n      (if-let [req @REQUEST]\n        (do (vreset! REQUEST nil)\n              (assoc p :request req))\n        p))))")
+	(title "mp-vehicle-request []"))
+
+([Cezium_Class30042] of  CloVar
+
+	(source "(volatile! nil)")
+	(title "ONBOARD"))
+
+([Cezium_Class30043] of  CloProgram
+
+	(cloFunctions
+		[Cezium_Class310002]
+		[Cezium_Class30047]
+		[Cezium_Class30048]
+		[Cezium_Class30049]
+		[Cezium_Class30050]
+		[Cezium_Class30051]
+		[Cezium_Class150000]
+		[Cezium_Class200000]
+		[Cezium_Class30052]
+		[Cezium_Class180000]
+		[Cezium_Class30054]
+		[Cezium_Class30055]
+		[Cezium_Class210000]
+		[Cezium_Class200001]
+		[Cezium_Class200002]
+		[Cezium_Class110051]
+		[Cezium_Class70000]
+		[Cezium_Class100000]
+		[Cezium_Class330000]
+		[Cezium_Class240000]
+		[Cezium_Class250000]
+		[Cezium_Class270000]
+		[Cezium_Class280000]
+		[Cezium_Class340000])
+	(cloNamespace [Cezium_Class30044])
+	(cloVars
+		[Cezium_Class30045]
+		[Cezium_Class210001]
+		[Cezium_Class210002])
+	(title "Cesium Server Light"))
+
+([Cezium_Class30044] of  CloNamespace
+
+	(source "(:require\n    [ring.util.response :as r]\n    [light.async.proc :as asp]\n    [clojure.data.json :as json])\n(:import java.util.Calendar)")
+	(title "light.cesium.core"))
+
+([Cezium_Class30045] of  CloVar
+
+	(source "(defonce CZ-CHAN (asp/mk-chan))")
+	(title "defo-CZ-CHAN"))
+
+([Cezium_Class30047] of  CloFunction
+
+	(source "(asp/pump-in CZ-CHAN [typ (.trim dat)])")
+	(title "send-event [typ dat]"))
+
+([Cezium_Class30048] of  CloFunction
+
+	(source "(let [evt-hr (fn [[typ dat]]\n                   (str \"event: \" typ \"\\ndata: \" dat \"\\n\\n\"))\n       ee (deref (future (asp/pump-out CZ-CHAN)))\n       resp (if (seq ee)\n                 (apply str (map evt-hr ee))\n                 \"\")]\n  (-> (r/response resp)\n         (r/header \"Access-Control-Allow-Origin\" \"*\")\n         (r/header \"Content-Type\" \"text/event-stream;charset=utf-8\")))")
+	(title "events []"))
+
+([Cezium_Class30049] of  CloFunction
+
+	(source "(let [cld (Calendar/getInstance)\n       yar (.get cld Calendar/YEAR )\n       mon (inc (.get cld Calendar/MONTH))\n       dat (.get cld Calendar/DATE)\n       hor (.get cld Calendar/HOUR_OF_DAY)\n       min (.get cld Calendar/MINUTE)\n       sec (.get cld Calendar/SECOND)]\n    (format \"%04d-%02d-%02dT%02d:%02d:%02dZ\" yar mon dat hor min sec))")
+	(title "iso8601curt []"))
+
+([Cezium_Class30050] of  CloFunction
+
+	(source "(let [cld (Calendar/getInstance)\n       mil (.getTimeInMillis cld)\n       _ (.setTimeInMillis cld (+ mil (* sec 1000)))\n        yar (.get cld Calendar/YEAR )\n        mon (inc (.get cld Calendar/MONTH))\n        dat (.get cld Calendar/DATE)\n        hor (.get cld Calendar/HOUR_OF_DAY)\n        min (.get cld Calendar/MINUTE)\n        sec (.get cld Calendar/SECOND)]\n    (format \"%04d-%02d-%02dT%02d:%02d:%02dZ\" yar mon dat hor min sec))")
+	(title "iso8601futt [sec]"))
+
+([Cezium_Class30051] of  CloFunction
+
+	(source "([]\n  (json/write-str {:id \"document\" :version \"1.0\"}))\n([iso]\n  (json/write-str {:id \"document\" :version \"1.0\" :clock {:currentTime iso}}))")
+	(title "doc"))
+
+([Cezium_Class30052] of  CloFunction
+
+	(source "(let [p {:id label\n           :availability (str (iso8601curt) \"/\" (iso8601futt span-sec))\n           :label {:scale scale\n                     :pixelOffset {:cartesian2 [8, -24]}\n                     :heightReference \"RELATIVE_TO_GROUND\"\n                     :text label}\n           :billboard {:scale scale\n                            :image img-url}\n           :position {:cartographicDegrees [lon lat alt]}}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "location [label scale img-url lat lon alt span-sec]"))
+
+([Cezium_Class30054] of  CloFunction
+
+	(source "(let [min-scl 0.25\n       max-scl 1.25\n       scl (min max-scl (- max-scl (/ dist max-dist)))]\n  (location txt scl \"img/arrdn.png\" lat lon 100 60))")
+	(title "point-out [txt [lat lon] dist max-dist]"))
+
+([Cezium_Class30055] of  CloFunction
+
+	(source "(def DOC-SENT false)")
+	(title "new-doc []"))
+
+([Cezium_Class310002] of  CloFunction
+
+	(source "(if (and (string? url) (not (empty? url)))\n  (last (seq (.split url \"/\"))))")
+	(title "icon-file [url]"))
+
+([Cezium_Class330000] of  CloFunction
+
+	(source "(if pts?\n  (let [cpts (map #(list (second %) (first %) alt) llp)]\n    (vec (flatten cpts)))\n  (let [degs (map #(Math/toDegrees %) llp)\n         pts (partition 2 degs)]\n    (llp-czcoords pts alt true)))")
+	(title "llp-czcoords [llp alt pts?]"))
+
+([Cezium_Class340000] of  CloFunction
+
+	(source "(let [p {:id id\n           :delete true}]\n  (send-doc-curt)\n  (send-event \"czml\" (json/write-str p)))")
+	(title "delete [id]"))
+
+([Cezium_Class350000] of  CloFunction
+
+	(source "(let [pos (js/Cesium.Cartographic. lam phi alt)\n       sh (.sampleHeight (.-scene VIEWER) pos)]\n  [phi lam (or sh -7777)])")
+	(title "sample-height [[phi lam] alt]"))
+
+([Cezium_Class350001] of  CloFunction
+
+	(source "(let [dtr (/ js/Math.PI 180)\n       phi (* lat dtr)\n       lam (* lon dtr)\n       az (* bea dtr)\n       mc (/ (* dis dtr) 60)\n       s (/ (* step dtr) 60)]\n  (for [c (range 0 mc s)] (spherical-between-js phi lam c az)))")
+	(title "ray [lat lon bea dis step]"))
+
+([Cezium_Class360000] of  CloVar
+
+	(source "(volatile! \n  {:state (eva/empty-state)\n   :value nil})")
+	(title "CLI-REPL"))
+
+([Cezium_Class360001] of  CloFunction
+
+	(source ";; (:require [cljs.js :as eva]\n;;               [ajax.core :refer (GET)])\n(letfn [(result [res]\n            (println res)\n            (vswap! CLI-REPL assoc :value (res :value)))\n          (evaluate [source]\n	(eva/eval-str (@CLI-REPL :state)\n		source \n		nil \n		{:eval eva/js-eval :context :expr}\n		result))\n          (hand [response]\n	(when-let [req (first (read-transit response))]\n	  (println req)\n	  (if-let [sexp (:sexp req)]\n 	   (evaluate sexp))))]\n  (GET \"/cli-repl\" {:params {:transit\n                             (try\n                               (t/write (t/writer :json) (@CLI-REPL :value))\n                               (catch js/Error e\n                                 (t/write (t/writer :json) :NOT-TRANSIT)))}\n                            :handler hand\n	    :error-handler error-handler})\n  (js/setTimeout run-repl 1000))")
+	(title "run-repl []"))
+
+([Cezium_Class360002] of  CloFunction
+
+	(source "(letfn [(cli-repl-chan-out []\n	(loop [[bit ch] (alts!! [CLI-REPL-CHAN] :default :none) bits []]\n	    (if (= bit :none)\n	      bits\n	      (recur (alts!! [CLI-REPL-CHAN] :default :none) (conj bits bit)))))]\n  (def CLI-REPL params)\n  (let [req (deref (future (cli-repl-chan-out)))]\n    ;; (println :REQ req)\n    (write-transit req)))")
+	(title "cli-repl [params]"))
+
+([Cezium_Class360003] of  CloVar
+
+	(source "(defonce CLI-REPL-CHAN (chan))")
+	(title "defonceCLI-REPL-CHAN"))
+
+([Cezium_Class360004] of  CloVar
+
+	(source "nil")
+	(title "CLI-REPL"))
+
+([Cezium_Class360005] of  CloFunction
+
+	(source ";; sexp must be string or quote\n(put! CLI-REPL-CHAN {:sexp (str sexp)})\n(def CLI-REPL :WAIT)\n(clirepl)")
+	(title "replcli [sexp]"))
+
+([Cezium_Class370000] of  CloFunction
+
+	(source "(let [ray (geo/ray lat lon bea dis step)]\n  (map #(sample-height % alt) ray))")
+	(title "hig-ray [lat lon bea dis step alt]"))
+
+([Cezium_Class370001] of  CloFunction
+
+	(source "(let [bais (ByteArrayInputStream. (.getBytes x \"UTF-8\"))\n        r    (t/reader bais :json)]\n    (.reset bais)\n    (t/read r))")
+	(title "read-transit [x]"))
+
+([Cezium_Class370002] of  CloFunction
+
+	(source "([]\n  (clirepl 10))\n([sec]\n  (if (> sec 0)\n    (if (= CLI-REPL :WAIT)\n      (do (Thread/sleep 1000)\n        (clirepl (dec sec)))\n      (read-transit (CLI-REPL :transit)))))")
+	(title "clirepl"))
+
+([Cezium_Class380000] of  CloFunction
+
+	(source "(let [hir (hig-ray lat lon bea dis step alt)]\n  (loop [f (first hir) r (rest hir)]\n    (if (seq r)\n      (let [h1 (nth f 2)\n             fr (first r)\n             h2 (nth fr 2)]\n        (cond\n          (<= h2 alt) (recur fr (rest r))\n          (and (> h1 -7777) (<= h1 alt)) f\n          true (first hir)))\n      (if (> (nth f 2) -7777) f (first hir)))))")
+	(title "los-end [lat lon bea dis step alt]"))
+
+([Cezium_Class380001] of  CloFunction
+
+	(source "(let [[lat lon] center\n       [start end] sector\n       losec (for [bea (range start end bea-step)]\n                  (los-end lat lon bea dist dist-step alt))]\n  (cons [(geo/radians lat) (geo/radians lon) alt] losec))")
+	(title "los-sector [center sector dist alt dist-step bea-step]"))
+
+([Cezium_Class4] of  CloVar
+
+	(source "(js/Cesium.CzmlDataSource.)")
+	(title "CZML-SRC"))
+
+([Cezium_Class40000] of  CloProgram
+
+	(cloFunctions
+		[Cezium_Class40002]
+		[Cezium_Class40003]
+		[Cezium_Class40004]
+		[Cezium_Class40005]
+		[Cezium_Class40006]
+		[Cezium_Class40007]
+		[Cezium_Class40008]
+		[Cezium_Class40009]
+		[Cezium_Class40010]
+		[Cezium_Class40011])
+	(cloNamespace [Cezium_Class40001])
+	(title "Async Processing Light"))
+
+([Cezium_Class40001] of  CloNamespace
+
+	(source "(:require \n  [clojure.core.async :refer [chan alts!! put! <! <!! go timeout close!]])")
+	(title "light.async.proc"))
+
+([Cezium_Class40002] of  CloFunction
+
+	(source "([func time-out]\n  (go (while true\n           (func)\n           (<! (timeout time-out)))))\n([func param time-out]\n  (go (while true\n           (func param)\n           (<! (timeout time-out)))))")
+	(title "repeater"))
+
+([Cezium_Class40003] of  CloFunction
+
+	(source "(when (not= @status \"RUN\") \n  (vreset! status \"RUN\")\n  (go (do \n          (while (and (= @status \"RUN\")\n                            (proc-fn))\n                (<! (timeout time-out)))\n          (if (instance? clojure.lang.IFn final-fun) (final-fun))\n          (vreset! status \"STOP\")))\n  @status)")
+	(title "start-process [status proc-fn time-out final-fun]"))
+
+([Cezium_Class40004] of  CloFunction
+
+	(source "(vreset! status \"FINISH\")")
+	(title "stop-process [status]"))
+
+([Cezium_Class40005] of  CloFunction
+
+	(source "(= @status \"RUN\")")
+	(title "running? [status]"))
+
+([Cezium_Class40006] of  CloFunction
+
+	(source "(put! chn val)")
+	(title "pump-in [chn val]"))
+
+([Cezium_Class40007] of  CloFunction
+
+	(source "(loop [[bit ch] (alts!! [chn] :default :none) bits []]\n  (if (= bit :none)\n    bits\n    (recur (alts!! [chn] :default :none) (conj bits bit))))")
+	(title "pump-out [chn]"))
+
+([Cezium_Class40008] of  CloFunction
+
+	(source "(loop [out []]\n  (if (empty? out)\n    (recur (<!! chn))\n    out))")
+	(title "one-out [chn]"))
+
+([Cezium_Class40009] of  CloFunction
+
+	(source "(chan)")
+	(title "mk-chan []"))
+
+([Cezium_Class40010] of  CloFunction
+
+	(source "(close! chn)")
+	(title "close-chan [chn]"))
+
+([Cezium_Class40011] of  CloFunction
+
+	(source "(go (<! (timeout time))\n  (func))")
+	(title "delayer [func time]"))
+
+([Cezium_Class5] of  CloVar
+
+	(source "(volatile! {:view 0\n               :pitch 0\n               :roll 0})")
+	(title "CAMERA"))
+
+([Cezium_Class50000] of  CloVar
+
+	(source "(volatile! \n  {:view \"0\"\n   :pitch \"0\"\n   :roll \"0\"})")
+	(title "CAMERA"))
+
+([Cezium_Class50003] of  CloFunction
+
+	(source "(if-let [vie (:view request)]\n  (view vie))\n(if-let [pit (:pitch request)]\n  (pitch pit))\n(if-let [rol (:roll request)]\n  (roll rol))\n(if-let [[lat lon] (:elevation request)]\n  (let [[_ _ sh] (czm/sample-height [(geo/radians lat) (geo/radians lon)] 0)]\n    (vswap! RESPONSE assoc :elevation (int sh))))\n(response-request)")
+	(title "handle-request [request]"))
+
+([Cezium_Class6] of  CloFunction
+
+	(source "(cond\n   (> x 360) (- x 360)\n   (< x 0) (+ x 360)\n   true x)")
+	(title "norm-crs [x]"))
+
+([Cezium_Class60000] of  CloFunction
+
+	(source "(.getElementById js/document id)")
+	(title "by-id [id]"))
+
+([Cezium_Class60001] of  CloFunction
+
+	(source "(set-html! \"camera\" \"<h4>Camera</h4>\")\n(set-html! \"onboard\" \"Onboard:\")\n(set-html! \"onboard-fld\" \"\")\n(set-html! \"elev\" \"Elevation:\")\n(set-html! \"elev-fld\" \n  \"<input value='4' style='width:100px' id='input-elev'\n                     onchange='javascript:light.view3d.client.elev(this.value)'>\")\n(set-html! \"roll\" \"Roll:\")\n(set-html! \"roll-fld\" 0)\n(set-html! \"roll-sld\" \n  \"<input type='range' style='width:200px' id='roll-vals'\n               min='-180' value='0' max='180'\n               oninput='javascript:light.view3d.client.roll(this.value)'>\")\n(set-html! \"pitch\" \"Pitch:\")\n(set-html! \"pitch-fld\" 0)\n(set-html! \"pitch-sld\" \n  \"<input type='range' style='width:200px' id='pitch-vals'\n               min='-90' value='0' max='90'\n               oninput='javascript:light.view3d.client.pitch(this.value)'>\")\n(set-html! \"view\" \"View:\")\n(set-html! \"view-fld\" 0)\n(set-html! \"view-sld\" \n  \"<input type='range' style='width:200px' id='view-vals'\n               min='-180' value='0' max='180'\n               oninput='javascript:light.view3d.client.view(this.value)'>\")\n(set-html! \"viewM-btn\" \n  \"<button onclick='javascript:light.view3d.client.viewM()'>view-</button>\")\n(set-html! \"viewP-btn\" \n  \"<button onclick='javascript:light.view3d.client.viewP()'>view+</button>\")")
+	(title "left-controls []"))
+
+([Cezium_Class60002] of  CloFunction
+
+	(source "(set! (.-innerHTML (.getElementById js/document id)) msg)")
+	(title "set-html! [id msg]"))
+
+([Cezium_Class60003] of  CloFunction
+
+	(source "(let [deg (num-val deg)]\n  (when (<= -180 deg 180)\n    (vswap! czm/CAMERA assoc :view deg)\n    (set-html! \"view-fld\" deg)))")
+	(title "view [deg]"))
+
+([Cezium_Class60004] of  CloFunction
+
+	(source "(let [deg (num-val deg)]\n  (when (<= -90 deg 90)\n    (vswap! czm/CAMERA assoc :pitch deg)\n    (set-html! \"pitch-fld\" deg)))")
+	(title "pitch [deg]"))
+
+([Cezium_Class60005] of  CloFunction
+
+	(source "(let [deg (num-val deg)]\n  (when (<= -180 deg 180)\n    (vswap! czm/CAMERA assoc :roll deg)\n    (set-html! \"roll-fld\" deg)))")
+	(title "roll [deg]"))
+
+([Cezium_Class60006] of  CloFunction
+
+	(source "(if (number? x) x (rdr/read-string x))")
+	(title "num-val [x]"))
+
+([Cezium_Class60007] of  CloFunction
+
+	(source "(set-html! \"vehicle\" \"<h4>Vehicle</h4>\")\n(set-html! \"name\" \"Name:\")\n(set-html! \"name-fld\" \"\")\n(set-html! \"latitude\" \"Latitude:\")\n(set-html! \"latitude-fld\" \"\")\n(set-html! \"longitude\" \"Longitude:\")\n(set-html! \"longitude-fld\" \"\")\n(set-html! \"course\" \"Course:\")\n(set-html! \"course-fld\" \"\")\n(set-html! \"speed\" \"Speed:\")\n(set-html! \"speed-fld\" \"\")\n(set-html! \"altitude\" \"Altitude:\")\n(set-html! \"altitude-fld\" \"\")")
+	(title "right-controls []"))
+
+([Cezium_Class60008] of  CloFunction
+
+	(source "(right-controls)\n(left-controls)\n(middle-controls)")
+	(title "show-controls []"))
+
+([Cezium_Class7] of  CloFunction
+
+	(source "(def CZML-DATA (js/JSON.parse (.-data e)))\n(.process CZML-SRC CZML-DATA)")
+	(title "cz-processor [e]"))
+
+([Cezium_Class70000] of  CloFunction
+
+	(source "(let [ncrs (.getCourse nmo)]\n  (if (< (.getSpeed nmo) 0.1)\n  0\n  (let [bon (.bearingsDeg omo nmo)\n         oons (or (< bon 90) (> bon 270))\n         dir (if oons\n                (cond\n                  (= ncrs 0) (if (< bon 180) :LE :RI)\n                  (= ncrs 180) (if (< bon 180) :RI :LE)\n                  (< ncrs 180) :RI \n                  true :LE)\n                (cond\n                  (= ncrs 0) (if (< bon 180) :RI :LE)\n                  (= ncrs 180) (if (< bon 180) :LE :RI)\n                  (< ncrs 180) :LE\n                  true :RI))]\n    (condp = dir\n      :LE 1.57\n      :RI 4.71))))")
+	(title "billboard-rotation [nmo omo]"))
+
+([Cezium_Class70001] of  CloFunction
+
+	(source "(condp > (float bea)\n  5.625 \"N\"\n  16.875 \"NtO\"\n  28.125 \"NNO\"\n  39.375 \"NOtN\"\n  50.625 \"NO\"\n  61.875 \"NOtO\"\n  73.125 \"ONO\"\n  84.375 \"OtN\"\n  95.625 \"O\"\n  106.875 \"OtS\"\n  118.125 \"OSO\"\n  129.375 \"SOtO\"\n  140.625 \"SO\"\n  151.875 \"SOtS\"\n  163.125 \"SSO\"\n  174.375 \"StO\"\n  185.625 \"S\"\n  196.875 \"StW\"\n  208.125 \"SSW\"\n  219.375 \"SWtS\"\n  230.625 \"SW\"\n  241.875 \"SWtW\"\n  253.125 \"WSW\"\n  264.375 \"WtS\"\n  275.625 \"W\"\n  286.875 \"WtN\"\n  298.125 \"WNW\"\n  309.375 \"NWtW\"\n  320.625 \"NW\"\n  331.875 \"NWtN\"\n  343.125 \"NNW\"\n  354.375 \"NtW\"\n  \"N\")")
+	(title "rumb [bea]"))
+
+([Cezium_Class70005] of  CloFunction
+
+	(source "([hm inst]\n  (czs/new-doc)\n  (if-let [sel (DisplayUtilities/pickInstanceFromCollection nil (OMT/getNavObInstances) 0 \"Select NavOb\")]\n    (let [lab (sv sel \"label\")]\n      (ssv inst \"onboard\" lab)\n      (vreset! ONBOARD lab))))\n([lab]\n  (czs/new-doc)\n  (when-let [inst (first (cls-instances \"CeziumControl\"))]\n    (ssv inst \"onboard\" lab)\n    (vreset! ONBOARD lab)))")
+	(title "go-onboard"))
+
+([Cezium_Class8] of  CloFunction
+
+	(source "(let [dest (js/Cesium.Cartesian3.fromDegrees lon lat alt)]\n  (.flyTo (.-camera VIEWER)\n            #js{:destination dest\n                  :orientation #js{:heading (js/Cesium.Math.toRadians hea)\n                                           :pitch   (js/Cesium.Math.toRadians pit)\n                                           :roll    (js/Cesium.Math.toRadians rol)}\n                  :maximumHeight alt\n                  :duration per\n                  :easingFunction (fn [time] time)}))")
+	(title "fly-control [lat lon alt hea pit rol per]"))
+
+([Cezium_Class80000] of  CloFunction
+
+	(source "(vreset! REQUEST req)\n(if wait-response\n  (vreset! RESPONSE :WAIT))")
+	(title "request [req wait-response]"))
+
+([Cezium_Class80001] of  CloFunction
+
+	(source "([]\n  (receive-response 10))\n([sec]\n  (if (> sec 0)\n    (if (= @RESPONSE :WAIT)\n      (do (Thread/sleep 1000)\n        (receive-response (dec sec)))\n      @RESPONSE)))")
+	(title "receive-response"))
+
+([Cezium_Class80003] of  CloFunction
+
+	(source "(let [resp @RESPONSE]\n  (when (not (empty? resp))\n    (GET \"/response\"\n	{:params {:response\n                             (try\n                               (t/write (t/writer :json) resp)\n                               (catch js/Error e\n                                 (t/write (t/writer :json) :NOT-TRANSIT)))}\n                         :error-handler error-handler})\n    (vreset! RESPONSE {})))")
+	(title "response-request []"))
+
+([Cezium_Class80004] of  CloVar
+
+	(source "(volatile! {})")
+	(title "RESPONSE"))
+
+([Cezium_Class9] of  CloFunction
+
+	(source ";;(println :MC lat lon alt hea pit rol)\n(let [dest (js/Cesium.Cartesian3.fromDegrees lon lat alt)]\n  (.setView (.-camera VIEWER)\n            #js{:destination dest\n                  :orientation #js{:heading (js/Cesium.Math.toRadians hea)\n                                           :pitch   (js/Cesium.Math.toRadians pit)\n                                           :roll    (js/Cesium.Math.toRadians rol)}}))")
+	(title "move-control [lat lon alt hea pit rol]"))
+
+([Cezium_Class90000] of  ClsRequired
+
+	(cloFunctions
+		[Cezium_Class90018]
+		[Cezium_Class90019]
+		[Cezium_Class90002]
+		[Cezium_Class90005]
+		[Cezium_Class6]
+		[Cezium_Class350001]
+		[Cezium_Class70001])
+	(cloNamespace [Cezium_Class90001])
+	(title "Geo Light"))
+
+([Cezium_Class90001] of  CloNamespace
+
+	(title "light.geo.calc"))
+
+([Cezium_Class90002] of  CloFunction
+
+	(source "(let [cosphi1 (js/Math.cos phi1)\n       sinphi1 (js/Math.sin phi1)\n       cosaz (js/Math.cos az)\n       sinaz (js/Math.sin az)\n       sinc (js/Math.sin c)\n       cosc (js/Math.cos c)\n       phi2 (js/Math.asin (+ (* sinphi1 cosc) (* cosphi1 sinc cosaz)))\n       lam2 (+ (js/Math.atan2 (* sinc sinaz) (- (* cosphi1 cosc) (* sinphi1 sinc cosaz))) lambda0)]\n  [phi2 lam2])")
+	(title "spherical-between-js [^double phi1 ^double lambda0 ^double c ^double az]"))
+
+([Cezium_Class90005] of  CloFunction
+
+	(source "(let [phi (radians lat)\n       lam (radians lon)\n       dir (radians crs)\n       way (* spd tim)\n       way (radians (/ way 60))\n       [phi2 lam2] (spherical-between-js phi lam way dir)]\n   [(degrees phi2) (degrees lam2)])")
+	(title "future-pos-js [[lat lon] crs spd tim]"))
+
+([Cezium_Class90017] of  CloVar
+
+	(source "100")
+	(title "MAX-UPGROUND"))
+
+([Cezium_Class90018] of  CloFunction
+
+	(source "(/ (* deg js/Math.PI) 180)")
+	(title "radians [deg]"))
+
+([Cezium_Class90019] of  CloFunction
+
+	(source "(/ (* rad 180) js/Math.PI)")
+	(title "degrees [rad]"))
+
+([CeziumEngine_Class30000] of  CloFunction
+
+	(source "(set! (.-depthTestAgainstTerrain (.-globe (.-scene czm/VIEWER))) true)\n(println :D (.-depthTestAgainstTerrain (.-globe (.-scene czm/VIEWER))))\n(let [ppc (js/Cesium.PointPrimitiveCollection. #js{\n              :heightReference js/Cesium.HeightReference.CLAMP_TO_GROUND})\n       lla [[61.6 7.5][61.61 7.51][61.6 7.52]]\n       clr js/Cesium.Color.YELLOW\n       size 10\n       prims (.add (.-primitives (.-scene czm/VIEWER)) ppc)]\n  (js/fillPointPrimColl prims (clj->js lla) clr size))")
+	(title "tst []"))
+
+([CeziumEngineLight_Class1] of  CloFunction
+
+	(source "([]\n  (if-let [serv SERV]\n    (invoke-later (.browse (Desktop/getDesktop) (URI/create (str \"http://localhost:\" PORT))))))\n([hm inst]\n  (start-client))")
+	(title "start-client"))
+
+([CeziumEngineLight_Class10000] of  CloVar
+
+	(source "nil")
+	(title "CZML-DATA"))
+
+([CeziumEngineLight_Class30001] of  Rule
+
+	(lhs "(CZMLGenerator delay ?del)\n?onb (Onboard label ?lab\n	time ?tim)\n(Clock time ?t (> ?t ?tim))")
+	(rhs "(let [onb (deref light.pro.server/ONBOARD)\n       fut (+ ?t ?del)]\n  (if (not= onb ?lab)\n    (modify ?onb time fut label onb)\n    (modify ?onb time fut)))")
+	(salience 0)
+	(title "czm:Check Onboard"))
+
+([CeziumEngineLight_Class30002] of  Rule
+
+	(lhs "(CZMLGenerator delay ?del\n	visibility ?vis)\n(Onboard label ?onb)\n?cs (CZMLSpan time ?tim\n	object ?obj\n	options ?ops)\n(Clock time ?t (> ?t ?tim))")
+	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/navob-leg \n	nmo\n	dis\n	(+ ?del 2)\n	?ops))\n      (modify ?cs time (+ ?t ?del)))))")
+	(salience 1)
+	(title "czm:CZML Navob Leg Generation"))
+
+([CeziumEngineLight_Class30003] of  Rule
+
+	(lhs "?cs (CZMLSpan time ?tim\n	object ?obj\n	options ?ops\n	((not (string? ?obj))\n	 (not (string? ?ops))))")
+	(rhs "(modify ?cs object (protege.core/sv ?obj \"label\")\n	options (apply hash-map\n		(mapcat #(list (read-string (protege.core/sv % \"keyword\"))\n			(read-string (protege.core/sv % \"argument\"))) ?ops)))")
+	(salience 0)
+	(title "czm:CZMLSpan Init"))
+
+([CeziumEngineLight_Class40004] of  RuleSet
+
+	(rules
+		[CeziumEngineLight_Class30001]
+		[CeziumEngineLight_Class30003]
+		[CeziumEngineLight_Class30002])
+	(templates
+		[CZMLGenerator]
+		[CZMLSpan]
+		[Onboard])
+	(title "CZML Generation Set for Scenarios"))
+
+([CeziumEngineLight_Class40005] of  Rule
+
+	(lhs "?moe (MapObEvent0)")
+	(rhs "(retract ?moe)")
+	(salience -10)
+	(title "sim0:RetractMapObEvent0"))
+
+([CeziumEngineLight_Class40006] of  Rule
+
+	(lhs "?c1 (Clock0 time ?t1)\n?c2 (Clock0 time ?t2\n	(< ?t2 ?t1))")
+	(rhs "(retract ?c2)")
+	(salience 10)
+	(title "sim0:RetractSecondClock0"))
+
+([CeziumEngineLight_Class40007] of  Rule
+
+	(lhs "(CZMLGenerator)\n(not Clock0)")
+	(rhs "(light.sim/start-sim)")
+	(salience 0)
+	(title "sim0:Start Simulation"))
+
+([CeziumEngineLight_Class40008] of  RuleSet
+
+	(rules
+		[CeziumEngineLight_Class40005]
+		[CeziumEngineLight_Class40006]
+		[CeziumEngineLight_Class40007])
+	(templates
+		[Clock0]
+		[MapObEvent0])
+	(title "CZML Simulation Set"))
+
+([CeziumEngineLight_Class40011] of  CloProgram
+
+	(cloFunctions
+		[CeziumEngineLight_Class40015]
+		[CeziumEngineLight_Class40016]
+		[CeziumEngineLight_Class40017]
+		[CeziumEngineLight_Class40018]
+		[CeziumEngineLight_Class40019]
+		[CeziumEngineLight_Class40020]
+		[CeziumEngineLight_Class40021])
+	(cloNamespace [CeziumEngineLight_Class40012])
+	(cloVars
+		[CeziumEngineLight_Class40013]
+		[CeziumEngineLight_Class40014])
+	(title "Cezium Simulator"))
+
+([CeziumEngineLight_Class40012] of  CloNamespace
+
+	(source "(:require\n  [protege.core :as p]\n  [rete.core :as rete])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.Clock\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.NavOb\n  java.util.HashMap\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  java.awt.event.ActionListener)")
+	(title "light.sim"))
+
+([CeziumEngineLight_Class40013] of  CloVar
+
+	(source "nil")
+	(title "ES-TIMER"))
+
+([CeziumEngineLight_Class40014] of  CloVar
+
+	(source "(volatile! {})")
+	(title "EVT-LISTENERS"))
+
+([CeziumEngineLight_Class40015] of  CloFunction
+
+	(source "(doseq[pg (OMT/getPlaygrounds)]\n  (let [al (proxy [ActionListener] []\n	(actionPerformed [evt] \n	  ;; (println :OMT-GEN-EVT evt)\n  	(rete/assert-frame ['MapObEvent0 \n                                                     'status (.getActionCommand evt)\n                                                     'object (.getSource evt)\n                                                     'label (.getName (.getSource evt))])))]\n    (.addActionListener pg al)\n    (vswap! EVT-LISTENERS assoc pg al)))")
+	(title "start-evt-listen []"))
+
+([CeziumEngineLight_Class40016] of  CloFunction
+
+	(source "(doseq[[pg al] @EVT-LISTENERS]\n  (.removeActionListener pg al))")
+	(title "stop-evt-listen []"))
+
+([CeziumEngineLight_Class40017] of  CloFunction
+
+	(source "(if (and (some? ES-TIMER) (OMT/isRunning))\n  (let [msec (Clock/getClock)\n         sec (int (/ msec 1000))\n         frm ['Clock0 'time sec]]\n    (rete/assert-frame frm)\n    (rete/fire)))")
+	(title "work-sim []"))
+
+([CeziumEngineLight_Class40018] of  CloFunction
+
+	(source "(when (some? ES-TIMER)\n  (.cancel ES-TIMER)\n  (def ES-TIMER nil)\n  (stop-evt-listen)\n  (println \"Simulation Stoped...\"))")
+	(title "stop-sim []"))
+
+([CeziumEngineLight_Class40019] of  CloFunction
+
+	(source "(if (some? ES-TIMER)\n  (stop-sim))\n(def ES-TIMER (java.util.Timer.))\n(.schedule \n  ES-TIMER \n  (proxy [java.util.TimerTask] [] (run [] (work-sim)))\n  (long 0) \n  (long 1000))\n(start-evt-listen)\n(println \"Simulation Started...\")")
+	(title "start-sim []"))
+
+([CeziumEngineLight_Class40020] of  CloFunction
+
+	(source "(stop-sim)\n(start-sim)")
+	(title "restart-sim []"))
+
+([CeziumEngineLight_Class40021] of  CloFunction
+
+	(source "(Clock/setClock 0)")
+	(title "reset-time []"))
+
+([CeziumEngineLight_Class40022] of  Rule
+
+	(lhs "(CZMLGenerator delay ?del)\n?onb (Onboard label ?lab\n	time ?tim)\n(Clock0 time ?t (> ?t ?tim))")
+	(rhs "(let [onb (deref light.pro.server/ONBOARD)\n       fut (+ ?t ?del)]\n  (if (not= onb ?lab)\n    (modify ?onb time fut label onb)\n    (modify ?onb time fut)))")
+	(salience 0)
+	(title "czm0:Check Onboard"))
+
+([CeziumEngineLight_Class40023] of  Rule
+
+	(lhs "(CZMLGenerator delay ?del\n	visibility ?vis)\n(Onboard label ?onb)\n?cs (CZMLSpan time ?tim\n	object ?obj\n	options ?ops)\n(Clock0 time ?t (> ?t ?tim))")
+	(rhs "(if-let [omo (ru.igis.omtab.OMT/getMapOb ?onb)]\n  (if-let [nmo (ru.igis.omtab.OMT/getMapOb ?obj)]\n    (let [dis (.distanceNM omo nmo)]\n      (if (< dis ?vis)\n        (light.cesium.core/navob-leg \n	nmo\n	dis\n	(+ ?del 2)\n	?ops))\n      (modify ?cs time (+ ?t ?del)))))")
+	(salience 1)
+	(title "czm0:CZML Navob Leg Generation"))
+
+([CeziumEngineLight_Class40026] of  RuleSet
+
+	(rules
+		[CeziumEngineLight_Class40022]
+		[CeziumEngineLight_Class30003]
+		[CeziumEngineLight_Class40023])
+	(templates
+		[Clock0]
+		[CZMLGenerator]
+		[CZMLSpan]
+		[Onboard])
+	(title "CZML Generation Set"))

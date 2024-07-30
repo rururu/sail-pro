@@ -5,8 +5,6 @@ Simulation and modelling environment for virtual sailing.
 [![Watch the video](1.png)](https://www.youtube.com/watch?v=uabntPNL_kc)
 Click the screenshot to see a video!
 
-_Simplified version: [https://github.com/rururu/VRShoreView](https://github.com/rururu/VRShoreView)_
-
 ## Prerequisites
 
 You need to be installed on your machine:
@@ -77,6 +75,8 @@ See details in screencasts. Some details can be differen of earlier - these are 
 10. Boat tossing effect.
 
 [Boat tossing control](https://youtu.be/27-_AhOrAg4)
+
+_Note: If a cockpit view blinkins elevate a camera several meters._
 
 ### 2. Project Sail Expert
 

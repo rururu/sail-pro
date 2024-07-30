@@ -1,0 +1,271 @@
+#vehicle {
+  position:fixed;
+  bottom:180px;
+  right:60px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#name {
+  position:fixed;
+  bottom:170px;
+  right:90px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#latitude {
+  position:fixed;
+  bottom:150px;
+  right:90px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#longitude {
+  position:fixed;
+  bottom:130px;
+  right:90px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#course {
+  position:fixed;
+  bottom:110px;
+  right:90px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#speed {
+  position:fixed;
+  bottom:90px;
+  right:90px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#altitude {
+  position:fixed;
+  bottom:70px;
+  right:90px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#name-fld {
+  position:fixed;
+  bottom:170px;
+  right:30px;
+  padding:5px;
+  z-index:100;
+  color:cyan
+}
+#latitude-fld {
+  position:fixed;
+  bottom:150px;
+  right:30px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#longitude-fld {
+  position:fixed;
+  bottom:130px;
+  right:30px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#course-fld {
+  position:fixed;
+  bottom:110px;
+  right:30px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#speed-fld {
+  position:fixed;
+  bottom:90px;
+  right:30px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#altitude-fld {
+  position:fixed;
+  bottom:70px;
+  right:30px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#camera {
+  position:fixed;
+  bottom:180px;
+  left:60px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#onboard {
+  position:fixed;
+  bottom:170px;
+  left:20px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#onboard-fld {
+  position:fixed;
+  bottom:170px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+  color:cyan
+}
+#elev {
+  position:fixed;
+  bottom:150px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#elev-fld {
+  position:fixed;
+  bottom:150px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#roll {
+  position:fixed;
+  bottom:130px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#roll-sld {
+  position:fixed;
+  bottom:130px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#roll-fld {
+  position:fixed;
+  bottom:130px;
+  left:304px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#pitch {
+  position:fixed;
+  bottom:110px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#pitch-sld {
+  position:fixed;
+  bottom:110px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#pitch-fld {
+  position:fixed;
+  bottom:110px;
+  left:304px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#view {
+  position:fixed;
+  bottom:90px;
+  left:22px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#view-sld {
+  position:fixed;
+  bottom:90px;
+  left:100px;
+  padding:5px;
+  z-index:100;
+}
+#view-fld {
+  position:fixed;
+  bottom:90px;
+  left:304px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#viewM-btn {
+  position:fixed;
+  bottom:70px;
+  left:150px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#viewP-btn {
+  position:fixed;
+  bottom:70px;
+  left:210px;
+  padding:5px;
+  z-index:100;
+  color:yellow
+}
+#view-dir {
+  position: absolute;
+  left: 0;
+  bottom: 15%;
+  width: 100%;
+  text-align: center;
+  color:yellow
+}
+
+#binocular {
+  position: absolute;
+  bottom: 12%;
+  right:18%;
+  z-index:100;
+  color:yellow
+}
+#zoom-sld {
+  position: absolute;
+  bottom: 10%;
+  right:16%;
+  z-index:100;
+  color:yellow
+}
+#zoom-val {
+  position: absolute;
+  bottom: 10%;
+  right:13%;
+  z-index:100;
+  color:yellow
+}
+#zoomM {
+  position: absolute;
+  bottom: 7%;
+  right:20%;
+  z-index:100;
+  color:yellow
+}
+#zoomP {
+  position: absolute;
+  bottom: 7%;
+  right:18%;
+  z-index:100;
+}

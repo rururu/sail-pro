@@ -1,4 +1,4 @@
-; Sun Mar 26 22:49:07 MSK 2017
+; Wed Apr 24 12:59:47 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[GeoNames_ProjectKB_Class20371]
-		[GeoNames_ProjectKB_Class20372]
-		[GeoNames_ProjectKB_Class20373]))
+		[GeoNames_ProjectKB_Class316]
+		[GeoNames_ProjectKB_Class317]
+		[GeoNames_ProjectKB_Class318]))
 
 ([CLSES_TAB] of  Widget
 
@@ -124,29 +124,29 @@
 ([GeoNames_ProjectKB_Class20365] of  Property_List
 )
 
-([GeoNames_ProjectKB_Class20371] of  String
+([GeoNames_ProjectKB_Class314] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [GeoNames_ProjectKB_Class315])
+	(widget_class_name "edu.stanford.smi.protegex.queries_tab.QueriesTab"))
+
+([GeoNames_ProjectKB_Class315] of  Property_List
+)
+
+([GeoNames_ProjectKB_Class316] of  String
 
 	(name "FeatureClass")
 	(string_value "title"))
 
-([GeoNames_ProjectKB_Class20372] of  String
+([GeoNames_ProjectKB_Class317] of  String
 
 	(name "Country")
 	(string_value "title"))
 
-([GeoNames_ProjectKB_Class20373] of  String
+([GeoNames_ProjectKB_Class318] of  String
 
 	(name "Feature")
 	(string_value "title"))
-
-([GeoNames_ProjectKB_Class357] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [GeoNames_ProjectKB_Class358])
-	(widget_class_name "edu.stanford.smi.protegex.queries_tab.QueriesTab"))
-
-([GeoNames_ProjectKB_Class358] of  Property_List
-)
 
 ([GeoNames_ProjectKB_Class359] of  Widget
 
@@ -320,34 +320,6 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_504471_Class353] of  Map
-
-	(entries
-		[KB_504471_Class354]
-		[KB_504471_Class355]
-		[KB_504471_Class356]))
-
-([KB_504471_Class354] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_504471_Class355] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_504471_Class356] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
 ([KB_773074_Class0] of  String
 
 	(name "factory_class_name")
@@ -444,6 +416,34 @@
 
 	(name "instances_file_name")
 	(string_value "GeoNames.pins"))
+
+([KB_879529_Class310] of  Map
+
+	(entries
+		[KB_879529_Class311]
+		[KB_879529_Class312]
+		[KB_879529_Class313]))
+
+([KB_879529_Class311] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_879529_Class312] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_879529_Class313] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([LAYOUT_PROPERTIES] of  Property_List
 

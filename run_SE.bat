@@ -1,6 +1,6 @@
 chcp 65001
 
-set JARS=lib\*;lib_ext\*
+set JARS=lib\*;lib_ext\*;lib_pro\*;lib_clo\*
 set MAIN_CLASS=ru.igis.scena.Starter
 set OPTIONS=-Xmx1000M
 set ENCODING=-Dfile.encoding=UTF-8

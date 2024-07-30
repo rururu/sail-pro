@@ -2,8 +2,8 @@
 goog.provide('cljs.analyzer.passes');
 goog.require('cljs.core');
 cljs.analyzer.passes.apply_passes = (function cljs$analyzer$passes$apply_passes(var_args){
-var G__2782 = arguments.length;
-switch (G__2782) {
+var G__43366 = arguments.length;
+switch (G__43366) {
 case 2:
 return cljs.analyzer.passes.apply_passes.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -31,8 +31,8 @@ return pass.call(null,new cljs.core.Keyword(null,"env","env",-1815813235).cljs$c
 (cljs.analyzer.passes.apply_passes.cljs$lang$maxFixedArity = 3);
 
 cljs.analyzer.passes.walk = (function cljs$analyzer$passes$walk(var_args){
-var G__2786 = arguments.length;
-switch (G__2786) {
+var G__43370 = arguments.length;
+switch (G__43370) {
 case 2:
 return cljs.analyzer.passes.walk.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -55,18 +55,18 @@ return cljs.analyzer.passes.walk.call(null,ast,passes,null);
 return cljs.core.reduce.call(null,(function (ast__$1,child_k){
 return cljs.core.assoc.call(null,ast__$1,child_k,(function (){var child = cljs.core.get.call(null,ast__$1,child_k);
 if(cljs.core.vector_QMARK_.call(null,child)){
-return cljs.core.into.call(null,cljs.core.PersistentVector.EMPTY,cljs.core.map.call(null,(function (p1__2784_SHARP_){
-return cljs.analyzer.passes.walk.call(null,p1__2784_SHARP_,passes,opts);
+return cljs.core.into.call(null,cljs.core.PersistentVector.EMPTY,cljs.core.map.call(null,(function (p1__43368_SHARP_){
+return cljs.analyzer.passes.walk.call(null,p1__43368_SHARP_,passes,opts);
 })),child);
 } else {
 return cljs.analyzer.passes.walk.call(null,child,passes,opts);
 }
 })());
-}),(function (){var G__2787 = ast;
-if((G__2787 == null)){
+}),(function (){var G__43371 = ast;
+if((G__43371 == null)){
 return null;
 } else {
-return cljs.analyzer.passes.apply_passes.call(null,G__2787,passes,opts);
+return cljs.analyzer.passes.apply_passes.call(null,G__43371,passes,opts);
 }
 })(),new cljs.core.Keyword(null,"children","children",-940561982).cljs$core$IFn$_invoke$arity$1(ast));
 }));

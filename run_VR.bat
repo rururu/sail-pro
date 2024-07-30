@@ -1,6 +1,6 @@
 chcp 65001
 
-set JARS=lib\*;lib_ext\*
+set JARS=lib\*;lib_ext\*;lib_pro\*;lib_clo\*
 set MAIN_CLASS=ru.igis.scena.Starter
 set OPTIONS=-Xmx1000M
 set ENCODING=-Dfile.encoding=UTF-8
@@ -19,5 +19,5 @@ cd ..
 
 java %OPTIONS% %ENCODING% -cp .;classes;%JARS%;src %MAIN_CLASS% pprj_examples/VRDashboardClient.pprj
 
-taskkill /f /IM python3.exe
+taskkill /f /IM python.exe
 

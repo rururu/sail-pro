@@ -1,0 +1,157 @@
+; Tue Apr 23 20:20:05 MSK 2024
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([ShareOnto_Class0] of  CloFunction
+
+	(source "(if KB2\n  (let [mp (into {} hm)\n         inss (DisplayUtilities/pickInstances nil KB2 [(.getCls KB2 \":THING\")])]\n    (doseq [in inss]\n      (copy-instance in KB2 KB1 false)))\n  (if (confirm \"Load Source Project!\")\n    (load-src-prj hm inst)))")
+	(title "shal-copy [hm inst]"))
+
+([ShareOnto_Class1] of  CloFunction
+
+	(source "(= (JOptionPane/showConfirmDialog nil mes) (JOptionPane/YES_OPTION))")
+	(title "confirm [mes]"))
+
+([ShareOnto_Class10000] of  CloFunction
+
+	(source "(cond\n  (not deep)\n    (if (not (or (instance? Cls v2) (instance? Instance v2)))\n              v2)\n  (instance? Cls v2)\n    (or (cls (.getName v2))\n      (do (println (str \"Copying Class \" (.getName v2) \" not exists!\"))\n        (def ERROR true)\n        nil))    \n  (instance? Instance v2)\n    (copy-instance v2 kb2 kb1 deep)\n  true\n    v2)")
+	(title "find-or-create-copy [v2 kb2 kb1 deep]"))
+
+([ShareOnto_Class100014] of  ShareOnto
+
+	(but-check-scen-vars "Check Scenario Variables/scen.check/check-scenario-vars")
+	(but-deep-copy "Deep Copy Instance/share.onto/deep-copy")
+	(but-del-fil "Delete Filtered Instances/share.onto/delfil")
+	(but-del-unref "Delete Unreferenced/share.onto/delete-unref")
+	(but-find-unref "Find Unreferenced/share.onto/find-unref")
+	(but-load-prj "Load Source Project/share.onto/load-src-prj")
+	(but-shal-copy "Shallow Copy Instances/share.onto/shal-copy")
+	(scenario [ShareOnto_Class100014]))
+
+([ShareOnto_Class20000] of  CloFunction
+
+	(source "(if KB2\n  (let [mp (into {} hm)\n         inss (DisplayUtilities/pickInstances nil KB2 [(.getCls KB2 \":THING\")])]\n    (doseq [in inss]\n      (copy-instance in KB2 KB1 true)))\n  (if (confirm \"Load Source Project!\")\n    (load-src-prj hm inst)))")
+	(title "deep-copy [hm inst]"))
+
+([ShareOnto_Class20001] of  CloFunction
+
+	(source "(let [tit \"title\"\n       lab \"label\"]\n  (if-let [val (.getOwnSlotValue i (.getSlot kb2 tit))]\n    [tit val]\n    (if-let [val (.getOwnSlotValue i (.getSlot kb2 lab))]\n      [lab val])))")
+	(title "titorlab-slot-val [i kb2]"))
+
+([ShareOnto_Class3] of  CloProgram
+
+	(cloFunctions
+		[ShareOnto_Class1]
+		[ShareOnto_Class5]
+		[ShareOnto_Class20001]
+		[ShareOnto_Class10000]
+		[ShareOnto_Class40042]
+		[ShareOnto_Class40000]
+		[ShareOnto_Class6]
+		[ShareOnto_Class30002]
+		[ShareOnto_Class30001]
+		[ShareOnto_Class0]
+		[ShareOnto_Class20000]
+		[ShareOnto_Class50000]
+		[ShareOnto_Class60000]
+		[ShareOnto_Class70002])
+	(cloNamespace [ShareOnto_Class4])
+	(cloVars
+		[ShareOnto_Class7]
+		[ShareOnto_Class8]
+		[ShareOnto_Class40004]
+		[ShareOnto_Class40001]
+		[ShareOnto_Class40067]
+		[ShareOnto_Class30000]
+		[ShareOnto_Class90001])
+	(title "Share Ontology"))
+
+([ShareOnto_Class30000] of  CloVar
+
+	(source "nil")
+	(title "copy-instance"))
+
+([ShareOnto_Class30001] of  CloFunction
+
+	(source "(if-let [clz (DisplayUtilities/pickCls nil *kb* [(cls \":THING\")])]\n  (do (def cnt 0)\n    (doseq [in (cls-instances (.getName clz))]\n      (if (< (count (.getReferences in)) 2)\n        (do\n          (println (str \"Unreferenced instance \" (or (titorlab-slot-val in *kb*) (.getName in)) \" of class \" (.getName clz)))\n          (def cnt (inc cnt)))))\n    (confirm (str \"Found \" cnt))))")
+	(title "find-unref [hm inst]"))
+
+([ShareOnto_Class30002] of  CloFunction
+
+	(source "(if-let [clz (DisplayUtilities/pickCls nil *kb* [(cls \":THING\")])]\n  (do (def cnt 0)\n    (doseq [in (cls-instances (.getName clz))]\n      (if (< (count (.getReferences in)) 2)\n        (do\n          (println (str \"Deleting unreferenced instance \" (or (titorlab-slot-val in *kb*) (.getName in)) \" of class \" (.getName clz)))\n          (delin in)\n          (def cnt (inc cnt)))))\n    (confirm (str \"Deleted \" cnt))))")
+	(title "delete-unref [hm inst]"))
+
+([ShareOnto_Class4] of  CloNamespace
+
+	(source "(:use protege.core)\n(:import \n  javax.swing.JFileChooser\n  javax.swing.JOptionPane\n  edu.stanford.smi.protege.ui.DisplayUtilities\n  edu.stanford.smi.protege.model.Cls\n  edu.stanford.smi.protege.model.Instance\n  edu.stanford.smi.protege.model.Project)")
+	(title "share.onto"))
+
+([ShareOnto_Class40000] of  CloFunction
+
+	(source "([in deep]\n  (def ERROR false)\n  (copy-instance in KB2 KB1 deep)\n  (if ERROR\n    (do (confirm (str \"Errors while copying \" (titorlab-slot-val in KB2)))\n      (doseq [in (vals @INSS-MAPPING)]\n        (delin in))\n      (def INSS-MAPPING (atom {})))\n    (println (str \"Deeply copied \" (titorlab-slot-val in KB2)))))\n([in kb2 kb1 deep]\n  (or (@INSS-MAPPING in)\n    (let[typ2 (.getDirectType in)\n           tn (.getName typ2)\n           sls2 (.getTemplateSlots typ2)]\n      (if-let [typ1 (cls tn)]\n        (let [cin (crin tn)]\n          (swap! INSS-MAPPING assoc in cin)\n          (doseq [sl2 sls2]\n            (let [sn (.getName sl2)\n                   sl1 (.getSlot kb1 sn)]\n              (if sl1\n                (if (.getAllowsMultipleValues sl1)\n                  (if-let [insl2vv (seq (.getOwnSlotValues in sl2))]\n                    (ssvs cin sn (map #(find-or-create-copy % kb2 kb1 deep) insl2vv)))\n                  (if (or (= sn \"label\") (= sn \"title\"))\n                    (ssv cin sn (check-n-gen tn sn (.getOwnSlotValue in sl2)))\n                    (ssv cin sn (find-or-create-copy (.getOwnSlotValue in sl2) kb2 kb1 deep))))\n                (do \n                  (def ERROR true)\n                  (println  (str \"Slot not exists: \" sn \" for class: \" tn \"!\"))) )))\n          cin)\n        (do (println (str \"Class \" tn \" not exists!\"))\n          (def ERROR true)\n          nil)))))")
+	(title "copy-instance"))
+
+([ShareOnto_Class40001] of  CloVar
+
+	(source "(atom {})")
+	(title "INSS-MAPPING"))
+
+([ShareOnto_Class40004] of  CloVar
+
+	(source "nil")
+	(title "KB1"))
+
+([ShareOnto_Class40042] of  CloFunction
+
+	(source "(println :C-N-G tn sn val)\n(if-let [old (fifos tn sn val)]\n  (str val \".\" (java.util.Date.))\n  val)")
+	(title "check-n-gen [tn sn val]"))
+
+([ShareOnto_Class40067] of  CloVar
+
+	(source "nil")
+	(title "ERROR"))
+
+([ShareOnto_Class5] of  CloFunction
+
+	(source "(let [fc (JFileChooser. s)]\n  (if (= (.showOpenDialog fc nil) JFileChooser/APPROVE_OPTION)\n    (.getPath (.getSelectedFile fc))))")
+	(title "file-chooser [s]"))
+
+([ShareOnto_Class50000] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n       nix (mp \"filter-pattern\")]\n  (println \"Deleted:\")\n  (doseq [e (.getInstances *kb*)]\n    (if-let [lab (sv e \"label\")]\n      (when (.contains lab nix)\n        (println (str \"Label: \" lab))\n        (delin e)))\n    (if-let [tit (sv e \"title\")]\n      (when (.contains tit nix)\n        (println (str \"Title: \" tit))\n        (delin e)))))")
+	(title "delfil [hm inst]"))
+
+([ShareOnto_Class6] of  CloFunction
+
+	(source "([hm inst]\n  (if-let [pth (file-chooser (.getPath (.getProjectDirectoryFile *prj*)))]\n    (let [err (java.util.ArrayList.)]\n      (if PRJ2\n        (.dispose PRJ2))\n      (def PRJ2 (Project. pth err))\n      (if (> (.size err) 0)\n        (ssv inst \"source-project\" (apply str (seq err)))\n        (do\n          (def KB1 *kb*)\n          (def KB2 (.getKnowledgeBase PRJ2))\n          (def INSS-MAPPING (atom {}))\n          (ssv inst \"source-project\" (str KB2))) ) )))\n([path]\n  (let [err (java.util.ArrayList.)]\n    (if PRJ2\n      (.dispose PRJ2))\n    (def PRJ2 (Project. path err))\n    (if (> (.size err) 0)\n      (apply println (seq err))\n      (do\n        (def KB1 *kb*)\n        (def KB2 (.getKnowledgeBase PRJ2))\n        (def INSS-MAPPING (atom {}))\n        (println \"Second project:\" KB2 \"from\" path)) ) ))")
+	(title "load-src-prj"))
+
+([ShareOnto_Class60000] of  CloFunction
+
+	(source "(let [clz  (REPL-SLOT-VAL :class)\n       slt   (REPL-SLOT-VAL :slot)\n       fun  (REPL-SLOT-VAL :func)]\n  (doseq [ins (cls-instances clz)]\n    (ssv ins slt (fun (sv ins slt)))))")
+	(title "replace-slot-value []"))
+
+([ShareOnto_Class60012] of  CloDocumentation
+
+	(source "Порядок конвертации проектов из Scena-1.2/SA в DroolsTabScene-5.1kt.\n———————————————————————————————————————————————————————————\n\n1. Сохранить отлаженный в Scena-1.2/SA проект в папке SA-проектов DroolsTabScene-5.1kt (меню File > Save Project As …).\n\n2. Выполнить команду \"SA.To Azm Converter\" (на вкладке OpenMap кнопка Execute Command (с мегафоном)).\n\n3. Сохранить проект еще раз, не обращая внимание на предупреждения.\n\n4. Выполнить команду \"SA.Include Patch\". При этом в проводнике выбрать файл .pprj только что сохраненного проекта.\n\n5. Выйти из Scena-1.2/SA НЕ СОХРАНЯЯ ПРОЕКТ В ТРЕТИЙ РАЗ!\n\n6. Войти в DroolsTabScene-5.1kt и в ней открыть данный проект, не обращая внимание на сообщение об ошибке.\n\n7. Удалить в конфигурации проекта ClojureTab и одновременно добавить DroolsTab (меню Project > Configure..)\n\n8. Создать экземпляр класса RuleBase путем копирования существующего экземпляра Scenario Rule Base, переименования и аннотирования с помощью желтого стикера (кнопка Create Instance Note со сверкающим сердцем в правом верхнем углу окна).\n\nПроект готов к использованию в DroolsTabScene-5.1kt и в ОНТОМАП."))
+
+([ShareOnto_Class7] of  CloVar
+
+	(source "nil")
+	(title "PRJ2"))
+
+([ShareOnto_Class70002] of  CloFunction
+
+	(source "(let [mp (into {} hm)\n       sel (selection mp \"instances\")]\n  (doseq [i sel]\n    (delin i)))")
+	(title "delete-instances [hm inst]"))
+
+([ShareOnto_Class8] of  CloVar
+
+	(source "nil")
+	(title "KB2"))
+
+([ShareOnto_Class90001] of  CloVar
+
+	(source "{:class \"NavOb\"\n :slot \"url\"\n :func (fn [v] (.replace v \"data/images\" \n                                     \"resources/public/img\"))}")
+	(title "REPL-SLOT-VAL"))

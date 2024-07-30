@@ -1,13 +1,7 @@
-; Thu May 16 20:10:05 MSK 2024
+; Tue Apr 23 22:35:11 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
-
-([ClojureScriptBuild_Class1] of  CloProgram
-)
-
-([ClojureScriptBuild_Class10000] of  CloProgram
-)
 
 ([ClojureScriptBuild_Class10001] of  CloNamespace
 

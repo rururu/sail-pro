@@ -1,0 +1,166 @@
+; Thu May 16 21:04:38 MSK 2024
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot delay
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot object
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING MapOb NavOb)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot visibility
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-onboard
+		(type STRING)
+;+		(value "Go on Board/light.pro.server/go-onboard")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot port
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot time
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot status
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-start-serv
+		(type STRING)
+;+		(value "Start Cesium Server/light.pro.server/start-server")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-start-client
+		(type STRING)
+;+		(value "Start Cesium Client/light.pro.server/start-client")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-stop-serv
+		(type STRING)
+;+		(value "Stop Cesium Server/light.pro.server/stop-server")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot onboard
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CeziumEngine+Ontology
+	(is-a USER)
+	(role abstract))
+
+(defclass CeziumControl
+	(is-a CeziumEngine+Ontology)
+	(role concrete)
+	(single-slot onboard
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-start-serv
+		(type STRING)
+;+		(value "Start Cesium Server/light.pro.server/start-server")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-onboard
+		(type STRING)
+;+		(value "Go on Board/light.pro.server/go-onboard")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-stop-serv
+		(type STRING)
+;+		(value "Stop Cesium Server/light.pro.server/stop-server")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot but-start-client
+		(type STRING)
+;+		(value "Start Cesium Client/light.pro.server/start-client")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Onboard
+	(is-a CeziumEngine+Ontology)
+	(role concrete)
+	(single-slot label
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot time
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot view
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CZMLGenerator
+	(is-a CeziumEngine+Ontology)
+	(role concrete)
+	(single-slot visibility
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot delay
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CZMLSpan
+	(is-a CeziumEngine+Ontology)
+	(role concrete)
+	(single-slot time
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot object
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING MapOb NavOb)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot options
+		(type INSTANCE)
+;+		(allowed-classes Option)
+		(create-accessor read-write)))
+
+(defclass Clock0
+	(is-a CeziumEngine+Ontology)
+	(role concrete)
+	(single-slot time
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass MapObEvent0
+	(is-a CeziumEngine+Ontology)
+	(role concrete)
+	(single-slot status
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot label
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot object
+		(type INSTANCE)
+;+		(allowed-classes %3ATHING MapOb NavOb)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))

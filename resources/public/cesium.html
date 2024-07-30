@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <title>Cockpit View</title>
-    <link rel="stylesheet" href="css/cesium.css" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/cesium_light.css" />
     <script src="Cesium/Cesium.js"></script>
     <style>
       @import url(Cesium/Widgets/widgets.css);
@@ -48,15 +49,17 @@
     <div id="binocular"></div>
     <div id="zoom-sld"></div><div id="zoom-val"></div>
     <div id="zoomM"></div><div id="zoomP"></div>
-    <script>
+    <script type="module">
       // Grant your CesiumJS app access to your ion assets
       // This is your actual default access token, you can copy/paste this directly into your app code
       Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwN2EzYzEyNS1mMmNlLTRlYjEtYjRiMS04OTliNjhkZjI4NzQiLCJpZCI6MzY0MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTUzODQxODg5OH0.E2p7oe8fLJOtyawv0uT9zBZw4oyKZ6Vt3CZsE0FKeJw';
+
       function terraHeightRequest(terrProv, lat, lon, func){
         var pos = [Cesium.Cartographic.fromDegrees(lon, lat)];
         var pms = Cesium.sampleTerrain(terrProv, 11, pos);
         Cesium.when(pms, func);
       }
+
       function fillPointPrimColl(prims, lla, color, size){
         for(i = 0; i < lla.length; i++){
           var lat = lla[i][0];
@@ -69,6 +72,6 @@
         }
       }
     </script>
-    <script type="text/javascript" src="js/cesium.js"></script>
+    <script src="js/cesium.js"></script>
   </body>
 </html>

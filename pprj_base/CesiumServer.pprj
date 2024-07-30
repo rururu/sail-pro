@@ -1,4 +1,4 @@
-; Sun May 19 13:46:00 MSK 2024
+; Sat Apr 27 11:30:08 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,21 +20,21 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CesiumServer_ProjectKB_Class1523]
-		[CesiumServer_ProjectKB_Class1524]
-		[CesiumServer_ProjectKB_Class1525]))
+		[CesiumServer_ProjectKB_Class1526]
+		[CesiumServer_ProjectKB_Class1527]
+		[CesiumServer_ProjectKB_Class1528]))
 
-([CesiumServer_ProjectKB_Class1523] of  String
+([CesiumServer_ProjectKB_Class1526] of  String
 
 	(name "CZMLGenerator")
 	(string_value "{CZMLGenerator+del+}delay{+viz+}visibility"))
 
-([CesiumServer_ProjectKB_Class1524] of  String
+([CesiumServer_ProjectKB_Class1527] of  String
 
 	(name "Onboard")
 	(string_value "label"))
 
-([CesiumServer_ProjectKB_Class1525] of  String
+([CesiumServer_ProjectKB_Class1528] of  String
 
 	(name "CZMLSpan")
 	(string_value "{CZMLSpan+}object"))
@@ -384,28 +384,28 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_151005_Class1519] of  Map
+([KB_303188_Class1519] of  Map
 
 	(entries
-		[KB_151005_Class1520]
-		[KB_151005_Class1521]
-		[KB_151005_Class1522]))
+		[KB_303188_Class1520]
+		[KB_303188_Class1521]
+		[KB_303188_Class1522]))
 
-([KB_151005_Class1520] of  Map_Entry
+([KB_303188_Class1520] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_151005_Class1521] of  Map_Entry
+([KB_303188_Class1521] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([KB_151005_Class1522] of  Map_Entry
+([KB_303188_Class1522] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")

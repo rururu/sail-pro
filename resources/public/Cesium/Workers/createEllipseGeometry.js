@@ -1,1 +1,26 @@
-define(["./Matrix2-ccd5b911","./when-4bbc8319","./EllipseGeometry-52786bf6","./RuntimeError-346a3079","./ComponentDatatype-93750d1a","./WebGLConstants-1c8239cc","./GeometryOffsetAttribute-1772960d","./Transforms-d5c6ad6e","./combine-83860057","./EllipseGeometryLibrary-9dda9a85","./GeometryAttribute-c30799b8","./GeometryAttributes-7827a6c2","./GeometryInstance-5f4fe82b","./GeometryPipeline-548e76d2","./AttributeCompression-1f045b73","./EncodedCartesian3-08b8d980","./IndexDatatype-b7d979a6","./IntersectionTests-4d6f5c54","./Plane-18bb00f8","./VertexFormat-71718faa"],function(r,n,i,e,t,o,a,c,s,d,b,l,m,f,p,y,u,G,E,C){"use strict";return function(e,t){return(e=n.defined(t)?i.EllipseGeometry.unpack(e,t):e)._center=r.Cartesian3.clone(e._center),e._ellipsoid=r.Ellipsoid.clone(e._ellipsoid),i.EllipseGeometry.createGeometry(e)}});
+/**
+ * @license
+ * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.119
+ *
+ * Copyright 2011-2022 Cesium Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Columbus View (Pat. Pend.)
+ *
+ * Portions licensed separately.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
+ */
+
+import{a as o}from"./chunk-KRKI6AAO.js";import"./chunk-BMHPVZ4H.js";import"./chunk-EFZKO5RU.js";import"./chunk-QB3MDM4J.js";import"./chunk-ABGXSJNX.js";import"./chunk-DQO6B4EQ.js";import"./chunk-ILGBPNP6.js";import"./chunk-HEEMUCG6.js";import"./chunk-TAMCUKAR.js";import"./chunk-PDMQLSBL.js";import"./chunk-P37AI2DW.js";import"./chunk-T6BE4RZK.js";import"./chunk-X5IHHI6X.js";import"./chunk-TMSETF7M.js";import"./chunk-7Z5IIKOJ.js";import"./chunk-KZNJOCYU.js";import{a as t,d as c}from"./chunk-POASMU2N.js";import"./chunk-R6KGAEF6.js";import"./chunk-3C7WC463.js";import"./chunk-II4VNKYR.js";import"./chunk-IUA6FAOZ.js";import"./chunk-UH2WFNTA.js";import{e as n}from"./chunk-PEYJTJPE.js";function a(r,i){return n(i)&&(r=o.unpack(r,i)),r._center=t.clone(r._center),r._ellipsoid=c.clone(r._ellipsoid),o.createGeometry(r)}var u=a;export{u as default};

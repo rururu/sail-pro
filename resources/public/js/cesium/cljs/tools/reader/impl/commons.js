@@ -18,8 +18,8 @@ cljs.tools.reader.impl.commons.read_past = (function cljs$tools$reader$impl$comm
 var ch = cljs.tools.reader.reader_types.read_char.call(null,rdr);
 while(true){
 if(pred.call(null,ch)){
-var G__2508 = cljs.tools.reader.reader_types.read_char.call(null,rdr);
-ch = G__2508;
+var G__43107 = cljs.tools.reader.reader_types.read_char.call(null,rdr);
+ch = G__43107;
 continue;
 } else {
 return ch;
@@ -82,8 +82,8 @@ return parseFloat(s);
 }
 });
 cljs.tools.reader.impl.commons.matches_QMARK_ = (function cljs$tools$reader$impl$commons$matches_QMARK_(pattern,s){
-var vec__2509 = cljs.core.re_find.call(null,pattern,s);
-var match = cljs.core.nth.call(null,vec__2509,(0),null);
+var vec__43108 = cljs.core.re_find.call(null,pattern,s);
+var match = cljs.core.nth.call(null,vec__43108,(0),null);
 return (match === s);
 });
 cljs.tools.reader.impl.commons.match_number = (function cljs$tools$reader$impl$commons$match_number(s){
@@ -133,14 +133,14 @@ return null;
 });
 cljs.tools.reader.impl.commons.read_comment = (function cljs$tools$reader$impl$commons$read_comment(var_args){
 var args__5732__auto__ = [];
-var len__5726__auto___2514 = arguments.length;
-var i__5727__auto___2515 = (0);
+var len__5726__auto___43113 = arguments.length;
+var i__5727__auto___43114 = (0);
 while(true){
-if((i__5727__auto___2515 < len__5726__auto___2514)){
-args__5732__auto__.push((arguments[i__5727__auto___2515]));
+if((i__5727__auto___43114 < len__5726__auto___43113)){
+args__5732__auto__.push((arguments[i__5727__auto___43114]));
 
-var G__2516 = (i__5727__auto___2515 + (1));
-i__5727__auto___2515 = G__2516;
+var G__43115 = (i__5727__auto___43114 + (1));
+i__5727__auto___43114 = G__43115;
 continue;
 } else {
 }
@@ -158,34 +158,34 @@ return cljs.tools.reader.impl.commons.skip_line.call(null,rdr);
 (cljs.tools.reader.impl.commons.read_comment.cljs$lang$maxFixedArity = (1));
 
 /** @this {Function} */
-(cljs.tools.reader.impl.commons.read_comment.cljs$lang$applyTo = (function (seq2512){
-var G__2513 = cljs.core.first.call(null,seq2512);
-var seq2512__$1 = cljs.core.next.call(null,seq2512);
+(cljs.tools.reader.impl.commons.read_comment.cljs$lang$applyTo = (function (seq43111){
+var G__43112 = cljs.core.first.call(null,seq43111);
+var seq43111__$1 = cljs.core.next.call(null,seq43111);
 var self__5711__auto__ = this;
-return self__5711__auto__.cljs$core$IFn$_invoke$arity$variadic(G__2513,seq2512__$1);
+return self__5711__auto__.cljs$core$IFn$_invoke$arity$variadic(G__43112,seq43111__$1);
 }));
 
 cljs.tools.reader.impl.commons.throwing_reader = (function cljs$tools$reader$impl$commons$throwing_reader(msg){
 return (function() { 
-var G__2517__delegate = function (rdr,_){
+var G__43116__delegate = function (rdr,_){
 return cljs.tools.reader.impl.errors.reader_error.call(null,rdr,msg);
 };
-var G__2517 = function (rdr,var_args){
+var G__43116 = function (rdr,var_args){
 var _ = null;
 if (arguments.length > 1) {
-var G__2518__i = 0, G__2518__a = new Array(arguments.length -  1);
-while (G__2518__i < G__2518__a.length) {G__2518__a[G__2518__i] = arguments[G__2518__i + 1]; ++G__2518__i;}
-  _ = new cljs.core.IndexedSeq(G__2518__a,0,null);
+var G__43117__i = 0, G__43117__a = new Array(arguments.length -  1);
+while (G__43117__i < G__43117__a.length) {G__43117__a[G__43117__i] = arguments[G__43117__i + 1]; ++G__43117__i;}
+  _ = new cljs.core.IndexedSeq(G__43117__a,0,null);
 } 
-return G__2517__delegate.call(this,rdr,_);};
-G__2517.cljs$lang$maxFixedArity = 1;
-G__2517.cljs$lang$applyTo = (function (arglist__2519){
-var rdr = cljs.core.first(arglist__2519);
-var _ = cljs.core.rest(arglist__2519);
-return G__2517__delegate(rdr,_);
+return G__43116__delegate.call(this,rdr,_);};
+G__43116.cljs$lang$maxFixedArity = 1;
+G__43116.cljs$lang$applyTo = (function (arglist__43118){
+var rdr = cljs.core.first(arglist__43118);
+var _ = cljs.core.rest(arglist__43118);
+return G__43116__delegate(rdr,_);
 });
-G__2517.cljs$core$IFn$_invoke$arity$variadic = G__2517__delegate;
-return G__2517;
+G__43116.cljs$core$IFn$_invoke$arity$variadic = G__43116__delegate;
+return G__43116;
 })()
 ;
 });

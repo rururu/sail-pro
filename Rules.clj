@@ -223,9 +223,6 @@
     (light.pro.server/start-client) 
     (light.pro.server/go-onboard ?onb) 
     (modify ?cv status "ONBOARD")))
-(vreset! light.pro.server/VEHICLES 
-  (map #(rete.core/slot-value 'object %) 
-           (rete.core/fact-list 'CZMLSpan)))
 (modify ?d time (+ ?t1 ?del)))
 
 (vr:NMEA Init 0

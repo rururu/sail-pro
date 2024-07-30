@@ -1,27 +1,33 @@
-{:deps
- {org.clojure/clojure {:mvn/version "1.11.1"}
-  protege/protege {:local/root "lib/protege-3.5.0.jar"}
-  protege/standard-extensions {:local/root "lib/standard-extensions-3.5.0.jar"}
-  protege/looks {:local/root "lib/looks-3.5.0.jar"}
-  protege/unicode_panel {:local/root "lib/unicode_panel-3.5.0.jar"}
-  protege/JGo {:local/root "lib/JGo-3.5.0.jar"}
-  protege/JGoLayout {:local/root "lib/JGoLayout-3.5.0.jar"}
-  protege/ClojureTab {:local/root "lib/ClojureTab-1.5.jar"}
-  OpenMapTab/OpenMapTab {:local/root "lib/OpenMapTab-5.2.1.jar"}
-  org.openmap-java/openmap {:local/root "lib/openmap-5.1.15.jar"}
-  rete/rete {:mvn/version "5.3.0-SNAPSHOT"}
-  org.clojure/clojurescript {:mvn/version "1.11.132"}
-  org.clojure/core.async {:mvn/version "1.6.681"}
-  ring/ring {:mvn/version "1.12.1"}
-  compojure/compojure {:mvn/version "1.7.1"}
-  cljs-ajax/cljs-ajax {:mvn/version "0.8.4"}
-  com.cognitect/transit-clj {:mvn/version "0.8.313"}
-  com.cognitect/transit-cljs {:mvn/version "0.8.256"}
-  hiccup/hiccup {:mvn/version "1.0.5"}
-  clj-json/clj-json {:mvn/version "0.5.3"}
-  clj-time/clj-time {:mvn/version "0.15.0"}
-  javax.xml.bind/jaxb-api {:mvn/version "2.3.0"}}
- :aliases {:pro-build {:main-opts ["-m" "pro.core"]}}
- :paths ["src" "src/clojure" "resources"]}
-
-
+;; This file is only needed when using Clojure CLI Tools
+{:deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/core.async {:mvn/version "1.6.681"}
+        compojure/compojure {:mvn/version "1.7.1"}
+        ring/ring-core {:mvn/version "1.12.1"}
+        ring/ring-jetty-adapter {:mvn/version "1.12.1"}
+        org.clojure/data.json {:mvn/version "2.5.0"}
+        cljs-ajax/cljs-ajax {:mvn/version "0.8.4"}
+		clj-json/clj-json {:mvn/version "0.5.3"}
+		rete/rete {:mvn/version "5.3.0-SNAPSHOT"}
+        ;; Local jars
+        org.clojure/core.memoize {:mvn/version "1.1.266"}
+        ;;
+        protege/protege {:local/root "lib/protege-3.5.0.jar"}
+        protege/standard-extensions {:local/root "lib/standard-extensions-3.5.0.jar"}
+        protege/looks {:local/root "lib/looks-3.5.0.jar"}
+        protege/unicode_panel {:local/root "lib/unicode_panel-3.5.0.jar"}
+        protege/JGo {:local/root "lib/JGo-3.5.0.jar"}
+        protege/JGoLayout {:local/root "lib/JGoLayout-3.5.0.jar"}
+        protege/ClojureTab {:local/root "lib/ClojureTab-1.5.jar"}
+        protege/ProtegeExtensions {:local/root "lib/ProtegeExtensions.jar"}
+		OpenMapTab/OpenMapTab {:local/root "lib/OpenMapTab-5.2.1.jar"}
+		org.openmap-java/openmap {:local/root "lib/openmap-5.1.15.jar"}
+		AisLibMessages/AisLibMessages {:local/root "lib/AisLibMessages.jar"}
+		AisMessages/AisMessages {:local/root "lib/AisMessages.jar"}
+		enav-model/enav-model {:local/root "lib/enav-model.jar"}
+		VRDnmea/VRDnmea {:local/root "lib/VRDnmea.jar"}
+		ScenaSupport/ScenaSupport {:local/root "lib/ScenaSupport.jar"}}
+ :aliases {:sail-pro {:main-opts ["-m" "sail-pro.core"]}
+           :pro {:main-opts ["-m" "pro.core"]}
+           :pro-build {:extra-deps {org.clojure/clojurescript {:mvn/version "1.11.132"}}
+                       :main-opts ["-m" "pro.core"]}}
+ :paths ["src" "src/clojure" "classes" "src/cljs" "resources" "target"]}

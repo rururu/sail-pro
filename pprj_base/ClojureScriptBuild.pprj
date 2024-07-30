@@ -1,4 +1,4 @@
-; Thu May 16 20:10:05 MSK 2024
+; Tue Apr 23 22:35:11 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -709,6 +709,34 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
+([KB_227382_Class310] of  Map
+
+	(entries
+		[KB_227382_Class311]
+		[KB_227382_Class312]
+		[KB_227382_Class313]))
+
+([KB_227382_Class311] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_227382_Class312] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([KB_227382_Class313] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
 ([KB_435933_Class0] of  String
 
 	(name "factory_class_name")
@@ -808,34 +836,6 @@
 
 	(name "instances_file_name")
 	(string_value "ClojureScriptBuild.pins"))
-
-([KB_542003_Class310] of  Map
-
-	(entries
-		[KB_542003_Class311]
-		[KB_542003_Class312]
-		[KB_542003_Class313]))
-
-([KB_542003_Class311] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_542003_Class312] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([KB_542003_Class313] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([LAYOUT_PROPERTIES] of  Property_List
 

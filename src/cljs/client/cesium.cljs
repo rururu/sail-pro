@@ -1,12 +1,9 @@
 (ns client.cesium
 (:require
-  [geo.calc :as geo]))
-(def VIEWER (js/Cesium.Viewer. 
-  "cesiumContainer" 
-  #js{:imageryProvider (js/Cesium.createWorldImagery)
-        :terrainProvider (js/Cesium.createWorldTerrain)
-        :animation false
-        :shouldAnimate true}))
+  [geo.calc :as geo]
+  [cljs.core.async :refer [go <!]]
+  [cljs.core.async.interop :refer-macros [<p!]]))
+(def VIEWER nil)
 (def CZML-SRC (js/Cesium.CzmlDataSource.))
 (def CZML-DATA nil)
 (def CAMERA (volatile! {:view 0
@@ -55,18 +52,42 @@
   (let [pitch (:pitch @CAMERA)
        roll (:roll @CAMERA)
        head (norm-crs (+ crs (:view @CAMERA)))]
-  (if (> alt MAX-UPGROUND) 
-    (fly-control lat lon alt head pitch roll per)
-    (let [[_ _ sh] (sample-height [(geo/radians lat) (geo/radians lon)] ALT)]
-      (if (> sh -7777)
-        (def ALT (int (+ sh alt))))
-      (fly-control lat lon ALT head pitch roll per)))))
+;;  (if (> alt MAX-UPGROUND) 
+;;    (fly-control lat lon alt head pitch roll per)
+;;    (let [[_ _ sh] (sample-height [(geo/radians lat) (geo/radians lon)] ALT)]
+;;      (if (> sh -7777)
+;;        (def ALT (int (+ sh alt))))
+;;      (fly-control lat lon ALT head pitch roll per))))
+  (fly-control lat lon alt head pitch roll per)))
 
 (defn init-3D-view [url]
-  (set! (.-enableLighting (.-globe (.-scene VIEWER))) true)
-(.add (.-dataSources VIEWER) CZML-SRC)
-(.addEventListener (js/EventSource. (str url "/czml")) "czml" cz-processor false)
-(println [:INIT-3D-VIEW url]))
+  (go
+   (println "Cesium initialisation..")
+   (let [imap (<p! (js/Cesium.createWorldImageryAsync))
+          terp (<p! (js/Cesium.createWorldTerrainAsync))]
+     (println " 1.Image and Terrain providers set..")
+     (try
+       (let [viewer (js/Cesium.Viewer. "cesiumContainer" #js{
+                                            :imageryProvider imap
+                                            :terrainProvider terp
+                                            :scene3DOnly true
+                                            ;;:selectionIndicator false
+                                            ;;:baseLayerPicker: false
+                                            :animation false
+                                            :shouldAnimate true})]
+         (println " 2.Cesium Viewer created..")
+         (set! (.-enableLighting (.-globe (.-scene viewer))) true)
+         (println " 3.Night and Day Lightning enabled..")
+         (def VIEWER viewer)
+         (println " 4.VIEWER Var set..")
+         (.add (.-dataSources VIEWER) CZML-SRC)
+         (println " 5.CZML Data Source added..")
+         (.addEventListener (js/EventSource. (str url "/czml")) "czml" cz-processor false)
+         (println " 6.CZML Event Source Listener added..")
+         (println [:INIT-3D-VIEW url])
+         (println "Cesium initialisation done.")
+         (println "777"))
+      (catch js/Error err (js/console.log (ex-cause err)))))))
 
 (defn hig-ray [lat lon bea dis step alt]
   (let [ray (geo/ray lat lon bea dis step)]

@@ -1,0 +1,425 @@
+; Fri Jun 11 17:45:50 MSK 2021
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(multislot cloVars
+		(type INSTANCE)
+;+		(allowed-classes CloVar)
+		(create-accessor read-write))
+	(multislot cloExtendProtocols
+		(type INSTANCE)
+;+		(allowed-classes CloExtendProtocol)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloPrograms
+		(type INSTANCE)
+;+		(allowed-classes CloProgram)
+		(create-accessor read-write))
+	(single-slot asset-path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloFunctions
+		(type INSTANCE)
+;+		(allowed-classes CloFunction CloMacro)
+		(create-accessor read-write))
+	(single-slot butt-load-progs
+		(type STRING)
+		(default "Load Programs/protege.core/ldns")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot css
+		(type INSTANCE)
+;+		(allowed-classes CSS)
+		(create-accessor read-write))
+	(single-slot compiler-options
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloProtocols
+		(type INSTANCE)
+;+		(allowed-classes CloProtocol)
+		(create-accessor read-write))
+	(multislot cloRecords
+		(type INSTANCE)
+;+		(allowed-classes CloRecord)
+		(create-accessor read-write))
+	(single-slot epilogue
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloExtendTypes
+		(type INSTANCE)
+;+		(allowed-classes CloExtendType)
+		(create-accessor read-write))
+	(multislot options
+		(type INSTANCE)
+;+		(allowed-classes Option)
+		(create-accessor read-write))
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot required
+		(type INSTANCE)
+;+		(allowed-classes ClsRequired)
+		(create-accessor read-write))
+	(single-slot argument
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot output-to
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloImplementations
+		(type INSTANCE)
+;+		(allowed-classes CloImplementation)
+		(create-accessor read-write))
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot cloNamespace
+		(type INSTANCE)
+;+		(allowed-classes CloNamespace)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot html
+		(type INSTANCE)
+;+		(allowed-classes HTML)
+		(create-accessor read-write))
+	(multislot fields
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot keyword
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloTypes
+		(type INSTANCE)
+;+		(allowed-classes CloType)
+		(create-accessor read-write))
+	(single-slot output-dir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot documentation
+		(type INSTANCE)
+;+		(allowed-classes CloDocumentation)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-build
+		(type STRING)
+		(default "Build/cljs.compile/build")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass ClojureOntology
+	(is-a USER)
+	(role abstract))
+
+(defclass CloFunction
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot documentation
+		(type INSTANCE)
+;+		(allowed-classes CloDocumentation)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CloMacro
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot documentation
+		(type INSTANCE)
+;+		(allowed-classes CloDocumentation)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CloFuncall
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CloNamespace
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CloVar
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CloProgram
+	(is-a ClojureOntology)
+	(role concrete)
+	(multislot cloProtocols
+		(type INSTANCE)
+;+		(allowed-classes CloProtocol)
+		(create-accessor read-write))
+	(multislot cloRecords
+		(type INSTANCE)
+;+		(allowed-classes CloRecord)
+		(create-accessor read-write))
+	(multislot cloExtendTypes
+		(type INSTANCE)
+;+		(allowed-classes CloExtendType)
+		(create-accessor read-write))
+	(multislot cloExtendProtocols
+		(type INSTANCE)
+;+		(allowed-classes CloExtendProtocol)
+		(create-accessor read-write))
+	(single-slot cloNamespace
+		(type INSTANCE)
+;+		(allowed-classes CloNamespace)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloVars
+		(type INSTANCE)
+;+		(allowed-classes CloVar)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloFunctions
+		(type INSTANCE)
+;+		(allowed-classes CloFunction CloMacro)
+		(create-accessor read-write))
+	(single-slot documentation
+		(type INSTANCE)
+;+		(allowed-classes CloDocumentation)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloTypes
+		(type INSTANCE)
+;+		(allowed-classes CloType)
+		(create-accessor read-write)))
+
+(defclass ClsMain
+	(is-a CloProgram)
+	(role concrete)
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot asset-path
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot epilogue
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot html
+		(type INSTANCE)
+;+		(allowed-classes HTML)
+		(create-accessor read-write))
+	(multislot required
+		(type INSTANCE)
+;+		(allowed-classes ClsRequired)
+		(create-accessor read-write))
+	(single-slot butt-build
+		(type STRING)
+		(default "Build/cljs.compile/build")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot output-dir
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot output-to
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot css
+		(type INSTANCE)
+;+		(allowed-classes CSS)
+		(create-accessor read-write))
+	(single-slot compiler-options
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass ClsRequired
+	(is-a CloProgram)
+	(role concrete))
+
+(defclass CloProtocol
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloFunctions
+		(type INSTANCE)
+;+		(allowed-classes CloFunction CloMacro)
+		(create-accessor read-write)))
+
+(defclass CloImplementation
+	(is-a CloProtocol)
+	(role concrete))
+
+(defclass CloType
+	(is-a ClojureOntology)
+	(role concrete)
+	(multislot cloProtocols
+		(type INSTANCE)
+;+		(allowed-classes CloProtocol)
+		(create-accessor read-write))
+	(multislot fields
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot options
+		(type INSTANCE)
+;+		(allowed-classes Option)
+		(create-accessor read-write)))
+
+(defclass CloRecord
+	(is-a CloType)
+	(role concrete))
+
+(defclass CloExtendProtocol
+	(is-a ClojureOntology)
+	(role concrete)
+	(multislot cloImplementations
+		(type INSTANCE)
+;+		(allowed-classes CloImplementation)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CloExtendType
+	(is-a ClojureOntology)
+	(role concrete)
+	(multislot cloImplementations
+		(type INSTANCE)
+;+		(allowed-classes CloImplementation)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CloDocumentation
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass WorkingPrograms
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot cloPrograms
+		(type INSTANCE)
+;+		(allowed-classes CloProgram)
+		(create-accessor read-write))
+	(single-slot butt-load-progs
+		(type STRING)
+		(default "Load Programs/protege.core/ldns")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Option
+	(is-a ClojureOntology)
+	(role concrete)
+	(single-slot keyword
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot argument
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass HTML
+	(is-a USER)
+	(role concrete)
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass CSS
+	(is-a USER)
+	(role concrete)
+	(single-slot store-in
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot source
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))

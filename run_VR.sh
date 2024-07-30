@@ -6,6 +6,8 @@ JARS=lib/'*':lib_ext/'*'
 MAIN_CLASS=ru.igis.scena.Starter
 OPTIONS=-Xmx1000M
 ENCODING=-Dfile.encoding=UTF-8
+# CTRY=-Duser.country=RU
+# LANG=-Duser.language=ru
 
 # uncomment this to check correct classpath
 
@@ -17,9 +19,9 @@ cd NMEA_CACHE
 python3 ../nmea_cashe.py --port 8081 &
 cd ..
 
-
 # java must be on your PATH variable or change this to point your JVM installation
 
-java $OPTIONS $ENCODING -cp .:classes:$JARS:src $MAIN_CLASS pprj_examples/VRDashboardClient.pprj
+java $OPTIONS $ENCODING -cp .:classes:$JARS:src:src/clojure $MAIN_CLASS pprj_examples/VRDashboardClient
 
 killall -KILL python3
+

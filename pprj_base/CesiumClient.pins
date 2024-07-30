@@ -1,4 +1,4 @@
-; Sat May 18 22:22:07 MSK 2024
+; Thu May 02 19:44:44 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -117,17 +117,17 @@
 
 ([Cezium_Class1] of  CloNamespace
 
-	(source "(:require\n  [geo.calc :as geo])")
+	(source "(:require\n  [geo.calc :as geo]\n  [cljs.core.async :refer [go <!]]\n  [cljs.core.async.interop :refer-macros [<p!]])")
 	(title "client.cesium"))
 
 ([Cezium_Class10] of  CloFunction
 
-	(source "(let [pitch (:pitch @CAMERA)\n       roll (:roll @CAMERA)\n       head (norm-crs (+ crs (:view @CAMERA)))]\n  (if (> alt MAX-UPGROUND) \n    (fly-control lat lon alt head pitch roll per)\n    (let [[_ _ sh] (sample-height [(geo/radians lat) (geo/radians lon)] ALT)]\n      (if (> sh -7777)\n        (def ALT (int (+ sh alt))))\n      (fly-control lat lon ALT head pitch roll per))))")
+	(source "(let [pitch (:pitch @CAMERA)\n       roll (:roll @CAMERA)\n       head (norm-crs (+ crs (:view @CAMERA)))]\n;;  (if (> alt MAX-UPGROUND) \n;;    (fly-control lat lon alt head pitch roll per)\n;;    (let [[_ _ sh] (sample-height [(geo/radians lat) (geo/radians lon)] ALT)]\n;;      (if (> sh -7777)\n;;        (def ALT (int (+ sh alt))))\n;;      (fly-control lat lon ALT head pitch roll per))))\n  (fly-control lat lon alt head pitch roll per))")
 	(title "fly-to [lat lon alt crs per]"))
 
 ([Cezium_Class10001] of  CloFunction
 
-	(source "(czm/init-3D-view (str \"http://localhost:\" PORT))\n(repeater receive-vehicle 4000)\n(show-controls)")
+	(source "(czm/init-3D-view (str \"http://localhost:\" PORT))\n(delayer #(do\n                  (repeater receive-vehicle 2000)\n                  (show-controls))\n              4000)")
 	(title "on-load []"))
 
 ([Cezium_Class10002] of  CloFunction
@@ -162,7 +162,7 @@
 
 ([Cezium_Class13] of  CloFunction
 
-	(source "(set! (.-enableLighting (.-globe (.-scene VIEWER))) true)\n(.add (.-dataSources VIEWER) CZML-SRC)\n(.addEventListener (js/EventSource. (str url \"/czml\")) \"czml\" cz-processor false)\n(println [:INIT-3D-VIEW url])")
+	(source "(go\n   (println \"Cesium initialisation..\")\n   (let [imap (<p! (js/Cesium.createWorldImageryAsync))\n          terp (<p! (js/Cesium.createWorldTerrainAsync))]\n     (println \" 1.Image and Terrain providers set..\")\n     (try\n       (let [viewer (js/Cesium.Viewer. \"cesiumContainer\" #js{\n                                            :imageryProvider imap\n                                            :terrainProvider terp\n                                            :scene3DOnly true\n                                            ;;:selectionIndicator false\n                                            ;;:baseLayerPicker: false\n                                            :animation false\n                                            :shouldAnimate true})]\n         (println \" 2.Cesium Viewer created..\")\n         (set! (.-enableLighting (.-globe (.-scene viewer))) true)\n         (println \" 3.Night and Day Lightning enabled..\")\n         (def VIEWER viewer)\n         (println \" 4.VIEWER Var set..\")\n         (.add (.-dataSources VIEWER) CZML-SRC)\n         (println \" 5.CZML Data Source added..\")\n         (.addEventListener (js/EventSource. (str url \"/czml\")) \"czml\" cz-processor false)\n         (println \" 6.CZML Event Source Listener added..\")\n         (println [:INIT-3D-VIEW url])\n         (println \"Cesium initialisation done.\")\n         (println \"777\"))\n      (catch js/Error err (js/console.log (ex-cause err))))))")
 	(title "init-3D-view [url]"))
 
 ([Cezium_Class14] of  CloDocumentation
@@ -236,7 +236,7 @@
 
 ([Cezium_Class20000] of  HTML
 
-	(source "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Cockpit View</title>\n    <link rel=\"stylesheet\" href=\"css/cesium.css\" />\n    <script src=\"Cesium/Cesium.js\"></script>\n    <style>\n      @import url(Cesium/Widgets/widgets.css);\n      #cesiumContainer {\n        position: absolute;\n        top: 0;\n        left: 0;\n        height: 100%;\n        width: 100%;\n        margin: 0;\n        overflow: hidden;\n        padding: 0;\n        font-family: sans-serif;\n      }\n      html {\n        height: 100%;\n      }\n      body {\n        padding: 0;\n        margin: 0;\n        overflow: hidden;\n        height: 100%;\n      }\n    </style>\n  </head>\n  <body>\n    <div id=\"cesiumContainer\"></div>\n    <div id=\"vehicle\"></div>\n    <div id=\"name\"></div><div id=\"name-fld\"></div>\n    <div id=\"latitude\"></div><div id=\"latitude-fld\"></div>\n    <div id=\"longitude\"></div><div id=\"longitude-fld\"></div>\n    <div id=\"course\"></div><div id=\"course-fld\"></div>\n    <div id=\"speed\"></div><div id=\"speed-fld\"></div>\n    <div id=\"altitude\"></div><div id=\"altitude-fld\"></div>\n    <div id=\"camera\"></div>\n    <div id=\"onboard\"></div><div id=\"onboard-fld\"></div>\n    <div id=\"elev\"></div><div id=\"elev-fld\"></div>\n    <div id=\"roll\"></div><div id=\"roll-fld\"></div><div id=\"roll-sld\"></div>\n    <div id=\"pitch\"></div><div id=\"pitch-fld\"></div><div id=\"pitch-sld\"></div>\n    <div id=\"view\"></div><div id=\"view-fld\"></div><div id=\"view-sld\"></div>\n    <div id=\"viewM-btn\"></div><div id=\"viewP-btn\"></div>\n    <div id=\"view-dir\"></div>\n    <div id=\"binocular\"></div>\n    <div id=\"zoom-sld\"></div><div id=\"zoom-val\"></div>\n    <div id=\"zoomM\"></div><div id=\"zoomP\"></div>\n    <script>\n      // Grant your CesiumJS app access to your ion assets\n      // This is your actual default access token, you can copy/paste this directly into your app code\n      Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwN2EzYzEyNS1mMmNlLTRlYjEtYjRiMS04OTliNjhkZjI4NzQiLCJpZCI6MzY0MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTUzODQxODg5OH0.E2p7oe8fLJOtyawv0uT9zBZw4oyKZ6Vt3CZsE0FKeJw';\n      function terraHeightRequest(terrProv, lat, lon, func){\n        var pos = [Cesium.Cartographic.fromDegrees(lon, lat)];\n        var pms = Cesium.sampleTerrain(terrProv, 11, pos);\n        Cesium.when(pms, func);\n      }\n      function fillPointPrimColl(prims, lla, color, size){\n        for(i = 0; i < lla.length; i++){\n          var lat = lla[i][0];\n          var lon = lla[i][1];\n            prims.add({\n              position : Cesium.Cartesian3.fromDegrees(lon, lat),\n              color : color,\n              heightReference : Cesium.HeightReference.CLAMP_TO_GROUND\n            });\n        }\n      }\n    </script>\n    <script type=\"text/javascript\" src=\"js/cesium.js\"></script>\n  </body>\n</html>")
+	(source "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>Cockpit View</title>\n    <meta charset=\"utf-8\">\n    <link rel=\"stylesheet\" href=\"css/cesium_light.css\" />\n    <script src=\"Cesium/Cesium.js\"></script>\n    <style>\n      @import url(Cesium/Widgets/widgets.css);\n      #cesiumContainer {\n        position: absolute;\n        top: 0;\n        left: 0;\n        height: 100%;\n        width: 100%;\n        margin: 0;\n        overflow: hidden;\n        padding: 0;\n        font-family: sans-serif;\n      }\n      html {\n        height: 100%;\n      }\n      body {\n        padding: 0;\n        margin: 0;\n        overflow: hidden;\n        height: 100%;\n      }\n    </style>\n  </head>\n  <body>\n    <div id=\"cesiumContainer\"></div>\n    <div id=\"vehicle\"></div>\n    <div id=\"name\"></div><div id=\"name-fld\"></div>\n    <div id=\"latitude\"></div><div id=\"latitude-fld\"></div>\n    <div id=\"longitude\"></div><div id=\"longitude-fld\"></div>\n    <div id=\"course\"></div><div id=\"course-fld\"></div>\n    <div id=\"speed\"></div><div id=\"speed-fld\"></div>\n    <div id=\"altitude\"></div><div id=\"altitude-fld\"></div>\n    <div id=\"camera\"></div>\n    <div id=\"onboard\"></div><div id=\"onboard-fld\"></div>\n    <div id=\"elev\"></div><div id=\"elev-fld\"></div>\n    <div id=\"roll\"></div><div id=\"roll-fld\"></div><div id=\"roll-sld\"></div>\n    <div id=\"pitch\"></div><div id=\"pitch-fld\"></div><div id=\"pitch-sld\"></div>\n    <div id=\"view\"></div><div id=\"view-fld\"></div><div id=\"view-sld\"></div>\n    <div id=\"viewM-btn\"></div><div id=\"viewP-btn\"></div>\n    <div id=\"view-dir\"></div>\n    <div id=\"binocular\"></div>\n    <div id=\"zoom-sld\"></div><div id=\"zoom-val\"></div>\n    <div id=\"zoomM\"></div><div id=\"zoomP\"></div>\n    <script type=\"module\">\n      // Grant your CesiumJS app access to your ion assets\n      // This is your actual default access token, you can copy/paste this directly into your app code\n      Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwN2EzYzEyNS1mMmNlLTRlYjEtYjRiMS04OTliNjhkZjI4NzQiLCJpZCI6MzY0MCwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTUzODQxODg5OH0.E2p7oe8fLJOtyawv0uT9zBZw4oyKZ6Vt3CZsE0FKeJw';\n\n      function terraHeightRequest(terrProv, lat, lon, func){\n        var pos = [Cesium.Cartographic.fromDegrees(lon, lat)];\n        var pms = Cesium.sampleTerrain(terrProv, 11, pos);\n        Cesium.when(pms, func);\n      }\n\n      function fillPointPrimColl(prims, lla, color, size){\n        for(i = 0; i < lla.length; i++){\n          var lat = lla[i][0];\n          var lon = lla[i][1];\n            prims.add({\n              position : Cesium.Cartesian3.fromDegrees(lon, lat),\n              color : color,\n              heightReference : Cesium.HeightReference.CLAMP_TO_GROUND\n            });\n        }\n      }\n    </script>\n    <script src=\"js/cesium.js\"></script>\n  </body>\n</html>")
 	(store-in "resources/public")
 	(title "cesium"))
 
@@ -258,7 +258,7 @@
 
 ([Cezium_Class3] of  CloVar
 
-	(source "(js/Cesium.Viewer. \n  \"cesiumContainer\" \n  #js{:imageryProvider (js/Cesium.createWorldImagery)\n        :terrainProvider (js/Cesium.createWorldTerrain)\n        :animation false\n        :shouldAnimate true})")
+	(source "nil")
 	(title "VIEWER"))
 
 ([Cezium_Class350000] of  CloFunction
@@ -363,7 +363,7 @@
 
 ([Cezium_Class7] of  CloFunction
 
-	(source ";;(println :CZML (.-data e))\n(def CZML-DATA (js/JSON.parse (.-data e)))\n(.process CZML-SRC CZML-DATA)")
+	(source "(println :CZML (.-data e))\n(def CZML-DATA (js/JSON.parse (.-data e)))\n(.process CZML-SRC CZML-DATA)")
 	(title "cz-processor [e]"))
 
 ([Cezium_Class70001] of  CloFunction

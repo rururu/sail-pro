@@ -1,4 +1,4 @@
-; Fri Oct 13 21:39:03 MSK 2023
+; Tue Jul 30 17:26:51 MSK 2024
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -52,7 +52,7 @@
 
 ([SailExpert_Class10000] of  CeziumControl
 
-	(onboard "Bylina"))
+	(onboard "Vela"))
 
 ([SailExpert_Class100000] of  RuleSet
 
@@ -160,7 +160,9 @@
 		[SailExpert_Class140000]
 		[SailExpert_Class90000]
 		[SailExpert_Class270000]
-		[SailExpert_Class350008])
+		[SailExpert_Class350008]
+		[SailExpert_Class260000]
+		[SailExpert_Class260001])
 	(cloNamespace [SailExpert_Class10010])
 	(cloVars
 		[SailExpert_Class10016]
@@ -332,7 +334,7 @@
 
 	(altitude 0)
 	(course 0)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.05\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "Bylina")
 	(latitude "62 26.5")
 	(longitude "6 0.02")
@@ -370,7 +372,7 @@
 
 	(altitude 0)
 	(course 0)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.05\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "Vela")
 	(latitude "62 26.64")
 	(longitude "6 0.71")
@@ -383,7 +385,7 @@
 
 	(altitude 0)
 	(course 225)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.05\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "Diana")
 	(latitude "62 26.67")
 	(longitude "6 2.74")
@@ -396,7 +398,7 @@
 
 	(altitude 0)
 	(course 0)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.05\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "Argo")
 	(latitude "62 26.78")
 	(longitude "6 1.43")
@@ -738,6 +740,36 @@
 	(salience 1)
 	(title "ws:WindChange Update"))
 
+([SailExpert_Class260000] of  CloFunction
+
+	(source "(if-let [mo (OMT/getMapOb n)]\n  (.getDescription n))")
+	(title "get-description [n]"))
+
+([SailExpert_Class260001] of  CloFunction
+
+	(source "(if-let [mo (OMT/getMapOb n)]\n  (let [md (read-string (.getDescription mo))\n         md (assoc md :draft d)]\n    (ctpl md)\n    (.setDescription mo (str md))))")
+	(title "set-draft [n d]"))
+
+([SailExpert_Class260002] of  CloFuncall
+
+	(source "(in-ns '"))
+
+([SailExpert_Class260003] of  CloFuncall
+
+	(source "(in-ns 'sail.exp)"))
+
+([SailExpert_Class260004] of  CloFuncall
+
+	(source "(set-draft \"Vela\" 10)"))
+
+([SailExpert_Class260005] of  CloFuncall
+
+	(source "(set-draft \"Vela\" 20)"))
+
+([SailExpert_Class260006] of  CloFuncall
+
+	(source "(fifos \"NavOb\" \"label\" \"Vela\")"))
+
 ([SailExpert_Class260007] of  Rule
 
 	(lhs "?wc (WindChange asserted ?a\n	(not= ?a true))\n(not WindChange)")
@@ -752,11 +784,19 @@
 
 ([SailExpert_Class270007] of  Wave
 
-	(pitch 6)
-	(pitch-interval 8)
-	(roll 4)
-	(roll-interval 5)
+	(pitch 0)
+	(pitch-interval 0)
+	(roll 0)
+	(roll-interval 0)
 	(status "INIT"))
+
+([SailExpert_Class280007] of  CloFuncall
+
+	(source "(set-draft \"Vela\" 24)"))
+
+([SailExpert_Class280008] of  CloFuncall
+
+	(source "(set-draft \"Vela\" 0)"))
 
 ([SailExpert_Class30000] of  CloFuncall
 
@@ -870,7 +910,7 @@
 
 	(altitude 0)
 	(course 0)
-	(description "{:draft 8\n  :label\n    {:scale 0.3\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
+	(description "{:draft 8\n  :label\n    {:scale 0.05\n     :pixelOffset {:cartesian2 [0.0 -40.0]}\n     :heightReference \"RELATIVE_TO_GROUND\"}\n  :model \n    {:gltf \"models/sailboat/1368 Sailboat.gltf\"\n      :heightReference \"RELATIVE_TO_GROUND\"}}")
 	(label "Mars")
 	(latitude "62 26.37")
 	(longitude "5 59.29")
@@ -966,7 +1006,7 @@
 
 ([SailExpert_Class80000] of  Rule
 
-	(lhs "(Onboard label ?boat)\n(Wave pitch ?pit pitch-interval ?pin roll ?rol roll-interval ?rin)\n?bt (BoatToss label ?boat \n	slope ?slp\n	time ?tim)\n(Clock0 time ?t (> ?t ?tim))")
+	(lhs "(Onboard label ?boat)\n(Wave pitch ?pit \n	pitch-interval ?pin \n	roll ?rol \n	roll-interval ?rin\n                      [(> ?pin 0) (> ?rin )])\n?bt (BoatToss label ?boat \n	slope ?slp\n	time ?tim)\n(Clock0 time ?t (> ?t ?tim))")
 	(rhs "(let [[ivl act amp slp] \n         (condp = ?slp\n           'UP       [?rin :roll (+ ?rol) 'RIGHT]\n           'RIGHT  [?pin :pitch (- ?pit) 'DOWN]\n           'DOWN [?rin :roll (- ?rol) 'LEFT]\n           'LEFT    [?pin :pitch (+ ?pit) 'UP])]\n  (sail.exp/camera-control act amp)\n  (modify ?bt slope slp\n	time (+ ?t ivl)))")
 	(salience 0)
 	(title "bs:Boat Tossing"))

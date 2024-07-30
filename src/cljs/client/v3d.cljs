@@ -235,8 +235,10 @@
 
 (defn on-load []
   (czm/init-3D-view (str "http://localhost:" PORT))
-(repeater receive-vehicle 4000)
-(show-controls))
+(delayer #(do
+                  (repeater receive-vehicle 2000)
+                  (show-controls))
+              4000))
 
 (defn run-repl []
   ;; (:require [cljs.js :as eva]

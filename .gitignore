@@ -5,6 +5,7 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
+protege.properties
 logs
 data/tiles
 NMEA_CACHE
